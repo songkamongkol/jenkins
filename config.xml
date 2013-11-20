@@ -1,0 +1,2746 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <disabledAdministrativeMonitors>
+    <string>hudson.node_monitors.MonitorMarkedNodeOffline</string>
+    <string>jenkins.security.RekeySecretAdminMonitor</string>
+  </disabledAdministrativeMonitors>
+  <version>1.511</version>
+  <numExecutors>1</numExecutors>
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy"/>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>false</disableSignup>
+    <enableCaptcha>false</enableCaptcha>
+  </securityRealm>
+  <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
+  <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
+  <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter">
+    <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
+  </markupFormatter>
+  <jdks/>
+  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+  <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+  <clouds/>
+  <slaves>
+    <slave>
+      <name>octavian-il</name>
+      <description>octavian-il</description>
+      <remoteFS>/home/klei/jenkins/</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.21.7</host>
+        <port>22</port>
+        <credentialsId>5e227c1b-756f-4ab6-91c0-1f33576f5e81</credentialsId>
+        <jdk>
+          <id>jdk-6u16-oth-JPR@CDS-CDS_Developer</id>
+          <acceptLicense>true</acceptLicense>
+        </jdk>
+      </launcher>
+      <label>octavian-il</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>next_linux</name>
+      <description>tableUbuntu03</description>
+      <remoteFS>/home/table/jenkins/</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.20.91</host>
+        <port>22</port>
+        <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
+      </launcher>
+      <label>linux_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>next_windows</name>
+      <description>Cal-VM-W7E64-T3 </description>
+      <remoteFS>c:/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>linux_x64</name>
+      <description>tableUbuntu04</description>
+      <remoteFS>/home/table/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.99</host>
+        <port>22</port>
+        <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
+      </launcher>
+      <label>linux_x64</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>spccalpvxpvm-01</name>
+      <description></description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>spccalengec02</name>
+      <description>Windows Server 2008 Standard R2 64 bit</description>
+      <remoteFS>D:\jenkins-tc</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x64_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>spccalengec01</name>
+      <description>Windows Server 2008 Standard R2 64 bit</description>
+      <remoteFS>D:/dev/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x64_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>octavian-table</name>
+      <description>octavian-table</description>
+      <remoteFS>/home/table/jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.21.7</host>
+        <port>22</port>
+        <credentialsId>8429d064-181d-43ec-97e8-fa5bcb28796b</credentialsId>
+      </launcher>
+      <label>octavian-table</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>scmbuild1-xp</name>
+      <description>Windows XP build system used in nightly builds of Spirent TestCenter.</description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>10.1.20.22</name>
+      <description>FreeBSD 6.3 BLL Build machine</description>
+      <remoteFS>/home/scmbuild/build/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.1.20.22</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>freebsd63</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>10.1.20.18</name>
+      <description>FreeBSD 71 BLL Build machine</description>
+      <remoteFS>/home/scmbuild/build/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.1.20.18</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>freebsd71</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>spccalengec07</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: 10.2.19.19 </description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.19</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>il_scm_chos il_scm</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalengec08</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: 10.2.19.55</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.55</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>il_scm il_scm08</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/export/crosstools/ppc/405/bin:$PATH</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalengec09</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: 10.2.19.243</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.243</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>il_scm il_scm9</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>2</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+              <string>PYTHONPATH</string>
+              <string>/usr/local/lib/python2.6/dist-packages:/usr/local/lib/python2.6/site-packages</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalengec11</name>
+      <description>builds IL targets for SCM packaging jobs IP: 10.2.19.208</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.208</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>il_scm11 il_scm</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>3</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin:/home/scmbuild/bin/java/bin</string>
+              <string>PHX_CROSS_TOOLS</string>
+              <string>/export/crosstools</string>
+              <string>PYTHONPATH</string>
+              <string>/usr/local/lib/python2.6/dist-packages:/usr/local/lib/python2.6/site-packages</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name> scm-cbw02.ad.spirentcom.com</name>
+      <description>Windows XP build system used in nightly builds of Spirent TestCenter.</description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86_scm_bll scm-cbw02.ad.spirentcom.com</label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>spccalenglnx10</name>
+      <description>builds BLL CTS: 10.2.10.157</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.157</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>bll_lnx10</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>3</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4 spccalenglnx11/4 corsa/4 augustus/4 julius/4</string>
+              <string>LD_LIBRARY_PATH</string>
+              <string>/usr/local/lib</string>
+              <string>PATH</string>
+              <string>/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/home/scmbuild/bin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalsolpv02</name>
+      <description>builds Solaris BLL IP: 10.2.10.88</description>
+      <remoteFS>/export1/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.88</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>bll_solaris_spccalsolpv02</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>2</int>
+              <string>LD_LIBRARY_PATH</string>
+              <string>/usr/lib:/usr/local/lib:/lib</string>
+              <string>PATH</string>
+              <string>/home/aoliver/pkg/solaris/java/bin:/opt/mono/bin:/usr/local/bin:/usr/local/ActiveTcl/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/bin:/usr/ccs/bin:/opt/gcc/bin:/usr/sfw/bin:/export1/home/scmbuild/bin:/usr/local/tcltk8.1/bin:/home/scmbuild/bin/solaris::/home/scmbuild/tcl8.4.14/bin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalenglnx11</name>
+      <description>builds BLL CTS: 10.2.10.158</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.158</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>bll_lnx11</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>3</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4 spccalenglnx10/4 corsa/4 augustus/4 julius/4</string>
+              <string>LD_LIBRARY_PATH</string>
+              <string>/usr/local/lib</string>
+              <string>PATH</string>
+              <string>/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/home/scmbuild/bin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalengec06</name>
+      <description>Windows Server 2008 Standard R2 64 bit</description>
+      <remoteFS>D:/dev/jenkins-tomcat</remoteFS>
+      <numExecutors>3</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x64_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>scmbuild2-xp</name>
+      <description>Windows XP build system used in nightly builds of Spirent TestCenter.</description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86_scm_bll</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>Tableubuntu01</name>
+      <description>Tableubuntu01</description>
+      <remoteFS>/home/table/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>Tableubuntu01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
+      </launcher>
+      <label>linux_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>spccalsolpv03</name>
+      <description>builds Solaris BLL IP: 10.2.10.91</description>
+      <remoteFS>/export/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.91</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>bll_solaris_spccalsolpv03</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>3</int>
+              <string>CCACHE_DIR</string>
+              <string>/export/home/scmbuild/.ccache</string>
+              <string>LD_LIBRARY_PATH</string>
+              <string>/usr/lib:/usr/local/lib:/lib:/export1/usr/local/lib</string>
+              <string>PATH</string>
+              <string>/home/aoliver/pkg/solaris/java/bin:/opt/mono/bin:/export1/usr/local/bin:/usr/local/bin:/usr/local/ActiveTcl/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/bin:/usr/ccs/bin:/opt/gcc/bin:/usr/sfw/bin:/export1/home/scmbuild/bin:/usr/local/tcltk8.1/bin:/home/scmbuild/bin/solaris::/home/scmbuild/tcl8.4.14/bin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalsolpv01</name>
+      <description>builds Solaris BLL IP: 10.1.10.120</description>
+      <remoteFS>/export0/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.1.10.120</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>bll_solaris_spccalsolpv01</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>2</int>
+              <string>LD_LIBRARY_PATH</string>
+              <string>/usr/lib:/usr/local/lib:/lib</string>
+              <string>PATH</string>
+              <string>/home/aoliver/pkg/solaris/java/bin:/opt/mono/bin:/usr/local/ActiveTcl/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/bin:/usr/ccs/bin:/opt/gcc/bin:/usr/sfw/bin:/export1/home/scmbuild/bin:/usr/local/tcltk8.1/bin:/home/scmbuild/bin/solaris::/home/scmbuild/tcl8.4.14/bin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalenglnx03</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: 10.2.10.134</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.134</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>3</int>
+              <string>PATH</string>
+              <string>/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+              <string>PHX_CROSS_TOOLS</string>
+              <string>/export/crosstools</string>
+              <string>PYTHONPATH</string>
+              <string>/usr/lib/python2.5/site-packages/oldxml</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>spccalenglnx01</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: 10.2.10.146</description>
+      <remoteFS>/home/scmbuild/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.10.146</host>
+        <port>22</port>
+        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>4</int>
+              <string></string>
+              <string></string>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+              <string>PHX_CROSS_TOOLS</string>
+              <string>/export/crosstools</string>
+              <string>PYTHONPATH</string>
+              <string>/usr/lib/python2.5/site-packages/oldxml</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-01</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-02</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-02.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-03</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-03.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-04</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-04.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-05</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-05.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-06</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-06.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-06.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-07</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-07.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-07.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-08</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-08.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-08.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-09</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-phys-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-09.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[14]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-10</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-10.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>CAL-J3ZLDP1</name>
+      <description>Mark Giffin&apos;s machine</description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
+      <name>bllbuild-win-01</name>
+      <description></description>
+      <remoteFS>c:/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>bllbuild-win-01\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>bllbuild-win-01.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
+      <name>bllbuild-win-02</name>
+      <description></description>
+      <remoteFS>c:/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>bllbuild-win-02\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>bllbuild-win-02.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>bllbuild-win-03-ui</name>
+      <description></description>
+      <remoteFS>c:/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>bllbuild-win-03\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>bllbuild-win-03.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>ilbuild-11</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-11.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>ilbuild-12</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-12.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[12]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>CIReg-06</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>cireg-06\spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>cireg-06\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>cireg-06.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>bllbuild-win-04-ui</name>
+      <description></description>
+      <remoteFS>c:/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86</label>
+      <nodeProperties/>
+    </slave>
+    <slave>
+      <name>CIReg-07</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>CIReg-07\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>CIReg-07.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+      <userId>mhall</userId>
+    </slave>
+    <slave>
+      <name>CIReg-08</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>CIReg-08\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>CIReg-08.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+      <userId>mhall</userId>
+    </slave>
+    <slave>
+      <name>CIReg-09</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>CIReg-09\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>CIReg-09.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+      <userId>mhall</userId>
+    </slave>
+    <slave>
+      <name>CIReg-10</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>CIReg-10\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>CIReg-10.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+      <userId>mhall</userId>
+    </slave>
+    <slave>
+      <name>CIReg-11</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>CIReg-11\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>CIReg-11.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>CIRegressionAgents</label>
+      <nodeProperties/>
+      <userId>mhall</userId>
+    </slave>
+    <slave>
+      <name>uibldwin-v01</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>uibldwin-v01\spirent</userName>
+        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>uibldwin-v01\spirent</userName>
+          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
+        </account>
+        <host>uibldwin-v01.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>uibldwin-v02</name>
+      <description></description>
+      <remoteFS>c:\jenkins-tc</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldwin-v03</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldwin-v01</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-02</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-02.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-03</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-03.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[54]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-01</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[54]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-04</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-04.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[54]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-v01</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-v01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldbsd63</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldbsd63-tmp.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldbsd71</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldbsd71-tmp.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[59]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>CIReg-Linux-01</name>
+      <description></description>
+      <remoteFS>/home/thot/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>CIReg-Linux-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>4ccf7afd-ae3d-4d27-acf8-97bb216ec2f9</credentialsId>
+      </launcher>
+      <label>CIRegressionAgents-Linux</label>
+      <nodeProperties/>
+      <userId>rpatel</userId>
+    </slave>
+    <slave>
+      <name>CIReg-Linux-02</name>
+      <description></description>
+      <remoteFS>/home/thot/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>CIReg-Linux-02.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>4ccf7afd-ae3d-4d27-acf8-97bb216ec2f9</credentialsId>
+      </launcher>
+      <label>CIRegressionAgents-Linux-ls</label>
+      <nodeProperties/>
+      <userId>kachon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-v05</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-v05.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>Jenkins-win-01</name>
+      <description>Windows XP build system used in nightly builds of Spirent TestCenter.</description>
+      <remoteFS>c:/dev/jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows_x86_scm_bll</label>
+      <nodeProperties/>
+      <userId>mhaber</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-13</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-13.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>CIReg-bsd71-01</name>
+      <description>CIReg-bsd71-01</description>
+      <remoteFS>/home/spirent/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>CIReg-bsd71-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>kachon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-14</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins-tc/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-14.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-15</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-15.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-16</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-16.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-17</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-17.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-18</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-18.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-19</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-19.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-20</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-20.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilpkg-01</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins-tc/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilpkg-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[67]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-05</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-05.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-06</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-06.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[75]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbuild-win-06</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>bllbuild-win-06\spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
+        <host>bllbuild-win-06.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>uibldwin-03</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>uibldwin-03\spirent</userName>
+          <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        </account>
+        <host>uibldwin-03.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbuild-win-07</name>
+      <description></description>
+      <remoteFS>c:\jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>bllbuild-win-07\spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
+        <host>bllbuild-win-07.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bldmiscwin-01</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+        <userName>bldmiscwin-01\spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
+        <host>bldmiscwin-01.cal.ci.spirentcom.com</host>
+      </launcher>
+      <label>windows_x86</label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldlnx-07</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldlnx-07.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[75]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bldmisclnx-01</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bldmisclnx-01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[75]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldbsd71-02</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldbsd71-02.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[75]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllbldbsd63-02</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllbldbsd63-02.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>bllpkglnxc-v01</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>bllpkglnxc-v01.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[75]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>DISTCC_HOSTS</string>
+              <string>localhost/4</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>ilbuild-22</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>ilbuild-22.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label>scm_il_build</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[67]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>klocwork-ilbld</name>
+      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
+      <remoteFS>/home/spirent/jenkins-tc/</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>klocwork-ilbld.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>Somboon</userId>
+    </slave>
+    <slave>
+      <name>klocwork-bllbld</name>
+      <description></description>
+      <remoteFS>c:\jenkins-tc</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
+  </slaves>
+  <quietPeriod>5</quietPeriod>
+  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+  <views>
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+    </hudson.model.AllView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>integration_summary_ci</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>bll_ci</string>
+        <string>bll_ci_join</string>
+        <string>cts_windows</string>
+        <string>il_changeling</string>
+        <string>il_changeling_all</string>
+        <string>il_chos2</string>
+        <string>il_ci</string>
+        <string>il_ci_join</string>
+        <string>il_qemu_test</string>
+        <string>il_testmodule_contents</string>
+        <string>il_virtual</string>
+        <string>il_vtc</string>
+        <string>integration_cts_linux</string>
+        <string>regression</string>
+        <string>regression_changeling</string>
+        <string>regression_cl_nightly</string>
+        <string>regression_linux</string>
+        <string>regression_linux_ls</string>
+        <string>regression_nightly</string>
+        <string>results_reporter_windows</string>
+        <string>ui_debug</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.claim.ClaimColumn plugin="claim@2.3"/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+        <hudson.plugins.claim.ClaimColumn plugin="claim@2.3"/>
+      </columns>
+      <includeRegex>(bll|ui|il).*</includeRegex>
+    </listView>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+      <owner class="hudson" reference="../../.."/>
+      <name>summary</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views>
+        <listView>
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>failed</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </jobNames>
+          <jobFilters>
+            <hudson.views.JobStatusFilter plugin="view-job-filters@1.26">
+              <includeExcludeTypeString>includeMatched</includeExcludeTypeString>
+              <unstable>true</unstable>
+              <failed>true</failed>
+              <aborted>true</aborted>
+              <disabled>false</disabled>
+              <stable>false</stable>
+            </hudson.views.JobStatusFilter>
+          </jobFilters>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastStableColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+          </columns>
+        </listView>
+        <listView>
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>stale</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+          </jobNames>
+          <jobFilters>
+            <hudson.views.BuildTrendFilter plugin="view-job-filters@1.26">
+              <includeExcludeTypeString>includeUnmatched</includeExcludeTypeString>
+              <buildCountTypeString>AtLeastOne</buildCountTypeString>
+              <amountTypeString>Days</amountTypeString>
+              <amount>3.0</amount>
+              <statusTypeString>Stable</statusTypeString>
+            </hudson.views.BuildTrendFilter>
+          </jobFilters>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastStableColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+          </columns>
+        </listView>
+      </views>
+    </hudson.plugins.nested__view.NestedView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>integration_summary_packaging</name>
+      <filterExecutors>true</filterExecutors>
+      <filterQueue>true</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>integration_bll_freebsd63_packaging</string>
+        <string>integration_bll_freebsd71_packaging</string>
+        <string>integration_bll_linux_packaging</string>
+        <string>integration_bll_solaris_packaging</string>
+        <string>integration_bll_win_pkg_webhelp</string>
+        <string>integration_bll_windows_packaging</string>
+        <string>integration_ccp_packaging-new</string>
+        <string>integration_ccp_webhelp</string>
+        <string>integration_copy_to_spccalfs03</string>
+        <string>integration_ftp_tarball</string>
+        <string>integration_il_centralboot_packaging</string>
+        <string>integration_il_ftp_centralboot</string>
+        <string>integration_launch_nightly_builds</string>
+        <string>integration_launch_smarttest</string>
+        <string>integration_ls_vm_packaging</string>
+        <string>integration_package_bll_linux_x64</string>
+        <string>integration_package_cts_linux</string>
+        <string>integration_package_cts_windows</string>
+        <string>integration_package_l4l7_windows</string>
+        <string>integration_reset_tag_file</string>
+        <string>integration_set_status</string>
+        <string>integration_webhelp</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+      </columns>
+    </listView>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+      <owner class="hudson" reference="../../.."/>
+      <name>wip</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views>
+        <listView>
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>dev</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>hg2p4sync</string>
+            <string>Klocwork_Diff_Report</string>
+            <string>new_branch_setup</string>
+            <string>test1</string>
+            <string>test2</string>
+            <string>test4</string>
+            <string>test5</string>
+            <string>test_bll_linux_node</string>
+            <string>test_bll_linux_x64</string>
+            <string>test_bll_windows_debug</string>
+            <string>test_bottom</string>
+            <string>test_il_changeling</string>
+            <string>test_il_changeling_all</string>
+            <string>test_il_chos2</string>
+            <string>test_il_cii_packaging</string>
+            <string>test_il_qemu</string>
+            <string>test_ui_debug</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+          </columns>
+        </listView>
+      </views>
+    </hudson.plugins.nested__view.NestedView>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>SCM_Admin</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>BV_Database_Update</string>
+        <string>BV_Scheduler</string>
+        <string>BV_Scheduler_all</string>
+        <string>BV_Statistics</string>
+        <string>BV_Statistics_M</string>
+        <string>integration-nightly-regression-jenkins2</string>
+        <string>release-nightly-regression-jenkins2</string>
+        <string>SmartTest-BVTOOL</string>
+        <string>SmartTest-Query</string>
+        <string>SmartTest-Run-TestCase</string>
+        <string>SmartTest-Run-TestCase-Demo</string>
+        <string>SmartTest_Scheduler</string>
+        <string>STR-AVALANCHE</string>
+        <string>STR-AVALANCHE-Results</string>
+        <string>STR-Debug-Integration</string>
+        <string>STR-Debug-Integration-Results</string>
+        <string>STR-Inferno-Debug</string>
+        <string>STR-Inferno-Debug-Results</string>
+        <string>STR-ITEST-BV</string>
+        <string>STR-ITEST-BV-Results</string>
+        <string>STR-PV-VALIDATION-Integration</string>
+        <string>STR-PV-VALIDATION-Integration-Results</string>
+        <string>STR-PV-VALIDATION-Release</string>
+        <string>STR-PV-VALIDATION-Release-Results</string>
+        <string>STR-Run-Failed-TestCases</string>
+        <string>STR-Tbird-Debug</string>
+        <string>STR-Tbird-Debug-Results</string>
+        <string>XML-DEBUG</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+      </columns>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>true</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets/>
+      <rightPortlets/>
+      <topPortlets/>
+      <bottomPortlets/>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>SmartTest-Nightly</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>STR-Admin-Integration</string>
+        <string>STR-Admin-Release</string>
+        <string>STR-Admin-Results-Integration</string>
+        <string>STR-Admin-Results-Release</string>
+        <string>STR-Amara-Admin</string>
+        <string>STR-Amara-Admin-Results</string>
+        <string>STR-Karma-Integration</string>
+        <string>STR-Karma-Integration-Results</string>
+        <string>STR-Nightly-433-Release</string>
+        <string>STR-Nightly-433-Release-Results</string>
+        <string>STR-Nightly-4_1x_rel</string>
+        <string>STR-Nightly-Integration</string>
+        <string>STR-Nightly-Release</string>
+        <string>STR-Nightly-Release-S3</string>
+        <string>STR-Nightly-Release-S3-Results</string>
+        <string>STR-Nightly-Results-4_1x_rel</string>
+        <string>STR-Nightly-Results-Integration</string>
+        <string>STR-Nightly-Results-Release</string>
+        <string>STR-QTP-Integration</string>
+        <string>STR-QTP-Release</string>
+        <string>STR-QTP-Results-Integration</string>
+        <string>STR-QTP-Results-Release</string>
+        <string>STR-Wraith-Release</string>
+        <string>STR-Wraith-Release-Results</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+      </columns>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>true</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets/>
+      <rightPortlets/>
+      <topPortlets/>
+      <bottomPortlets/>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>SmartTest-Weekend</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard[2]/jobNames/comparator"/>
+        <string>STR-Admin-Results-Weekend-Integration</string>
+        <string>STR-Admin-Results-Weekend-Release</string>
+        <string>STR-Admin-Weekend-Integration</string>
+        <string>STR-Admin-Weekend-Release</string>
+        <string>STR-PV-VALIDATION-Weekend-Release</string>
+        <string>STR-PV-VALIDATION-Weekend-Release-Results</string>
+        <string>STR-QEMU-DEBUG</string>
+        <string>STR-QEMU-DEBUG-Results</string>
+        <string>STR-QEMU-Integration</string>
+        <string>STR-QEMU-Integration-Results</string>
+        <string>STR-QEMU-Release</string>
+        <string>STR-QEMU-Release-Results</string>
+        <string>STR-Weekend-Integration</string>
+        <string>STR-Weekend-Release</string>
+        <string>STR-Weekend-Results-Integration</string>
+        <string>STR-Weekend-Results-Release</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+      </columns>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>true</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets/>
+      <rightPortlets/>
+      <topPortlets/>
+      <bottomPortlets/>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+      <owner class="hudson" reference="../../.."/>
+      <name>release</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views>
+        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>release_summary_ci</name>
+          <filterExecutors>true</filterExecutors>
+          <filterQueue>true</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>release_bll_ci</string>
+            <string>release_bll_ci_join</string>
+            <string>release_bll_linux_ci</string>
+            <string>release_bll_linux_x64_ci</string>
+            <string>release_bll_windows_ci</string>
+            <string>release_bll_windows_debug_ci</string>
+            <string>release_ccp_webhelp</string>
+            <string>release_cts_linux_ci</string>
+            <string>release_cts_windows_ci</string>
+            <string>release_il_changeling_all_ci</string>
+            <string>release_il_changeling_ci</string>
+            <string>release_il_chos2_ci</string>
+            <string>release_il_ci</string>
+            <string>release_il_ci_join</string>
+            <string>release_il_qemu_ci</string>
+            <string>release_il_testmodule_contents_ci</string>
+            <string>release_il_unit_test</string>
+            <string>release_il_virtual_ci</string>
+            <string>release_il_vtc_ci</string>
+            <string>release_regression_changeling_ci</string>
+            <string>release_regression_ci</string>
+            <string>release_regression_cl_nightly</string>
+            <string>release_regression_nightly</string>
+            <string>release_results_reporter_windows_ci</string>
+            <string>release_ui_ci</string>
+            <string>release_ui_debug_ci</string>
+            <string>release_webhelp</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+          <useCssStyle>false</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>release_summary_packaging</name>
+          <filterExecutors>true</filterExecutors>
+          <filterQueue>true</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
+            <string>release_bll_win_pkg_webhelp</string>
+            <string>release_bll_windows_packaging_new</string>
+            <string>release_ccp_packaging-new</string>
+            <string>release_launch_smarttest</string>
+            <string>release_reset_tag_file</string>
+            <string>release_set_status</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+          <includeRegex>^(release_).*(packaging$)</includeRegex>
+          <useCssStyle>false</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+      </views>
+      <defaultView>release_summary_ci</defaultView>
+    </hudson.plugins.nested__view.NestedView>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>SmartTest-BV</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>BV_AV_Compatibility_Integration</string>
+        <string>BV_AV_Compatibility_Integration_Results</string>
+        <string>BV_BOF_Integration</string>
+        <string>BV_BOF_Integration_Results</string>
+        <string>BV_CTS_Integration</string>
+        <string>BV_Launch_all</string>
+        <string>BV_Launch_one</string>
+        <string>release_BV_Launch_all</string>
+        <string>release_BV_Launch_one</string>
+        <string>releaseC_BV_Launch_all</string>
+        <string>releaseC_BV_Launch_one</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+      </columns>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>true</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets/>
+      <rightPortlets/>
+      <topPortlets/>
+      <bottomPortlets/>
+    </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+      <owner class="hudson" reference="../../.."/>
+      <name>4.36_rel_av</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views>
+        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>ci</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>4.36_rel_av_bll_ci</string>
+            <string>4.36_rel_av_bll_ci_join</string>
+            <string>4.36_rel_av_bll_linux_ci</string>
+            <string>4.36_rel_av_bll_linux_x64_ci</string>
+            <string>4.36_rel_av_bll_windows_ci</string>
+            <string>4.36_rel_av_bll_windows_debug_ci</string>
+            <string>4.36_rel_av_cts_linux_ci</string>
+            <string>4.36_rel_av_cts_windows_ci</string>
+            <string>4.36_rel_av_il_changeling_all_ci</string>
+            <string>4.36_rel_av_il_changeling_ci</string>
+            <string>4.36_rel_av_il_chos2_ci</string>
+            <string>4.36_rel_av_il_ci</string>
+            <string>4.36_rel_av_il_ci_join</string>
+            <string>4.36_rel_av_il_qemu_ci</string>
+            <string>4.36_rel_av_il_testmodule_contents_ci</string>
+            <string>4.36_rel_av_il_unit_test</string>
+            <string>4.36_rel_av_il_virtual_ci</string>
+            <string>4.36_rel_av_il_vtc_ci</string>
+            <string>4.36_rel_av_regression_changeling_ci</string>
+            <string>4.36_rel_av_regression_ci</string>
+            <string>4.36_rel_av_regression_cl_nightly</string>
+            <string>4.36_rel_av_regression_nightly</string>
+            <string>4.36_rel_av_results_reporter_windows_ci</string>
+            <string>4.36_rel_av_ui_ci</string>
+            <string>4.36_rel_av_ui_debug_ci</string>
+            <string>4.36_rel_av_webhelp</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+          <useCssStyle>false</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>packaging</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
+            <string>4.36_rel_av_bll_freebsd63_packaging</string>
+            <string>4.36_rel_av_bll_freebsd71_packaging</string>
+            <string>4.36_rel_av_bll_linux_packaging</string>
+            <string>4.36_rel_av_bll_linux_rpm_packaging</string>
+            <string>4.36_rel_av_bll_linux_x64_packaging</string>
+            <string>4.36_rel_av_bll_win_pkg_webhelp</string>
+            <string>4.36_rel_av_bll_windows_packaging_new</string>
+            <string>4.36_rel_av_ccp_packaging-new</string>
+            <string>4.36_rel_av_copy_to_spccalfs03_packaging</string>
+            <string>4.36_rel_av_cts_linux_packaging</string>
+            <string>4.36_rel_av_cts_windows_packaging</string>
+            <string>4.36_rel_av_ftp_tarball_packaging</string>
+            <string>4.36_rel_av_il_centralboot_packaging</string>
+            <string>4.36_rel_av_il_ftp_centralboot_packaging</string>
+            <string>4.36_rel_av_l4l7_windows_packaging</string>
+            <string>4.36_rel_av_launch_nightly_packaging</string>
+            <string>4.36_rel_av_launch_smarttest</string>
+            <string>4.36_rel_av_reset_tag_file</string>
+            <string>4.36_rel_av_set_status</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+          <useCssStyle>true</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+      </views>
+      <defaultView>ci</defaultView>
+      <columns>
+        <columns/>
+      </columns>
+    </hudson.plugins.nested__view.NestedView>
+    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
+      <owner class="hudson" reference="../../.."/>
+      <name>klocwork</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[87]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+        <string>kw_bll_ui</string>
+        <string>kw_il</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+      </columns>
+      <useCssStyle>false</useCssStyle>
+      <includeStdJobList>true</includeStdJobList>
+      <leftPortletWidth>50%</leftPortletWidth>
+      <rightPortletWidth>50%</rightPortletWidth>
+      <leftPortlets/>
+      <rightPortlets/>
+      <topPortlets/>
+      <bottomPortlets/>
+    </hudson.plugins.view.dashboard.Dashboard>
+  </views>
+  <primaryView>All</primaryView>
+  <slaveAgentPort>49152</slaveAgentPort>
+  <label></label>
+  <nodeProperties/>
+  <globalNodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents/>
+        <tree-map>
+          <default>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </default>
+          <int>1</int>
+          <string>STR_LATEST_RESULTS_FOLDER</string>
+          <string>NONE</string>
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </globalNodeProperties>
+</hudson>
