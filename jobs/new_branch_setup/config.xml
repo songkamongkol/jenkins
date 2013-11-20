@@ -33,6 +33,8 @@ mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-%BRANCH_NAME%
 mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_testmodule_contents-%BRANCH_NAME%
 mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_virtual-%BRANCH_NAME%
 mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_vtc-%BRANCH_NAME%
+
+rem add comment
 </command>
     </hudson.tasks.BatchFile>
   </builders>
