@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Klocwork IL Build job &lt;br&gt;&#xd;
+  <description>Klocwork IL build job &lt;br&gt;&#xd;
 &#xd;
 </description>
   <logRotator class="hudson.tasks.LogRotator">
