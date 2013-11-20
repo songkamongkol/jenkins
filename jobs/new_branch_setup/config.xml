@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description></description>
+          <defaultValue>4.37_rel</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling_all-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_chos2-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_testmodule_contents-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_virtual-%BRANCH_NAME%
+mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_vtc-%BRANCH_NAME%
+rem testing</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

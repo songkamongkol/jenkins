@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>20</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description>Version</description>
+          <defaultValue>4.40</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BUILD_NUMBER</name>
+          <description>Build number</description>
+          <defaultValue>latestbuild</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_EMAIL_GROUP</name>
+          <description>SCM,PV,STR</description>
+          <defaultValue>STR</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>WINRESPATH</name>
+          <description>\\storage.cal.ci.spirentcom.com\results\SCMSmartTest&#xd;
+\\results.cal.ci.spirentcom.com\smt\SCMSmartTest</description>
+          <defaultValue>\\results.cal.ci.spirentcom.com\smt\SCMSmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_GROUP</name>
+          <description></description>
+          <defaultValue>STR-Admin-Integration</defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//SCM/Scripts/... //ws/Scripts/...&#xd;
+//TestCenter/integration/regression/transformThotResult.py //ws/transformThotResult.py</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>scmbuild2-xp</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <authToken>mosheallowedtodothis</authToken>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${JOB_NAME}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo  Running SmartTest Results Job&#xd;
+c:\python27\python.exe %WORKSPACE%\Scripts\SmartTest_Results_Reporter.py %STC_MAJ_MIN_VERSION% %BUILD_NUMBER% %STR_EMAIL_GROUP% %WINRESPATH% %STR_GROUP%&#xd;
+echo  Porting results to Jenkins&#xd;
+c:\python27\python.exe transformThotResult.py suite_summary.xml example.xml</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>SMResultEmail.html</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>example.xml</testResults>
+      <keepLongStdio>true</keepLongStdio>
+      <testDataPublishers>
+        <hudson.plugins.claim.ClaimTestDataPublisher plugin="claim@2.1"/>
+      </testDataPublishers>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Ashley Liu</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>ghStuOVt7MDgT9pCGkHFTWeM4gH0U9eqQ2/bPRddXJA9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>laChpm:53a0598a9a6a9a0b3b5020e532056e3c22344759d337b0bad0f55a99e027298e</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>xiaozhi.liu@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

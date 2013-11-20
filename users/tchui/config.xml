@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Tommi Chui</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>dPtKVoYnfnV9WfywOEQkXFX49FY9Xmnb3p9RRedk5849px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.plugins.perforce.PerforceUserProperty>
+      <perforceId>tchui</perforceId>
+      <perforceEmail>tommi.chui@spirentcom.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>BAwJzk:117954c1665f6fee1d561df7feeaec27276c8c4f49085fb1a948c103d0ba0068</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>Tommi.Chui@spirentcom.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>jun.wang</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>9Lcm6a6eJF7oZVgOFIoszEPY1gIBhyuE+Y4l6odWkK89px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.plugins.perforce.PerforceUserProperty>
+      <perforceId>jun.wang</perforceId>
+      <perforceEmail>jun.wang@spirent.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>Wprjnc:8ca6d03e0a85d24cbd6bd4e89d569596ed5138546d49165d0df73c2c44075008</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>jun.wang@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

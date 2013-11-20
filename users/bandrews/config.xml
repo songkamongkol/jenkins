@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Barry Andrews</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+        <maps.hudson.plugin.xfpanel.XFPanelView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>Wall</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </jobNames>
+          <jobFilters/>
+          <columns/>
+          <colors>
+            <okBG>#7E7EFF</okBG>
+            <okFG>#FFFFFF</okFG>
+            <failedBG>#FFC130</failedBG>
+            <failedFG>#FFFFFF</failedFG>
+            <brokenBG>#FF0000</brokenBG>
+            <brokenFG>#FFFFFF</brokenFG>
+            <otherBG>#CCCCCC</otherBG>
+            <otherFG>#FFFFFF</otherFG>
+          </colors>
+          <numColumns>1</numColumns>
+          <refresh>3</refresh>
+          <fullHD>false</fullHD>
+          <showDescription>true</showDescription>
+          <showZeroTestCounts>true</showZeroTestCounts>
+          <sortDescending>false</sortDescending>
+        </maps.hudson.plugin.xfpanel.XFPanelView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty>
+      <perforceId>bandrews</perforceId>
+      <perforceEmail>Barry.Andrews@spirentcom.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>tbfLIx:fa4e41bcd74ba0cb287f229e6beb0a6ed80bcece6f80df5e6d42563b04c8ded0</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>barry.andrews@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>2SIdkGXGCYuDxpwiYYf3cVFXzui3jytMRz+v3vl7w9I9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+  </properties>
+</user>

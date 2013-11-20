@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Greg Kodama</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>bbReMK9tmsrkE6wwIwyxr1EM2QCZB8EXS/aBW1Q12ck9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>UdfrTj:94499e6c0f279746b9a5add3335978465ef5e3a235d05b69d0d27933e24c0d44</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>greg.kodama@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

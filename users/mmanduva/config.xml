@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Madhava Manduva</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>idI3u2zCqjuDJL9AA4O0mCQZxiocwZilfjNX1aMl+QI9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>WZtMqQ:31024e42b038f6d6f3997cfdaa8fde61e729c6a6011d6690a55102370dbc1ef6</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>madhava.manduva@spirentcom</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

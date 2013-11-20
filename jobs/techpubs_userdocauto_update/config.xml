@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Run the Tech Pubs python script called &lt;b&gt;xdoc&lt;/b&gt; to update the STC&lt;br/&gt;&#xd;
+documentation XML files. This results in changed XML files being checked in&lt;br/&gt;&#xd;
+under here: //TestCenter/integration/userdocauto/doc_source/&lt;br/&gt;&#xd;
+&#xd;
+This is a manual build, not triggered by Perforce checkins.</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>CRNUMBER</name>
+          <description>The Tech Pubs CR number for the current release. If the CR number above is correct, just leave it as it is.</description>
+          <defaultValue>332191996</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>BRANCH</name>
+          <description>The branch to run xdoc on. The default is integration. CAUTION: don&apos;t change this unless you talk to Mark Giffin first.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>integration</string>
+              <string>release</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>scmbuild</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}</p4Client>
+    <projectPath>//TestCenter/${BRANCH}/content/.../def/... //ws/${BRANCH}/content/.../def/...&#xd;
+//TestCenter/${BRANCH}/framework/common/... //ws/${BRANCH}/framework/common/...&#xd;
+//TestCenter/${BRANCH}/framework/def/... //ws/${BRANCH}/framework/def/...&#xd;
+//TestCenter/integration/userdocauto/doc_source/... //ws/integration/userdocauto/doc_source/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>spccalengec02</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>set WORKSPACE=%WORKSPACE:/=\%
+
+set ANT_HOME=%WORKSPACE%\integration\userdocauto\doc_source\tools\apache-ant-1.8.4
+set PATH=%WORKSPACE%\integration\userdocauto\doc_source\tools\apache-ant-1.8.4\bin;%PATH%
+
+ant -f %WORKSPACE%\integration\userdocauto\doc_source\tools\ant\build-jenkins.xml -Dperforce-user=&quot;scmbuild&quot; -Dperforce-client=&quot;techpubs_userdocauto_update-817786774&quot; -Dcr=&quot;%CRNUMBER%&quot; -Dbranch=&quot;%BRANCH%&quot; main</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>REM delete old changes file.
+del changes.zip
+
+REM zip up the changes text files.
+7z a -tzip changes.zip %WORKSPACE%\integration\userdocauto\doc_source\tools\xdiff\output</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>changes.zip</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.28">
+      <recipientList>mark@markgiffin.com, mark.giffin@spirent.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo></replyTo>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo></replyTo>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo></replyTo>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

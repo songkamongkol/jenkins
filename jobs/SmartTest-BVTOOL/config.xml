@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Please do not change this job parameters !!!!!!!!&#xd;
+&#xd;
+This job includes the following tasks:&lt;br&gt;&#xd;
+1. XML generator (pw_thot_conf_creator.py) .&lt;br&gt;&#xd;
+2. XML execution on THoT suite master (SmartTest_Scheduler.py) .&lt;br&gt;&#xd;
+3. Waiting results, get results from results folder (SmartTest_Results_Reporter.py) .&lt;br&gt;&#xd;
+&#xd;
+&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SM_IP</name>
+          <description></description>
+          <defaultValue>smarttest-qtp-2.cal.ci.spirentcom.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>COMMAND</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>check</string>
+              <string>stop</string>
+              <string>start</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//SCM/Scripts/... //ws/Scripts/...&#xd;
+</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>scmbuild2-xp</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${JOB_NAME}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>c:\python27\python %WORKSPACE%\Scripts\SmartTest_THoT.py %SM_IP% %COMMAND%</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

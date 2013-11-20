@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>The latest build is stored at \\spccalfs04\PV-Results\Builds\jenkins\il_aonic\build-latest</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>BUILD_RUN_UNITTEST</name>
+          <description>run unittest</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>UTEST_OUTPUT_DIR</name>
+          <description>unittest output dir</description>
+          <defaultValue>build/il/bld_ccpu_utest_i386_pentium3/utest/reports</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>BUILD_IMAGE</name>
+          <description>build image</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>klei</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
+-//TestCenter/*/sandbox/...&#xd;
+-//TestCenter/*/.../WebHelp/...&#xd;
+-//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
+-//TestCenter/*/other/...&#xd;
+-//TestCenter/*/documents/...&#xd;
+-//TestCenter/*/schedules/...&#xd;
+-//TestCenter/*/regression/...&#xd;
+-//TestCenter/*/userdocauto/...&#xd;
+-//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
+-//TestCenter/*/framework/ui/...&#xd;
+-//TestCenter/*/content/.../ui/...&#xd;
+-//TestCenter/*/.../bll/...&#xd;
++//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...&#xd;
++//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
++//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>0</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>il&amp;&amp;integression&amp;&amp;aonic</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command># TODO: remove after Kip fixes incremental build
+# rm -rf build/il/bld_appliance/tmp/mnt/spirent/hypervisor</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
+#take out sfpga for now
+#export SFPGA_LIB=y 
+
+$WORKSPACE/build/il/scripts/phxbld aonic_64</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
+#take out sfpga for now
+#export SFPGA_LIB=y 
+
+$WORKSPACE/build/il/scripts/phxbld aonic_64_raw</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
+#take out sfpga for now
+#export SFPGA_LIB=y 
+
+$WORKSPACE/build/il/scripts/phxbld aonic</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>if [ &quot;$BUILD_IMAGE&quot; = &quot;true&quot; ]; then
+    export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
+
+    $WORKSPACE/build/il/scripts/phxbld aonic_raw
+
+fi</command>
+    </hudson.tasks.Shell>
+    <com.thalesgroup.hudson.plugins.scons.SConsBuilderScriptFile plugin="scons@0.4">
+      <options>-j8 ccache=1 distcc=1</options>
+      <variables>target=appliance</variables>
+      <targets></targets>
+      <rootSconsscriptDirectory></rootSconsscriptDirectory>
+      <sconsscript></sconsscript>
+    </com.thalesgroup.hudson.plugins.scons.SConsBuilderScriptFile>
+    <hudson.tasks.Shell>
+      <command>python /home/table/jenkins/ftp.py --ip=10.8.50.181 --n=30 --file=PV-Results/Builds/jenkins/il_aonic/</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>regression_aonic</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.tasks.Fingerprinter>
+      <targets>build/il/packages/fsimg/*fs-1.1.tgz</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.28">
+      <recipientList>engstciteam@spirent.com,klaus.seggelke@spirent.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.9">
+      <consolePrefix>FTP: </consolePrefix>
+      <delegate>
+        <publishers>
+          <jenkins.plugins.publish__over__ftp.BapFtpPublisher>
+            <configName>spccalfs04</configName>
+            <verbose>false</verbose>
+            <transfers>
+              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
+                <remoteDirectory>il_aonic/build-$P4_CHANGELIST/</remoteDirectory>
+                <sourceFiles>build/il/packages/fsimg/*fs-1.1.tgz,build/il/packages/fsimg/*fs-1.1.tgz.md5,build/il/packages/fsimg/rawimage.map</sourceFiles>
+                <excludes></excludes>
+                <removePrefix>build/il/packages/fsimg</removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <cleanRemote>false</cleanRemote>
+                <noDefaultExcludes>false</noDefaultExcludes>
+                <makeEmptyDirs>false</makeEmptyDirs>
+                <asciiMode>false</asciiMode>
+              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
+              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
+                <remoteDirectory>il_aonic/build-latest/</remoteDirectory>
+                <sourceFiles>build/il/packages/fsimg/*fs-1.1.tgz,build/il/packages/fsimg/*fs-1.1.tgz.md5,build/il/packages/fsimg/rawimage.map</sourceFiles>
+                <excludes></excludes>
+                <removePrefix>build/il/packages/fsimg</removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <cleanRemote>true</cleanRemote>
+                <noDefaultExcludes>false</noDefaultExcludes>
+                <makeEmptyDirs>false</makeEmptyDirs>
+                <asciiMode>false</asciiMode>
+              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
+            </transfers>
+            <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+            <usePromotionTimestamp>false</usePromotionTimestamp>
+          </jenkins.plugins.publish__over__ftp.BapFtpPublisher>
+        </publishers>
+        <continueOnError>false</continueOnError>
+        <failOnError>false</failOnError>
+        <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+        <hostConfigurationAccess class="jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin" reference="../.."/>
+      </delegate>
+    </jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

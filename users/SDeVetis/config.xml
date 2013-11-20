@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Santiago DeVetis</fullName>
+  <description></description>
+  <properties>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>santiago.devetis@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>lYNDpB:23b1052cfaed2e36255999bb9cc48d7b77fe2c37ac953d94d351750d1a395bd6</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.plugins.perforce.PerforceUserProperty>
+      <perforceId>SDeVetis</perforceId>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys></authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+  </properties>
+</user>

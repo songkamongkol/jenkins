@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>15</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SM_IP</name>
+          <description></description>
+          <defaultValue>smarttest-1-sm.cal.ci.spirentcom.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>INIFILE</name>
+          <description></description>
+          <defaultValue>STR-PV-VALIDATION-Release.xml</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MAJ_MIN_VER</name>
+          <description></description>
+          <defaultValue>4.37</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BLL_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>properties.txt</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>WINRESPATH</name>
+          <description>Windows Results Path&#xd;
+</description>
+          <defaultValue>\\results.cal.ci.spirentcom.com\smt\SCMSmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>LNXRESPATH</name>
+          <description>Linux Results Path&#xd;
+</description>
+          <defaultValue>/results/smt/SCMSmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TAG</name>
+          <description>STR_BASE_TESTS</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TEST_SCRIPTS_DIRS</name>
+          <description>Test Scripts directorie</description>
+          <defaultValue>&quot;{&apos;//PV_Scripts/integration/SmartTest/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;} }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>EMAIL_SERVER</name>
+          <description>Email Server</description>
+          <defaultValue>spccalexcfe02.spirentcom.com</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TEST_SET</name>
+          <description>TEST SET VALUE (NIGHTLY,BASE,WEEKEND)&#xd;
+BASE,NIGHTLY</description>
+          <defaultValue>BASE,NIGHTLY,WEEKEND</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CI_HW_MODULES</name>
+          <description>cm-1g,cv-10g,mx-10g-s,dx-10g-s32,edm-2003,mx-100g,mx-40g,c1-10g,cpu-5004,mx-10g-c,mx-1g-c,cpr-2001,xfp-2001,c1-1g</description>
+          <defaultValue>cm-1g,cv-10g,mx-10g-s,dx-10g-s32,edm-2003,mx-100g,mx-40g,c1-10g,mx-10g-c,mx-1g-c,c1-1g,msa-2001-s,wan-2003-h,upy-2002,cv-8gfc,dx-1g-s32,stcv-qemu,stcv-roma,dx2-10g,dx2-40g,fx2-10g,fx2-40g,mx-100g-p2</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_PORT_PAIR</name>
+          <description>&quot;{&apos;cm-1g&apos;:[&apos;10.96.149.12/1/1;10.96.149.12/1/3&apos;,&apos;10.96.149.12/1/5;10.96.149.12/1/7&apos;, &apos;10.96.149.12/1/9;10.96.149.12/1/11&apos;],&apos;cv-10g&apos;:[&apos;10.96.149.12/2/1;10.96.149.12/2/2&apos;,&apos;10.96.149.12/2/3;10.96.149.12/2/4&apos;, &apos;10.96.149.12/2/5;10.96.149.12/2/6&apos;,&apos;10.96.149.12/2/7;10.96.149.12/2/8&apos;],&apos;mx-10g-s&apos;:[&apos;10.96.149.12/12/1;10.96.149.12/12/2&apos;,&apos;10.96.149.12/12/3;10.96.149.12/12/4&apos;, &apos;10.96.149.12/12/5;10.96.149.12/12/6&apos;,&apos;10.96.149.12/12/7;10.96.149.12/12/8&apos;],&apos;dx-10g-s32&apos;:[&apos;10.96.149.12/5/1;10.96.149.12/5/5&apos;,&apos;10.96.149.12/5/9;10.96.149.12/5/13&apos;,&apos;10.96.149.12/5/17;10.96.149.12/5/21&apos;,&apos;10.96.149.12/5/25;10.96.149.12/5/29&apos;],&apos;edm-2003&apos;:[&apos;10.96.149.12/9/1;10.96.149.12/9/3&apos;,&apos;10.96.149.12/9/5;10.96.149.12/9/7&apos;, &apos;10.96.149.12/9/9;10.96.149.12/9/11&apos;],&apos;mx-100g&apos;:[&apos;10.96.149.12/10/1;10.96.149.12/10/3&apos;], &apos;mx-40g&apos;:[&apos;10.96.149.12/7/1;10.96.149.12/7/3&apos;],&apos;c1-10g&apos;:[&apos;10.96.149.21/1/1;10.96.149.22/1/1&apos;],&apos;cpu-5004&apos;:[&apos;10.96.20.126/1/1;10.96.20.126/1/2&apos;]}&quot;</description>
+          <defaultValue>&quot;{&apos;cm-1g&apos;:[&apos;172.20.62.2/1/1;172.20.62.2/1/3&apos;,&apos;172.20.62.2/1/5;172.20.62.2/1/7&apos;, &apos;172.20.62.2/1/9;172.20.62.2/1/11&apos;,&apos;172.20.62.21/3/1;172.20.62.21/3/3&apos;,&apos;172.20.62.21/3/5;172.20.62.21/3/7&apos;,&apos;172.20.62.21/3/9;172.20.62.21/3/11&apos;],&apos;cv-10g&apos;:[&apos;172.20.62.2/11/1;172.20.62.2/11/2&apos;,&apos;172.20.62.2/11/3;172.20.62.2/11/4&apos;, &apos;172.20.62.2/11/5;172.20.62.2/11/6&apos;,&apos;172.20.62.2/11/7;172.20.62.2/11/8&apos;],&apos;mx-10g-s&apos;:[&apos;172.20.62.21/2/1;172.20.62.21/2/2&apos;,&apos;172.20.62.21/2/3;172.20.62.21/2/4&apos;, &apos;172.20.62.21/2/5;172.20.62.21/2/6&apos;,&apos;172.20.62.21/2/7;172.20.62.21/2/8&apos;],&apos;dx-10g-s32&apos;:[&apos;172.20.62.2/5/1;172.20.62.2/5/5&apos;,&apos;172.20.62.2/5/9;172.20.62.2/5/13&apos;,&apos;172.20.62.2/5/17;172.20.62.2/5/21&apos;,&apos;172.20.62.2/5/25;172.20.62.2/5/29&apos;],&apos;edm-2003&apos;:[&apos;172.20.62.21/8/1;172.20.62.21/8/3&apos;,&apos;172.20.62.21/8/5;172.20.62.21/8/7&apos;,&apos;172.20.62.21/8/9;172.20.62.21/8/11&apos;],&apos;mx-100g&apos;:[&apos;172.20.62.2/7/1;172.20.62.2/7/3&apos;], &apos;mx-40g&apos;:[&apos;172.20.62.21/10/1;172.20.62.21/10/3&apos;],&apos;c1-10g&apos;:[&apos;172.20.63.5/1/1;172.20.63.5/1/2&apos;,&apos;172.20.63.6/1/1;172.20.63.6/1/2&apos;],&apos;mx-10g-c&apos;:[&apos;172.20.62.2/9/1;172.20.62.2/9/5&apos;,&apos;172.20.62.2/9/2;172.20.62.2/9/6&apos;] , &apos;mx-1g-c&apos;:[&apos;172.20.62.2/9/3;172.20.62.2/9/7&apos;,&apos;172.20.62.2/9/4;172.20.62.2/9/8&apos;] ,&apos;c1-1g&apos;:[&apos;172.20.63.7/1/1;172.20.63.7/1/3&apos;],&apos;msa-2001-s&apos;:[&apos;172.20.62.3/7/1;172.20.62.3/7/2&apos;],&apos;wan-2003-h&apos;:[&apos;172.20.62.3/12/1;172.20.62.3/12/2&apos;], &apos;upy-2002&apos;:[&apos;172.20.62.3/8/1;172.20.62.3/8/2&apos;] ,&apos;cv-8gfc&apos;:[&apos;172.20.62.5/1/1;172.20.62.5/1/2&apos;], &apos;dx-1g-s32&apos;:[ &apos;172.20.62.2/3/1;172.20.62.2/3/5&apos;,&apos;172.20.62.2/3/9;172.20.62.2/3/13&apos;,&apos;172.20.62.2/3/17;172.20.62.2/3/21&apos;,&apos;172.20.62.2/3/25;172.20.62.2/3/29&apos;], &apos;stcv-roma&apos;:[&apos;172.20.63.103/1/1;172.20.63.104/1/1&apos;] , &apos;dx2-10g&apos;:[&apos;172.20.62.21/6/1;172.20.62.21/6/5&apos;,&apos;172.20.62.21/6/9;172.20.62.21/6/13&apos;], &apos;dx2-40g&apos;:[&apos;172.20.62.21/6/17;172.20.62.21/6/21&apos;,&apos;172.20.62.21/6/25;172.20.62.21/6/29&apos;] , &apos;fx2-10g&apos;:[&apos;172.20.62.21/5/9;172.20.62.21/5/10&apos;], &apos;fx2-40g&apos;:[&apos;172.20.62.21/5/1;172.20.62.21/5/5&apos;],&apos;mx-100g-p2&apos;:[&apos;172.20.62.21/7/1;172.20.62.21/7/2&apos;]}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_AGENT_LIST</name>
+          <description>&quot;{&apos;Agent1&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-01.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent2&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-02.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;} }&quot;</description>
+          <defaultValue>&quot;{&apos;Agent1&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-01.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent2&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-02.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent3&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-03.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent4&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-04.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent5&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-05.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;},&apos;Agent6&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-06.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;},&apos;Agent7&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-07.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;},&apos;Agent8&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-08.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MISC_SCRIPTS_DIRS</name>
+          <description>Misc folders - &#xd;
+&#xd;
+Note:   Variable is retrived from file &quot;STR-Config.txt&quot;</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>AGENTS_PER_HOST</name>
+          <description>Number of agents per host</description>
+          <defaultValue>7</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TAG_FILE</name>
+          <description>Tag file - tags accumulated from last regression&#xd;
+pw_packages_to_test</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>FORCED_DEAD_TIMER</name>
+          <description>Force dead timr to 120 minutes (for debuging)&#xd;
+--scripttimer=%FORCED_DEAD_TIMER%&#xd;
+</description>
+          <defaultValue>7200</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SM_TOUT</name>
+          <description>Suite Master Max time to run</description>
+          <defaultValue>54</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>DB_HOST</name>
+          <description></description>
+          <defaultValue>smarttestdb.cal.ci.spirentcom.com</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_GROUP</name>
+          <description></description>
+          <defaultValue>STR-PV-VALIDATION-Release</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SUITE_NAME</name>
+          <description>Suite name (Title)</description>
+          <defaultValue>STR-PV-VALIDATION-Release</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>Agent_Exit</name>
+          <description>Agent Exit Criteria - Failures Count &#xd;
+&quot;{&apos;exitCount&apos;: &apos;15&apos;, &apos;enabled&apos;: &apos;true&apos;}&quot;</description>
+          <defaultValue>&quot;{&apos;exitCount&apos;: &apos;15&apos;, &apos;enabled&apos;: &apos;true&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>DB_Update</name>
+          <description>Database Update feature</description>
+          <defaultValue>&quot;{&apos;type&apos;: &apos;database&apos;, &apos;enabled&apos;: &apos;false&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_EMAIL_GROUP</name>
+          <description></description>
+          <defaultValue>SMT</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>EVENT_ENTRYPOINT</name>
+          <description></description>
+          <defaultValue>&quot;{&apos;entrypoint&apos;: &apos;postsuite&apos;, &apos;interpreter&apos;: &apos;c:\Python27\python.exe&apos;, &apos;script&apos;: &apos;SmartTest_THoT_Callback.py&apos;,  &apos;arguments&apos;: &apos;STR-PV-VALIDATION-Release-Results&apos;, &apos;script_location&apos;: &apos;\\\\results.cal.ci.spirentcom.com\\smt\\SCMSmartTest\\ini&apos; }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SUITE_USER</name>
+          <description></description>
+          <defaultValue>&quot;{&apos;extraSummaryColumn&apos; : &apos;CR&apos;, &apos; mode&apos; : &apos;SCM&apos;, &apos;scriptOrder&apos; : &apos;alphabetical&apos;, &apos;lightweight&apos;  : &apos;true&apos;  }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>OPTIMIZE_FOR_DISKSPACE</name>
+          <description></description>
+          <defaultValue>--optimize_for_diskspace</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SMARTEST_DBUPDATE</name>
+          <description></description>
+          <defaultValue>&quot;{&apos;enabled&apos; : &apos;true&apos;, &apos;branch&apos; : &apos;release&apos; ,&apos;owner&apos; : &apos;SmartTest&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>OPTIMIZE_WITH_VIRTUAL</name>
+          <description></description>
+          <defaultValue>--optimize_with_virtual</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>VIRTUAL_SERVER_OPTIONS</name>
+          <description></description>
+          <defaultValue>&quot;{&apos;max_port_pairs&apos; : 5, &apos;id&apos; : &apos;STR-PV-VALIDATION-Release&apos;, &apos;vm_ttl&apos; : 2700}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>THGROUP</name>
+          <description></description>
+          <defaultValue>DB</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>UPGRADE</name>
+          <description></description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description></description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>ENVANALYSIS</name>
+          <description></description>
+          <defaultValue>&quot;{&apos;enabled&apos; : &apos;true&apos;, &apos;branch&apos; : &apos;release&apos; ,&apos;owner&apos; : &apos;SmartTest&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TESTCASE-STATE</name>
+          <description>ACTIVE                 0&#xd;
+INACTIVE             1&#xd;
+DEPRICATED       2&#xd;
+Being Fixed         3&#xd;
+Awaiting Test     4&#xd;
+</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//TestCenter/integration/framework/tools/buildUtil/... //ws/buildUtil/...&#xd;
+//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
+//SCM/Scripts/... //ws/Scripts/...&#xd;
+//SCM/Scripts/SmartTest/${BRANCH_NAME}/STR-Config-local.txt //ws/STR-Config.ini&#xd;
+//TestCenter/integration/regression/transformThotResult.py //ws/transformThotResult.py</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>scmbuild2-xp</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${JOB_NAME}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo Smartterst Nightly getting latest build version =%MAJ_MIN_VER% !!! &#xd;
+c:\python27\python %WORKSPACE%\Scripts\SmartTest_Latest_Build.py %MAJ_MIN_VER% %WINRESPATH% %STR_GROUP%&#xd;
+echo Smartterst CONFIG CREATOR is Running !!! &#xd;
+c:\python27\python %WORKSPACE%\buildUtil\pw_thot_conf_creator1.py --outputXML=%WINRESPATH%\ini\%INIFILE% --dbHost=%DB_HOST% --tags=%CI_TAG% --test_script_directories=%TEST_SCRIPTS_DIRS% --email_server=%EMAIL_SERVER% --hw_modules=%CI_HW_MODULES% --hw_details=%CI_PORT_PAIR% --agent_host_details=%CI_AGENT_LIST% --agents_per_host=%AGENTS_PER_HOST% --tagsfile=%CI_TAG_FILE% --testsets=%CI_TEST_SET% --test-suite-name=%SUITE_NAME% --agentexit=%Agent_Exit% --dbupdate=%DB_Update% --event_entrypoint=%EVENT_ENTRYPOINT% %OPTIMIZE_FOR_DISKSPACE% --suite_user=%SUITE_USER% --smarttest_dbupdate=%SMARTEST_DBUPDATE% %OPTIMIZE_WITH_VIRTUAL% --virtual_server_options=%VIRTUAL_SERVER_OPTIONS% --thgroup=%THGROUP% --min_stc_version=%MAJ_MIN_VER% --upgrade=%UPGRADE% --env_analysis=%ENVANALYSIS% --testcase-state=%TESTCASE-STATE%&#xd;
+echo Smartterst Running %SM_IP%  %INIFILE% %BLL_BUILD_NUMBER% %IL_BUILD_NUMBER% !!! &#xd;
+c:\python27\python %WORKSPACE%\Scripts\SmartTest_Scheduler.py %SM_IP% %INIFILE% %MAJ_MIN_VER% %BLL_BUILD_NUMBER% %WINRESPATH% %LNXRESPATH% %SM_TOUT%</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>echo Generating Changelist Report for PV Scripts&#xd;
+c:\perl\bin\perl.exe %WORKSPACE%\Scripts\pv_changelist_reporter.pl %WORKSPACE%\report.html</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>report.html</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

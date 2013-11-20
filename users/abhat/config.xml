@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Aniket Bhat</fullName>
+  <description></description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>nxgRyY6DNMWFnGbfy6cXoBuGt2YxI2c0d+ooW5zIVwir4Y06FIA/BhVvdSRSD6Xn</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.4">
+      <emailAddress>aniket.bhat@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName>MyIntegrationDash</primaryViewName>
+      <views>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>MyIntegrationDash</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>bll_linux</string>
+            <string>bll_windows</string>
+            <string>bll_windows_debug</string>
+            <string>il_qemu</string>
+            <string>il_qemu_coverage</string>
+            <string>il_unit_test</string>
+            <string>regression</string>
+            <string>regression_linux</string>
+            <string>regression_nightly</string>
+            <string>rtp_nightly_regression_integration</string>
+            <string>rtp_regr_coverage_merged</string>
+            <string>rtp_regression_coverage</string>
+            <string>STR-Nightly-Results-Integration</string>
+            <string>STR-Nightly-Results-Integration-1</string>
+            <string>STR-Nightly-Results-Integration-2</string>
+            <string>STR-Weekend-Results-Integration</string>
+            <string>STR-Weekend-Results-Integration-1</string>
+            <string>STR-Weekend-Results-Integration-2</string>
+            <string>ui</string>
+            <string>ui_debug</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+        </hudson.model.ListView>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>MyReleaseDash</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.model.ListView/jobNames/comparator"/>
+            <string>release_bll_linux_ci</string>
+            <string>release_bll_windows_ci</string>
+            <string>release_bll_windows_debug_ci</string>
+            <string>release_il_qemu_ci</string>
+            <string>release_il_unit_test</string>
+            <string>release_regression_ci</string>
+            <string>release_regression_nightly</string>
+            <string>release_ui_ci</string>
+            <string>release_ui_debug_ci</string>
+            <string>STR-Nightly-Results-Release</string>
+            <string>STR-Nightly-Results-Release-1</string>
+            <string>STR-Nightly-Results-Release-2</string>
+            <string>STR-Weekend-Results-Release</string>
+            <string>STR-Weekend-Results-Release-1</string>
+            <string>STR-Weekend-Results-Release-2</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+        </hudson.model.ListView>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+        <maps.hudson.plugin.xfpanel.XFPanelView plugin="xfpanel@1.1.6">
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>CICare About</name>
+          <description>Jenkins Wall Display.</description>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>bll_linux</string>
+            <string>bll_windows</string>
+            <string>bll_windows_debug</string>
+            <string>il_qemu</string>
+            <string>il_unit_test</string>
+            <string>regression</string>
+            <string>regression_nightly</string>
+            <string>release_bll_linux_ci</string>
+            <string>release_bll_windows_ci</string>
+            <string>release_bll_windows_debug_ci</string>
+            <string>release_il_qemu_ci</string>
+            <string>release_il_unit_test</string>
+            <string>release_regression_ci</string>
+            <string>release_regression_nightly</string>
+            <string>release_ui_ci</string>
+            <string>release_ui_debug_ci</string>
+            <string>ui</string>
+            <string>ui_debug</string>
+          </jobNames>
+          <jobFilters/>
+          <columns/>
+          <colors>
+            <okBG>#267526</okBG>
+            <okFG>#FFFFFF</okFG>
+            <failedBG>#FFC130</failedBG>
+            <failedFG>#FFFFFF</failedFG>
+            <brokenBG>#FF0000</brokenBG>
+            <brokenFG>#FFFFFF</brokenFG>
+            <otherBG>#CCCCCC</otherBG>
+            <otherFG>#FFFFFF</otherFG>
+          </colors>
+          <numColumns>2</numColumns>
+          <refresh>180</refresh>
+          <fullHD>false</fullHD>
+          <guiHeight>120</guiHeight>
+          <guiJobFont>45</guiJobFont>
+          <guiFailFont>20</guiFailFont>
+          <guiInfoFont>20</guiInfoFont>
+          <guiBuildFont>20</guiBuildFont>
+          <guiClaimFont>20</guiClaimFont>
+          <showDescription>false</showDescription>
+          <showBrokenBuildCount>false</showBrokenBuildCount>
+          <showZeroTestCounts>false</showZeroTestCounts>
+          <sortDescending>false</sortDescending>
+          <showTimeStamp>true</showTimeStamp>
+          <enableAutomaticSort>true</enableAutomaticSort>
+          <showClaimInfo>true</showClaimInfo>
+          <showWarningIcon>true</showWarningIcon>
+          <replaceResponsibles>true</replaceResponsibles>
+          <autoResizeEntryHeight>true</autoResizeEntryHeight>
+          <hideSuccessfulBuilds>false</hideSuccessfulBuilds>
+          <replaceNumberOfTestCases>true</replaceNumberOfTestCases>
+          <showClaimInfoInUnstable>true</showClaimInfoInUnstable>
+          <showGreenColor>false</showGreenColor>
+          <BlameState>NOTATALL</BlameState>
+          <maxAmmountOfResponsibles>1</maxAmmountOfResponsibles>
+          <responsiblesTopic>Responsible(s): </responsiblesTopic>
+        </maps.hudson.plugin.xfpanel.XFPanelView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>uLeswK:14ef1a038976cf2f31cbd382e1bd2d4a1801222055d387ca80f4762362cad5ec</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.21">
+      <perforceId>abhat</perforceId>
+      <perforceEmail>aniket.bhat@spirent.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys></authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.4">
+      <credentials/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+  </properties>
+</user>

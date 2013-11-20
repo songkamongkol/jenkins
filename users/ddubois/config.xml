@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Daniel DuBois</fullName>
+  <description>some guy</description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>eoCJdxWREzzwn0spERXBwOud0kuemlf3u1prz/ARB4M9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>ddubois@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>QCCujb:1e899ab5d281bbecf939ad824dba705bf94d7868b29c9528ff8558c11759a821</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.plugins.perforce.PerforceUserProperty>
+      <perforceId>Daniel.DuBois</perforceId>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys></authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+  </properties>
+</user>

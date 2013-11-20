@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>15</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BLL_BUILD_NUMBER</name>
+          <description>This is used to pass a common build number to all IL and BLL build jobs run during the nightly build process.</description>
+          <defaultValue>BAD_BUILD_NUMBER</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description></description>
+          <defaultValue>4.40</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SOURCE_OS</name>
+          <description></description>
+          <defaultValue>IL</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>scmbuild</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//TestCenter/profx_iso/Labserver/... //ws/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>0</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <quietPeriod>120</quietPeriod>
+  <assignedNode>il_scm08</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+# uncompress labserver image file
+rm -f labServerBaseVm.img.gz
+cp labServerBaseVmWeb.img.gz labServerBaseVm.img.gz
+gunzip labServerBaseVm.img.gz
+
+
+
+# -- Build stcapi_linux tar ball (REST API)
+# rm -rf stcapi_linux
+# mkdir stcapi_linux
+# pushd stcapi_linux
+# wget http://mercurial.cal.ci.spirentcom.com/StcRestApi/raw-file/tip/deployment/build_stcapi_package.py
+# python $WORKSPACE/stcapi_linux/build_stcapi_package.py
+# popd
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+# -- setup build number and path based on the branch name
+if [ &quot;$BRANCH_NAME&quot; = &quot;integration&quot; ]; then
+     export BRANCH_ID=&apos;3&apos;
+fi
+
+export FULL_BUILD=${STC_MAJ_MIN_VERSION}.${BLL_BUILD_NUMBER}${BRANCH_ID}
+export MARTIN_TAR_DIR=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/GUI_BLL/${FULL_BUILD}/tar
+
+# -- copy the tar balls from martin
+rm -f Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz
+rm -f Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz
+cp ${MARTIN_TAR_DIR}/Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz $WORKSPACE
+# cp ${MARTIN_TAR_DIR}/Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz $WORKSPACE
+
+# Re-structure LS tar ball according to the requirement for LS VM
+# tar xvfz Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz
+# cp stcapi_linux/stcapi_linux*.*gz ./Spirent_TestCenter_Application_Linux_Server/
+# mv Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz ./Spirent_TestCenter_Application_Linux_Server/
+# rm -f Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz
+# tar cvfz Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz Spirent_TestCenter_Application_Linux_Server
+
+
+
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+      <project>stcapi_rest_api</project>
+      <filter>deployment/stcapi</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+baseimg=$WORKSPACE/labServerBaseVm.img
+lstarball=$WORKSPACE/Spirent_TestCenter_LS_${STC_MAJ_MIN_VERSION}.tar.gz
+echo &quot;STC API Linux filename is $filename&quot;
+
+# -- mount the qcow image
+TmpDir=/tmp/vm
+Dev=/dev/nbd0
+echo &quot;Updating server $lstarball on image file: $baseimg&quot;
+sudo modprobe nbd max_part=8
+sudo qemu-nbd -d $Dev
+sudo qemu-nbd -c $Dev $baseimg
+mkdir -p $TmpDir
+echo &quot;Device $Dev&quot;
+# TODO Takes a bit to mount need to check if the device exists first
+sleep 5
+# make sure the devices mounted
+sudo fdisk -l $Dev
+
+# mount the qcow as a block device
+sudo mount /dev/nbd0p1 $TmpDir
+Dir=`pwd`
+# untar a version of the server
+pushd $TmpDir/home/stc
+sudo mv -f STC_SERVER OLD_SERVER
+sudo tar -z -x -v -f $lstarball -C $TmpDir/home/stc
+sudo mv Spirent_TestCenter_Application_Linux_Server STC_Server
+pushd STC_Server
+export filename=`ls | grep stcapi_linux*.tgz`
+popd
+sudo chown -R 500:500 STC_Server
+# sudo ln $TmpDir/home/stc/STC_Server/Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz $TmpDir/tmp/Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz
+sudo ln $TmpDir/home/stc/STC_Server/$filename $TmpDir/tmp/$filename
+sudo cp $WORKSPACE/stcapi $TmpDir/etc/init.d/stcapi
+sudo chmod a+x $TmpDir/etc/init.d/stcapi
+popd
+# Set vm to dhcp by default
+pushd $TmpDir/etc/sysconfig/network-scripts
+sudo echo -e &quot;DEVICE=eth0\nTYPE=Ethernet\nNM_CONTROLLED=no\nONBOOT=yes\nBOOTPROTO=dhcp\nPEERDNS=yes&quot; &gt; /tmp/ifcfg-eth0.new
+sudo rm -f ifcfg-eth0
+sudo mv /tmp/ifcfg-eth0.new ifcfg-eth0
+sudo sudo chown root:root ifcfg-eth0
+popd
+cd $WORKSPACE
+sudo umount $TmpDir
+sudo qemu-nbd -d $Dev
+gzip labServerBaseVm.img</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.28">
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>false</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo></replyTo>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_RECIPIENTS</replyTo>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>KOMAL DAGA</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>SCRATCH</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>Test1</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+          </columns>
+        </hudson.model.ListView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>JiiODX:f485353ddf37b6ef2a3185c3e153ed401de028d39f52d2f0cee3d769756f0702</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>komal.daga@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>scmbuild2-xp</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os&#xd;
+import sys&#xd;
+import subprocess&#xd;
+import optparse&#xd;
+import re&#xd;
+import string&#xd;
+import urllib2&#xd;
+&#xd;
+&#xd;
+ &#xd;
+job = &apos;integration-nightly-regression-root&apos;&#xd;
+url = &quot;http://jenkins2.cal.ci.spirentcom.com:8080/job/&quot; + job +&quot;/build&quot;&#xd;
+print url&#xd;
+data=&quot;token=mosheallowedtodothis&quot;&#xd;
+#creating HTTP Req&#xd;
+req = urllib2.Request(url,data)&#xd;
+f = urllib2.urlopen(req)&#xd;
+&#xd;
+&#xd;
+    &#xd;
+&#xd;
+&#xd;
+&#xd;
+&#xd;
+</command>
+    </hudson.plugins.python.Python>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

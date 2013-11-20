@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Test job to develop ant script to run Tech Pubs STC automation PDF, HTML and text docs.&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>RELDATE</name>
+          <description>The release date for the manual.</description>
+          <defaultValue>February 2013</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PARTNUM</name>
+          <description>The manual&apos;s part number.</description>
+          <defaultValue>P/N 71-006853 REV A</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SECRETID</name>
+          <description>The &quot;secret&quot; version ID number. These are found on the Tech Pubs Sharepoint under&lt;b&gt; STC Help File IDs&lt;/b&gt;.</description>
+          <defaultValue>0021</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>VERSIONDATE</name>
+          <description>Release version number and date. Change the number to match the current release, but do not touch &lt;b&gt;${TODAY}&lt;/b&gt;, which is a special code that adds the date. For final builds, delete everything in the VERSIONDATE box and replace it with &lt;b&gt;none&lt;/b&gt;. This will remove preliminary markings and the date from the PDF.</description>
+          <defaultValue>4.22 - ${TODAY}</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>scmbuild</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}</p4Client>
+    <projectPath>//TestCenter/integration/content/.../def/... //ws/integration/content/.../def/...&#xd;
+//TestCenter/integration/framework/common/... //ws/integration/framework/common/...&#xd;
+//TestCenter/integration/framework/def/... //ws/integration/framework/def/...&#xd;
+//TestCenter/integration/userdocauto/doc_source/... //ws/integration/userdocauto/doc_source/...&#xd;
+</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>0</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>CAL-J3ZLDP1</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>REM Fix slashes in path.
+set WORKSPACE=%WORKSPACE:/=\%
+
+set ANT_HOME=%WORKSPACE%\integration\userdocauto\doc_source\tools\apache-ant-1.8.4
+set PATH=%WORKSPACE%\integration\userdocauto\doc_source\tools\apache-ant-1.8.4\bin;%PATH%
+
+REM OUTPUT PDF
+REM ant -f %WORKSPACE%\integration\userdocauto\doc_source\tools\ant\build-jenkins.xml -Ddate-param=&quot;%VERSIONDATE%&quot; -Drd=&quot;%RELDATE%&quot; -Dpn=&quot;%PARTNUM%&quot; -Did-number=&quot;%SECRETID%&quot; output-pdf
+
+REM OUTPUT HTML
+REM ant -f %WORKSPACE%\integration\userdocauto\doc_source\tools\ant\build-jenkins.xml -Ddate-param=&quot;%VERSIONDATE%&quot; -Did-number=&quot;%SECRETID%&quot; output-html
+
+REM OUTPUT TEXT
+REM ant -f %WORKSPACE%\integration\userdocauto\doc_source\tools\ant\build-jenkins.xml output-text
+
+REM OUTPUT HTML, PDF and text
+ant -f %WORKSPACE%\integration\userdocauto\doc_source\tools\ant\build-jenkins.xml -Ddate-param=&quot;%VERSIONDATE%&quot; -Drd=&quot;%RELDATE%&quot; -Dpn=&quot;%PARTNUM%&quot; -Did-number=&quot;%SECRETID%&quot; output-all</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

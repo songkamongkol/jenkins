@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Nilesh Gavaskar</fullName>
+  <properties>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>FirstResp_Integration</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>bll_coverage</string>
+            <string>bll_linux</string>
+            <string>bll_linux_x64</string>
+            <string>bll_windows</string>
+            <string>il_changeling</string>
+            <string>il_qemu</string>
+            <string>il_qemu_coverage</string>
+            <string>il_unit_test</string>
+            <string>regression</string>
+            <string>regression_changeling</string>
+            <string>regression_cl_nightly</string>
+            <string>regression_nightly</string>
+            <string>ui</string>
+            <string>ui_debug</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+            <hudson.plugins.claim.ClaimColumn plugin="claim@2.1"/>
+          </columns>
+        </hudson.model.ListView>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>FirstResp_release</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.model.ListView/jobNames/comparator"/>
+            <string>release_bll_linux_ci</string>
+            <string>release_bll_windows_ci</string>
+            <string>release_il_changeling_ci</string>
+            <string>release_il_qemu_ci</string>
+            <string>release_il_unit_test</string>
+            <string>release_regression_changeling_ci</string>
+            <string>release_regression_ci</string>
+            <string>release_regression_cl_nightly</string>
+            <string>release_regression_nightly</string>
+            <string>release_ui_ci</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+            <hudson.plugins.claim.ClaimColumn plugin="claim@2.1"/>
+          </columns>
+        </hudson.model.ListView>
+        <hudson.model.ListView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>Weekend Jobs</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>STR-Admin-Results-Weekend-Integration</string>
+            <string>STR-Admin-Results-Weekend-Release</string>
+            <string>STR-Admin-Weekend-Integration</string>
+            <string>STR-Admin-Weekend-Release</string>
+            <string>STR-Weekend-Integration</string>
+            <string>STR-Weekend-Integration-1</string>
+            <string>STR-Weekend-Integration-2</string>
+            <string>STR-Weekend-Release</string>
+            <string>STR-Weekend-Release-1</string>
+            <string>STR-Weekend-Release-2</string>
+            <string>STR-Weekend-Results-Integration</string>
+            <string>STR-Weekend-Results-Integration-1</string>
+            <string>STR-Weekend-Results-Integration-2</string>
+            <string>STR-Weekend-Results-Release</string>
+            <string>STR-Weekend-Results-Release-1</string>
+            <string>STR-Weekend-Results-Release-2</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
+          </columns>
+        </hudson.model.ListView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.21">
+      <perforceId>ngavaskar</perforceId>
+      <perforceEmail>nilesh.gavaskar@spirent.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>FfIaIo:1d2fe29cd36d03a0ac8c6f0346563041ebc538e304a138dc4edc9f4901b6fb8a</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.4">
+      <emailAddress>nilesh.gavaskar@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>y0noV7DMrrByGm9iN1qER8Sb1effvR9YWE361WccQqqr4Y06FIA/BhVvdSRSD6Xn</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.4">
+      <credentials/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+  </properties>
+</user>

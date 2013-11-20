@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Contains maintenance script</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>5</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>0 * * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.groovy.SystemGroovy plugin="groovy@1.13">
+      <scriptSource class="hudson.plugins.groovy.StringScriptSource">
+        <command>import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionActivationListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+import net.bull.javamelody.*;
+  
+def chuck = SessionListener.newInstance();
+println (&quot;Session Info: &quot;);
+println chuck.getAllSessionsInformations();
+sessionCount = chuck.getSessionCount();
+println (&quot;Number of Session: &quot; + sessionCount);
+maxSessionCount = 10;
+if ( sessionCount &gt; maxSessionCount ) {
+          println (&quot;Open Session &quot; + sessionCount + &quot; more than &quot; + maxSessionCount);
+          println &quot;Invalidating...&quot;;
+          chuck.invalidateAllSessions();
+}</command>
+      </scriptSource>
+      <bindings></bindings>
+      <classpath></classpath>
+    </hudson.plugins.groovy.SystemGroovy>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

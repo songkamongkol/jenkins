@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>klei</fullName>
+  <properties>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.4"/>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>ecqX4tShqvBigl/36cLuCxRzRtyQlkjLb/RXM4x25betcHQx7yIK0VVdmc6wX0jmpGTlivN0RL1hSW94uLogv+qVbBNlVZnEhqgbYdAj5rE=</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.8.2">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.21"/>
+  </properties>
+</user>

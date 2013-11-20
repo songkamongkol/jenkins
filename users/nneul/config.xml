@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>nneul@neulinger.org</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>bEU6FoNZZxGsIdcR4qnBUdKmeuu4cGEsHVCif+yLawk9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>vumhTD:657032e281752af0c7f8c703c7cded34cc4cbb83127baa660f1a0e2d9e4ee39e</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>nneul@neulinger.org</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+  </properties>
+</user>

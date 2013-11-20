@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>Harshad Kolte</fullName>
+  <description></description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>peyBABYvw8TB8ZKEh8RGaP8Y6/lE63ERwWELc+wEiDA9px31QpF+or0C9YH8o/76</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.tasks.Mailer_-UserProperty>
+      <emailAddress>harshad.kolte@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+        <hudson.plugins.view.dashboard.Dashboard>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>MyBuildsDashboard</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>bll_linux</string>
+            <string>bll_windows</string>
+            <string>il_changeling</string>
+            <string>il_qemu</string>
+            <string>il_unit_test</string>
+            <string>il_virtual</string>
+            <string>ui</string>
+            <string>ui_debug</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn/>
+          </columns>
+          <useCssStyle>true</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+        <hudson.plugins.view.dashboard.Dashboard>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>MyRegressionsDashboard</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
+            <string>BDC_Routing_Scale</string>
+            <string>regression</string>
+            <string>regression_changeling</string>
+            <string>regression_cl_nightly</string>
+            <string>regression_nightly</string>
+            <string>release_regression_changeling_ci</string>
+            <string>release_regression_ci</string>
+            <string>release_regression_cl_nightly</string>
+            <string>release_regression_nightly</string>
+            <string>rtp_regr_coverage_merged</string>
+            <string>rtp_regression_coverage</string>
+            <string>STR-Base-Results-Integration</string>
+            <string>STR-Nightly-Results-Integration-1</string>
+            <string>STR-Nightly-Results-Integration-2</string>
+            <string>STR-Weekend-Integration-1</string>
+            <string>STR-Weekend-Integration-2</string>
+          </jobNames>
+          <jobFilters/>
+          <columns>
+            <hudson.views.StatusColumn/>
+            <hudson.views.WeatherColumn/>
+            <hudson.views.JobColumn/>
+            <hudson.views.LastSuccessColumn/>
+            <hudson.views.LastFailureColumn/>
+            <hudson.views.LastDurationColumn/>
+            <hudson.views.BuildButtonColumn/>
+            <hudson.plugins.nodenamecolumn.NodeNameColumn/>
+            <hudson.plugins.projectstats.column.NumBuildsColumn/>
+          </columns>
+          <useCssStyle>true</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
+          <leftPortletWidth>50%</leftPortletWidth>
+          <rightPortletWidth>50%</rightPortletWidth>
+          <leftPortlets/>
+          <rightPortlets/>
+          <topPortlets/>
+          <bottomPortlets/>
+        </hudson.plugins.view.dashboard.Dashboard>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.plugins.perforce.PerforceUserProperty/>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys></authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>yTFaYp:53d5d2458b0f420a15347d45d605a1711531e5d340db549d1d0fb427ee137000</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+  </properties>
+</user>

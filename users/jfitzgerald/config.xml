@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>John Fitzgerald</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>KjenS+An8CbZM7aznAXnojYZHz7+HyKQ5POyssTdbS+r4Y06FIA/BhVvdSRSD6Xn</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>CwMSNt:b5debb2a055af8637d83dcf2bb31376c7eb77589f42c09818cce54215fa53a88</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.4">
+      <emailAddress>john.fitzgerald@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.4">
+      <credentials/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.21"/>
+  </properties>
+</user>

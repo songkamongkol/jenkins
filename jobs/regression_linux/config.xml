@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Adding clean-up script.</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>50</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>INSTALL_DIR</name>
+          <description>stc install dir</description>
+          <defaultValue>/home/thot/jenkins/workspace/regression_linux/stc_install_dir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NUM_EXECUTOR</name>
+          <description>number of executors </description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FILTER</name>
+          <description>filter (e.g. DEV_CI and PGA)</description>
+          <defaultValue>&apos;DEV_CI and (HW_NONE or HW_QEMU) and not (OS_ONLY_WIN) and not disabled&apos;</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>scmthot</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...&#xd;
+//TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>CIRegressionAgents-Linux</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+      <project>bll_linux</project>
+      <filter>build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz, BLL_Linux_changelist_*.txt,bll_idl_crc.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>rm -rf il_qemu_changelist_*.txt
+rm -rf BLL_Linux_changelist_*.txt
+rm -rf BLL_changelist_*.txt
+exit 0</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+      <project>il_qemu</project>
+      <filter>il_qemu_changelist_*.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>rm -rf il_img
+mkdir il_img
+cp -rf /storagecal/jenkins/il_qemu/build-latest/*  il_img/.
+
+diff -q bll_idl_crc.txt il_img/il_idl_crc.txt
+
+python -W ignore regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
+
+python regression/stcInstall.py --qm-uid=$JOB_NAME --stc-install-dir=&quot;$INSTALL_DIR&quot; --stc-package=TestCenter.Linux.tar.gz --chassis=&quot;qmanager.cal.ci.spirentcom.com&quot; --fw-image-dir=&quot;/home/thot/jenkins/workspace/regression_linux/il_img/&quot;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>tclsh regression/util/unittest/all.tcl
+
+python regression/run.py --vm-user-id=$JOB_NAME --stc-pkg-dir=&quot;$INSTALL_DIR/Spirent_TestCenter_Application_Linux_Server&quot; -n $NUM_EXECUTOR -m $FILTER --archive-tmpdir --keep-all-tmpdir --basetemp=/home/thot/pytest_tmp --maxfail=200 --vm-desc=$BUILD_TAG --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>python2.7 regression/jenkins/junitEmail.py --junit result.junit.xml --output-file email.properties</command>
+    </hudson.tasks.Shell>
+    <EnvInjectBuilder plugin="envinject@1.84">
+      <info>
+        <propertiesFilePath>email.properties</propertiesFilePath>
+      </info>
+    </EnvInjectBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>tmpdir.tar.gz, ls_log.tar.gz</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/regression_log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>*.junit.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers>
+        <hudson.plugins.claim.ClaimTestDataPublisher plugin="claim@2.1"/>
+      </testDataPublishers>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets>regression/il_img/*.gz</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.28">
+      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>false</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo></replyTo>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_RECIPIENTS</replyTo>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>

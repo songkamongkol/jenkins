@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This job includes the following tasks:&lt;br&gt;&#xd;
+1. XML generator (pw_thot_conf_creator.py) .&lt;br&gt;&#xd;
+2. XML execution on THoT suite master (SmartTest_Scheduler.py) .&lt;br&gt;&#xd;
+3. Waiting results, get results from results folder (SmartTest_Results_Reporter.py) .&lt;br&gt;&#xd;
+&#xd;
+&#xd;
+</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SM_IP</name>
+          <description></description>
+          <defaultValue>10.2.10.191</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>INIFILE</name>
+          <description></description>
+          <defaultValue>SmartTest.xml</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BLL_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>4.10.3176</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>IL_BUILD_NUMBER</name>
+          <description></description>
+          <defaultValue>4.10.3176</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>WINRESPATH</name>
+          <description>Windows Results Path</description>
+          <defaultValue>\\spccalfs04\scm\SCMSmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>LNXRESPATH</name>
+          <description>Linux Results Path</description>
+          <defaultValue>/thot-data/SCMSmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TAG</name>
+          <description>PGA_CORE_BLL</description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>TEST_SCRIPTS_DIRS</name>
+          <description>Test Scripts directorie</description>
+          <defaultValue>&quot;{&apos;//PV_Scripts/mainline/SmartTest/PGA/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/Access/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/ALP/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/B2BPortScalability/Scripts/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/PGA/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/Routing/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/DC/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/DCB/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;},&apos;//PV_Scripts/mainline/SmartTest/SIP/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/IPS/...&apos;:{&apos;source&apos;: &apos;perforce&apos;, &apos;recursive&apos;: &apos;true&apos;} }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>EMAIL_SERVER</name>
+          <description>Email Server</description>
+          <defaultValue>spccalexcfe02.spirentcom.com</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TEST_SET</name>
+          <description>TEST SET VALUE (NIGHTLY,BASE,WEEKEND)&#xd;
+BASE,NIGHTLY</description>
+          <defaultValue>BASE</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CI_HW_MODULES</name>
+          <description>cm-1g,cv-10g,mx-10g-s,dx-10g-s32,edm-2003,mx-100g,mx-40g,c1-10g,cpu-5004,mx-10g-c,mx-1g-c,cpr-2001,xfp-2001,c1-1g</description>
+          <defaultValue>cpr-2001</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_PORT_PAIR</name>
+          <description>&quot;{&apos;cm-1g&apos;:[&apos;10.96.149.12/1/1;10.96.149.12/1/3&apos;,&apos;10.96.149.12/1/5;10.96.149.12/1/7&apos;, &apos;10.96.149.12/1/9;10.96.149.12/1/11&apos;],&apos;cv-10g&apos;:[&apos;10.96.149.12/2/1;10.96.149.12/2/2&apos;,&apos;10.96.149.12/2/3;10.96.149.12/2/4&apos;, &apos;10.96.149.12/2/5;10.96.149.12/2/6&apos;,&apos;10.96.149.12/2/7;10.96.149.12/2/8&apos;],&apos;mx-10g-s&apos;:[&apos;10.96.149.12/12/1;10.96.149.12/12/2&apos;,&apos;10.96.149.12/12/3;10.96.149.12/12/4&apos;, &apos;10.96.149.12/12/5;10.96.149.12/12/6&apos;,&apos;10.96.149.12/12/7;10.96.149.12/12/8&apos;],&apos;dx-10g-s32&apos;:[&apos;10.96.149.12/5/1;10.96.149.12/5/5&apos;,&apos;10.96.149.12/5/9;10.96.149.12/5/13&apos;,&apos;10.96.149.12/5/17;10.96.149.12/5/21&apos;,&apos;10.96.149.12/5/25;10.96.149.12/5/29&apos;],&apos;edm-2003&apos;:[&apos;10.96.149.12/9/1;10.96.149.12/9/3&apos;,&apos;10.96.149.12/9/5;10.96.149.12/9/7&apos;, &apos;10.96.149.12/9/9;10.96.149.12/9/11&apos;],&apos;mx-100g&apos;:[&apos;10.96.149.12/10/1;10.96.149.12/10/3&apos;], &apos;mx-40g&apos;:[&apos;10.96.149.12/7/1;10.96.149.12/7/3&apos;],&apos;c1-10g&apos;:[&apos;10.96.149.21/1/1;10.96.149.22/1/1&apos;],&apos;cpu-5004&apos;:[&apos;10.96.20.126/1/1;10.96.20.126/1/2&apos;]}&quot;</description>
+          <defaultValue>&quot;{&apos;cpr-2001&apos;:[&apos;10.100.20.35/2/1;10.100.20.35/2/2&apos;]}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_AGENT_LIST</name>
+          <description>&quot;{&apos;Agent1&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-01.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;}, &apos;Agent2&apos;:{&apos;hostname&apos;:&apos;smarttest-agent-02.cal.ci.spirentcom.com&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;11U&apos;} }&quot;</description>
+          <defaultValue>&quot;{&apos;Agent1&apos;:{&apos;hostname&apos;:&apos;10.100.34.64&apos;,&apos;platform&apos;:&apos;linux&apos;,&apos;OSVersion&apos;:&apos;EL3&apos;, &apos;chassisType&apos;:&apos;2U&apos;} }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>MISC_SCRIPTS_DIRS</name>
+          <description>Misc folders</description>
+          <defaultValue>&quot;{&apos;//tcl_library/mainline/PV/Narra/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/DC/FCoE/...&apos;:{&apos;source&apos;: &apos;perforce&apos;}, &apos;//PV_Scripts/mainline/Phoenix_PV_Files/L4L7_Native/Scripts/Utilities/...&apos;:{&apos;source&apos;: &apos;perforce&apos;}, &apos;//PV_Scripts/mainline/Phoenix_PV_Files/L4L7_Native/Scripts/Helper/...&apos;:{&apos;source&apos;: &apos;perforce&apos;}, &apos;//PV_Scripts/mainline/SmartTest/B2BPortScalability/Utilities/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},  &apos;//PV_Scripts/mainline/Phoenix_PV_Files/IPS/Scripts/Utilities/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},  &apos;//PV_Scripts/mainline/Phoenix_PV_Files/IPS/Scripts/helper/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/DCB/Misc/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/IPS/Misc/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/Routing/Misc/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/Routing/BGP/BTB/misc/...&apos;: {&apos;source&apos;: &apos;perforce&apos;},&apos;//tcl_library/mainline/stclib/...&apos;: {&apos;source&apos; : &apos;perforce&apos;},&apos;//tcl_library/mainline/PV/PVUtil/...&apos;: {&apos;DestinationDir&apos;:&apos;/home/thot/PVTCLLibrary&apos;, &apos;source&apos;: &apos;perforce&apos;}, &apos;//PV_Scripts/mainline/Phoenix_PV_Files/2.00_PGA/Misc/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/Phoenix_PV_Files/2.00_PGA/PGA_Misc/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/Phoenix_PV_Files/2.00_PGA/Misc/Linux/...&apos;:{&apos;source&apos;: &apos;perforce&apos;},&apos;//tcl_library/mainline/PV/...&apos;:{&apos;DestinationDir&apos;:&apos;/home/thot/PVTCLLibrary&apos;, &apos;source&apos;: &apos;perforce&apos;},&apos;//PV_Scripts/mainline/SmartTest/DC/DC_Utilities/...&apos;: {&apos;source&apos;: &apos;perforce&apos;} }&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>AGENTS_PER_HOST</name>
+          <description>Number of agents per host</description>
+          <defaultValue>14</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>FORCED_DEAD_TIMER</name>
+          <description>Force dead timr to 120 minutes (for debuging)&#xd;
+--scripttimer=%FORCED_DEAD_TIMER%&#xd;
+</description>
+          <defaultValue>7200</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SM_TOUT</name>
+          <description>Suite Master Max time to run</description>
+          <defaultValue>54</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>DB_HOST</name>
+          <description></description>
+          <defaultValue>smarttestdb.cal.ci.spirentcom.com</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_GROUP</name>
+          <description></description>
+          <defaultValue>Debug</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>SUITE_NAME</name>
+          <description>Suite name (Title)</description>
+          <defaultValue>Debug-SmartTest</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>Agent_Exit</name>
+          <description>Agent Exit Criteria - Failures Count &#xd;
+&quot;{&apos;exitCount&apos;: &apos;15&apos;, &apos;enabled&apos;: &apos;true&apos;}&quot;</description>
+          <defaultValue>&quot;{&apos;exitCount&apos;: &apos;15&apos;, &apos;enabled&apos;: &apos;false&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>DB_Update</name>
+          <description>Database Update feature</description>
+          <defaultValue>&quot;{&apos;type&apos;: &apos;database&apos;, &apos;enabled&apos;: &apos;false&apos;}&quot;</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>STR_EMAIL</name>
+          <description>yan.yang@spirentcom.com</description>
+          <defaultValue>moshe.haber@spirentcom.com</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>ILPATH</name>
+          <description>IL path</description>
+          <defaultValue>\\martin\archive\pv\TestCenter</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>WINBLLPATH</name>
+          <description>Wondows BLL path</description>
+          <defaultValue>\\martin\archive\pv\TestCenter</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>LNXBLLPATH</name>
+          <description>Linux BLL path</description>
+          <defaultValue>/gibson/TestCenter</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>QUERY_TESTCASES</name>
+          <description>Test case name&#xd;
+Example:  acceptance_sip_ipv6_b2b&#xd;
+&#xd;
+</description>
+          <defaultValue>ips_2544_back_to_back_frame_fifo_l2_ib_copper_1g</defaultValue>
+        </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>CI_TAG_FILE</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
+    <configVersion>0</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//TestCenter/integration/framework/tools/buildUtil/... //ws/buildUtil/...&#xd;
+//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
+//SCM/Scripts/... //ws/Scripts/...&#xd;
+//TestCenter/integration/regression/transformThotResult.py //ws/transformThotResult.py</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive>C:</p4SysDrive>
+    <p4SysRoot>C:\WINDOWS</p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>scmbuild2-xp</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>true</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${JOB_NAME}</customWorkspace>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo Smartterst CONFIG CREATOR is Running !!! 
+c:\python27\python %WORKSPACE%\buildUtil\pw_thot_conf_creator.py --outputXML=%WINRESPATH%\ini\%INIFILE% --dbHost=%DB_HOST% --tags=%CI_TAG% --test_script_directories=%TEST_SCRIPTS_DIRS% --email_server=%EMAIL_SERVER% --hw_modules=%CI_HW_MODULES% --hw_details=%CI_PORT_PAIR% --agent_host_details=%CI_AGENT_LIST% --misc_script_directories=%MISC_SCRIPTS_DIRS% --agents_per_host=%AGENTS_PER_HOST% --tagsfile=%CI_TAG_FILE% --testsets=%CI_TEST_SET% --scripttimer=%FORCED_DEAD_TIMER% --test-suite-name=%SUITE_NAME% --agentexit=%Agent_Exit% --dbupdate=%DB_Update% --query_testcases=%QUERY_TESTCASES%
+echo Smartterst Running %SM_IP%  %INIFILE% %BLL_BUILD_NUMBER% %IL_BUILD_NUMBER% !!! 
+c:\python27\python %WORKSPACE%\Scripts\SmartTest_THoT_Exec.py %SM_IP% %INIFILE% %BLL_BUILD_NUMBER% %IL_BUILD_NUMBER% %WINRESPATH% %LNXRESPATH% %ILPATH% %WINBLLPATH% %LNXBLLPATH% %SM_TOUT% %STR_EMAIL%
+echo  Running SmartTest Results Job
+c:\python27\python.exe %WORKSPACE%\Scripts\SmartTest_Email_Results.py %BLL_BUILD_NUMBER% %IL_BUILD_NUMBER% %STR_EMAIL% %WINRESPATH% %STR_GROUP%</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>SMResultEmail.html</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+  </buildWrappers>
+</project>
