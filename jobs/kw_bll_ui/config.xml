@@ -90,7 +90,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -166,9 +166,9 @@ pipe.wait()
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>true</sendToRequester>
-            <includeCulprits>true</includeCulprits>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -182,9 +182,9 @@ pipe.wait()
             <recipientList>aniket.bhat@spirent.com, jihad.sabra@spirent.com, wes.seifert@spirent.com, harshad.kolte@spirent.com</recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>true</sendToRequester>
-            <includeCulprits>true</includeCulprits>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
@@ -198,9 +198,9 @@ pipe.wait()
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>true</sendToRequester>
-            <includeCulprits>true</includeCulprits>
+            <sendToDevelopers>false</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
