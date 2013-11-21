@@ -100,7 +100,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -135,7 +135,7 @@ fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>export PATH=/usr/bin:/opt/klocwork/bin:&quot;$PATH&quot;
-export PYTHONPATH=/usr/lib/python2.5/site-packages/oldxml
+export PYTHONPATH=/usr/local/lib/python2.7/dist-packages
 
 echo &quot;Copying ~/bin/klockwork_build.sh to build directory ...&quot;
 cp ~/bin/klocwork_build.sh .
