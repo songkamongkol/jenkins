@@ -90,7 +90,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -110,15 +110,18 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>del BLL_changelist_*.txt
+      <command>dir
+del BLL_changelist_*.txt
 echo %P4_CHANGELIST% %JOB_NAME% %BUILD_NUMBER% &gt; BLL_changelist_%P4_CHANGELIST%.txt</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>echo P4CHANGESTART %P4_CHANGELIST% P4CHANGEEND
+dir
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd %WORKSPACE%
+dir
 
 echo &quot;Executing klockwork build script ...&quot;
 echo &quot;kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release&quot;
