@@ -100,7 +100,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -151,12 +151,12 @@ ln -s asm-ppc asm
 
 cd $WORKSPACE
 echo &quot;Executing kwbuildproject -f -o kwtables integration_kw.out --project integration_x86 ...&quot;
-kwbuildproject -f -o kwtables integration_kw.out --project integration_x86
+kwbuildproject --url http://klocwork.cal.ci.spirentcom.com:8090/integration_x86_baseline -f -o kwtables integration_kw.out --project integration_x86
 
 TODAY=$(date +&quot;%Y-%M-%d&quot;)
 ehco &quot;Upload new Klocwork analysis result to the baseline project ...&quot;
-echo &quot;Executing kwadmin load integration_x86_baseline ./kwtables --name integration_$TODAY ...&quot;;
-kwadmin load integration_x86_baseline ./kwtables --name integration_$TODAY&quot;</command>
+echo &quot;Executing kwadmin --url http://klocwork.cal.ci.spirentcom.com:8090  load integration_x86_baseline ./kwtables --name integration_$TODAY ...&quot;;
+kwadmin --url http://klocwork.cal.ci.spirentcom.com:8090 load integration_x86_baseline ./kwtables --name integration_$TODAY&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
