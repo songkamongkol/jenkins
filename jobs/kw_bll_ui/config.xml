@@ -72,7 +72,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>true</alwaysForceSync>
+    <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -85,7 +85,7 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
@@ -120,13 +120,13 @@ echo %P4_CHANGELIST% %JOB_NAME% %BUILD_NUMBER% &gt; BLL_changelist_%P4_CHANGELIS
 
 echo &quot;Executing klockwork build script ...&quot;
 echo &quot;kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release&quot;
-kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release
+rem kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release
 
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Executing kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out ...&quot;
-kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
+rem kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
 
 echo &quot;Executing kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline...&quot;
 kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline
