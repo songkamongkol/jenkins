@@ -83,7 +83,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
+    <alwaysForceSync>true</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -96,7 +96,7 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <wipeBeforeBuild>true</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
