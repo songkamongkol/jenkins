@@ -135,6 +135,7 @@ exit /B 0</command>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import time
 import subprocess
+import sys
 
 today=time.strftime(&quot;%Y-%m-%d&quot;)
 build_name = &quot;integration_&quot; + today
