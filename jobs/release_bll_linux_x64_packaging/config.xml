@@ -13,7 +13,7 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -51,8 +51,8 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -61,6 +61,7 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
 //SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
 //TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -76,6 +77,7 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -97,6 +99,7 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>1320</quietPeriod>
@@ -108,7 +111,7 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_bll_linux_x64_ci</project>
       <filter>build/il/bld_bll-el3-64-automation-client-only_x86_64/Release/bin/TestCenter.Linux.AutomationClient.x64.tar.gz</filter>
       <target></target>
@@ -136,7 +139,7 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.17">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
@@ -145,7 +148,7 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_ftp_tarball_packaging, </projects>
+          <projects>release_ftp_tarball_packaging,</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -153,6 +156,6 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
     </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>

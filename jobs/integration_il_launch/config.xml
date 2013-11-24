@@ -172,7 +172,7 @@ f.close
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>integration_il_linux_main,integration_il_linux_chos2, integration_il_linux_changeling, integration_il_virtual, integration_il_vtc, </projects>
+          <projects>integration_il_linux_main,integration_il_linux_chos2,integration_il_linux_changeling,integration_il_virtual,integration_il_vtc,</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
