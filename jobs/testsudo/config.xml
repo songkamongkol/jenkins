@@ -71,7 +71,6 @@
 +//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -101,7 +100,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -122,83 +121,13 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>export avail=`df -h | grep \/dev\/sda1 | sed &apos;s/\(.*\)G\(.*\)G\(.*\)[G|M].*/\3/g&apos; | sed &apos;s/\ //g&apos; | cut -d . -f 1`
-export cutoff_limit=10
-# clear ccache is disk space is too low
-if [[ $avail -ge $cutoff_limit ]]; then 
-     echo &quot;Available disk space is $avail and is greater than $cutoff_limit, ccache not clear&quot;; 
-else 
-     echo &quot;Cut-off limit for disk space is $cutoff_limit and is greater than available disk space of $avail, clearing ccache&quot;;
-     ccache -C
-     export avail=`df -h | grep \/dev\/sda1 | sed &apos;s/\(.*\)G\(.*\)G\(.*\)G.*/\3/g&apos;`
-     echo &quot;Available disk space after ccache cleared is now $avail&quot;
-fi</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>export PATH=/usr/bin:/opt/klocwork/bin:&quot;$PATH&quot;
-export PYTHONPATH=/usr/local/lib/python2.7/dist-packages
-
-echo &quot;Copying ~/bin/klockwork_build.sh to build directory ...&quot;
-cp ~/bin/klocwork_build.sh .
-kwinject --version
-echo &quot;Executing klockwork build script ...&quot;
-kwinject -T integration_kw.trace ./klocwork_build.sh
-
-echo &quot;Executing kwinject -t integration_kw.trace -o integration_kw.out ...&quot;
-kwinject -t integration_kw.trace -o integration_kw.out
-
-cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include
-ln -s asm-ppc asm
-
-cd $WORKSPACE
-echo &quot;Executing kwbuildproject -f -o kwtables integration_kw.out --project integration_x86 ...&quot;
-kwbuildproject --url http://klocwork.cal.ci.spirentcom.com:8090/integration_x86_baseline -f -o kwtables integration_kw.out --project integration_x86
-
-TODAY=$(date +&quot;%Y-%M-%d&quot;)
-ehco &quot;Upload new Klocwork analysis result to the baseline project ...&quot;
-echo &quot;Executing kwadmin --url http://klocwork.cal.ci.spirentcom.com:8090  load integration_x86_baseline ./kwtables --name integration_$TODAY ...&quot;;
-kwadmin --url http://klocwork.cal.ci.spirentcom.com:8090 load integration_x86_baseline ./kwtables --name integration_$TODAY&quot;</command>
+      <command>sudo ls -algh /root</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
-    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
-      <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>false</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
-    </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
-      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>false</sendToDevelopers>
-            <sendToRequester>false</sendToRequester>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-            <attachmentsPattern></attachmentsPattern>
-            <attachBuildLog>false</attachBuildLog>
-            <compressBuildLog>false</compressBuildLog>
-            <replyTo></replyTo>
-            <contentType>project</contentType>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript></presendScript>
-      <attachBuildLog>false</attachBuildLog>
-      <compressBuildLog>false</compressBuildLog>
-      <replyTo></replyTo>
-      <saveOutput>false</saveOutput>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
