@@ -82,47 +82,52 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>5 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Spirent_TestCenter\StcHelp.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true
-&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Session_Manager\StcSMHelp.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true
-&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Provisioning_Manager\provision-mgr.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true
+      <command>&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Spirent_TestCenter\StcHelp.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true&#xd;
+&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Session_Manager\StcSMHelp.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true&#xd;
+&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Provisioning_Manager\provision-mgr.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true&#xd;
 &quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V9\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\CTS\cts.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>7z a -ttar CTS_WebHelp.tar %WORKSPACE%\online_help\CTS\Output\spirent\WebHelp
-7z a -ttar CTS_WebHelp.tar %WORKSPACE%\online_help\CTS\HelpResource.resx
-7z a -tgzip CTS_WebHelp.tar.gz CTS_WebHelp.tar
-
-echo Creating TestCenter_WebHelp.tar.gz file
-7z a -ttar TestCenter_WebHelp.tar %WORKSPACE%\online_help\Spirent_TestCenter\Output\spirent\WebHelp
-7z a -ttar TestCenter_WebHelp.tar %WORKSPACE%\online_help\Spirent_TestCenter\HelpResource.resx
-7z a -tgzip TestCenter_WebHelp.tar.gz TestCenter_WebHelp.tar
-
-7z a -ttar ServerManager_WebHelp.tar %WORKSPACE%\online_help\Session_Manager\Output\spirent\WebHelp
-7z a -ttar ServerManager_WebHelp.tar %WORKSPACE%\online_help\Session_Manager\HelpResource.resx
-7z a -tgzip ServerManager_WebHelp.tar.gz ServerManager_WebHelp.tar
-
-7z a -ttar Provisioning_WebHelp.tar %WORKSPACE%\online_help\Provisioning_Manager\Output\spirent\WebHelp
-7z a -tgzip Provisioning_WebHelp.tar.gz Provisioning_WebHelp.tar
-
-
-7z a -ttar WebHelp_mclog.tar %WORKSPACE%\online_help\Spirent_TestCenter\Project\Reports\WebHelp.fltar*
-7z a -tgzip WebHelp_mclog.tar.gz WebHelp_mclog.tar
-
-del TestCenter_WebHelp.tar
-del ServerManager_WebHelp.tar
-del Provisioning_WebHelp.tar
-del CTS_WebHelp.tar
+      <command>7z a -ttar CTS_WebHelp.tar %WORKSPACE%\online_help\CTS\Output\spirent\WebHelp&#xd;
+7z a -ttar CTS_WebHelp.tar %WORKSPACE%\online_help\CTS\HelpResource.resx&#xd;
+7z a -tgzip CTS_WebHelp.tar.gz CTS_WebHelp.tar&#xd;
+&#xd;
+echo Creating TestCenter_WebHelp.tar.gz file&#xd;
+7z a -ttar TestCenter_WebHelp.tar %WORKSPACE%\online_help\Spirent_TestCenter\Output\spirent\WebHelp&#xd;
+7z a -ttar TestCenter_WebHelp.tar %WORKSPACE%\online_help\Spirent_TestCenter\HelpResource.resx&#xd;
+7z a -tgzip TestCenter_WebHelp.tar.gz TestCenter_WebHelp.tar&#xd;
+&#xd;
+7z a -ttar ServerManager_WebHelp.tar %WORKSPACE%\online_help\Session_Manager\Output\spirent\WebHelp&#xd;
+7z a -ttar ServerManager_WebHelp.tar %WORKSPACE%\online_help\Session_Manager\HelpResource.resx&#xd;
+7z a -tgzip ServerManager_WebHelp.tar.gz ServerManager_WebHelp.tar&#xd;
+&#xd;
+7z a -ttar Provisioning_WebHelp.tar %WORKSPACE%\online_help\Provisioning_Manager\Output\spirent\WebHelp&#xd;
+7z a -tgzip Provisioning_WebHelp.tar.gz Provisioning_WebHelp.tar&#xd;
+&#xd;
+&#xd;
+7z a -ttar WebHelp_mclog.tar %WORKSPACE%\online_help\Spirent_TestCenter\Project\Reports\WebHelp.fltar*&#xd;
+7z a -tgzip WebHelp_mclog.tar.gz WebHelp_mclog.tar&#xd;
+&#xd;
+del TestCenter_WebHelp.tar&#xd;
+del ServerManager_WebHelp.tar&#xd;
+del Provisioning_WebHelp.tar&#xd;
+del CTS_WebHelp.tar&#xd;
 del WebHelp_mclog.tar</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-bll_build_number=&quot;1&quot;
-print &quot;bll build number is &quot; + bll_build_number
-paramfile = open(os.environ[&apos;WORKSPACE&apos;] + &quot;\properties.txt&quot;, &quot;w&quot;)
+      <command>import os&#xd;
+bll_build_number=&quot;1&quot;&#xd;
+print &quot;bll build number is &quot; + bll_build_number&#xd;
+paramfile = open(os.environ[&apos;WORKSPACE&apos;] + &quot;\properties.txt&quot;, &quot;w&quot;)&#xd;
 paramfile.write(&quot;BLL_BUILD_NUMBER=&quot; + bll_build_number)</command>
     </hudson.plugins.python.Python>
   </builders>
