@@ -34,7 +34,6 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//tech_pubs/online_help/Provisioning_Manager/... //ws/online_help/Provisioning_Manager/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -87,7 +86,7 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
       <command>&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V8\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Provisioning_Manager\provision-mgr.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>7z a -ttar Provisioning_WebHelp.tar %WORKSPACE%\online_help\Provisioning_Manager\Output\qabuild\WebHelp
+      <command>7z a -ttar Provisioning_WebHelp.tar %WORKSPACE%\online_help\Provisioning_Manager\Output\spirent\WebHelp
 7z a -tgzip Provisioning_WebHelp.tar.gz Provisioning_WebHelp.tar
 
 del Provisioning_WebHelp.tar</command>
@@ -109,7 +108,7 @@ paramfile.write(&quot;BLL_BUILD_NUMBER=&quot; + bll_build_number)</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
       <configs>
