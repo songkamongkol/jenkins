@@ -10,7 +10,7 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.37_rel</defaultValue>
+          <defaultValue>4.38_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -43,18 +43,18 @@
         <hudson.model.StringParameterDefinition>
           <name>RELEASE_NUM</name>
           <description>release number</description>
-          <defaultValue>4.37</defaultValue>
+          <defaultValue>4.38</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
       <activeProcessNames>
         <string>Release IL Build Passed on all platforms</string>
       </activeProcessNames>
     </hudson.plugins.promoted__builds.JobPropertyImpl>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
     <p4User>klei</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -76,6 +76,7 @@
 +//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -91,6 +92,7 @@
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -112,6 +114,7 @@
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <assignedNode>ilbuild-16</assignedNode>
@@ -174,8 +177,8 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <targets>build/il/packages/central/testcenter*.*, build/il/packages/central/rawimage.map,*_changelist_*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
-    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.28">
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -202,6 +205,7 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <attachBuildLog>false</attachBuildLog>
       <compressBuildLog>false</compressBuildLog>
       <replyTo></replyTo>
+      <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.9">
       <consolePrefix>FTP: </consolePrefix>
@@ -289,6 +293,6 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
     </jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>

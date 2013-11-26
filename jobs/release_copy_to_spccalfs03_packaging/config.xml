@@ -17,12 +17,12 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.37_rel</defaultValue>
+          <defaultValue>4.38_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.37</defaultValue>
+          <defaultValue>4.38</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -37,8 +37,8 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -56,6 +56,7 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -77,6 +78,7 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
   <quietPeriod>60</quietPeriod>
@@ -94,6 +96,6 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
   </builders>
   <publishers/>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>

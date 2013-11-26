@@ -19,7 +19,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -27,7 +27,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.37_rel</defaultValue>
+          <defaultValue>4.38_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -47,7 +47,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.37</defaultValue>
+          <defaultValue>4.38</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -70,8 +70,8 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -110,6 +110,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -131,6 +132,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <assignedNode>spccalengec01</assignedNode>
@@ -147,7 +149,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 del UI_changelist*.txt
 exit /B 0</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_ui_ci</project>
       <filter>bin/Release/TestCenter.Windows.no_version.tar.gz, BLL_changelist*.txt, UI_changelist*.txt</filter>
       <target></target>
@@ -160,14 +162,14 @@ exit /B 0</command>
       <command>echo extracting TestCenter.Windows.no_version.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
 python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_version.tar.gz --directory=bin/Release</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_webhelp</project>
       <filter>TestCenter_WebHelp.tar.gz, Provisioning_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_results_reporter_windows_ci</project>
       <filter>ResultsReporter.tar.gz</filter>
       <target></target>
@@ -226,9 +228,9 @@ del EAT.Unix.tar</command>
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>

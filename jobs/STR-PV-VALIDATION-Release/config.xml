@@ -10,7 +10,7 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAJ_MIN_VER</name>
           <description></description>
-          <defaultValue>4.37</defaultValue>
+          <defaultValue>4.38</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -207,8 +207,8 @@ Awaiting Test     4&#xd;
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -235,6 +235,7 @@ Awaiting Test     4&#xd;
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -256,6 +257,7 @@ Awaiting Test     4&#xd;
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <assignedNode>scmbuild2-xp</assignedNode>
@@ -294,9 +296,9 @@ c:\perl\bin\perl.exe %WORKSPACE%\Scripts\pv_changelist_reporter.pl %WORKSPACE%\r
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>
