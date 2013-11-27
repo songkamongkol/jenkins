@@ -326,37 +326,6 @@
       </nodeProperties>
     </slave>
     <slave>
-      <name>spccalsolpv02</name>
-      <description>builds Solaris BLL IP: 10.2.10.88</description>
-      <remoteFS>/export1/home/scmbuild/jenkins/</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
-        <host>10.2.10.88</host>
-        <port>22</port>
-        <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
-      </launcher>
-      <label>bll_solaris_spccalsolpv02</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[11]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
-              </default>
-              <int>2</int>
-              <string>LD_LIBRARY_PATH</string>
-              <string>/usr/lib:/usr/local/lib:/lib</string>
-              <string>PATH</string>
-              <string>/home/aoliver/pkg/solaris/java/bin:/opt/mono/bin:/usr/local/bin:/usr/local/ActiveTcl/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/bin:/usr/ccs/bin:/opt/gcc/bin:/usr/sfw/bin:/export1/home/scmbuild/bin:/usr/local/tcltk8.1/bin:/home/scmbuild/bin/solaris::/home/scmbuild/tcl8.4.14/bin</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-    </slave>
-    <slave>
       <name>spccalenglnx11</name>
       <description>builds BLL CTS: 10.2.10.158</description>
       <remoteFS>/home/scmbuild/jenkins/</remoteFS>
@@ -1180,7 +1149,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1210,7 +1179,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1240,7 +1209,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1316,7 +1285,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[57]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[56]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1512,7 +1481,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1542,7 +1511,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1572,7 +1541,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1602,7 +1571,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1632,7 +1601,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1662,7 +1631,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1722,7 +1691,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[73]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[72]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1823,7 +1792,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[73]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[72]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1853,7 +1822,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[73]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[72]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1883,7 +1852,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[73]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[72]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1929,7 +1898,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[73]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[72]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>DISTCC_HOSTS</string>
@@ -1959,7 +1928,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -2688,7 +2657,7 @@
         <unserializable-parents/>
         <tree-map>
           <default>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[85]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[84]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
           </default>
           <int>1</int>
           <string>STR_LATEST_RESULTS_FOLDER</string>
