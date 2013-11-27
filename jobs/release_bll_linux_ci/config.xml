@@ -53,7 +53,7 @@
         </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release Build Passed Regression</string>
         <string>Release Build Passed on all OS</string>
@@ -91,6 +91,7 @@
 +//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/ui/automation/... //ws/framework/ui/automation/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -120,7 +121,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
