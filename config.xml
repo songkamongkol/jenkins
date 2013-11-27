@@ -1705,6 +1705,18 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$SimpleOfflineCause">
+        <description>
+          <holder>
+            <owner>hudson.slaves.Messages</owner>
+          </holder>
+          <key>SlaveComputer.DisconnectedBy</key>
+          <args>
+            <string>Somboon</string>
+            <string></string>
+          </args>
+        </description>
+      </temporaryOfflineCause>
       <name>bllbldlnx-05</name>
       <description></description>
       <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
