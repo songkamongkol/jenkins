@@ -79,7 +79,6 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 //TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...&#xd;
 //TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/DpgUpdate/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -216,7 +215,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>TestCenter.Linux.tar.gz,BUILD_*.txt</targets>
@@ -239,6 +238,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
