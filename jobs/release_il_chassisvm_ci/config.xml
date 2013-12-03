@@ -116,7 +116,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>ilbldchassis-v01</assignedNode>
+  <assignedNode>ilbldchassis-v02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
