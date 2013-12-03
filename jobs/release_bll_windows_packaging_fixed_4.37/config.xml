@@ -27,7 +27,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.37_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -47,7 +47,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.37</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -94,7 +94,6 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 //ISDE_China/SDE/Java/... //ws/framework/ui/EAT/...&#xd;
 //TestCenter/${BRANCH_NAME}/framework/bll/serverManager/scripts/... //ws/framework/bll/serverManager/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -124,7 +123,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -149,17 +148,10 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 del UI_changelist*.txt
 exit /B 0</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
-      <project>release_ui_ci</project>
-      <filter>bin/Release/TestCenter.Windows.no_version.tar.gz, BLL_changelist*.txt, UI_changelist*.txt</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed Regression</id>
-      </selector>
-      <flatten>true</flatten>
-    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>echo extracting TestCenter.Windows.no_version.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
+      <command>copy \\storage\builds\jenkins\test\TestCenter.Windows.no_version.tar.gz .
+copy \\storage\builds\jenkins\test\*.txt .
+echo extracting TestCenter.Windows.no_version.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
 python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_version.tar.gz --directory=bin/Release</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
@@ -256,6 +248,7 @@ del EAT.Unix.tar</command>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
@@ -269,21 +262,6 @@ del EAT.Unix.tar</command>
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.FileBuildParameters>
-              <propertiesFile>properties.txt</propertiesFile>
-              <failTriggerOnMissing>false</failTriggerOnMissing>
-            </hudson.plugins.parameterizedtrigger.FileBuildParameters>
-          </configs>
-          <projects>release_bll_linux_packaging,release_set_status,release_l4l7_windows_packaging</projects>
-          <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
