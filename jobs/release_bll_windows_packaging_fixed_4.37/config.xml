@@ -83,7 +83,6 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 //TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...&#xd;
 //TestCenter/${BRANCH_NAME}/framework/ui/resultsanalysis/... //ws/framework/ui/resultsanalysis/...&#xd;
 -//TestCenter/${BRANCH_NAME}/framework/ui/resultsanalysis/tools/jvm/linux_x86/man/... //ws/framework/ui/resultsanalysis/tools/jvm/linux_x86/man/...&#xd;
--//TestCenter/${BRANCH_NAME}/framework/ui/EAT/rcp/eclipse/plugins/...&#xd;
 //TestCenter/${BRANCH_NAME}/bin/Release/Help/... //ws/bin/Release/Help/...&#xd;
 //TestCenter/${BRANCH_NAME}/bin/Release/ServerManagerHelp/... //ws/bin/Release/ServerManagerHelp/...&#xd;
 //TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/framework/automation/scripting/stc/SampleScripts/...&#xd;
@@ -93,6 +92,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 //TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/bin/Release/Dpg/DpgUpdate/...&#xd;
 //TestCenter/${BRANCH_NAME}/common/lib/pduEditor/... //ws/common/lib/pduEditor/...&#xd;
 //ISDE_China/SDE/Java/... //ws/framework/ui/EAT/...&#xd;
+-//ISDE_China/SDE/Java/rcp/eclipse/plugins/...&#xd;
 //TestCenter/${BRANCH_NAME}/framework/bll/serverManager/scripts/... //ws/framework/bll/serverManager/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive>C:</p4SysDrive>
