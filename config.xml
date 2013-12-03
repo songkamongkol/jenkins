@@ -2377,6 +2377,7 @@
             <string>release_cts_windows_ci</string>
             <string>release_il_changeling_all_ci</string>
             <string>release_il_changeling_ci</string>
+            <string>release_il_chassisvm_ci</string>
             <string>release_il_chos2_ci</string>
             <string>release_il_ci</string>
             <string>release_il_ci_join</string>
