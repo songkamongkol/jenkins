@@ -61,7 +61,7 @@ Triggers job &quot;integration_launch_bv&quot; for BV system &quot;Avalanche&quo
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>scmbuild2-xp</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
