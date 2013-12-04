@@ -89,7 +89,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -132,22 +132,15 @@ echo &quot;Executing kwbuildproject --host klocwork.cal.ci.spirentcom.com --port
 rem kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline
 exit /B 0</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import time
-import subprocess
-import sys
-
-today=time.strftime(&quot;%Y-%m-%d&quot;)
-build_name = &quot;integration_&quot; + today
-
-print &quot;Executing kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name &quot; + build_name + &quot;...&quot;;
-# sys.stdout.flush()
-# pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--debug&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
-# pipe.wait()
-</command>
-    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name integration_2013-12-04</command>
+      <command>FOR /F &quot;TOKENS=1* DELIMS= &quot; %%A IN (&apos;DATE/T&apos;) DO SET CDATE=%%B
+FOR /F &quot;TOKENS=1,2 eol=/ DELIMS=/ &quot; %%A IN (&apos;DATE/T&apos;) DO SET mm=%%B
+FOR /F &quot;TOKENS=1,2 DELIMS=/ eol=/&quot; %%A IN (&apos;echo %CDATE%&apos;) DO SET dd=%%B
+FOR /F &quot;TOKENS=2,3 DELIMS=/ &quot; %%A IN (&apos;echo %CDATE%&apos;) DO SET yyyy=%%B
+SET date=%yyyy%-%mm%-%dd%
+
+echo %date%
+kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name integration_%date%</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
