@@ -72,7 +72,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>true</alwaysForceSync>
+    <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -85,7 +85,7 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
@@ -143,7 +143,7 @@ build_name = &quot;integration_&quot; + today
 print &quot;Executing kwadmin --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name &quot; + build_name + &quot;...&quot;;
 
 sys.stdout.flush()
-pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
+pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--debug&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
 pipe.wait()
 </command>
     </hudson.plugins.python.Python>
