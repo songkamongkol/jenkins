@@ -89,7 +89,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -144,7 +144,7 @@ print &quot;Executing kwadmin --debug --host klocwork.cal.ci.spirentcom.com --po
 
 sys.stdout.flush()
 pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--debug&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
-pipe.wait()
+# pipe.wait()
 </command>
     </hudson.plugins.python.Python>
   </builders>
