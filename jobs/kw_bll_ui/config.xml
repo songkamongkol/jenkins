@@ -89,7 +89,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -126,7 +126,7 @@ rem kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPAC
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Executing kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out ...&quot;
-kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
+rem kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
 
 echo &quot;Executing kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline...&quot;
 rem kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline
