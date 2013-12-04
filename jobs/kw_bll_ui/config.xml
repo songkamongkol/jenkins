@@ -89,7 +89,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -142,11 +142,14 @@ build_name = &quot;integration_&quot; + today
 
 print &quot;Executing kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name &quot; + build_name + &quot;...&quot;;
 
-sys.stdout.flush()
-pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--debug&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
+๒ sys.stdout.flush()
+๒ pipe = subprocess.Popen([&quot;kwadmin&quot;, &quot;--debug&quot;, &quot;--host&quot;, &quot;klocwork.cal.ci.spirentcom.com&quot;, &quot;--port&quot;, &quot;8090&quot;, &quot;load&quot;, &quot;integration_Win_BLL_baseline&quot;, &quot;.\\kwtables&quot;, &quot;--name&quot;, build_name], stdout=subprocess.PIPE)
 # pipe.wait()
 </command>
     </hudson.plugins.python.Python>
+    <hudson.tasks.BatchFile>
+      <command>kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name integration_2013-12-04</command>
+    </hudson.tasks.BatchFile>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
