@@ -177,7 +177,7 @@ python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_vers
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
       <command>rem -- echo extracting ResultsReporter.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_RESULTS_REPORTER_WINDOWS%
-python framework\tools\buildUtil\package.py --install ResultsReporter.tar.gz --directory=framework/ui/resultsanalysis/dist
+rem -- python framework\tools\buildUtil\package.py --install ResultsReporter.tar.gz --directory=framework/ui/resultsanalysis/dist
 p4 info
 set
 
