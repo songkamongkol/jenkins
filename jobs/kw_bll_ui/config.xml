@@ -120,16 +120,16 @@ echo %P4_CHANGELIST% %JOB_NAME% %BUILD_NUMBER% &gt; BLL_changelist_%P4_CHANGELIS
 
 echo &quot;Executing klockwork build script ...&quot;
 echo &quot;kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release&quot;
-rem kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release
+kwinject -T integration_bll_win_kw.trace c:\etsmb\stc\buildall.bat %WORKSPACE% Release
 
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Executing kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out ...&quot;
-rem kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
+kwinject -t integration_bll_win_kw.trace -o integration_bll_win_kw.out
 
 echo &quot;Executing kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline...&quot;
-rem kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline
+kwbuildproject --host klocwork.cal.ci.spirentcom.com --port 8090 -I -o kwtables integration_bll_win_kw.out --project integration_Win_BLL_baseline
 exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
