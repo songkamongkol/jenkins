@@ -40,7 +40,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release IL Build Passed on all platforms</string>
       </activeProcessNames>
@@ -101,7 +101,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -188,7 +188,8 @@ sudo rm -rf $WORKSPACE/build/il/bld_*</command>
       <command># rm -f il_testmodule_contents_$STC_MAJ_MIN_VERSION.tar
 # tar cvf il_testmodule_contents_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
 echo &quot;Finished creating il_testmodule_contents_$STC_MAJ_MIN_VERSION.tar&quot;
-# python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_testmodule_contents-$BRANCH_NAME/</command>
+# python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_testmodule_contents-$BRANCH_NAME/
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_testmodule_contents-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
