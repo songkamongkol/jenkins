@@ -90,6 +90,11 @@ kwinject -t integration_kw.trace -o integration_kw.out
 cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include
 ln -s asm-ppc asm
 
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include/linux
+echo &quot;#define KERNEL_VERSION(a,b,c) (((a) &lt;&lt; 16) + ((b) &lt;&lt; 8) + (c))&quot; &gt; version.h 
+
+&apos;/bin/sh&apos; &apos;-c&apos; &apos;echo \#define LINUX_COMPILER \&quot;`ppc_405-gcc -D__KERNEL__ -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/include -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/../include -Wall -Wstrict-prototypes -Wno-trigraphs -O2 -fno-strict-aliasing -fno-common -fomit-frame-pointer -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/arch/ppc -fsigned-char -msoft-float -pipe -ffixed-r2 -Wno-uninitialized -mmultiple -mstring -Wa,-m405 -v 2&gt;&amp;1 | tail -1`\&quot; &gt; compile.h&apos;
+
 cd $WORKSPACE
 echo &quot;Executing kwbuildproject -f -o kwtables integration_kw.out --project integration_x86 ...&quot;
 kwbuildproject --url http://klocwork.cal.ci.spirentcom.com:8090/integration_x86_baseline -f -o kwtables integration_kw.out --project integration_x86 || true
