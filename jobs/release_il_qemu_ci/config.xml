@@ -47,7 +47,7 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release IL Build Passed on all platforms</string>
       </activeProcessNames>
@@ -107,7 +107,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -156,7 +156,8 @@ fi</command>
 python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_qemu-${BRANCH_NAME}/</command>
+      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_qemu-${BRANCH_NAME}/
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_qemu-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
