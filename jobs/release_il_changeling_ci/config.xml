@@ -47,7 +47,7 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release IL Build Passed on all platforms</string>
       </activeProcessNames>
@@ -105,7 +105,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -126,7 +126,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo $JOB_NAME $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt</command>
+echo $JOB_NAME $BUILD_NUMBER $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#remove the previous build
