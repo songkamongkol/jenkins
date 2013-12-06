@@ -64,13 +64,6 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
-      <project>release_il_chassisvm_ci</project>
-      <filter>*il_chassisvm_*changelist_*.txt</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
-      <flatten>true</flatten>
-    </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_il_testmodule_contents_ci</project>
       <filter>*il_testmodule_contents*changelist*.txt</filter>
       <target></target>
