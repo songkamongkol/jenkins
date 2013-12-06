@@ -150,7 +150,7 @@ fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo $P4_CHANGELIST $BUILD_NUMBER &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
+echo $P4_CHANGELIST $JOB_NAME $BUILD_NUMBER &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
 echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties
 echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
