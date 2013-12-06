@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -106,7 +106,7 @@
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.BuildTrigger>
-      <childProjects>release_il_changeling_ci, release_il_chos2_ci, release_il_testmodule_contents_ci, release_il_changeling_all_ci, release_il_virtual_ci, release_il_vtc_ci, release_il_qemu_ci, release_il_chassisvm_ci</childProjects>
+      <childProjects>release_il_changeling_ci, release_il_chos2_ci, release_il_testmodule_contents_ci, release_il_changeling_all_ci, release_il_virtual_ci, release_il_vtc_ci, release_il_qemu_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
