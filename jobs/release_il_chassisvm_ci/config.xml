@@ -105,7 +105,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -137,7 +137,10 @@ echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command
       <command>$WORKSPACE/build/il/scripts/phxbld -j32 c3</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># copy the build output to storage server
+      <command># clean up old build output
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_chassisvm-$BRANCH_NAME
+
+# copy the build output to storage server
 export STORAGE_DIR=/mnt/builds/jenkins/il_chassisvm-$BRANCH_NAME/build-$P4_CHANGELIST
 
 
