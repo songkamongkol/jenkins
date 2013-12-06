@@ -105,7 +105,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -143,7 +143,8 @@ export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
 sudo scons reversion_il $RELEASE_NUM.$PAD_BUILD_NUMBER $RELEASE_NUM.$PAD_BUILD_NUMBER</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling-$BRANCH_NAME/</command>
+      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling-$BRANCH_NAME/
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_changeling-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>python $WORKSPACE/framework/tools/buildUtil/pw_build_tracker.py --build_dir=$WORKSPACE/build/il --job_name=il
