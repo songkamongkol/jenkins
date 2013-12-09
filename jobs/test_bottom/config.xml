@@ -21,21 +21,16 @@
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
-      <groovyScriptContentList>
-        <org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
-          <content>if(manager.logContains(&quot;UNSTABLE BUILD&quot;)) {
+    <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
+      <groovyScript>if(manager.logContains(&quot;UNSTABLE BUILD&quot;)) {
     manager.addWarningBadge(&quot;Build Unstable&quot;)
     manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;h1&gt;Unstable!&lt;/h1&gt;&quot;, false, false, false, &quot;red&quot;)
     manager.buildUnstable()
 }
 
-</content>
-        </org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
-      </groovyScriptContentList>
-      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
-      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+</groovyScript>
+      <behavior>0</behavior>
+    </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
   </publishers>
   <buildWrappers/>
 </project>
