@@ -17,15 +17,15 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>echo &quot;BAD BUILD&quot;
+      <command>echo &quot;UNSTABLE BUILD&quot;
 exit 1</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
-      <groovyScript>if(manager.logContains(&quot;.*UNSTABLE.*&quot;)) {
+      <groovyScript>if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
     manager.addWarningBadge(&quot;Build unstable.&quot;)
-    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;h1&gt;You have been warned!&lt;/h1&gt;&quot;, false, false, false, &quot;red&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
     manager.buildUnstable()
 }
 
@@ -56,7 +56,7 @@ exit 1</command>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
       <defaultContent>$DEFAULT_CONTENT</defaultContent>
       <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <presendScript></presendScript>
       <attachBuildLog>false</attachBuildLog>
       <compressBuildLog>false</compressBuildLog>
       <replyTo>$DEFAULT_REPLYTO</replyTo>
