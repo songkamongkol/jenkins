@@ -17,7 +17,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>echo &quot;UNSTABLE BUILD&quot;</command>
+      <command>echo &quot;BAD BUILD&quot;
+exit 1</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
