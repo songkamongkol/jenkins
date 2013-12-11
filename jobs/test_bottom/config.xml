@@ -18,6 +18,7 @@
   <builders>
     <hudson.tasks.BatchFile>
       <command>echo &quot;UNSTABLE BUILD&quot;
+exit 1
 </command>
     </hudson.tasks.BatchFile>
   </builders>
