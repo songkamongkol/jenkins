@@ -2196,6 +2196,7 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
             <string>hg2p4sync</string>
+            <string>kachon_test</string>
             <string>Klocwork_Diff_Report</string>
             <string>new_branch_setup</string>
             <string>test1</string>

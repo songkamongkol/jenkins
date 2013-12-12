@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo &quot;UNSTABLE BUILD&quot;
+exit 1
+</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
+      <groovyScript>if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
+    manager.addWarningBadge(&quot;Build unstable.&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
+     manager.buildSuccess()
+    manager.buildUnstable()
+}
+
+</groovyScript>
+      <behavior>1</behavior>
+    </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
+  </publishers>
+  <buildWrappers/>
+</project>
