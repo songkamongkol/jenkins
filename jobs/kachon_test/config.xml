@@ -22,7 +22,7 @@
     </hudson.tasks.BatchFile>
     <EnvInjectBuilder plugin="envinject@1.89">
       <info>
-        <propertiesContent>EMAIL_DEV=kachon.lei@spirent.com klei@spirent.com </propertiesContent>
+        <propertiesContent>EMAIL_DEV=kachon.lei@spirent.com, klei@spirent.com </propertiesContent>
       </info>
     </EnvInjectBuilder>
   </builders>
@@ -32,7 +32,7 @@
       <behavior>1</behavior>
     </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
-      <recipientList>kachon@spirent.com $EMAIL_DEV</recipientList>
+      <recipientList>kachon@spirent.com,$EMAIL_DEV</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
           <email>
