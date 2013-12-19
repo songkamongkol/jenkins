@@ -25,13 +25,13 @@ exit 0
   <publishers>
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
       <groovyScript>import hudson.model.*
- println &quot;Hello&quot;
+manager.listener.logger.println(&quot;hello&quot;)
 if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
     manager.addWarningBadge(&quot;Build unstable.&quot;)
     manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
      manager.buildSuccess()
     // manager.buildUnstable()
-    println &quot;Marking build unstable&quot;
+   manager.listener.logger.println(&quot;Marking build unstable&quot;) 
      manager.build.setResult(hudson.model.Result.UNSTABLE)
 }
 
