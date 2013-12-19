@@ -32,7 +32,8 @@ if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
      manager.buildSuccess()
     // manager.buildUnstable()
    manager.listener.logger.println(&quot;Marking build unstable&quot;) 
-     manager.build.setResult(hudson.model.Result.UNSTABLE)
+     //manager.build.setResult(hudson.model.Result.UNSTABLE)
+   manager.build.@result = hudson.model.Result.UNSTABLE
 }
 
 </groovyScript>
