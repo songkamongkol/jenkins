@@ -2027,6 +2027,18 @@
       <nodeProperties/>
       <userId>ASu</userId>
     </slave>
+    <slave>
+      <name>ASU2-XP</name>
+      <description>Windows XP (32-bit), Visual Studio 2005</description>
+      <remoteFS>c:/jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>Windows x86 VS2005</label>
+      <nodeProperties/>
+      <userId>ASu</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
