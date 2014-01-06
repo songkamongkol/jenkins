@@ -52,7 +52,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -106,7 +106,7 @@ make all</command>
           <basedir></basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/pli/lin32/${JOB_NAME}-${BUILD_NUMBER}</remote>
-          <flatten>false</flatten>
+          <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
           <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
