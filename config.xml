@@ -2011,6 +2011,22 @@
       </nodeProperties>
       <userId>Somboon</userId>
     </slave>
+    <slave>
+      <name>10.2.19.19</name>
+      <description></description>
+      <remoteFS>/net/storage_cal_ci/general/Development/Hardware/FPGA/Workspaces/4jenkins/10_2_19_19</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+        <host>10.2.19.19</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>Linux x86_64 CentOS6.5 gcc</label>
+      <nodeProperties/>
+      <userId>ASu</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
