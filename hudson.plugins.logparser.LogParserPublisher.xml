@@ -13,5 +13,29 @@
       <name>regression</name>
       <path>/opt/jenkins/jenkins-root/regression_log_parse_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>bll_regression</name>
+      <path>/opt/jenkins/jenkins-root/bll_regression_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>gcc</name>
+      <path>/opt/jenkins/jenkins-root/gcc_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>il_regression</name>
+      <path>/opt/jenkins/jenkins-root/il_regression_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>msvc</name>
+      <path>/opt/jenkins/jenkins-root/msvc_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>synplify_pro</name>
+      <path>/opt/jenkins/jenkins-root/synplify_pro_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>vsim</name>
+      <path>/opt/jenkins/jenkins-root/vsim_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>
 </hudson.plugins.logparser.LogParserPublisher_-DescriptorImpl>
