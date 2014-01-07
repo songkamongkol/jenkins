@@ -55,7 +55,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,7 +95,7 @@ devenv /Rebuild &quot;Release|Win32&quot; &quot;.\Code\modelsimworkspace\ModelSi
           <includes>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</includes>
           <basedir></basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/pli/win32/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>\\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
