@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -103,7 +103,7 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>SptModelSimPli_Lin32</project>
-      <filter>Shell/ModelSimPliShell.v</filter>
+      <filter>ModelSimPliShell.v</filter>
       <target>SimSource</target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
@@ -112,7 +112,7 @@
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>SptModelSimPli_Lin32</project>
-      <filter>Bin/libGeneratorParser.so.1</filter>
+      <filter>libGeneratorParser.so.1</filter>
       <target>SimSource</target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
         <stable>true</stable>
