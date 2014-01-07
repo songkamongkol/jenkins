@@ -2710,7 +2710,7 @@
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
       <owner class="hudson" reference="../../.."/>
       <name>HW</name>
-      <description>Spirent Hardware Projects</description>
+      <description>Spirent Hardware Project Builds</description>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
