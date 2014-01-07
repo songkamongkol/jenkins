@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -136,6 +136,7 @@ ln -sf libGeneratorParser.so.1 libGeneratorParser.so</command>
     <hudson.tasks.Shell>
       <command>echo &quot;Run simulation&quot;
 export PATH=$MODEL_TECH:$PATH
+export LM_LICENSE_FILE=$LM_LICENSE_FILE
 
 cd SimSource
 cp -f $SIM_LIB_PATH/modelsim.ini ./
@@ -223,7 +224,7 @@ rm -rf ./*</command>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
       <defaultContent>$DEFAULT_CONTENT</defaultContent>
       <attachmentsPattern></attachmentsPattern>
-      <presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+      <presendScript></presendScript>
       <attachBuildLog>false</attachBuildLog>
       <compressBuildLog>false</compressBuildLog>
       <replyTo>$DEFAULT_REPLYTO</replyTo>
