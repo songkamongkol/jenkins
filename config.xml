@@ -2718,11 +2718,14 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>PLI</name>
+          <description>Spirent ModelSim PLI Builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>SptModelSimPli_Lin32</string>
+            <string>SptModelSimPli_Win32</string>
           </jobNames>
           <jobFilters/>
           <columns>
