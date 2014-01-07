@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Spirent ModelSim PLI modules - Linux (32-bit)</description>
+  <description>Spirent ModelSim PLI modules - Windows (32-bit)</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
     <artifactDaysToKeep>-1</artifactDaysToKeep>
-    <artifactNumToKeep>-1</artifactNumToKeep>
+    <artifactNumToKeep>50</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -21,7 +21,10 @@
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SpirentModelSimPli/mainline/... //ws/...&#xd;
--//SpirentModelSimPli/mainline/Bin/... //ws/Bin/...</projectPath>
+-//SpirentModelSimPli/mainline/Bin/*.dll  //ws/Bin/*.dll&#xd;
+-//SpirentModelSimPli/mainline/Bin/*.exe  //ws/Bin/*.exe&#xd;
+-//SpirentModelSimPli/mainline/Bin/*.txt  //ws/Bin/*.txt&#xd;
++//SpirentModelSimPli/mainline/Bin/mtipli.dll  //ws/Bin/mtipli.dll</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -63,9 +66,9 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>10.2.19.19</assignedNode>
+  <assignedNode>ASU2-XP</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -76,36 +79,23 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>mkdir -p Bin</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>cd ./Code/GeneratorParserLib
-mkdir -p obj
-#make clean
-#make all</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>cd ./Code/SpirentModelSimPli
-mkdir -p obj
-#make clean
-#make all</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>cd ./Code
-mkdir -p obj
-make clean
-make all</command>
-    </hudson.tasks.Shell>
+    <hudson.tasks.BatchFile>
+      <command>echo &quot;  Setting VersionString.cpp to writable&quot;
+attrib -R &quot;.\Code\SpirentModelSimPli\SpirentModelSimPliLib\VersionString.cpp&quot;</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>echo &quot;  Starting clean build&quot;
+devenv /Rebuild &quot;Release|Win32&quot; &quot;.\Code\modelsimworkspace\ModelSimWorkSpace.sln&quot; /Out compile.log</command>
+    </hudson.tasks.BatchFile>
   </builders>
   <publishers>
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-          <includes>Bin/*.so, Bin/*.so.*, Shell/*, TestBench/AddressMap/*</includes>
+          <includes>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</includes>
           <basedir></basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/pli/lin32/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/pli/win32/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -116,7 +106,7 @@ make all</command>
       <deployEvenBuildFail>false</deployEvenBuildFail>
     </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Bin/*.so, Bin/*.so.*, Shell/*, TestBench/AddressMap/*</artifacts>
+      <artifacts>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
