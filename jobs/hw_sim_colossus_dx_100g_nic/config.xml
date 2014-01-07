@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -131,7 +131,10 @@
     <hudson.tasks.Shell>
       <command>echo &quot;Create symbolic link for libGeneratorParser&quot;
 cd SimSource
-ln -sf libGeneratorParser.so.1 libGeneratorParser.so</command>
+ln -sf libGeneratorParser.so.1 libGeneratorParser.so
+
+echo &quot;Make ModelSimPliShell.v writable&quot;
+chmod a+w ModelSimPliShell.v</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Run simulation&quot;
