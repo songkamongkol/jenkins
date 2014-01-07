@@ -107,8 +107,8 @@ devenv /Rebuild &quot;Release|Win32&quot; &quot;.\Code\modelsimworkspace\ModelSi
 mkdir \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%
 copy /V /Y /B Bin\*.dll \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
 copy /V /Y /B Bin\*.exe \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
-copy /V /Y /B Shell\* \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
-copy /V /Y /B TestBench\AddressMap\* \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
+copy /V /Y /A Shell\* \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
+copy /V /Y /A TestBench\AddressMap\* \\storage.cal.ci.spirentcom.com\builds\dev\fpga\pli\win32\%JOB_NAME%-%BUILD_NUMBER%\
 
 </command>
         </hudson.tasks.BatchFile>
