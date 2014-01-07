@@ -2041,7 +2041,7 @@
     </slave>
     <slave>
       <name>hw-toolbuilder-x64-01</name>
-      <description>Hardware tool</description>
+      <description>Hardware tool builder (CentOS 6.5 64-bit)</description>
       <remoteFS>/net/storage_cal_ci/general/Development/Hardware/FPGA/Workspaces/4jenkins/hw-toolbuilder-x64-01</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
