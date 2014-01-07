@@ -55,7 +55,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -89,22 +89,31 @@ devenv /Rebuild &quot;Release|Win32&quot; &quot;.\Code\modelsimworkspace\ModelSi
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
-      <entries>
-        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-          <includes>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</includes>
-          <basedir></basedir>
-          <excludes></excludes>
-          <remote>S:\dev\fpga\pli\win32\${JOB_NAME}-${BUILD_NUMBER}</remote>
-          <flatten>true</flatten>
-          <deleteRemote>false</deleteRemote>
-          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
-          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
-          <failNoFilesDeploy>false</failNoFilesDeploy>
-        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-      </entries>
-      <deployEvenBuildFail>false</deployEvenBuildFail>
-    </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.BatchFile>
+          <command>net use S: \\storage.cal.ci.spirentcom.com\builds /persistent:yes</command>
+        </hudson.tasks.BatchFile>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</includes>
+            <basedir></basedir>
+            <excludes></excludes>
+            <remote>S:\dev\fpga\pli\win32\${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <hudson.tasks.BatchFile>
+          <command>net use S: /delete</command>
+        </hudson.tasks.BatchFile>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>Bin/*.dll, Bin/*.exe, Shell/*, TestBench/AddressMap/*</artifacts>
       <latestOnly>true</latestOnly>
