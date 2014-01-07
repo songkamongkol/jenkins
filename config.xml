@@ -2714,7 +2714,16 @@
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
-      <views/>
+      <views>
+        <hudson.plugins.nested__view.NestedView>
+          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
+          <name>PLI</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+          <views/>
+        </hudson.plugins.nested__view.NestedView>
+      </views>
       <columns>
         <columns>
           <hudson.views.WeatherColumn/>
