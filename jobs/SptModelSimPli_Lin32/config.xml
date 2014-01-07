@@ -176,6 +176,14 @@ make all</command>
       <replyTo>$DEFAULT_REPLYTO</replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_sim_colossus_dx_100g_nic</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
