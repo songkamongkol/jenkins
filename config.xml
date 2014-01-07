@@ -2759,11 +2759,13 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Colossus</name>
+          <description>Colossus builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <string>hw_sim_colossus_dx_100g_nic</string>
           </jobNames>
           <jobFilters/>
           <columns>
