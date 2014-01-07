@@ -14,27 +14,27 @@
       <path>/opt/jenkins/jenkins-root/regression_log_parse_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>bll_regression</name>
+      <name>BLL Regression Rules</name>
       <path>/opt/jenkins/jenkins-root/bll_regression_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>gcc</name>
+      <name>GCC Rules</name>
       <path>/opt/jenkins/jenkins-root/gcc_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>il_regression</name>
+      <name>IL Regression Rules</name>
       <path>/opt/jenkins/jenkins-root/il_regression_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>msvc</name>
+      <name>Microsoft Visual C++ Rules</name>
       <path>/opt/jenkins/jenkins-root/msvc_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>synplify_pro</name>
+      <name>Synplify Pro Rules</name>
       <path>/opt/jenkins/jenkins-root/synplify_pro_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>vsim</name>
+      <name>ModelSim Rules</name>
       <path>/opt/jenkins/jenkins-root/vsim_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>

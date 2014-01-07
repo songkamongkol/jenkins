@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson.plugins.perforce.PerforceSCM_-PerforceSCMDescriptor plugin="perforce@1.3.26">
-  <generation>15</generation>
+  <generation>16</generation>
   <p4ClientPattern>.*</p4ClientPattern>
   <p4ReadlineTimeout>0</p4ReadlineTimeout>
 </hudson.plugins.perforce.PerforceSCM_-PerforceSCMDescriptor>
