@@ -22,8 +22,8 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
-          <description>FlexLM license server ports</description>
-          <defaultValue>7418@spcsjcapp01.ad.spirentcom.com:7418@SPCCALFLEX02.ad.spirentcom.com</defaultValue>
+          <description>FlexLM license server ports, example:  7418@SPCCALFLEX02.ad.spirentcom.com:7418@spcsjcapp01.ad.spirentcom.com</description>
+          <defaultValue>7418@SPCCALFLEX02.ad.spirentcom.com:7418@spcsjcapp01.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SIM_LIB_PATH</name>
@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -161,6 +161,11 @@ echo &quot;Simulation completed&quot;</command>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/vsim_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
         <hudson.tasks.Shell>
