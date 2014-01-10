@@ -222,7 +222,7 @@ rm -rf ${WORKSPACE}</command>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_sim_colossus_dx_100g_nic, hw_sim_frenzy_1g_nic, hw_sim_legion_1x40g_nic, hw_sim_thunderbird_10g_iob, hw_sim_tbonaonic_10g_nic, SptModelSimPli_Lin32</childProjects>
+      <childProjects>hw_sim_colossus_dx_100g_nic, hw_sim_frenzy_1g_nic, hw_sim_legion_1x40g_nic, hw_sim_thunderbird_10g_iob, hw_sim_tbonaonic_10g_nic</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
