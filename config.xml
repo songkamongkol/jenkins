@@ -2711,6 +2711,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <string>hw_sim_tbonaonic_10g_nic</string>
             <string>hw_sim_thunderbird_10g_iob</string>
           </jobNames>
           <jobFilters/>
