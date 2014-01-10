@@ -327,7 +327,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>4.36_rel_av_il_ftp_centralboot_packaging,</projects>
+          <projects>4.36_rel_av_il_ftp_centralboot_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

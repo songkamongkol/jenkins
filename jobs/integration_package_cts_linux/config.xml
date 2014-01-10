@@ -147,7 +147,7 @@ echo &quot;Finished creating CTS.Linux_$STC_MAJ_MIN_VERSION.tar.gz&quot;</comman
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>integration_ftp_tarball,</projects>
+          <projects>integration_ftp_tarball</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

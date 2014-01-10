@@ -334,7 +334,7 @@ echo &quot;Finished creating tar files&quot;</command>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
             <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
           </configs>
-          <projects>release_ftp_tarball_packaging,</projects>
+          <projects>release_ftp_tarball_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

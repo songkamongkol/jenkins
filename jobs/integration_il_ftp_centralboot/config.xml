@@ -129,7 +129,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>integration_set_status,BV_Launch_all,integration_copy_to_spccalfs03,integration_reset_tag_file,</projects>
+          <projects>integration_set_status,BV_Launch_all,integration_copy_to_spccalfs03,integration_reset_tag_file</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

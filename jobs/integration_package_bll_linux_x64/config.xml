@@ -148,7 +148,7 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>integration_ftp_tarball,</projects>
+          <projects>integration_ftp_tarball</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

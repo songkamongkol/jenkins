@@ -333,7 +333,7 @@ echo &quot;Finished creating tar files&quot;</command>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
             <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
           </configs>
-          <projects>4.36_rel_av_ftp_tarball_packaging,</projects>
+          <projects>4.36_rel_av_ftp_tarball_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

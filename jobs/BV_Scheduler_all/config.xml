@@ -46,7 +46,7 @@ Schedule job &quot;Bv_Scheduler&quot; for BV system &quot;BOF&quot;  &lt;br&gt;&
 </properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>BV_Scheduler,</projects>
+          <projects>BV_Scheduler</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -57,7 +57,7 @@ Schedule job &quot;Bv_Scheduler&quot; for BV system &quot;BOF&quot;  &lt;br&gt;&
 </properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>BV_Scheduler,</projects>
+          <projects>BV_Scheduler</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -67,7 +67,7 @@ Schedule job &quot;Bv_Scheduler&quot; for BV system &quot;BOF&quot;  &lt;br&gt;&
               <properties>BV_TYPE = L4L7_New</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>BV_Scheduler,</projects>
+          <projects>BV_Scheduler</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -77,7 +77,7 @@ Schedule job &quot;Bv_Scheduler&quot; for BV system &quot;BOF&quot;  &lt;br&gt;&
               <properties>BV_TYPE = STU</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>BV_Scheduler,</projects>
+          <projects>BV_Scheduler</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
