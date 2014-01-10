@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -104,7 +104,9 @@
 
 source ${XILINX_PATH}/settings64.sh
 
-chmod u+w ./Vivado/Vivado.data/runs/*
+cd Vivado
+
+chmod u+w ./Vivado.data/runs/*
 
 echo &quot;open_project Vivado.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
