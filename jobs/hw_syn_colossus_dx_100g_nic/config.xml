@@ -116,8 +116,8 @@ ${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot
       <conditionalbuilders>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>rev_1/ColossusDX_1x100G.edf</includes>
-            <basedir></basedir>
+            <includes>*.edf, *.srs, *.srr</includes>
+            <basedir>Synplify/rev_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -132,7 +132,7 @@ ${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>rev_1/ColossusDX_1x100G.edf</artifacts>
+      <artifacts>Synplify/rev_1/*.edf</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
