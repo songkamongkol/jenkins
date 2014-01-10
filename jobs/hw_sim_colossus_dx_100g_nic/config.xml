@@ -152,7 +152,7 @@ fi
 echo &quot;Create work directory&quot;
 vlib work
 echo &quot;Begin simulation&quot;
-vsim -c -do &quot;do ./CompileAll.do; run 500us; quit&quot;
+vsim -c -do &quot;do ./CompileAll.do; run 200us; quit&quot;
 #vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
 echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
