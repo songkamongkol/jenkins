@@ -2686,6 +2686,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <string>hw_sim_frenzy_1g_nic</string>
           </jobNames>
           <jobFilters/>
           <columns>
