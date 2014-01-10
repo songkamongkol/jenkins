@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -100,8 +100,9 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>export PATH=${XILINX_PATH}:$PATH
-export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+      <command>export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+
+source ${XILINX_PATH}/settings64.sh
 
 chmod u+w ./Vivado/Vivado.data/runs/*
 
