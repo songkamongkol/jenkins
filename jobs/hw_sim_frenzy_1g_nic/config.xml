@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>SIM_LIB_PATH</name>
           <description>path to modelsim.ini, example: /net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/Vivado/2013.2/32-bit/mti_se/10.1d</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/Vivado/2013.2/32-bit/mti_se/10.1d</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/ISE/14.6/32-bit/mti_se/10.1d</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -78,7 +78,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/frenzy/sandbox/bitstream/...
 //SPT_HW/frenzy/sandbox/cpld/...
