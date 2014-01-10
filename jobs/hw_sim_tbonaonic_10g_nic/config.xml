@@ -41,10 +41,10 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/...&#xd;
 +//SPT_HW/tbonaonic/sandbox/SourceCode/... //ws/SourceCode/...&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+-//SPT_HW/tbonaonic/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
+-//SPT_HW/tbonaonic/sandbox/SimSource/*.exe //ws/SimSource/*.exe&#xd;
+-//SPT_HW/tbonaonic/sandbox/SimSource/*.dll //ws/SimSource/*.dll&#xd;
+-//SPT_HW/tbonaonic/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -76,7 +76,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
