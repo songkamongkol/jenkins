@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus 1x100G NIC FPGA Simulation</description>
+  <description>Frenzy 1G NIC FPGA Simulation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -39,13 +39,14 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/... //ws/SimSource/...&#xd;
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/... //ws/SourceCode/...&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/transcript //ws/SimSource/transcript&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+    <projectPath>+//SPT_HW/frenzy/sandbox/... //ws/...&#xd;
+-//SPT_HW/frenzy/sandbox/bitstream/...  //ws/bitstream/...&#xd;
+-//SPT_HW/frenzy/sandbox/cpld/... //ws/cpld/...&#xd;
+-//SPT_HW/frenzy/sandbox/Xilinx*/... //ws/Xilinx*/...&#xd;
+-//SPT_HW/frenzy/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
+-//SPT_HW/frenzy/sandbox/SimSource/*.exe //ws/SimSource/*.exe&#xd;
+-//SPT_HW/frenzy/sandbox/SimSource/*.dll //ws/SimSource/*.dll&#xd;
+-//SPT_HW/frenzy/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -76,9 +77,12 @@
     <wipeBeforeBuild>true</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
-    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/frenzy/sandbox/bitstream/...
+//SPT_HW/frenzy/sandbox/cpld/...
+//SPT_HW/frenzy/sandbox/Xilinx*/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -88,7 +92,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>fpga-sim-01</assignedNode>
+  <assignedNode>fpga-sim-02 || fpga-sim-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -152,8 +156,7 @@ fi
 echo &quot;Create work directory&quot;
 vlib work
 echo &quot;Begin simulation&quot;
-vsim -c -do &quot;do ./CompileAll.do; run 200us; quit&quot;
-#vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
+vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
 echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
   </builders>
