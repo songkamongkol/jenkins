@@ -55,7 +55,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -186,7 +186,7 @@ copy /V /Y /A TestBench\AddressMap\* \\storage.cal.ci.spirentcom.com\builds\dev\
       <buildSteps>
         <hudson.tasks.BatchFile>
           <command>echo &quot;Clean out workspace&quot;
-del /F /S /Q %WORKSPACE%</command>
+del /F /S /Q &quot;.\*&quot;</command>
         </hudson.tasks.BatchFile>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
