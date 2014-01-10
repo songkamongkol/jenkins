@@ -232,7 +232,7 @@ echo &quot;Simulation completed&quot;</command>
       <buildSteps>
         <hudson.tasks.Shell>
           <command>echo &quot;Clean out workspace&quot;
-rm -rf ./*</command>
+rm -rf ${WORKSPACE}</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
