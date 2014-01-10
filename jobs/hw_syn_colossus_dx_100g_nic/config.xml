@@ -65,7 +65,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,7 +95,7 @@ export LD_LIBRARY_PATH=${SYNOPSYS_LIB_PATH}:$LD_LIBRARY_PATH
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 echo &quot;Synthesizing&quot;
-${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot;
+${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot; || cat ./stdout.log || cat ./rev_1/ColossusDX_1x100G.srr
 
 </command>
     </hudson.tasks.Shell>
