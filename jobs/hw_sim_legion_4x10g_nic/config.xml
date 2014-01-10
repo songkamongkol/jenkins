@@ -47,7 +47,6 @@
 -//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -90,7 +89,7 @@
   </scm>
   <assignedNode>fpga-sim-01 || fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -236,7 +235,6 @@ rm -rf ${WORKSPACE}</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
