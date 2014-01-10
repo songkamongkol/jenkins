@@ -2705,11 +2705,13 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Thunderbird</name>
+          <description>Thunderbird builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <string>hw_sim_thunderbird_10g_iob</string>
           </jobNames>
           <jobFilters/>
           <columns>
