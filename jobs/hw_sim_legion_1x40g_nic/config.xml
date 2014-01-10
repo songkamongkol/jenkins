@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus 1x100G NIC FPGA Simulation</description>
+  <description>Legion 1x40G NIC FPGA Simulation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>SIM_LIB_PATH</name>
           <description>path to modelsim.ini, example: /net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/Vivado/2013.2/32-bit/mti_se/10.1d</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/Vivado/2013.2/32-bit/mti_se/10.1d</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/ISE/14.6/32-bit/mti_se/10.1d</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -39,13 +39,12 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/... //ws/SimSource/...&#xd;
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/... //ws/SourceCode/...&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/transcript //ws/SimSource/transcript&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+    <projectPath>+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/... //ws/SimSource/...&#xd;
++//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/... //ws/SourceCode/...&#xd;
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/*.exe //ws/SimSource/*.exe&#xd;
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/*.dll //ws/SimSource/*.dll&#xd;
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -90,7 +89,7 @@
   </scm>
   <assignedNode>fpga-sim-01 || fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -152,8 +151,7 @@ fi
 echo &quot;Create work directory&quot;
 vlib work
 echo &quot;Begin simulation&quot;
-vsim -c -do &quot;do ./CompileAll.do; run 200us; quit&quot;
-#vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
+vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
 echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
   </builders>
