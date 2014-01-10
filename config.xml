@@ -2681,6 +2681,7 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Frenzy</name>
+          <description>Frenzy builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
