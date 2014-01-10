@@ -89,7 +89,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -141,6 +141,28 @@ SET date=%yyyy%-%mm%-%dd%
 
 echo %date%
 kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_Win_BLL_baseline .\\kwtables --name integration_%date%</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>cd %WORKSPACE%
+echo &quot;Executing kwcsprojparser TestCenter.UI.Gen.sln --config Release|Mixed Platforms -o integration_ui.out&quot;
+kwcsprojparser TestCenter.UI.Gen.sln --config &quot;Release|Mixed Platforms&quot; -o integration_ui.out
+</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>cd %WORKSPACE%
+echo &quot;Executing kwbuildproject --force --url http://klocwork.cal.ci.spirentcom.com:8090/integration_win_ui -o kwtables_ui integration_ui.out ...&quot;
+kwbuildproject --force --url http://klocwork.cal.ci.spirentcom.com:8090/integration_win_ui -o kwtables_ui integration_ui.out</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>FOR /F &quot;TOKENS=1* DELIMS= &quot; %%A IN (&apos;DATE/T&apos;) DO SET CDATE=%%B
+FOR /F &quot;TOKENS=1,2 eol=/ DELIMS=/ &quot; %%A IN (&apos;DATE/T&apos;) DO SET mm=%%B
+FOR /F &quot;TOKENS=1,2 DELIMS=/ eol=/&quot; %%A IN (&apos;echo %CDATE%&apos;) DO SET dd=%%B
+FOR /F &quot;TOKENS=2,3 DELIMS=/ &quot; %%A IN (&apos;echo %CDATE%&apos;) DO SET yyyy=%%B
+SET date=%yyyy%-%mm%-%dd%
+
+echo %date%
+kwadmin --debug --host klocwork.cal.ci.spirentcom.com --port 8090 load integration_win_ui kwtables_ui --name integration_ui_%date%
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
