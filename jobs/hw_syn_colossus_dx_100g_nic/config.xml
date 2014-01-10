@@ -65,7 +65,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -96,6 +96,7 @@ export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 echo &quot;Synthesizing&quot;
 ${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot; || cat ./Synplify/rev_1/ColossusDX_1x100G.srr
+cat ./Synplify/rev_1/ColossusDX_1x100G.srr
 
 </command>
     </hudson.tasks.Shell>
@@ -116,7 +117,7 @@ ${SYNOPSYS_PATH}/synplify_pro -batch &quot;./Synplify/ColossusDX_1x100G.prj&quot
       <conditionalbuilders>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.edf, *.srs, *.srr</includes>
+            <includes>*.edf, *.srr</includes>
             <basedir>Synplify/rev_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
