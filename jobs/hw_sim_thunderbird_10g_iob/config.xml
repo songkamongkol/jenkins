@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Frenzy 1G NIC FPGA Simulation</description>
+  <description>Thunderbird 10G I/O Board FPGA Simulation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -39,14 +39,13 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/frenzy/sandbox/... //ws/...&#xd;
--//SPT_HW/frenzy/sandbox/bitstream/...  //ws/bitstream/...&#xd;
--//SPT_HW/frenzy/sandbox/cpld/... //ws/cpld/...&#xd;
--//SPT_HW/frenzy/sandbox/Xilinx*/... //ws/Xilinx*/...&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+    <projectPath>+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SimSource/...  //ws/SimSource/...&#xd;
++//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/...&#xd;
+//ws/SourceCode/...&#xd;
+-//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
+-//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SimSource/*.exe //ws/SimSource/*.exe&#xd;
+-//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SimSource/*.dll //ws/SimSource/*.dll&#xd;
+-//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -80,9 +79,6 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//SPT_HW/frenzy/sandbox/bitstream/...
-//SPT_HW/frenzy/sandbox/cpld/...
-//SPT_HW/frenzy/sandbox/Xilinx*/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -92,9 +88,9 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>fpga-sim-02 || fpga-sim-01</assignedNode>
+  <assignedNode>fpga-sim-01 || fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
