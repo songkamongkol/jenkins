@@ -2058,7 +2058,7 @@
     <slave>
       <name>fpga-sim-02</name>
       <description>FPGA simulation runner</description>
-      <remoteFS>/net/storage_cal_ci/general/Development/Hardware/FPGA/Workspaces/4jenkins/fpga-sim-02</remoteFS>
+      <remoteFS>/tmp</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
