@@ -37,7 +37,6 @@
     <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/... //ws/Vivado/...&#xd;
 -//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/ColossusDX_1x100G.edf //ws/ColossusDX_1x100G.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -67,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -80,7 +79,7 @@
   </scm>
   <assignedNode>fpga-sim-02||fpga-sim-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -230,7 +229,6 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
