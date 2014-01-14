@@ -116,11 +116,11 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
-    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
