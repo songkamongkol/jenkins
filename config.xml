@@ -2766,6 +2766,14 @@
         </columns>
       </columns>
     </hudson.plugins.nested__view.NestedView>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+      <owner class="hudson" reference="../../.."/>
+      <name>4.37_rel</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views/>
+    </hudson.plugins.nested__view.NestedView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>49152</slaveAgentPort>
