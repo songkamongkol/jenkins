@@ -18,22 +18,17 @@
         <hudson.model.StringParameterDefinition>
           <name>MODEL_TECH</name>
           <description>path to the intended version of ModelSim executable binaries, example: /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/DE/modelsim_dlx/bin</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/SE/modeltech/bin</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/DE/modelsim_dlx/bin</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
           <description>FlexLM license server ports, example:  7418@SPCCALFLEX02.ad.spirentcom.com:7418@spcsjcapp01.ad.spirentcom.com</description>
-          <defaultValue>7418@spcsjcapp01.ad.spirentcom.com:7418@SPCCALFLEX02.ad.spirentcom.com</defaultValue>
+          <defaultValue>7418@SPCCALFLEX02.ad.spirentcom.com:7418@spcsjcapp01.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SIM_LIB_PATH</name>
           <description>path to modelsim.ini, example: /net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/Vivado/2013.2/32-bit/mti_se/10.1d</description>
           <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/SimLib/Xilinx/ISE/14.6/32-bit/mti_se/10.1d</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>MODELSIM_VCO_MODE</name>
-          <description>Specify ModelSim to run in either 32-bit mode or 64-bit mode, valid values: 32, 64</description>
-          <defaultValue>32</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -81,7 +76,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -92,7 +87,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>fpga-sim-02</assignedNode>
+  <assignedNode>fpga-sim-01 || fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -142,12 +137,11 @@ chmod a+w ModelSimPliShell.v</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Run simulation&quot;
-export PATH=${MODEL_TECH}:$PATH
-export MTI_VCO_MODE=${MODELSIM_VCO_MODE}
-export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+export PATH=$MODEL_TECH:$PATH
+export LM_LICENSE_FILE=$LM_LICENSE_FILE
 
 cd SimSource
-cp -f ${SIM_LIB_PATH}/modelsim.ini ./
+cp -f $SIM_LIB_PATH/modelsim.ini ./
 
 if [ -e  work ]; then
     echo &quot;Delete existing work directory&quot;
@@ -235,8 +229,8 @@ echo &quot;Simulation completed&quot;</command>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
         <hudson.tasks.Shell>
-          <command>echo &quot;!!! CLEAN OUT WORKSPACE !!!&quot;
-rm -rf ${WORKSPACE}/*</command>
+          <command>echo &quot;Clean out workspace&quot;
+rm -rf ${WORKSPACE}</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
