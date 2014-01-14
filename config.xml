@@ -2084,7 +2084,21 @@
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
       </launcher>
       <label>Linux Ubuntu12.04 32bit</label>
-      <nodeProperties/>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/opt/perforce/p4_cli:$PATH</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
       <userId>ASu</userId>
     </slave>
   </slaves>
@@ -2653,7 +2667,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>SptModelSimPli_Lin32</string>
             <string>SptModelSimPli_Win32</string>
           </jobNames>
@@ -2678,7 +2692,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_imp_colossus_dx_100g_iob</string>
             <string>hw_imp_colossus_dx_100g_nic</string>
             <string>hw_sanity_basic_colossus_dx_100g_iob</string>
@@ -2707,7 +2721,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_sim_frenzy2_1g_nic</string>
             <string>hw_sim_frenzy_1g_nic</string>
           </jobNames>
@@ -2732,7 +2746,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_sim_tbonaonic_10g_nic</string>
             <string>hw_sim_thunderbird_10g_iob</string>
           </jobNames>
@@ -2757,7 +2771,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_sim_legion_1x40g_nic</string>
             <string>hw_sim_legion_4x10g_nic</string>
           </jobNames>
@@ -2796,7 +2810,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../hudson.plugins.nested__view.NestedView[4]/views/listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>4.37_rel_bll_ci</string>
             <string>4.37_rel_bll_linux_ci</string>
             <string>4.37_rel_bll_windows_ci</string>
@@ -2839,7 +2853,7 @@
         <unserializable-parents/>
         <tree-map>
           <default>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../views/hudson.plugins.nested__view.NestedView[4]/views/listView/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
           </default>
           <int>1</int>
           <string>STR_LATEST_RESULTS_FOLDER</string>
