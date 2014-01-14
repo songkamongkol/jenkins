@@ -2074,7 +2074,7 @@
     <slave>
       <name>10.2.20.68</name>
       <description>Linux Ubuntu 12.04.1 LTS (32-bit) {jazz-fpga-regression-1}</description>
-      <remoteFS>/tmp</remoteFS>
+      <remoteFS>~/</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
