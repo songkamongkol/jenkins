@@ -10,7 +10,7 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.3">
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
   </properties>
@@ -26,8 +26,8 @@
     <hudson.tasks.BatchFile>
       <command>echo &quot;BLL build complete on all OS&apos;s&quot;</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
-      <project>4.36_rel_av_bll_windows_ci</project>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>4.37_rel_bll_windows_ci</project>
       <filter>BLL_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -35,8 +35,8 @@
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.26">
-      <project>4.36_rel_av_bll_linux_ci</project>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>4.37_rel_bll_linux_ci</project>
       <filter>BLL_Linux_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -46,7 +46,7 @@
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>4.36_rel_av_ui_ci</childProjects>
+      <childProjects>4.37_rel_ui_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -64,6 +64,6 @@
     </hudson.tasks.Fingerprinter>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
 </project>
