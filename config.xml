@@ -2848,6 +2848,11 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <string>4.37_rel_bll_freebsd63_packaging</string>
+            <string>4.37_rel_bll_freebsd71_packaging</string>
+            <string>4.37_rel_bll_linux_packaging</string>
+            <string>4.37_rel_bll_linux_x64_packaging</string>
+            <string>4.37_rel_ftp_tarball_packaging</string>
           </jobNames>
           <jobFilters/>
           <columns>
@@ -2861,8 +2866,8 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
-          <useCssStyle>false</useCssStyle>
-          <includeStdJobList>false</includeStdJobList>
+          <useCssStyle>true</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
           <rightPortletWidth>50%</rightPortletWidth>
           <leftPortlets/>
