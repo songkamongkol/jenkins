@@ -2876,6 +2876,7 @@
           <bottomPortlets/>
         </hudson.plugins.view.dashboard.Dashboard>
       </views>
+      <defaultView>4.37_rel_summary_ci</defaultView>
       <columns>
         <columns/>
       </columns>
