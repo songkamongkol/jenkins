@@ -2723,6 +2723,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <string>hw_sanity_basic_frenzy_1g_nic</string>
             <string>hw_sim_frenzy2_1g_nic</string>
             <string>hw_sim_frenzy_1g_nic</string>
           </jobNames>
