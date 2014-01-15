@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<changelog>
+	<entry>
+		<changenumber>662771</changenumber>
+		<date>2013-11-08 07:35:14</date>
+		<description>Description: A supplementary check in for CR#437510368 (BLL unit test part)
+	Change Type: CR
+	Change #: 437510368
+	Reviewed by: MeiWei, Gavin
+	Review ID: 32915
+	Approved by: John K.
+	Designer Testing: Pass TABLE build on release and 4.37_rel; Add one BLL unit test case to cover the case.
+	Testing Impact: LDP IPv6 single-stack or dual stack with directed-and-targeted hello type only.</description>
+		<user>rzhu</user>
+		<workspace>rzhu_dell_4.37_rel</workspace>
+		<files>
+			<file>
+				<name>//TestCenter/4.37_rel/content/routing/ldp/bll/src/unittest/UnitTestLdp.cpp</name>
+				<workspacePath>content/routing/ldp/bll/src/unittest/UnitTestLdp.cpp</workspacePath>
+				<rev>3</rev>
+				<changenumber>662771</changenumber>
+				<action>EDIT</action>
+			</file>
+		</files>
+		<jobs>
+		</jobs>
+	</entry>
+	<entry>
+		<changenumber>662745</changenumber>
+		<date>2013-11-08 01:12:37</date>
+		<description>Description: A supplementary check in for CR#437510368
+	Change Type: CR
+	Change #: 437510368
+	Reviewed by: MeiWei, Gavin
+	Review ID: 32915
+	Approved by: John K.
+	Designer Testing: Pass TABLE build on release and 4.37_rel; Add one BLL unit test case to cover the case.
+	Testing Impact: LDP IPv6 single-stack or dual stack with directed-and-targeted hello type only.</description>
+		<user>rzhu</user>
+		<workspace>rzhu_bej-1xptz2x_6717</workspace>
+		<files>
+			<file>
+				<name>//TestCenter/4.37_rel/content/routing/ldp/bll/src/LdpRouterConfig.cpp</name>
+				<workspacePath>content/routing/ldp/bll/src/LdpRouterConfig.cpp</workspacePath>
+				<rev>3</rev>
+				<changenumber>662745</changenumber>
+				<action>INTEGRATE</action>
+			</file>
+		</files>
+		<jobs>
+		</jobs>
+	</entry>
+</changelog>

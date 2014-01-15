@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<build>
+  <actions>
+    <hudson.plugins.logparser.LogParserAction plugin="log-parser@1.0.8">
+      <build class="build" reference="../../.."/>
+      <result>
+        <totalErrors>0</totalErrors>
+        <totalWarnings>0</totalWarnings>
+        <totalInfos>0</totalInfos>
+        <htmlLogFile>/opt/jenkins/jenkins-root/jobs/4.36_rel_av_bll_linux_x64_ci/builds/2013-11-11_06-40-45/log_content.html</htmlLogFile>
+        <errorLinksFile>/opt/jenkins/jenkins-root/jobs/4.36_rel_av_bll_linux_x64_ci/builds/2013-11-11_06-40-45/logerrorLinks.html</errorLinksFile>
+        <warningLinksFile>/opt/jenkins/jenkins-root/jobs/4.36_rel_av_bll_linux_x64_ci/builds/2013-11-11_06-40-45/logwarningLinks.html</warningLinksFile>
+        <infoLinksFile>/opt/jenkins/jenkins-root/jobs/4.36_rel_av_bll_linux_x64_ci/builds/2013-11-11_06-40-45/loginfoLinks.html</infoLinksFile>
+        <parsedLogURL>job/4.36_rel_av_bll_linux_x64_ci/1/parsed_console/log.html</parsedLogURL>
+        <htmlLogPath>/opt/jenkins/jenkins-root/jobs/4.36_rel_av_bll_linux_x64_ci/builds/2013-11-11_06-40-45</htmlLogPath>
+      </result>
+    </hudson.plugins.logparser.LogParserAction>
+    <hudson.model.ParametersAction>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <value>4.37_rel</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.BooleanParameterValue>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <value>false</value>
+        </hudson.model.BooleanParameterValue>
+        <hudson.model.BooleanParameterValue>
+          <name>BUILD_RUN_UNITTEST</name>
+          <description>run unittest</description>
+          <value>true</value>
+        </hudson.model.BooleanParameterValue>
+        <hudson.model.BooleanParameterValue>
+          <name>BUILD_PACKAGE_BUILD</name>
+          <description>package build</description>
+          <value>true</value>
+        </hudson.model.BooleanParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>BUILD_OUTPUT_DIR</name>
+          <description>build output dir</description>
+          <value>build/il/bld_bll-el3-64-automation-client-only_x86_64/Release/bin</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description>major minor version TODO: get this from a file</description>
+          <value>4.37</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.BooleanParameterValue>
+          <name>RELEASE_BUILD</name>
+          <description>Flag whether or not this build is a release build candidate. If a build is a release candidate then STC_CR license/entitlement will be disabled</description>
+          <value>true</value>
+        </hudson.model.BooleanParameterValue>
+      </parameters>
+    </hudson.model.ParametersAction>
+    <hudson.model.CauseAction>
+      <causes>
+        <hudson.triggers.SCMTrigger_-SCMTriggerCause/>
+      </causes>
+    </hudson.model.CauseAction>
+    <hudson.triggers.SCMTrigger_-BuildAction>
+      <build class="build" reference="../../.."/>
+    </hudson.triggers.SCMTrigger_-BuildAction>
+    <org.jenkinsci.plugins.envinject.EnvInjectPluginAction plugin="envinject@1.84">
+      <build class="build" reference="../../.."/>
+    </org.jenkinsci.plugins.envinject.EnvInjectPluginAction>
+    <hudson.plugins.perforce.PerforceTagAction plugin="perforce@1.3.21">
+      <build class="build" reference="../../.."/>
+      <changeNumber>662771</changeNumber>
+      <depot>
+        <settings>
+          <entry>
+            <string>P4PORT</string>
+            <string>perforceproxy.cal.ci.spirentcom.com:1999</string>
+          </entry>
+          <entry>
+            <string>SystemRoot</string>
+            <string>C:\WINDOWS</string>
+          </entry>
+          <entry>
+            <string>P4CLIENT</string>
+            <string>4.36_rel_av_bll_linux_x64_ci_4.37_rel--819348811</string>
+          </entry>
+          <entry>
+            <string>P4USER</string>
+            <string>tableuser</string>
+          </entry>
+          <entry>
+            <string>SystemDrive</string>
+            <string>C:</string>
+          </entry>
+        </settings>
+        <validEnvp>false</validEnvp>
+        <p4exe>p4</p4exe>
+        <threshold>10000</threshold>
+        <execFactory class="hudson.plugins.perforce.HudsonP4ExecutorFactory"/>
+        <changes>
+          <depot reference="../.."/>
+        </changes>
+        <workspaces>
+          <depot reference="../.."/>
+        </workspaces>
+        <users>
+          <depot reference="../.."/>
+        </users>
+      </depot>
+      <tags/>
+      <view>+//TestCenter/4.37_rel/... //ws/...&#xd;
+-//TestCenter/*/Layer1/...&#xd;
+-//TestCenter/*/userdocauto/...&#xd;
+-//TestCenter/*/sandbox/...&#xd;
+-//TestCenter/*/.../il/...&#xd;
+-//TestCenter/*/.../hw/...&#xd;
+-//TestCenter/*/.../WebHelp/...&#xd;
+-//TestCenter/*/content/cts/...&#xd;
+-//TestCenter/*/common/lib/java/...&#xd;
+-//TestCenter/*/common/tools/scons/...&#xd;
+-//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...&#xd;
+-//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
+-//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
+-//TestCenter/*/other/...&#xd;
+-//TestCenter/*/documents/...&#xd;
+-//TestCenter/*/schedules/...&#xd;
+-//TestCenter/*/scm/...&#xd;
+-//TestCenter/*/regression/...&#xd;
++//TestCenter/4.37_rel/build/il/... //ws/build/il/...&#xd;
+-//TestCenter/4.37_rel/build/il/cli/... //ws/build/il/cli/...&#xd;
+-//TestCenter/4.37_rel/build/il/testframework/... //ws/build/il/testframework/...&#xd;
+-//TestCenter/*/.../ui/...&#xd;
++//TestCenter/4.37_rel/common/.../ui/... //ws/common/.../ui/...&#xd;
++//TestCenter/4.37_rel/framework/ui/automation/... //ws/framework/ui/automation/...</view>
+      <owner>tableuser</owner>
+    </hudson.plugins.perforce.PerforceTagAction>
+    <hudson.plugins.perforce.PerforceSCMRevisionState plugin="perforce@1.3.21">
+      <revision>662771</revision>
+    </hudson.plugins.perforce.PerforceSCMRevisionState>
+    <hudson.plugins.chucknorris.RoundhouseAction plugin="chucknorris@0.5">
+      <mStyle>BAD_ASS</mStyle>
+      <mFact>Chuck Norris can instantiate an abstract class.</mFact>
+    </hudson.plugins.chucknorris.RoundhouseAction>
+    <hudson.tasks.Fingerprinter_-FingerprintAction>
+      <build class="build" reference="../../.."/>
+      <record/>
+    </hudson.tasks.Fingerprinter_-FingerprintAction>
+    <hudson.plugins.claim.ClaimBuildAction plugin="claim@2.1">
+      <claimed>false</claimed>
+      <transientClaim>false</transientClaim>
+      <owner class="build" reference="../../.."/>
+    </hudson.plugins.claim.ClaimBuildAction>
+  </actions>
+  <number>1</number>
+  <startTime>1384180845743</startTime>
+  <result>FAILURE</result>
+  <duration>62111</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <builtOn>bllbldlnx-06</builtOn>
+  <workspace>/home/spirent/jenkins-tomcat/workspace/4.36_rel_av_bll_linux_x64_ci</workspace>
+  <hudsonVersion>1.511</hudsonVersion>
+  <scm class="hudson.plugins.perforce.PerforceChangeLogParser" plugin="perforce@1.3.21"/>
+  <culprits class="com.google.common.collect.RegularImmutableSortedSet">
+    <string>rzhu</string>
+  </culprits>
+</build>
