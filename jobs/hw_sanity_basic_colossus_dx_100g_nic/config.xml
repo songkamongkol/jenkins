@@ -120,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -186,6 +186,12 @@ sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
 cd build/il/testframework
 
 python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;COLOSSUS_DX_100G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;\) ] }\&apos;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;patch JUnit results file&quot;
+echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
+
+sed -i &apos;s/skips/skipped/g&apos; build/il/testframework/*.junit.xml</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
