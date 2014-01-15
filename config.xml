@@ -2696,6 +2696,7 @@
             <string>hw_imp_colossus_dx_100g_iob</string>
             <string>hw_imp_colossus_dx_100g_nic</string>
             <string>hw_sanity_basic_colossus_dx_100g_iob</string>
+            <string>hw_sanity_basic_colossus_dx_100g_nic</string>
             <string>hw_sim_colossus_dx_100g_nic</string>
             <string>hw_syn_colossus_dx_100g_iob</string>
             <string>hw_syn_colossus_dx_100g_nic</string>
