@@ -2815,6 +2815,7 @@
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>4.37_rel_bll_ci</string>
             <string>4.37_rel_bll_linux_ci</string>
+            <string>4.37_rel_bll_linux_x64_ci</string>
             <string>4.37_rel_bll_windows_ci</string>
             <string>4.37_rel_ui_ci</string>
           </jobNames>
