@@ -194,7 +194,7 @@ exit /B 0</command>
               <properties>BLL_BUILD_NUMBER=${BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>4.36_rel_av_bll_windows_packaging_new,4.37_rel_bll_freebsd71_packaging,4.37_rel_bll_freebsd63_packaging,4.36_rel_av_il_centralboot_packaging,4.36_rel_av_ccp_packaging-new,4.36_rel_av_cts_windows_packaging,4.36_rel_av_bll_linux_x64_packaging,4.36_rel_av_cts_linux_packaging,4.36_rel_av_bll_solaris_packaging,4.36_rel_av_cts_solaris_packaging</projects>
+          <projects>4.36_rel_av_bll_windows_packaging_new,4.37_rel_bll_freebsd71_packaging,4.37_rel_bll_freebsd63_packaging,4.36_rel_av_il_centralboot_packaging,4.36_rel_av_ccp_packaging-new,4.36_rel_av_cts_windows_packaging,4.37_rel_bll_linux_x64_packaging,4.36_rel_av_cts_linux_packaging,4.36_rel_av_bll_solaris_packaging,4.36_rel_av_cts_solaris_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
