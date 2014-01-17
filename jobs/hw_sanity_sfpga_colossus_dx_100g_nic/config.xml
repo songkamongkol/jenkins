@@ -32,7 +32,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>Spirent TestCenter chassis IP</description>
-          <defaultValue>10.100.21.109</defaultValue>
+          <defaultValue>10.100.255.210</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
