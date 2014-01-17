@@ -93,6 +93,8 @@ export STC_PRIVATE_INSTALL_DIR=${WORKSPACE}/${STC_INSTALL_DIR}</command>
       <command>import os
 import sys
 
+os.environ[&quot;STC_PRIVATE_INSTALL_DIR&quot;] = os.getcwd() + &apos;/&apos; + os.environ[&quot;STC_INSTALL_DIR&quot;]
+
 os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
 
 print &apos;cwd=%s&apos; % os.getcwd()
