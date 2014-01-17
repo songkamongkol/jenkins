@@ -85,9 +85,7 @@ echo BLL_PKG_DIR=${BLL_PKG_DIR}
 cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import system
-import time
-
+      <command>
 from StcPython import StcPython
 
 stc = StcPython()
