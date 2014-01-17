@@ -94,6 +94,7 @@ cd ${WORKSPACE}/${STC_INSTALL_DIR}
 echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; ./my_run.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; ./my_run.tcl
 echo &quot;stc::perform RebootEquipment -EquipmentList physicalchassis1&quot; &gt;&gt; ./my_run.tcl
+echo &quot;exit&quot; &gt;&gt; ./my_run.tcl
 
 tclsh ./my_run.tcl
 </command>
