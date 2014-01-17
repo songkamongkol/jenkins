@@ -100,11 +100,12 @@ os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
 print &apos;cwd=%s&apos; % os.getcwd()
 
 sys.path.insert(0, os.getcwd())
-#sys.path.insert(0, os.getcwd() + &apos;/&apos; + os.environ[&quot;STC_INSTALL_DIR&quot;] + &apos;/API/Python&apos;)
 
 from StcPython import StcPython
 
 stc = StcPython()
+
+print &apos;Spirent TestCenter version: %s&apos; % stc.get(&apos;system1&apos;, &apos;version&apos;)
 
 #stc.connect(os.environ[&quot;STC_CHASSIS_IP&quot;])
 #hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis&quot;)
