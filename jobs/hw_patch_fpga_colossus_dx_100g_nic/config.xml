@@ -34,11 +34,6 @@
           <description>Spirent TestCenter BLL/UI installation target directory</description>
           <defaultValue>stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>PYTHONPATH</name>
-          <description></description>
-          <defaultValue>${WORKSPACE}/${STC_INSTALL_DIR}:$PYTHONPATH</defaultValue>
-        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -92,11 +87,13 @@ rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${ST
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
+import sys
 
 os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
 
 print &apos;cwd=%s&apos; % os.getcwd()
-print &apos;pythonpath=%s&apos; % os.environ[&quot;PYTHONPATH&quot;]
+
+sys.path.insert(0, os.getcwd())
 
 from StcPython import StcPython
 
