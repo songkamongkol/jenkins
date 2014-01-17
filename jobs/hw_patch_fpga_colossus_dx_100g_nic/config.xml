@@ -74,9 +74,7 @@ rm -rf ${STC_INSTALL_DIR}
 mkdir -p ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
-
-#copy BLL package to workspace
+      <command>#copy BLL package to workspace
 echo copy BLL package to work space
 BLL_BUILD=`awk -F= &apos;{ if($1 == &quot;BLL&quot;) print $2 }&apos; &lt; ${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/latestbuild.txt`
 BLL_BUILD=`echo ${BLL_BUILD} | tr -d &apos;\r&apos;`
@@ -87,10 +85,14 @@ echo BLL_PKG_DIR=${BLL_PKG_DIR}
 cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
+      <command>#reboot chassis to load new FPGA image
+
+export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
+
+cd ${WORKSPACE}/${STC_INSTALL_DIR}
 
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; ./my_run.tcl
-echo &quot;stc::reboot physicalchassis1&quot; &gt;&gt; ./my_run.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList physicalchassis1&quot; &gt;&gt; ./my_run.tcl
 
 tclsh ./my_run.tcl
 </command>
