@@ -37,7 +37,7 @@
         <hudson.model.StringParameterDefinition>
           <name>PYTHONHOME</name>
           <description></description>
-          <defaultValue>$STC_INSTALL_DIR</defaultValue>
+          <defaultValue>$WORKSPACE/$STC_INSTALL_DIR</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
