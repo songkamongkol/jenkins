@@ -84,20 +84,21 @@ echo BLL_PKG_DIR=${BLL_PKG_DIR}
 #cp -av ${BLL_PKG_DIR}/EL3Linux64Server/* ${STC_INSTALL_DIR} ;#&lt;&lt;&lt;packages have softlink issues, also requires 64-bit license
 cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import system
+import time
+
+from StcPython import StcPython
+
+stc = StcPython()
+
+stc.connect(STC_CHASSIS_IP)
+hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis)
+stc.perform(&quot;RebootEquipment&quot;, EquipmentList=hPhysicalChassis)</command>
+    </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command>#reboot chassis to load new FPGA image
-
-export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
-
-cd ${WORKSPACE}/${STC_INSTALL_DIR}
-
-echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; ./my_run.tcl
-echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; ./my_run.tcl
-echo &quot;stc::perform RebootEquipment -EquipmentList physicalchassis1&quot; &gt;&gt; ./my_run.tcl
-echo &quot;exit&quot; &gt;&gt; ./my_run.tcl
-
-tclsh ./my_run.tcl
-</command>
+      <command>echo &quot;New FPGA version: &quot;
+sshpass -f /etc/stc_chassis.pass ssh -o root@${STC_CHASSIS_IP} &quot;BAR0=`cat /proc/bus/pci/devices  | awk &apos;{ if ($2 == \&quot;174a0a05\&quot;) {print $4} }&apos;`; /mnt/spirent/hypervisor/fpga/peek32 $BAR0 | grep 0x$BAR0 | awk &apos;{ print $3}&apos;&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
