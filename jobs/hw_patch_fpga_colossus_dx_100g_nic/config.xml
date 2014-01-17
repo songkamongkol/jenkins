@@ -19,6 +19,21 @@
           <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/hypervisor/fpga</description>
           <defaultValue>/mnt/spirent/hypervisor/fpga</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_VERSION</name>
+          <description>Spirent TestCenter version to use for testing</description>
+          <defaultValue>4.40</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALLER_DEPOT</name>
+          <description>Spirent TestCenter package repository</description>
+          <defaultValue>/mnt/martin/archive/pv/TestCenter</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALL_DIR</name>
+          <description>Spirent TestCenter BLL/UI installation target directory</description>
+          <defaultValue>stc_install_dir</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -39,14 +54,45 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>#sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+      <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
+#sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
 sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
 
+echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
 #sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
 sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
 
+
 #sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
+#sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#prepare workspace
+echo &quot;Preparing workspace&quot;
+rm -rf ${STC_INSTALL_DIR}
+mkdir -p ${STC_INSTALL_DIR}</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
+
+#copy BLL package to workspace
+echo copy BLL package to work space
+BLL_BUILD=`awk -F= &apos;{ if($1 == &quot;BLL&quot;) print $2 }&apos; &lt; ${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/latestbuild.txt`
+BLL_BUILD=`echo ${BLL_BUILD} | tr -d &apos;\r&apos;`
+BLL_PKG_DIR=${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/GUI_BLL/${BLL_BUILD}
+echo BLL_PKG_DIR=${BLL_PKG_DIR}
+#ls $BLL_PKG_DIR ;#&lt;&lt;&lt;debug
+#cp -av ${BLL_PKG_DIR}/EL3Linux64Server/* ${STC_INSTALL_DIR} ;#&lt;&lt;&lt;packages have softlink issues, also requires 64-bit license
+cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export TCLLIBPATH=${WORKSPACE}/${STC_INSTALL_DIR}:$TCLLIBPATH
+
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; ./my_run.tcl
+echo &quot;stc::reboot physicalchassis1&quot; &gt;&gt; ./my_run.tcl
+
+tclsh ./my_run.tcl
 </command>
     </hudson.tasks.Shell>
   </builders>
