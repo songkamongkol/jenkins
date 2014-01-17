@@ -93,7 +93,7 @@ from StcPython import StcPython
 stc = StcPython()
 
 stc.connect(STC_CHASSIS_IP)
-hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis)
+hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis&quot;)
 stc.perform(&quot;RebootEquipment&quot;, EquipmentList=hPhysicalChassis)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
