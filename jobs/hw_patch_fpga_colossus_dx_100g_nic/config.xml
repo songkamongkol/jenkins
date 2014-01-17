@@ -22,55 +22,9 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
-    <configVersion>1</configVersion>
-    <p4User>tableuser</p4User>
-    <p4Passwd></p4Passwd>
-    <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//TestCenter/integration/framework/tools/pytools/...  //ws/pytools/...</projectPath>
-    <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <p4SysDrive></p4SysDrive>
-    <p4SysRoot></p4SysRoot>
-    <browser class="hudson.plugins.perforce.browsers.P4Web">
-      <url>http://jenkins.ad.spirentcom.com:5104/</url>
-      <p4WebEndShite>?ac=22</p4WebEndShite>
-      <p4DifEndShite>?ac=19</p4DifEndShite>
-      <p4ClEndShite>?ac=10</p4ClEndShite>
-    </browser>
-    <p4Tool>p4</p4Tool>
-    <useClientSpec>false</useClientSpec>
-    <useStreamDepot>false</useStreamDepot>
-    <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
-    <dontUpdateServer>false</dontUpdateServer>
-    <disableAutoSync>false</disableAutoSync>
-    <disableChangeLogOnly>false</disableChangeLogOnly>
-    <disableSyncOnly>false</disableSyncOnly>
-    <showIntegChanges>false</showIntegChanges>
-    <useOldClientName>false</useOldClientName>
-    <createWorkspace>true</createWorkspace>
-    <updateView>true</updateView>
-    <dontRenameClient>false</dontRenameClient>
-    <updateCounterValue>false</updateCounterValue>
-    <dontUpdateClient>false</dontUpdateClient>
-    <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>true</wipeBeforeBuild>
-    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
-    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
-    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
-    <fileLimit>0</fileLimit>
-    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
-    <slaveClientNameFormat></slaveClientNameFormat>
-    <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
-    <useViewMaskForSyncing>false</useViewMaskForSyncing>
-    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
-    <pollOnlyOnMaster>false</pollOnlyOnMaster>
-  </scm>
-  <canRoam>true</canRoam>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>10.2.20.68</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -85,9 +39,12 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>cd pytools
+      <command>sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
 
-python ./phxscp.py ./ColossusDX_1x100G.bit -q False -d True ${STC_CHASSIS_IP}:${STC_FPGA_DIR}</command>
+sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no &quot;ln -sf ${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no &quot;ls -al ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
