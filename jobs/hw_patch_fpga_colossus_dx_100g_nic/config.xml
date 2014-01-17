@@ -39,11 +39,14 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+      <command>#sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
 
-sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;ln -sf ${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;ln -sf ${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;ls -al ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;ls -al ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;ls -al ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
 </command>
     </hudson.tasks.Shell>
   </builders>
