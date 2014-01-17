@@ -109,6 +109,8 @@ stc = StcPython()
 #stc.connect(os.environ[&quot;STC_CHASSIS_IP&quot;])
 #hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis&quot;)
 #stc.perform(&quot;RebootEquipment&quot;, EquipmentList=hPhysicalChassis)
+
+exit()
 </command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
