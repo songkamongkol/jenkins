@@ -96,6 +96,8 @@ rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${ST
 os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
 
 print &apos;cwd=%s&apos; % os.getcwd()
+print &apos;pythonpath=%s&apos; % os.environ[&quot;PYTHONPATH&quot;]
+print &apos;pythonhome=%s&apos; % os.environ[&quot;PYTHONHOME&quot;]
 
 from StcPython import StcPython
 
