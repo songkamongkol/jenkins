@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus DX 1x100G NIC FPGA image DSG sanity test</description>
+  <description>Colossus DX 1x100G NIC FPGA image SFPGA sanity test</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
@@ -37,7 +37,7 @@
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
-          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
+          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and not sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
@@ -133,7 +133,7 @@
   </scm>
   <assignedNode>10.2.20.68</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
