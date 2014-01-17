@@ -69,8 +69,8 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#prepare workspace
-echo &quot;Preparing workspace&quot;
-rm -rf ${STC_INSTALL_DIR}
+#echo &quot;Preparing workspace&quot;
+#rm -rf ${STC_INSTALL_DIR}
 mkdir -p ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -88,7 +88,7 @@ rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${ST
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 
-print &apos;%s&quot; % os.environ
+print &apos;%s&quot; % os.environ[-1]
 
 print &apos;%s&apos; % os.getcwd()
 
