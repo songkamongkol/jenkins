@@ -30,9 +30,9 @@
           <defaultValue>/mnt/martin/archive/pv/TestCenter</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>STC_PRIVATE_INSTALL_DIR</name>
+          <name>STC_INSTALL_DIR</name>
           <description>Spirent TestCenter BLL/UI installation target directory</description>
-          <defaultValue>$WORKSPACE/stc_install_dir</defaultValue>
+          <defaultValue>stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -70,8 +70,8 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
     <hudson.tasks.Shell>
       <command>#prepare workspace
 #echo &quot;Preparing workspace&quot;
-#rm -rf ${STC_PRIVATE_INSTALL_DIR}
-mkdir -p ${STC_PRIVATE_INSTALL_DIR}</command>
+#rm -rf ${STC_INSTALL_DIR}
+mkdir -p ${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#copy BLL package to workspace
@@ -81,22 +81,24 @@ BLL_BUILD=`echo ${BLL_BUILD} | tr -d &apos;\r&apos;`
 BLL_PKG_DIR=${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/GUI_BLL/${BLL_BUILD}
 echo BLL_PKG_DIR=${BLL_PKG_DIR}
 #ls $BLL_PKG_DIR ;#&lt;&lt;&lt;debug
-#cp -av ${BLL_PKG_DIR}/EL3Linux64Server/* ${STC_PRIVATE_INSTALL_DIR} ;#&lt;&lt;&lt;packages have softlink issues, also requires 64-bit license
-#cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_PRIVATE_INSTALL_DIR}
-rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${STC_PRIVATE_INSTALL_DIR}
+#cp -av ${BLL_PKG_DIR}/EL3Linux64Server/* ${STC_INSTALL_DIR} ;#&lt;&lt;&lt;packages have softlink issues, also requires 64-bit license
+#cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}
+rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${STC_INSTALL_DIR}
 
-</command>
+cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
+
+export STC_PRIVATE_INSTALL_DIR=${WORKSPACE}/${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import sys
 
-#os.chdir(os.environ[&quot;STC_PRIVATE_INSTALL_DIR&quot;])
+os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
 
-#print &apos;cwd=%s&apos; % os.getcwd()
+print &apos;cwd=%s&apos; % os.getcwd()
 
-#sys.path.insert(0, os.getcwd())
-sys.path.insert(0, os.environ[&quot;STC_PRIVATE_INSTALL_DIR&quot;] + &apos;/API/Python&apos;)
+sys.path.insert(0, os.getcwd())
+#sys.path.insert(0, os.getcwd() + &apos;/&apos; + os.environ[&quot;STC_INSTALL_DIR&quot;] + &apos;/API/Python&apos;)
 
 from StcPython import StcPython
 
