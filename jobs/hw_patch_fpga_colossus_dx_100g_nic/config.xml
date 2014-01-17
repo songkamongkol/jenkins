@@ -32,7 +32,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_PRIVATE_INSTALL_DIR</name>
           <description>Spirent TestCenter BLL/UI installation target directory</description>
-          <defaultValue>stc_install_dir</defaultValue>
+          <defaultValue>${WORKSPACE}/stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
