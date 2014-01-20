@@ -102,7 +102,7 @@ export LD_LIBRARY_PATH=${SYNOPSYS_LIB_PATH}:$LD_LIBRARY_PATH
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 echo &quot;Synthesizing&quot;
-${SYNOPSYS_PATH}/synplify_pro -batch &quot;./SynplifyBlade/ColossusDX_BLADE100G.prj&quot; || cat ./SynplifyBlade/rev_1/*.srr
+${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./SynplifyBlade/ColossusDX_BLADE100G.prj&quot; || cat ./SynplifyBlade/rev_1/*.srr
 cat ./SynplifyBlade/rev_1/*.srr
 
 </command>
