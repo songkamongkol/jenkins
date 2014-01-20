@@ -2804,6 +2804,7 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_sanity_basic_warpath_1x40g_iob</string>
+            <string>hw_sanity_dsg_warpath_1x40g_iob</string>
           </jobNames>
           <jobFilters/>
           <columns>
