@@ -37,7 +37,7 @@
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
-          <defaultValue>IL and HW_&apos;WARPATH_40G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and TbStreamStatsMiniTest and not slow and not disabled</defaultValue>
+          <defaultValue>IL and HW_WARPATH_40G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and TbStreamStatsMiniTest and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
@@ -120,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -185,7 +185,7 @@ sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
 
 cd build/il/testframework
 
-python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;&apos;WARPATH_40G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;WARPATH_40G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
 
 echo &quot;patch JUnit results file&quot;
 echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
