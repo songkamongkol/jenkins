@@ -226,6 +226,14 @@ sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
       </thresholds>
       <thresholdMode>1</thresholdMode>
     </xunit>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_sanity_sfpga_warpath_1x40g_iob</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
