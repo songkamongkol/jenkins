@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Warpath 1x40G I/O Board FPGA image SFPGA sanity test</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_VERSION</name>
+          <description>Spirent TestCenter version to use for testing</description>
+          <defaultValue>4.40</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>Perforce //TestCenter branch name</description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALLER_DEPOT</name>
+          <description>Spirent TestCenter package repository</description>
+          <defaultValue>/mnt/martin/archive/pv/TestCenter</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALL_DIR</name>
+          <description>Spirent TestCenter BLL/UI installation target directory</description>
+          <defaultValue>stc_install_dir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_CHASSIS_IP</name>
+          <description>Spirent TestCenter chassis IP</description>
+          <defaultValue>10.100.21.96</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FILTER</name>
+          <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
+          <defaultValue>IL and HW_WARPATH_40G and sanity_testlist_sanity_thunderbird and not sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_SLOT_ID</name>
+          <description>Spirent TestCenter testmodule slot ID (0-based)</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>TMP_DIR</name>
+          <description>temporary directory for test logs</description>
+          <defaultValue>tmp</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NUM_CPU</name>
+          <description>Number of CPU (cores) available for parallel execution</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+    <configVersion>1</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}</p4Client>
+    <projectPath>//TestCenter/${BRANCH_NAME}/build/il/...  //ws/build/il/...&#xd;
+//TestCenter/${BRANCH_NAME}/framework/idl/... //ws/framework/idl/...&#xd;
+//TestCenter/${BRANCH_NAME}/content/*/idl/...  //ws/content/*/idl/...&#xd;
+//TestCenter/${BRANCH_NAME}/content/*/*/idl/...  //ws/content/*/*/idl/...&#xd;
+//TestCenter/${BRANCH_NAME}/framework/def/... //ws/framework/def/...&#xd;
+//TestCenter/${BRANCH_NAME}/content/*/def/...  //ws/content/*/def/...&#xd;
+//TestCenter/${BRANCH_NAME}/content/*/*/def/...  //ws/content/*/*/def/...&#xd;
+//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
+//TestCenter/${BRANCH_NAME}/framework/tools/scg/...  //ws/framework/tools/scg/...&#xd;
+//TestCenter/${BRANCH_NAME}/framework/tools/xcg/...  //ws/framework/tools/xcg/...&#xd;
+//TestCenter/${BRANCH_NAME}/framework/tools/xsdValidator/... //ws/framework/tools/xsdValidator/...&#xd;
+&#xd;
+-//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt&#xd;
+&#xd;
++//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/run.py  //ws/build/il/testframework/testcases/run.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl&#xd;
+&#xd;
+&#xd;
++//SPT_HW/regression/pytest/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
++//SPT_HW/regression/pytest/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
++//SPT_HW/regression/pytest/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
+&#xd;
+&#xd;
++//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini&#xd;
++//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
+</projectPath>
+    <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive></p4SysDrive>
+    <p4SysRoot></p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
+    <firstChange>0</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>false</useViewMask>
+    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>10.2.20.68</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo generate idl
+
+cd framework/tools/scg
+
+python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFramework.xml
+
+python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo execute idltojar
+
+cd build/il/testframework/testexecuter
+
+./idltojar.sh</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>cd build/il/testframework
+
+echo clean up
+rm -rf ./testexecuter/Reports/*
+rm -f ./testexecuter/*.ini
+rm -rf ./testcases/tmp/
+rm -f ./testcases/*.pyc
+rm -rf ./testcases/__pycache__/
+rm -f ./*.log
+rm -f ./result.junit.xml
+
+echo create script info XML files
+python ./tagger.py
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo change cli.tcl output to stdout
+
+chmod u+w build/il/testframework/testexecuter/cli.tcl
+
+sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo execute test suite
+
+cd build/il/testframework
+
+python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;WARPATH_40G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+
+echo &quot;patch JUnit results file&quot;
+echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
+
+sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/il_regression_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <xunit plugin="xunit@1.65">
+      <types>
+        <JUnitType>
+          <pattern>build/il/testframework/*.junit.xml</pattern>
+          <skipNoTestFiles>false</skipNoTestFiles>
+          <failIfNotNew>false</failIfNotNew>
+          <deleteOutputFiles>false</deleteOutputFiles>
+          <stopProcessingIfError>true</stopProcessingIfError>
+        </JUnitType>
+      </types>
+      <thresholds>
+        <org.jenkinsci.plugins.xunit.threshold.FailedThreshold>
+          <unstableThreshold></unstableThreshold>
+          <unstableNewThreshold></unstableNewThreshold>
+          <failureThreshold>0</failureThreshold>
+          <failureNewThreshold></failureNewThreshold>
+        </org.jenkinsci.plugins.xunit.threshold.FailedThreshold>
+        <org.jenkinsci.plugins.xunit.threshold.SkippedThreshold>
+          <unstableThreshold></unstableThreshold>
+          <unstableNewThreshold></unstableNewThreshold>
+          <failureThreshold>0</failureThreshold>
+          <failureNewThreshold></failureNewThreshold>
+        </org.jenkinsci.plugins.xunit.threshold.SkippedThreshold>
+      </thresholds>
+      <thresholdMode>1</thresholdMode>
+    </xunit>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+  </buildWrappers>
+</project>
