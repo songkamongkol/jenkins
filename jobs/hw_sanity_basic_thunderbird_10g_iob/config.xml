@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Warpath 1x40G I/O Board FPGA image basic sanity test</description>
+  <description>Thunderbird 10G I/O Board FPGA image basic sanity test</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
@@ -32,17 +32,17 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>Spirent TestCenter chassis IP</description>
-          <defaultValue>10.100.21.96</defaultValue>
+          <defaultValue>10.100.21.12</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
-          <defaultValue>IL and HW_WARPATH_40G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and TbStreamStatsMiniTest and not slow and not disabled</defaultValue>
+          <defaultValue>IL and HW_TBIRD and sanity_testlist_sanity_thunderbird and sanity_fast_streams and TbStreamStatsMiniTest and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Spirent TestCenter testmodule slot ID (0-based)</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TMP_DIR</name>
@@ -91,7 +91,6 @@
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -186,7 +185,7 @@ sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
 
 cd build/il/testframework
 
-python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;WARPATH_40G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;TBIRD\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:3\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
 
 echo &quot;patch JUnit results file&quot;
 echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
