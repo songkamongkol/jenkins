@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -109,7 +109,14 @@ cd Vivado
 chmod u+w ./*.xpr
 chmod u+w ./Vivado.data/runs/*
 
+#derive FPGA image version/datecode
+#build=${BUILD_NUMBER}
+val=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+ver=$val`date &quot;+%m%d%y&quot;`
+echo &quot;ver=$ver&quot;
+
 echo &quot;open_project Vivado.xpr&quot; &gt;&gt; myImp.tcl
+echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS $ver&quot; &gt;&gt; myImp.tcl
 echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
@@ -133,10 +140,29 @@ vivado -mode batch -source ./myImp.tcl</command>
         </bestResult>
       </runCondition>
       <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>md5sum -b Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit | awk &apos;{print $1}&apos; &gt; ColossusDX_1x100G.bit.md5
+
+cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}
+</command>
+        </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit, *.log, *.rpt</includes>
             <basedir>Vivado/Vivado.runs/impl_1</basedir>
+            <excludes></excludes>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>version.txt</includes>
+            <basedir>Vivado</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
