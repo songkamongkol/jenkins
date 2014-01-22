@@ -2754,6 +2754,7 @@
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[91]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_sanity_basic_tbonaonic_10g_nic</string>
             <string>hw_sanity_basic_thunderbird_10g_iob</string>
+            <string>hw_sanity_dsg_thunderbird_10g_iob</string>
             <string>hw_sim_tbonaonic_10g_nic</string>
             <string>hw_sim_thunderbird_10g_iob</string>
           </jobNames>
