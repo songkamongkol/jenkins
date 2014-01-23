@@ -182,6 +182,11 @@ cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit, VivadoBlade/version.txt, ColossusDX_BLADE100G.bit.md5</artifacts>
       <latestOnly>true</latestOnly>
