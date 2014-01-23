@@ -38,7 +38,7 @@
       <path>/opt/jenkins/jenkins-root/vsim_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>xilinx_vivado Rules</name>
+      <name>Xilinx Vivado Rules</name>
       <path>/opt/jenkins/jenkins-root/xilinx_vivado_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>
