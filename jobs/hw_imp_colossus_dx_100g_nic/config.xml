@@ -121,8 +121,9 @@ echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS $ver [current_design]&quot; &gt;&gt; myImp.tcl
-echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
-echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+#echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
+#echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./Vivado.runs/impl_1/ColossusDX_1x100G.bit&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -182,6 +183,11 @@ cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit, Vivado/version.txt, ColossusDX_1x100G.bit.md5</artifacts>
       <latestOnly>true</latestOnly>
