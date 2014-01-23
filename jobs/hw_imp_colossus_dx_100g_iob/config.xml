@@ -121,8 +121,9 @@ echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS $ver [current_design]&quot; &gt;&gt; myImp.tcl
-echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
-echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+#echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
+#echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
