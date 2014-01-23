@@ -179,7 +179,7 @@ cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit</artifacts>
+      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit, VivadoBlade/version.txt, ColossusDX_BLADE100G.bit.md5</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
