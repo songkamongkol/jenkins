@@ -98,7 +98,9 @@ os.chdir(os.environ[&apos;STC_INSTALL_DIR&apos;])
 
 print &apos;cwd=%s&apos; % os.getcwd()
 
-print &apos;STC_PRIVATE_INSTALL_DIR=%s&apos; % os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;]
+print os.environ
+
+#print &apos;STC_PRIVATE_INSTALL_DIR=%s&apos; % os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;]
 
 sys.path.insert(0, os.getcwd())
 
