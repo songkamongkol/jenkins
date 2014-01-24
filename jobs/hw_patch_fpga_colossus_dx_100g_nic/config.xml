@@ -93,6 +93,8 @@ rm -rf TestCenter.Linux.tar.gz
 cd ${STC_INSTALL_DIR}
 
 echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::get physicalchassismanager1&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
 echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::perform RebootEquipment -EquipmentList \$hPhysicalChassis&quot; &gt;&gt; reboot.tcl
