@@ -50,7 +50,18 @@
       <project>hw_imp_colossus_dx_100g_nic</project>
       <filter>Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit</filter>
       <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>bll_linux</project>
+      <filter>build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
@@ -68,26 +79,16 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>#prepare workspace
-#echo &quot;Preparing workspace&quot;
-#rm -rf ${STC_INSTALL_DIR}
-mkdir -p ${STC_INSTALL_DIR}</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#copy BLL package to workspace
-echo copy BLL package to work space
-BLL_BUILD=`awk -F= &apos;{ if($1 == &quot;BLL&quot;) print $2 }&apos; &lt; ${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/latestbuild.txt`
-BLL_BUILD=`echo ${BLL_BUILD} | tr -d &apos;\r&apos;`
-BLL_PKG_DIR=${STC_INSTALLER_DEPOT}/${STC_VERSION}/Engineering_Builds/GUI_BLL/${BLL_BUILD}
-echo BLL_PKG_DIR=${BLL_PKG_DIR}
-#ls $BLL_PKG_DIR ;#&lt;&lt;&lt;debug
-#cp -av ${BLL_PKG_DIR}/EL3Linux64Server/* ${STC_INSTALL_DIR} ;#&lt;&lt;&lt;packages have softlink issues, also requires 64-bit license
-#cp -av ${BLL_PKG_DIR}/Linux_EL3/* ${STC_INSTALL_DIR}
-rsync -avz --exclude &apos;results_reporter&apos; ${BLL_PKG_DIR}/Linux_EL3/ ${STC_INSTALL_DIR}
+      <command>echo &quot;extract application files&quot;
+tar -zxvf TestCenter.Linux.tar.gz
+mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
+echo &quot;use API/Python/StcPython.py&quot;
+mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
 cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
-export STC_PRIVATE_INSTALL_DIR=${WORKSPACE}/${STC_INSTALL_DIR}</command>
+echo &quot;free up some space&quot;
+rm -rf TestCenter.Linux.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
@@ -119,7 +120,18 @@ exit()
 sshpass -f /etc/stc_chassis.pass ssh -o root@${STC_CHASSIS_IP} &quot;BAR0=`cat /proc/bus/pci/devices  | awk &apos;{ if ($2 == \&quot;174a0a05\&quot;) {print $4} }&apos;`; /mnt/spirent/hypervisor/fpga/peek32 $BAR0 | grep 0x$BAR0 | awk &apos;{ print $3}&apos;&quot;</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>echo &quot;!!! CLEAN OUT WORKSPACE !!!&quot;
+rm -rf ./${STC_INSTALL_DIR}</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+  </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
   </buildWrappers>
