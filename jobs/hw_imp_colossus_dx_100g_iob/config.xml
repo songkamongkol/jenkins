@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -145,7 +145,8 @@ vivado -mode batch -source ./myImp.tcl</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>md5sum -b VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit | awk &apos;{print $1}&apos; &gt; ColossusDX_BLADE100G.bit.md5
+          <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
+md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
 </command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
