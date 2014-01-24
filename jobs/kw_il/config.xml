@@ -91,9 +91,6 @@ kwinject -T integration_kw.trace ./klocwork_build.sh
 echo &quot;Executing kwinject -t integration_kw.trace -o integration_kw.out ...&quot;
 kwinject -t integration_kw.trace -o integration_kw.out
 
-cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include
-ln -s asm-ppc asm
-
 # cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include/linux
 # echo &quot;#define KERNEL_VERSION(a,b,c) (((a) &lt;&lt; 16) + ((b) &lt;&lt; 8) + (c))&quot; &gt; version.h 
 
@@ -107,6 +104,9 @@ cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31;make ARCH=ppc chassis_c2_co
 rm -f .config arch/ppc/defconfig
 cp -f arch/ppc/configs/chassis_c2_defconfig arch/ppc/defconfig
 make oldconfig
+
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include
+ln -s asm-ppc asm
 
 cd $WORKSPACE
 echo &quot;Executing kwbuildproject -f -o kwtables integration_kw.out --project integration_x86 ...&quot;
