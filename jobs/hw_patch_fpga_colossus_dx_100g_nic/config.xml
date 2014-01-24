@@ -80,7 +80,7 @@ mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 ls -al
 
 echo &quot;use API/Python/StcPython.py&quot;
-mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
+#mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
 cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
 echo &quot;free up some space&quot;
