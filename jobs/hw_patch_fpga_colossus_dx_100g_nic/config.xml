@@ -69,7 +69,11 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;extract application files&quot;
+      <command>echo &quot;prepare workspace&quot;
+rm -rf ./${STC_INSTALL_DIR}
+rm -rf ./Spirent_TestCenter_Application_Linux_Server/
+
+echo &quot;extract application files&quot;
 tar -zxvf TestCenter.Linux.tar.gz
 mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
