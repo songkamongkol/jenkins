@@ -94,10 +94,19 @@ kwinject -t integration_kw.trace -o integration_kw.out
 cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include
 ln -s asm-ppc asm
 
-cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include/linux
-echo &quot;#define KERNEL_VERSION(a,b,c) (((a) &lt;&lt; 16) + ((b) &lt;&lt; 8) + (c))&quot; &gt; version.h 
+# cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31/include/linux
+# echo &quot;#define KERNEL_VERSION(a,b,c) (((a) &lt;&lt; 16) + ((b) &lt;&lt; 8) + (c))&quot; &gt; version.h 
 
-&apos;/bin/sh&apos; &apos;-c&apos; &apos;echo \#define LINUX_COMPILER \&quot;`ppc_405-gcc -D__KERNEL__ -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/include -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/../include -Wall -Wstrict-prototypes -Wno-trigraphs -O2 -fno-strict-aliasing -fno-common -fomit-frame-pointer -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/arch/ppc -fsigned-char -msoft-float -pipe -ffixed-r2 -Wno-uninitialized -mmultiple -mstring -Wa,-m405 -v 2&gt;&amp;1 | tail -1`\&quot; &gt; compile.h&apos;
+# &apos;/bin/sh&apos; &apos;-c&apos; &apos;echo \#define LINUX_COMPILER \&quot;`ppc_405-gcc -D__KERNEL__ -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/include -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/../include -Wall -Wstrict-prototypes -Wno-trigraphs -O2 -fno-strict-aliasing -fno-common -fomit-frame-pointer -I/home/scmbuild/TestCenter/integration/framework/il/kernel/linux-2.4.20_mvl31/arch/ppc -fsigned-char -msoft-float -pipe -ffixed-r2 -Wno-uninitialized -mmultiple -mstring -Wa,-m405 -v 2&gt;&amp;1 | tail -1`\&quot; &gt; compile.h&apos;
+
+cd $WORKSPACE
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31;
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31;rm -f .hhl_*
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31;cp -f ../config/ppc/.hhl_* .
+cd $WORKSPACE/framework/il/kernel/linux-2.4.20_mvl31;make ARCH=ppc chassis_c2_config
+rm -f .config arch/ppc/defconfig
+cp -f arch/ppc/configs/chassis_c2_defconfig arch/ppc/defconfig
+make oldconfig
 
 cd $WORKSPACE
 echo &quot;Executing kwbuildproject -f -o kwtables integration_kw.out --project integration_x86 ...&quot;
