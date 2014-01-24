@@ -91,7 +91,6 @@
 +//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/ui/automation/... //ws/framework/ui/automation/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -121,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -223,7 +222,7 @@ for row in reader:
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
-      <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
+      <recipientList> ENGCIFirstResponderTeam@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -238,6 +237,7 @@ for row in reader:
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
