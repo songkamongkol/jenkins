@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -145,10 +145,7 @@ vivado -mode batch -source ./myImp.tcl</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>md5sum -b Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit | awk &apos;{print $1}&apos; &gt; ColossusDX_1x100G.bit.md5
-
-cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}
-</command>
+          <command>md5sum -b Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit | awk &apos;{print $1}&apos; &gt; ColossusDX_1x100G.bit.md5</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
@@ -167,6 +164,19 @@ cp ./*.bit.md5 /net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_
           <entry>
             <includes>version.txt</includes>
             <basedir>Vivado</basedir>
+            <excludes></excludes>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>*.bit.md5</includes>
+            <basedir></basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
