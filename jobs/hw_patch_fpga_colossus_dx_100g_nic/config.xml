@@ -102,10 +102,6 @@ echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
     </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>echo &quot;New FPGA version: &quot;
-sshpass -f /etc/stc_chassis.pass ssh -o root@${STC_CHASSIS_IP} &quot;BAR0=`cat /proc/bus/pci/devices  | awk &apos;{ if ($2 == \&quot;174a0a05\&quot;) {print $4} }&apos;`; /mnt/spirent/hypervisor/fpga/peek32 $BAR0 | grep 0x$BAR0 | awk &apos;{ print $3}&apos;&quot;</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
