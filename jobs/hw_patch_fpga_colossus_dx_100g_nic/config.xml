@@ -92,13 +92,17 @@ export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}</command>
       <command>import os
 import sys
 
-os.environ[&quot;STC_PRIVATE_INSTALL_DIR&quot;] = os.getcwd() + &apos;/&apos; + os.environ[&quot;STC_INSTALL_DIR&quot;]
+os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;] = os.getcwd() + &apos;/&apos; + os.environ[&apos;STC_INSTALL_DIR&apos;]
 
-os.chdir(os.environ[&quot;STC_INSTALL_DIR&quot;])
+os.chdir(os.environ[&apos;STC_INSTALL_DIR&apos;])
 
 print &apos;cwd=%s&apos; % os.getcwd()
 
+print &apos;STC_PRIVATE_INSTALL_DIR=%s&apos; % os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;]
+
 sys.path.insert(0, os.getcwd())
+
+print sys.path
 
 from StcPython import StcPython
 
@@ -106,9 +110,9 @@ stc = StcPython()
 
 print &apos;Spirent TestCenter version: %s&apos; % stc.get(&apos;system1&apos;, &apos;version&apos;)
 
-#stc.connect(os.environ[&quot;STC_CHASSIS_IP&quot;])
-#hPhysicalChassis = stc.get(&quot;physicalchassismanager1&quot;, &quot;children-physicalchassis&quot;)
-#stc.perform(&quot;RebootEquipment&quot;, EquipmentList=hPhysicalChassis)
+#stc.connect(os.environ[&apos;STC_CHASSIS_IP&apos;])
+#hPhysicalChassis = stc.get(&apos;physicalchassismanager1&apos;, &apos;children-physicalchassis&apos;)
+#stc.perform(&apos;RebootEquipment&apos;, EquipmentList=hPhysicalChassis)
 
 exit()
 </command>
