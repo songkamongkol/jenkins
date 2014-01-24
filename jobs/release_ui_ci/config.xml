@@ -49,7 +49,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release Build Passed Regression</string>
       </activeProcessNames>
@@ -127,7 +127,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
   </scm>
   <assignedNode>uibldwin-03</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
