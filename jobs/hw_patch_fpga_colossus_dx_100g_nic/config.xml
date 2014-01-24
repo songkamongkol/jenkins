@@ -20,16 +20,6 @@
           <defaultValue>/mnt/spirent/hypervisor/fpga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>STC_VERSION</name>
-          <description>Spirent TestCenter version to use for testing</description>
-          <defaultValue>4.40</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>STC_INSTALLER_DEPOT</name>
-          <description>Spirent TestCenter package repository</description>
-          <defaultValue>/mnt/martin/archive/pv/TestCenter</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
           <name>STC_INSTALL_DIR</name>
           <description>Spirent TestCenter BLL/UI installation target directory</description>
           <defaultValue>stc_install_dir</defaultValue>
