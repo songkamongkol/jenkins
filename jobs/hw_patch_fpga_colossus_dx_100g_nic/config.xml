@@ -86,7 +86,7 @@ cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 echo &quot;free up some space&quot;
 rm -rf TestCenter.Linux.tar.gz
 
-export STC_PRIVATE_INSTALL_DIR=`pwd`${STC_INSTALL_DIR}</command>
+export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
