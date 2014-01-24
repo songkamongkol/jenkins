@@ -84,7 +84,9 @@ echo &quot;use API/Python/StcPython.py&quot;
 cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
 echo &quot;free up some space&quot;
-rm -rf TestCenter.Linux.tar.gz</command>
+rm -rf TestCenter.Linux.tar.gz
+
+export STC_PRIVATE_INSTALL_DIR=`pwd`${STC_INSTALL_DIR}</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
@@ -124,7 +126,7 @@ sshpass -f /etc/stc_chassis.pass ssh -o root@${STC_CHASSIS_IP} &quot;BAR0=`cat /
 rm -rf ./${STC_INSTALL_DIR}</command>
         </hudson.tasks.Shell>
       </buildSteps>
-      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
