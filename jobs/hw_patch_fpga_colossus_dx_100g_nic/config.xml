@@ -85,40 +85,21 @@ cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
 echo &quot;free up some space&quot;
 rm -rf TestCenter.Linux.tar.gz
-
-export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}</command>
-    </hudson.tasks.Shell>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-import sys
-
-os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;] = os.getcwd() + &apos;/&apos; + os.environ[&apos;STC_INSTALL_DIR&apos;]
-
-os.chdir(os.environ[&apos;STC_INSTALL_DIR&apos;])
-
-print &apos;cwd=%s&apos; % os.getcwd()
-
-print os.environ
-
-#print &apos;STC_PRIVATE_INSTALL_DIR=%s&apos; % os.environ[&apos;STC_PRIVATE_INSTALL_DIR&apos;]
-
-sys.path.insert(0, os.getcwd())
-
-print sys.path
-
-from StcPython import StcPython
-
-stc = StcPython()
-
-print &apos;Spirent TestCenter version: %s&apos; % stc.get(&apos;system1&apos;, &apos;version&apos;)
-
-#stc.connect(os.environ[&apos;STC_CHASSIS_IP&apos;])
-#hPhysicalChassis = stc.get(&apos;physicalchassismanager1&apos;, &apos;children-physicalchassis&apos;)
-#stc.perform(&apos;RebootEquipment&apos;, EquipmentList=hPhysicalChassis)
-
-exit()
 </command>
-    </hudson.plugins.python.Python>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList $hPhysicalChassis&quot; &gt;&gt; reboot.tcl
+echo &quot;exit&quot; &gt;&gt; reboot.tcl
+
+tclsh ./reboot.tcl</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;New FPGA version: &quot;
 sshpass -f /etc/stc_chassis.pass ssh -o root@${STC_CHASSIS_IP} &quot;BAR0=`cat /proc/bus/pci/devices  | awk &apos;{ if ($2 == \&quot;174a0a05\&quot;) {print $4} }&apos;`; /mnt/spirent/hypervisor/fpga/peek32 $BAR0 | grep 0x$BAR0 | awk &apos;{ print $3}&apos;&quot;</command>
