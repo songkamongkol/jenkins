@@ -66,7 +66,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -201,7 +201,7 @@ md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit, VivadoBlade/version.txt, ColossusDX_BLADE100G.bit.md5</artifacts>
+      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit*, VivadoBlade/version.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
