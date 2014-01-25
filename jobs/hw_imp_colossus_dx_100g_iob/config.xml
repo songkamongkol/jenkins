@@ -151,7 +151,7 @@ md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.bit, *.log, *.rpt</includes>
+            <includes>*.bit*, *.log, *.rpt</includes>
             <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
