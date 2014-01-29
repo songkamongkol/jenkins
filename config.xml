@@ -2069,7 +2069,7 @@
       <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
         <host>klocwork.cal.ci.spirentcom.com</host>
         <port>22</port>
-        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
       </launcher>
       <label></label>
       <nodeProperties>
