@@ -30,7 +30,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command># java -jar ./flexparser.jar  --start 6/1/2013 --end 12/23/2013 
-TODAY=$(date +&quot;%m\/%d\/%Y&quot;)
+TODAY=$(date +&quot;%m/%d/%Y&quot;)
 LAST_WEEK=$(date -d &apos;-7day&apos; +%m\/%d\/%Y)
 cd /home/spirent/flexparser
 echo &quot;java -jar ./flexparser.jar  --start $LAST_WEEK --end $TODAY -d /opt/klocwork/projects_root/logs/license.log ...&quot;;
