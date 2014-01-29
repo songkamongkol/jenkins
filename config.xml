@@ -2145,6 +2145,7 @@
         <hudson.plugins.claim.ClaimColumn plugin="claim@2.3"/>
       </columns>
       <includeRegex>(bll|ui|il).*</includeRegex>
+      <recurse>false</recurse>
     </listView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
       <owner class="hudson" reference="../../.."/>
@@ -2182,6 +2183,7 @@
             <hudson.views.LastDurationColumn/>
             <hudson.views.BuildButtonColumn/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2211,6 +2213,7 @@
             <hudson.views.LastDurationColumn/>
             <hudson.views.BuildButtonColumn/>
           </columns>
+          <recurse>false</recurse>
         </listView>
       </views>
     </hudson.plugins.nested__view.NestedView>
@@ -2257,6 +2260,7 @@
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
         <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
       </columns>
+      <recurse>false</recurse>
     </listView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
       <owner class="hudson" reference="../../.."/>
@@ -2302,6 +2306,7 @@
             <hudson.views.LastDurationColumn/>
             <hudson.views.BuildButtonColumn/>
           </columns>
+          <recurse>false</recurse>
         </listView>
       </views>
     </hudson.plugins.nested__view.NestedView>
@@ -2353,6 +2358,7 @@
         <hudson.views.BuildButtonColumn/>
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
       </columns>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>true</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -2406,6 +2412,7 @@
         <hudson.views.BuildButtonColumn/>
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
       </columns>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>true</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -2451,6 +2458,7 @@
         <hudson.views.BuildButtonColumn/>
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
       </columns>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>true</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -2516,6 +2524,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
           <useCssStyle>false</useCssStyle>
           <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
@@ -2554,6 +2563,7 @@
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
           <includeRegex>^(release_).*(packaging$)</includeRegex>
+          <recurse>false</recurse>
           <useCssStyle>false</useCssStyle>
           <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
@@ -2598,6 +2608,7 @@
         <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
       </columns>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>true</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -2617,6 +2628,7 @@
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>kw_bll_ui</string>
         <string>kw_il</string>
+        <string>kw_usage_report</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -2630,6 +2642,7 @@
         <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
         <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
       </columns>
+      <recurse>false</recurse>
       <useCssStyle>false</useCssStyle>
       <includeStdJobList>true</includeStdJobList>
       <leftPortletWidth>50%</leftPortletWidth>
@@ -2671,6 +2684,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2704,6 +2718,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2730,6 +2745,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2759,6 +2775,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2784,6 +2801,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
@@ -2813,6 +2831,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
         </listView>
       </views>
       <columns>
@@ -2855,6 +2874,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
           <useCssStyle>true</useCssStyle>
           <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
@@ -2890,6 +2910,7 @@
             <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
+          <recurse>false</recurse>
           <useCssStyle>true</useCssStyle>
           <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
