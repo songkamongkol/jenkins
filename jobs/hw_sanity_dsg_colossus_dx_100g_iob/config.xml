@@ -32,7 +32,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>Spirent TestCenter chassis IP</description>
-          <defaultValue>10.100.21.109</defaultValue>
+          <defaultValue>10.100.21.62</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
@@ -42,7 +42,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Spirent TestCenter testmodule slot ID (0-based)</description>
-          <defaultValue>0</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TMP_DIR</name>
@@ -52,7 +52,7 @@
         <hudson.model.StringParameterDefinition>
           <name>NUM_CPU</name>
           <description>Number of CPU (cores) available for parallel execution</description>
-          <defaultValue>1</defaultValue>
+          <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -185,7 +185,7 @@ sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
 
 cd build/il/testframework
 
-python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --timeout=1800 --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;COLOSSUS_DX_100G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --timeout=1800 --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;COLOSSUS_DX_100G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
 
 echo &quot;patch JUnit results file&quot;
 echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
