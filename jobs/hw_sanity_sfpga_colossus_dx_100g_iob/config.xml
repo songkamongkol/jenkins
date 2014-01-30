@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus DX 1x100G I/O Board FPGA image DSG sanity test</description>
+  <description>Colossus DX 1x100G I/O Board FPGA image SFPGA sanity test</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
@@ -37,7 +37,7 @@
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
-          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
+          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and not sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
@@ -91,7 +91,6 @@
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -121,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
