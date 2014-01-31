@@ -81,7 +81,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -109,8 +109,8 @@
       <project>SptModelSimPli_Lin32</project>
       <filter>Shell/ModelSimPliShell.v</filter>
       <target>SimSource</target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
-        <stable>true</stable>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -118,8 +118,8 @@
       <project>SptModelSimPli_Lin32</project>
       <filter>Bin/libGeneratorParser.so.1</filter>
       <target>SimSource</target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
-        <stable>true</stable>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -127,8 +127,8 @@
       <project>SptModelSimPli_Lin32</project>
       <filter>Bin/libSpirentModelSimPli.so</filter>
       <target>SimSource</target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
-        <stable>true</stable>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
