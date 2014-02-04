@@ -10,24 +10,9 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>STC_VERSION</name>
-          <description>Spirent TestCenter version to use for testing</description>
-          <defaultValue>4.40</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>Perforce //TestCenter branch name</description>
           <defaultValue>integration</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>STC_INSTALLER_DEPOT</name>
-          <description>Spirent TestCenter package repository</description>
-          <defaultValue>/mnt/martin/archive/pv/TestCenter</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>STC_INSTALL_DIR</name>
-          <description>Spirent TestCenter BLL/UI installation target directory</description>
-          <defaultValue>stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
@@ -82,16 +67,15 @@
 +//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl&#xd;
 &#xd;
 &#xd;
-+//SPT_HW/regression/pytest/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
-+//SPT_HW/regression/pytest/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
-+//SPT_HW/regression/pytest/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
++//TestCenter/${BRANCH_NAME}/build/il/testframework/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
 &#xd;
 &#xd;
 +//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini&#xd;
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -121,7 +105,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
