@@ -71,7 +71,7 @@
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
-    <slaveClientNameFormat></slaveClientNameFormat>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
@@ -96,6 +96,13 @@ python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFra
 
 python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
 </command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo execute idltojar
+
+cd build/il/testframework/testexecuter
+
+./idltojar.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
