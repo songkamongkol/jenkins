@@ -34,7 +34,8 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/... //ws/Vivado/...&#xd;
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v  //ws/SourceCode/include/VERSION_ColossusDX_1x100G.v&#xd;
++//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/... //ws/Vivado/...&#xd;
 -//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/ColossusDX_1x100G.edf //ws/ColossusDX_1x100G.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -66,8 +67,9 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -104,16 +106,30 @@
 
 source ${XILINX_PATH}/settings64.sh
 
-cd Vivado
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+
+echo &quot;Update VERSION_ColossusDX_1x100G.v&quot;
+cd ${WORKSPACE}
+p4 edit SourceCode/include/VERSION_ColossusDX_1x100G.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusDX_1x100G.v
+sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+
+p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+
+echo &quot;Start implementation&quot;
+cd ${WORKSPACE}/Vivado
 
 chmod u+w ./*.xpr
 chmod u+w ./Vivado.data/runs/*
 
-#derive FPGA image version/datecode
-#build=${BUILD_NUMBER}
-val=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
-ver=$val`date &quot;+%m%d%y&quot;`
-echo &quot;$ver&quot; &gt; ./version.txt
+echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
 
 echo &quot;open_project Vivado.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
