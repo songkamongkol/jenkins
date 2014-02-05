@@ -105,6 +105,8 @@
 export LD_LIBRARY_PATH=${SYNOPSYS_LIB_PATH}:$LD_LIBRARY_PATH
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
+echo ${P4_CHANGELIST} &gt; changelist.txt
+
 echo &quot;Synthesizing&quot;
 ${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./Synplify/ColossusDX_1x100G.prj&quot; || cat ./Synplify/rev_1/ColossusDX_1x100G.srr
 cat ./Synplify/rev_1/ColossusDX_1x100G.srr
@@ -139,12 +141,25 @@ cat ./Synplify/rev_1/ColossusDX_1x100G.srr
             <failNoFilesDeploy>false</failNoFilesDeploy>
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>changelist.txt</includes>
+            <basedir></basedir>
+            <excludes></excludes>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Synplify/rev_1/*.edf</artifacts>
+      <artifacts>Synplify/rev_1/*.edf, changelist.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
