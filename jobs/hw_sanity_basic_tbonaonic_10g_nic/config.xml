@@ -48,7 +48,8 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>//TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...&#xd;
+    <projectPath>//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
+//TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...&#xd;
 -//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt&#xd;
 &#xd;
 +//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py&#xd;
