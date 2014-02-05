@@ -102,7 +102,10 @@ python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCor
 
 cd build/il/testframework/testexecuter
 
-./idltojar.sh</command>
+./idltojar.sh
+
+tar -zcvf java.tar.gz ./java/
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
