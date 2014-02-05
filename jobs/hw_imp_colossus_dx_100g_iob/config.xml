@@ -67,7 +67,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -94,10 +94,19 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>hw_syn_colossus_dx_100g_iob</project>
+      <filter>changelist.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>hw_syn_colossus_dx_100g_iob</project>
       <filter>SynplifyBlade/rev_1/ColossusDX_BLADE100G.edf</filter>
       <target>VivadoBlade</target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector">
-        <stable>true</stable>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -110,18 +119,20 @@ echo &quot;Derive FPGA image version/datecode&quot;
 VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
+LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
 echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
 cd ${WORKSPACE}
+
 p4 edit SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 
 sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 
-p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
