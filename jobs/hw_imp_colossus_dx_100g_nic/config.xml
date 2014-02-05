@@ -121,7 +121,7 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
 
-p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
+p4 submit -d &quot;Colossus DX 100G NIC version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_ColossusDX_1x100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Vivado
