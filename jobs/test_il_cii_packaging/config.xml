@@ -53,6 +53,9 @@ build/il/scripts/phxbld -j8 vtc_raw
 build/il/scripts/phxbld -j4 tsvm 
 sudo build/il/scripts/phxbld tsvm_raw 
 sudo build/il/scripts/phxbld studio
+
+sudo scons target=centralboot packaging=1
+sudo scons target=c3_pkg packaging=1
 </command>
     </hudson.tasks.Shell>
   </builders>
