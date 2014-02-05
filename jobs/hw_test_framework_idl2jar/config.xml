@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -90,7 +90,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo generate idl
+      <command>echo &quot;generate idl&quot;
 
 cd framework/tools/scg
 
@@ -100,16 +100,27 @@ python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCor
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo execute idltojar
+      <command>echo &quot;execute idltojar&quot;
 
 cd build/il/testframework/testexecuter
 
 ./idltojar.sh
 
+echo &quot;archive jar files&quot;
+
 tar -zcvf java.tar.gz ./java/
 </command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>build/il/testframework/testexecuter/java.tar.gz</artifacts>
+      <latestOnly>true</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+  </publishers>
   <buildWrappers/>
 </project>
