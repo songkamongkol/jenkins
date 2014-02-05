@@ -67,9 +67,9 @@
 +//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl&#xd;
 &#xd;
 &#xd;
-+//SPT_HW/regression/pytest/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
-+//SPT_HW/regression/pytest/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
-+//SPT_HW/regression/pytest/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
++//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
++//TestCenter/${BRANCH_NAME}/build/il/testframework/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
 &#xd;
 &#xd;
 +//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini&#xd;
