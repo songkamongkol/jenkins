@@ -103,7 +103,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -124,7 +124,7 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>hw_test_framework_idl2jar</project>
-      <filter>build/il/testframework/testexecuter/java.tar.gz</filter>
+      <filter>build/il/testframework/testexecuter/java.tar.gz, build/il/testframework/testexecuter/idl_tcl.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -148,6 +148,8 @@ cd build/il/testframework/testexecuter
 #./idltojar.sh
 
 tar -zxvf ./java.tar.gz
+
+tar -zxvf ./idl_tcl.tar.gz
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
