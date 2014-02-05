@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -109,7 +109,8 @@ cd build/il/testframework/testexecuter
 echo &quot;archive jar files&quot;
 
 tar -zcvf java.tar.gz ./java/
-</command>
+
+tar -zcvf idl_tcl.tar.gz *_[0-9].tcl</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -117,7 +118,7 @@ tar -zcvf java.tar.gz ./java/
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>build/il/testframework/testexecuter/java.tar.gz</artifacts>
+      <artifacts>build/il/testframework/testexecuter/java.tar.gz, build/il/testframework/testexecuter/idl_tcl.tar.gz</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
