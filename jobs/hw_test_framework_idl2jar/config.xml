@@ -33,7 +33,7 @@
 +//TestCenter/${BRANCH_NAME}/build/il/phxTclLib/...  //ws/build/il/phxTclLib/...&#xd;
 +//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/dmstart/*.idl  //ws/build/il/testframework/testcases/dmstart/*.idl&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/.../*.idl //ws/framework/.../*.idl&#xd;
-+//TestCenter/${BRANCH_NAME}/integration/content/.../*.idl //ws/content/.../*.idl&#xd;
++//TestCenter/${BRANCH_NAME}/content/.../*.idl //ws/content/.../*.idl&#xd;
 +//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/tools/scg/...  //ws/framework/tools/scg/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/tools/xcg/...  //ws/framework/tools/xcg/...&#xd;
@@ -68,7 +68,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
