@@ -103,7 +103,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -122,22 +122,33 @@
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>hw_test_framework_idl2jar</project>
+      <filter>build/il/testframework/testexecuter/java.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>echo generate idl
+      <command>#echo generate idl
 
-cd framework/tools/scg
+#cd framework/tools/scg
 
-python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFramework.xml
+#python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFramework.xml
 
-python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
+#python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo execute idltojar
+      <command>#echo execute idltojar
 
 cd build/il/testframework/testexecuter
 
-./idltojar.sh</command>
+#./idltojar.sh
+
+tar -zxvf ./java.tar.gz
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>cd build/il/testframework
