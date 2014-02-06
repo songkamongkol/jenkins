@@ -25,12 +25,12 @@ release_ccp&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_ID</name>
@@ -50,7 +50,7 @@ release_ccp&lt;br&gt;&#xd;
     <p4User>scmbuild</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}-${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//SCM/Scripts/ci_* //ws/Scripts/ci_*&#xd;
 +//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 -//TestCenter/*/sandbox/...&#xd;
@@ -60,15 +60,15 @@ release_ccp&lt;br&gt;&#xd;
 -//TestCenter/*/documents/...&#xd;
 -//TestCenter/*/schedules/...&#xd;
 -//TestCenter/*/regression/...&#xd;
--//TestCenter/*/dmcp/...&#xd;
--//TestCenter/*/scm/...&#xd;
 -//TestCenter/*/userdocauto/...&#xd;
 -//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
 -//TestCenter/*/Layer1/...&#xd;
 -//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...&#xd;
 -//TestCenter/*/framework/il/freebsd/sys/dev/digi/...&#xd;
--//TestCenter/*/framework/il/platform/scripts/chassis/i686/filesys/etc/...</projectPath>
+-//TestCenter/*/framework/il/platform/scripts/chassis/i686/filesys/etc/...&#xd;
+</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <p4Tool>p4</p4Tool>
@@ -105,10 +105,15 @@ release_ccp&lt;br&gt;&#xd;
   </scm>
   <assignedNode>spccalengec02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>00 18 * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
@@ -125,7 +130,7 @@ rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchang
       <filter>BLL_changelist_*.txt, UI_changelist_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed Regression</id>
+        <id>lastBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -134,7 +139,7 @@ rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchang
       <filter>*il_testmodule_contents*changelist_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release IL Build Passed on all platforms</id>
+        <id>lastBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -148,10 +153,11 @@ files = glob.glob(&quot;*il_testmodule_contents*changelist*.txt&quot;)
 changelistfile = files[0]
 changelist = re.sub(r&apos;.txt$&apos;, &quot;&quot;, changelistfile )
 changelist = re.sub(r&apos;il_testmodule_contents_changelist_&apos;, &quot;&quot;, changelist )
+build_number = os.environ[&apos;BUILD_NUMBER&apos;]
 print &quot;IL Changelist is &quot; + changelist
 il_changelist_file=&apos;IL_&apos; + changelist + &apos;.txt&apos;
 f = open(il_changelist_file, &apos;w&apos;)
-f.write(&quot;\nCHANGELIST=&quot; + changelist)
+f.write(&quot;\nCHANGELIST=&quot; + changelist + &quot; &quot; + build_number)
 f.close</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
@@ -188,7 +194,7 @@ exit /B 0</command>
               <properties>BLL_BUILD_NUMBER=${BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>release_bll_windows_packaging_new,release_bll_freebsd71_packaging,release_bll_freebsd63_packaging,release_il_centralboot_packaging,release_ccp_packaging-new,release_cts_windows_packaging,release_bll_linux_x64_packaging,release_cts_linux_packaging,release_bll_solaris_packaging,release_cts_solaris_packaging</projects>
+          <projects>release_bll_windows_packaging_new, release_bll_freebsd71_packaging, release_bll_freebsd63_packaging, release_il_centralboot_packaging, release_ccp_packaging-new, release_cts_windows_packaging, release_bll_linux_x64_packaging, release_cts_linux_packaging, release_bll_solaris_packaging, release_cts_solaris_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
