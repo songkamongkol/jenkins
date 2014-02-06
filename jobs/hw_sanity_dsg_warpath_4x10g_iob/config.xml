@@ -52,7 +52,7 @@
 //TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...&#xd;
 -//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt&#xd;
 &#xd;
-+//TestCenter/integration/framework/tools/xcg/... //ws/framework/tools/xcg/...&#xd;
++//TestCenter/${BRANCH_NAME}/framework/tools/xcg/... //ws/framework/tools/xcg/...&#xd;
 &#xd;
 +//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py&#xd;
 +//TestCenter/${BRANCH_NAME}/regression/run.py  //ws/build/il/testframework/testcases/run.py&#xd;
