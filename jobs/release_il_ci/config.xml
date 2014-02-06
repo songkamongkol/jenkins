@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -27,7 +27,7 @@
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
-    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 -//TestCenter/*/sandbox/...&#xd;
@@ -89,9 +89,9 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>bldmisclnx-01</assignedNode>
+  <assignedNode>ilpkg-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -101,13 +101,25 @@
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+
+export rev=`head -1 $WORKSPACE/framework/il/kernel/yocto/revision.hg`
+# --- sync the latest crosstools
+cd /export/crosstools
+p4 -u scmbuild -p perforce.spirentcom.com:1666 -c ilpkg-02 sync ...
+cd /export/crosstools/yocto-1.0
+sudo python install_yocto_crosstools.py -r $rev
+</command>
+    </hudson.tasks.Shell>
+  </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.BuildTrigger>
-      <childProjects>release_il_changeling_ci, release_il_chos2_ci, release_il_testmodule_contents_ci, release_il_changeling_all_ci, release_il_virtual_ci, release_il_vtc_ci, release_il_qemu_ci, release_il_chassisvm_ci</childProjects>
+      <childProjects>release_il_changeling_ci, release_il_chos2_ci, release_il_testmodule_contents_ci, release_il_changeling_all_ci, release_il_virtual_ci, release_il_vtc_ci, release_il_qemu_ci,release_il_chassisvm_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -117,7 +129,7 @@
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <join.JoinTrigger plugin="join@1.15">
       <joinProjects>release_il_ci_join</joinProjects>
@@ -141,7 +153,6 @@
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -157,7 +168,6 @@
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
         <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
@@ -173,7 +183,6 @@
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
       </configuredTriggers>
