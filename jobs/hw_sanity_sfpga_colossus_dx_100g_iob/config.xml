@@ -12,7 +12,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_VERSION</name>
           <description>Spirent TestCenter version to use for testing</description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.50</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
@@ -91,6 +91,7 @@
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
