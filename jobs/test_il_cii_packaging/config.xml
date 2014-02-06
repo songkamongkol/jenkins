@@ -27,20 +27,20 @@
     <hudson.tasks.Shell>
       <command>cd /home/spirent/integration
 
-build/il/scripts/phxbld -j16 changeling 
-build/il/scripts/phxbld -j16 changeling_raw 
-build/il/scripts/phxbld -j16 changeling_64 
-build/il/scripts/phxbld -j16 changeling_64_raw
+# build/il/scripts/phxbld -j16 changeling 
+# build/il/scripts/phxbld -j16 changeling_raw 
+# build/il/scripts/phxbld -j16 changeling_64 
+# build/il/scripts/phxbld -j16 changeling_64_raw
 
-build/il/scripts/phxbld -j8 chos2_yocto 
-build/il/scripts/phxbld -j8 controller3_yocto_yocto
+# build/il/scripts/phxbld -j8 chos2_yocto 
+# build/il/scripts/phxbld -j8 controller3_yocto_yocto
 
-build/il/scripts/phxbld -j32 testmodule_contents
+# build/il/scripts/phxbld -j32 testmodule_contents
 
-build/il/scripts/phxbld -j8 aonic 
-build/il/scripts/phxbld -j8 aonic_raw 
-build/il/scripts/phxbld -j8 aonic_64 
-build/il/scripts/phxbld -j8 aonic_64_raw 
+# build/il/scripts/phxbld -j8 aonic 
+# build/il/scripts/phxbld -j8 aonic_raw 
+# build/il/scripts/phxbld -j8 aonic_64 
+# build/il/scripts/phxbld -j8 aonic_64_raw 
 build/il/scripts/phxbld -j8 appliance_yocto_tardis 
 sudo rm $WORKSPACE/build/il/packages/fsimg/aonic-*
 build/il/scripts/phxbld -j8 appliance_yocto 
