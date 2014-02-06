@@ -19,7 +19,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
@@ -112,7 +112,7 @@ exit /B 0</command>
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, bll_idl_crc.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -135,7 +135,7 @@ exit /B 0</command>
       <filter>BLL_Linux_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -144,13 +144,7 @@ exit /B 0</command>
 mkdir regression\il_img\
 copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-release\build-latest\* regression\il_img
 
-fc bll_idl_crc.txt regression\il_img\il_idl_crc.txt 
-@echo off 
-IF ERRORLEVEL 1 goto different
-goto end
-:different
-echo IDL mismatch between BLL/IL.
-:end</command>
+python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME%</command>
