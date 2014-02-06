@@ -19,7 +19,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
@@ -103,12 +103,15 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.BatchFile>
+      <command>python regression\jenkins\detect_changelist.py</command>
+    </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_bll_windows_ci</project>
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, bll_idl_crc.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -137,7 +140,7 @@ exit /B 0</command>
       <filter>BLL_Linux_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -193,13 +196,7 @@ for file in fileList:
 print &apos;Done&apos;</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>fc bll_idl_crc.txt regression\il_img\il_idl_crc.txt 
-@echo off 
-IF ERRORLEVEL 1 goto different
-goto end
-:different
-echo IDL mismatch between BLL/IL.
-:end</command>
+      <command>python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>REM install BLL/IL
@@ -254,6 +251,30 @@ python regression\jenkins\removeResults.py --location %WORKSPACE%\regression</co
       <targets>regression/il_img/*.gz</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
+    <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
+      <groovyScript>import hudson.model.*
+
+if(manager.logContains(&quot;.*Aborting regression as.*&quot;)) {
+    manager.addWarningBadge(&quot;Gracefully Aborted&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
+    // manager.buildUnstable()
+    //manager.listener.logger.println(&quot;Marking build unstable&quot;) 
+    //manager.build.setResult(hudson.model.Result.UNSTABLE)
+   manager.build.@result = hudson.model.Result.UNSTABLE
+}
+
+if(manager.logContains(&quot;.*crc mismatch.*&quot;)) {
+    manager.addWarningBadge(&quot;Gracefully Aborted due to crc mismatch in BLL and IL components&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted due to crc mismatch between BLL and IL component&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
+    // manager.buildUnstable()
+    //manager.listener.logger.println(&quot;Marking build unstable&quot;) 
+    //manager.build.setResult(hudson.model.Result.UNSTABLE)
+   manager.build.@result = hudson.model.Result.UNSTABLE
+}
+
+</groovyScript>
+      <behavior>1</behavior>
+    </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
