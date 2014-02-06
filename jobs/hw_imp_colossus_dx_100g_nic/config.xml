@@ -67,7 +67,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -147,8 +147,7 @@ echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
-#echo &quot;launch_runs impl_1 -to_step write_bitstream&quot; &gt;&gt; myImp.tcl
-#echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;write_bitstream ./Vivado.runs/impl_1/ColossusDX_1x100G.bit&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
@@ -177,7 +176,7 @@ md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.bit*, *.log, *.rpt</includes>
+            <includes>*.bit*</includes>
             <basedir>Vivado/Vivado.runs/impl_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
@@ -218,6 +217,22 @@ md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
+      <entries>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+          <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
+          <basedir></basedir>
+          <excludes></excludes>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <flatten>true</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+      </entries>
+      <deployEvenBuildFail>true</deployEvenBuildFail>
+    </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>$DEFAULT_RECIPIENTS; alex.su@spirent.com</recipientList>
       <configuredTriggers>
