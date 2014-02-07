@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -51,9 +51,14 @@
 </description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description></description>
+          <defaultValue>4.40</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.14">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
       <activeProcessNames>
         <string>Release Build Passed Regression</string>
         <string>Release Build Passed on all OS</string>
@@ -66,7 +71,7 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
+    <projectPath>//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 -//TestCenter/*/Layer1/...&#xd;
 -//TestCenter/*/userdocauto/...&#xd;
 -//TestCenter/*/sandbox/...&#xd;
@@ -121,7 +126,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -165,7 +170,7 @@ import glob
 import shutil
 import re
 
-stc_maj_min_ver=&apos;4.38&apos;
+stc_maj_min_ver=os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]
 print &quot;\nIN:_run_update_ilversion_xml&quot;
 ilversion_xml_path = os.path.join(os.environ[&apos;WORKSPACE&apos;], &apos;framework&apos;, &apos;bll&apos;, &apos;core&apos;, &apos;install&apos;, &apos;release&apos;, &apos;ILVersion.xml&apos;)
 tmpfile = ilversion_xml_path + &quot;.new&quot;
@@ -243,7 +248,7 @@ rmdir /q /s pdb
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>c:\Python26\python.exe framework\tools\buildUtil\pw_build_tracker.py --build_dir=&quot;c:\jenkins\workspace\release_bll_windows_ci\bin\Release&quot;
-c:\Python26\python.exe common\idl\crc.py -f bll_idl_crc.txt</command>
+c:\Python26\python.exe common\idl\crc.py -f bll_idl_crc.txt --desc &quot;%JOB_NAME% %BUILD_NUMBER%&quot;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>if %BUILD_RUN_UNITTEST% == true (
