@@ -2218,7 +2218,7 @@
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
-        <host>ilbuild-test1.cal.ci.spirentcom.com</host>
+        <host>ilbuild-test5.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
       </launcher>
@@ -2229,7 +2229,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[87]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
