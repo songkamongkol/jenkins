@@ -21,7 +21,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -36,7 +36,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -50,7 +50,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
     <configVersion>1</configVersion>
     <p4User>scmbuild</p4User>
     <p4Passwd></p4Passwd>
-    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
 +//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
@@ -66,8 +66,6 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
 -//TestCenter/*/framework/ui/...&#xd;
 -//TestCenter/*/content/.../ui/...&#xd;
 -//TestCenter/*/.../bll/...&#xd;
--//TestCenter/*/dmcp/...&#xd;
--//TestCenter/*/scm/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
@@ -101,7 +99,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -137,8 +135,7 @@ fi</command>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
 echo $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
-echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties
-echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command>
+echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command># sync the latest cross compiler tool using a pre-defined p4 workspace 
@@ -204,30 +201,12 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_testm
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>false</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
-    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
-      <buildSteps>
-        <hudson.tasks.Shell>
-          <command># copy the build output to storage server
-export STORAGE_DIR=/mnt/builds/jenkins/il_testmodule_contents-$BRANCH_NAME/build-$P4_CHANGELIST/
-
-if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
-  mkdir -p $STORAGE_DIR
-fi
-
-cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
-cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
-</command>
-        </hudson.tasks.Shell>
-      </buildSteps>
-      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
-      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>scmteam@spirent.com</recipientList>
       <configuredTriggers>
@@ -258,6 +237,24 @@ cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command># copy the build output to storage server
+export STORAGE_DIR=/mnt/builds/jenkins/il_testmodule_contents-$BRANCH_NAME/build-$P4_CHANGELIST/
+
+if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
+  mkdir -p $STORAGE_DIR
+fi
+
+cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
+cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
+</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
