@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -33,7 +33,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SOURCE_OS</name>
@@ -110,7 +110,7 @@
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>ilpkg-01</assignedNode>
+  <assignedNode>ilbuild-14</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -139,17 +139,21 @@ rm -f $WORKSPACE/*.txt</command>
       <command>#!/bin/bash
 
 # -- setup build number and path based on the branch name
-if [ &quot;$BRANCH_NAME&quot; = &quot;4.37_rel&quot; ]; then
+if [ &quot;$BRANCH_NAME&quot; = &quot;release&quot; ]; then
+     export BRANCH_ID=&apos;6&apos;
+fi
+
+if [ &quot;$BRANCH_NAME&quot; = &quot;4.38_rel&quot; ]; then
      export BRANCH_ID=&apos;6&apos;
 fi
 
 
 # check if the build specified in the parameter exists
 export FULL_BUILD=${STC_MAJ_MIN_VERSION}.${BLL_BUILD_NUMBER}${BRANCH_ID}
-export aonic_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz
-export aonic_md5_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz.md5
-export c3_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz
-export c3_md5_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz.md5
+export aonic_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz
+export aonic_md5_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz.md5
+export c3_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz
+export c3_md5_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz.md5
 if [ -f $aonic_file ]; then
 echo &quot;Aonic file: $aonic_file&quot;
 else
@@ -185,7 +189,7 @@ gzip $WORKSPACE/framework/il/kernel/yocto/Install/usb_amara.img</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>somboon.ongkamongkol@spirent.com</recipientList>

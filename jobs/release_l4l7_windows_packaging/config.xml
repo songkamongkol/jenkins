@@ -22,7 +22,7 @@ Requires L drive to be mapped to \\filer\home\qabuild&lt;br&gt;</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -42,7 +42,7 @@ Requires L drive to be mapped to \\filer\home\qabuild&lt;br&gt;</description>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -141,10 +141,6 @@ if os.environ[&apos;BRANCH_NAME&apos;]==&apos;integration&apos;:
 if os.environ[&apos;BRANCH_NAME&apos;]==&apos;4.1x_rel&apos;:      
     branch_id=&quot;6&quot;  
 if os.environ[&apos;BRANCH_NAME&apos;]==&apos;release&apos;:      
-    branch_id=&quot;6&quot;
-if os.environ[&apos;BRANCH_NAME&apos;]==&apos;4.37_rel&apos;:      
-    branch_id=&quot;6&quot;  
-if os.environ[&apos;BRANCH_NAME&apos;]==&apos;4.38_rel&apos;:      
     branch_id=&quot;6&quot;  
 
 if os.environ[&apos;BLL_BUILD_NUMBER&apos;]==&apos;BAD_BUILD_NUMBER&apos;:      
@@ -187,6 +183,7 @@ else:
 
 
 
+
 </command>
     </hudson.plugins.python.Python>
   </builders>
@@ -197,28 +194,9 @@ else:
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>LAUNCH_BV =  YES
-BV_TYPE = Avalanche</properties>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-            <hudson.plugins.parameterizedtrigger.FileBuildParameters>
-              <propertiesFile>properties.txt</propertiesFile>
-              <failTriggerOnMissing>false</failTriggerOnMissing>
-            </hudson.plugins.parameterizedtrigger.FileBuildParameters>
-          </configs>
-          <projects>release_BV_Launch_one</projects>
-          <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>

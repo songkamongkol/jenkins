@@ -25,7 +25,7 @@ Wait 12 minutes&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -50,7 +50,7 @@ Wait 12 minutes&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version TODO: get this from a file</description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -243,7 +243,9 @@ cd Spirent_TestCenter_Application_FreeBSD63/
 # rm -r $WORKSPACE/Spirent_TestCenter_Application_FreeBSD63/*
 chmod -R a+rw $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
 cp -r $WORKSPACE/$BUILD_OUTPUT_DIR/API $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
-cp -r $WORKSPACE/$BUILD_OUTPUT_DIR/HelpInfo $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
+# cp -r $WORKSPACE/$BUILD_OUTPUT_DIR/HelpInfo $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
+cp $WORKSPACE/$BUILD_OUTPUT_DIR/HelpInfo.zip $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
+cp $WORKSPACE/$BUILD_OUTPUT_DIR/Resource.zip $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
 cp -r $WORKSPACE/$BUILD_OUTPUT_DIR/Templates $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
 cp -r $WORKSPACE/$BUILD_OUTPUT_DIR/Model $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
 cp -f $WORKSPACE/framework/bll/core/install/release/ILVersion.xml $WORKSPACE/Spirent_TestCenter_$STC_MAJ_MIN_VERSION/Spirent_TestCenter_Application_FreeBSD63
@@ -291,7 +293,7 @@ echo &quot;Finished creating tar files&quot;</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
@@ -310,7 +312,6 @@ echo &quot;Finished creating tar files&quot;</command>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
@@ -334,7 +335,7 @@ echo &quot;Finished creating tar files&quot;</command>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
             <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
           </configs>
-          <projects>release_ftp_tarball_packaging</projects>
+          <projects>release_ftp_tarball_packaging, </projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

@@ -22,7 +22,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -37,7 +37,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SOURCE_OS</name>
@@ -114,12 +114,12 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>ilpkg-01</assignedNode>
+  <assignedNode>ilpkg-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -212,27 +212,27 @@ echo &quot;Finished copying il_vtc files&quot;
 rm -f /mnt/builds/jenkins/il_vtc-${BRANCH_NAME}_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>##!/bin/bash
-#
-#if [ -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_promoting.txt ]; then
-#echo &quot;Promotion is in progress, wait for 5 minutes&quot;
-#sleep 300
-#else
-#echo &quot;No promotion is in progress, proceeding with packaging&quot;
-#fi
-#
-#echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_packaging.txt
-#echo Copying il_chassisvm build artifacts from /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/
-#ls -algh /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/*.txt
-#
-## chassisvm files need to be of a certain name per Ramana&apos;s request
-#export fixtargettgz=testcenter_c3_vm-4.30.0423-1.1.tgz
-#export fulltgzname=`ls /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/testcenter_c3*.tgz`
-#export tgzname=`basename $fulltgzname`
-#cp -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/$tgzname $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/$fixtargettgz
-#cp -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/${tgzname}.md5 $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/${fixtargettgz}.md5
-#echo &quot;Finished copying il_chassisvm files&quot;
-#rm -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_packaging.txt
+      <command>#!/bin/bash
+
+if [ -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_promoting.txt ]; then
+echo &quot;Promotion is in progress, wait for 5 minutes&quot;
+sleep 300
+else
+echo &quot;No promotion is in progress, proceeding with packaging&quot;
+fi
+
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_packaging.txt
+echo Copying il_chassisvm build artifacts from /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/
+ls -algh /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/*.txt
+
+# chassisvm files need to be of a certain name per Ramana&apos;s request
+export fixtargettgz=testcenter_c3_vm-4.30.0423-1.1.tgz
+export fulltgzname=`ls /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/testcenter_c3*.tgz`
+export tgzname=`basename $fulltgzname`
+cp -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/$tgzname $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/$fixtargettgz
+cp -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}/build-packaging/fsimg/${tgzname}.md5 $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/${fixtargettgz}.md5
+echo &quot;Finished copying il_chassisvm files&quot;
+rm -f /mnt/builds/jenkins/il_chassisvm-${BRANCH_NAME}_packaging.txt
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -287,8 +287,16 @@ cp -f $WORKSPACE/tmos-${filever}.zip $WORKSPACE/build/il/packages/bundle/tmosvtc
 rm -f $WORKSPACE/tmos-*.zip</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
+      <command>echo &quot;Copying chassisvm files ...&quot; 
+rm -rf $WORKSPACE/build/il/packages/chassisvm 
+mkdir $WORKSPACE/build/il/packages/chassisvm 
+cp $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/testcenter_c3* $WORKSPACE/build/il/packages/chassisvm 
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
       <command>echo &quot;Creating controller3 fsimg file to be use for Amara recovery USB disk ...&quot;
 ln -s $WORKSPACE/ChassisImage/chassis.img.gz $WORKSPACE/build/il/packages/rawimg/chassis.img.gz
+# sudo $WORKSPACE/build/il/scripts/phxbld -j32 c3_yocto
 sudo $WORKSPACE/build/il/scripts/phxbld -j32 amara_yocto</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -309,7 +317,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>$DEFAULT_RECIPIENTS</recipientList>
@@ -327,7 +335,6 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
@@ -350,7 +357,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_il_ftp_centralboot_packaging</projects>
+          <projects>release_il_ftp_centralboot_packaging, </projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

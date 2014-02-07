@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -58,10 +58,11 @@
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//SCM/Installer/tar2rpm/... //ws/...&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -119,12 +120,6 @@ if [ &quot;$BRANCH_NAME&quot; = &quot;release&quot; ]; then
      export BRANCH_ID=&apos;6&apos;
 fi
 
-# -- setup build number and path based on the branch name
-if [ &quot;$BRANCH_NAME&quot; = &quot;4.38_rel&quot; ]; then
-     export BRANCH_ID=&apos;6&apos;
-fi
-
-
 # check if the build specified in the parameter exists
 export FULL_BUILD=${STC_MAJ_MIN_VERSION}.${BLL_BUILD_NUMBER}${BRANCH_ID}
 export tar_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/GUI_BLL/${FULL_BUILD}/tar/Spirent_TestCenter_Auto_Linux_${STC_MAJ_MIN_VERSION}.tar.gz
@@ -159,7 +154,7 @@ scp stc-${STC_MAJ_MIN_VERSION}-linux.x86_64.rpm scm@martin.spirentcom.com:/expor
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
@@ -178,7 +173,6 @@ scp stc-${STC_MAJ_MIN_VERSION}-linux.x86_64.rpm scm@martin.spirentcom.com:/expor
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>

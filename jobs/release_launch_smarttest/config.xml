@@ -21,7 +21,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -29,7 +29,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>spccalengec06</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
@@ -75,7 +75,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
         <configs>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs class="empty-list"/>
-            <projects>STR-Nightly-Release,STR-QTP-Release,STR-Admin-Release,STR-QEMU-Release,release-nightly-regression-jenkins2</projects>
+            <projects>STR-Nightly-Release,STR-QTP-Release,STR-Admin-Release,STR-QEMU-Release,release-nightly-regression-jenkins2,STR-AVNext,STR-AVCMDR-Nightly-Release,STR-Nightly-Amara-Admin</projects>
             <condition>ALWAYS</condition>
             <triggerWithNoParameters>false</triggerWithNoParameters>
             <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
@@ -124,7 +124,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
         <configs>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs class="empty-list"/>
-            <projects>STR-Weekend-Release,STR-QTP-Release,STR-Admin-Weekend-Release,release-nightly-regression-jenkins2</projects>
+            <projects>STR-Weekend-Release,STR-QTP-Release,STR-Admin-Weekend-Release,release-nightly-regression-jenkins2,STR-AVNext,STR-AVCMDR-Nightly-Release,STR-Nightly-Amara-Admin</projects>
             <condition>ALWAYS</condition>
             <triggerWithNoParameters>false</triggerWithNoParameters>
             <buildAllNodesWithLabel>false</buildAllNodesWithLabel>

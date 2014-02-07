@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.38_rel</defaultValue>
+          <defaultValue>4.40_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -33,7 +33,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.38</defaultValue>
+          <defaultValue>4.40</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -47,7 +47,7 @@
     <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 //SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
 //SCM/*${STC_MAJ_MIN_VERSION}*.ver //ws/*${STC_MAJ_MIN_VERSION}*.ver&#xd;
-//SCM/Installer/ProvManager_4.38_rel/... //ws/DMCP_Installer/...&#xd;
+//SCM/Installer/ProvManager/... //ws/DMCP_Installer/...&#xd;
 -//TestCenter/*/Layer1/...&#xd;
 -//TestCenter/*/userdocauto/...&#xd;
 -//TestCenter/*/sandbox/...&#xd;
@@ -134,12 +134,11 @@
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-scons -j 12 -f SConstruct.bll debug=0 target=bll-win32-coreonly
-</command>
+scons -j 12 -f SConstruct.bll debug=0 target=bll-win32-coreonly</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new
+SET STC_BUILD_ROOT=D:\dev\jenkins\workspace\release_ccp_packaging-new
 scons -j 12 -f SConstruct.AutomationClient.Only.Gen.bll</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
@@ -278,7 +277,7 @@ rem  perl %WORKSPACE%\Build_Scripts\STC_Build_Scripts\ci_packageinstaller.pl %WO
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.tasks.Mailer plugin="mailer@1.5">
