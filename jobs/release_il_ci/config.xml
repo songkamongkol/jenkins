@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -108,8 +108,8 @@ export rev=`head -1 $WORKSPACE/framework/il/kernel/yocto/revision.hg`
 # --- sync the latest crosstools
 cd /export/crosstools
 # p4 -u scmbuild -p perforce.spirentcom.com:1666 -c bldmisclnx-01 sync ...
-cd /export/crosstools/yocto-1.0
-sudo python install_yocto_crosstools.py -r $rev
+# cd /export/crosstools/yocto-1.0
+# sudo python install_yocto_crosstools.py -r $rev
 </command>
     </hudson.tasks.Shell>
   </builders>
