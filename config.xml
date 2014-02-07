@@ -2242,7 +2242,7 @@
     </slave>
     <slave>
       <name>fpga-imp-00</name>
-      <description>Linux CentOS 6.5 (64-bit)</description>
+      <description>Xilinx FPGA implementation runner</description>
       <remoteFS>/tmp</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
@@ -2252,7 +2252,7 @@
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
       </launcher>
-      <label>Linux CentOS6.5 x86_64</label>
+      <label>Linux x86_64 CentOS6.5 Xilinx</label>
       <nodeProperties/>
       <userId>ASu</userId>
     </slave>
