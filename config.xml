@@ -858,7 +858,7 @@
     <slave>
       <name>CIReg-06</name>
       <description></description>
-      <remoteFS>c:\jenkins</remoteFS>
+      <remoteFS>c:\jenkins-tc</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
