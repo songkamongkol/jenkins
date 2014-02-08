@@ -2240,6 +2240,18 @@
       <nodeProperties/>
       <userId>ASu</userId>
     </slave>
+    <slave>
+      <name>bllbldwin-v02</name>
+      <description></description>
+      <remoteFS>c:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
