@@ -29,7 +29,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>spccalengec06</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
