@@ -24,7 +24,7 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
           <description>stc install dir</description>
-          <defaultValue>C:\jenkins\workspace\release_regression_ci\stc_install_dir</defaultValue>
+          <defaultValue>C:\jenkins-tc\workspace\release_regression_ci\stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_EXECUTOR</name>
@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
