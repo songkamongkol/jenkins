@@ -880,19 +880,11 @@
     <slave>
       <name>CIReg-07</name>
       <description></description>
-      <remoteFS>c:\jenkins</remoteFS>
+      <remoteFS>c:\jenkins-tc</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
-        <userName>spirent</userName>
-        <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
-        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
-          <userName>CIReg-07\spirent</userName>
-          <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
-        </account>
-        <host>CIReg-07.cal.ci.spirentcom.com</host>
-      </launcher>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
       <label>CIRegressionAgents</label>
       <nodeProperties/>
       <userId>mhall</userId>
