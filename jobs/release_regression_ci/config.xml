@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -145,7 +145,7 @@ exit /B 0</command>
     <hudson.tasks.BatchFile>
       <command>rmdir /q /s regression\il_img
 mkdir regression\il_img\
-copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-release\build-latest\* regression\il_img
+copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-4.40_rel\build-latest\* regression\il_img
 
 python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt 
 </command>
