@@ -121,6 +121,10 @@ DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
+if [ ${P4_CHANGELIST} &gt; ${LAST_CHANGE} ] ; then
+    LAST_CHANGE=${P4_CHANGELIST}
+fi
+
 echo &quot;Update VERSION_ColossusDX_1x100G.v&quot;
 cd ${WORKSPACE}
 p4 edit SourceCode/include/VERSION_ColossusDX_1x100G.v
