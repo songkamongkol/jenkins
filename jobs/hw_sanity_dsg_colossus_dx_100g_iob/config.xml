@@ -48,29 +48,18 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>//TestCenter/${BRANCH_NAME}/build/il/...  //ws/build/il/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/idl/... //ws/framework/idl/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/*/idl/...  //ws/content/*/idl/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/*/*/idl/...  //ws/content/*/*/idl/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/def/... //ws/framework/def/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/*/def/...  //ws/content/*/def/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/*/*/def/...  //ws/content/*/*/def/...&#xd;
-//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/scg/...  //ws/framework/tools/scg/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/xcg/...  //ws/framework/tools/xcg/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/xsdValidator/... //ws/framework/tools/xsdValidator/...&#xd;
-&#xd;
+    <projectPath>//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
+//TestCenter/${BRANCH_NAME}/build/il/phxTclLib/... //ws/build/il/phxTclLib/...&#xd;
+//TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...&#xd;
 -//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt&#xd;
+&#xd;
++//TestCenter/${BRANCH_NAME}/framework/tools/xcg/... //ws/framework/tools/xcg/...&#xd;
 &#xd;
 +//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py&#xd;
 +//TestCenter/${BRANCH_NAME}/regression/run.py  //ws/build/il/testframework/testcases/run.py&#xd;
 +//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl&#xd;
-&#xd;
-&#xd;
 +//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
 +//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
-+//TestCenter/${BRANCH_NAME}/build/il/testframework/tagger.py  //ws/build/il/testframework/tagger.py&#xd;
-&#xd;
 &#xd;
 +//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini&#xd;
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
@@ -124,22 +113,34 @@
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>hw_test_framework_idl2jar</project>
+      <filter>build/il/testframework/testexecuter/java.tar.gz, build/il/testframework/testexecuter/idl_tcl.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>echo generate idl
+      <command>#echo generate idl
 
-cd framework/tools/scg
+#cd framework/tools/scg
 
-python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFramework.xml
+#python ./scg.py --module il ../../../framework/def ../../../framework/def/stcFramework.xml
 
-python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
+#python ./scg.py --module il ../../../framework/def ../../../framework/def/stcCore.xml
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo execute idltojar
+      <command>#echo execute idltojar
 
 cd build/il/testframework/testexecuter
 
-./idltojar.sh</command>
+#./idltojar.sh
+
+tar -zxvf ./java.tar.gz
+
+tar -zxvf ./idl_tcl.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>cd build/il/testframework
