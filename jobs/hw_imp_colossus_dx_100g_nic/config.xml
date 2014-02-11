@@ -309,6 +309,11 @@ rm -rf ${WORKSPACE}/*</command>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+    <hudson.tasks.Mailer plugin="mailer@1.5">
+      <recipients></recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
