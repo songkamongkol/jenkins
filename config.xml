@@ -2701,6 +2701,7 @@
             <string>release_bll_windows_packaging_new</string>
             <string>release_ccp_packaging-new</string>
             <string>release_launch_smarttest</string>
+            <string>release_launch_smarttest_remote</string>
             <string>release_reset_tag_file</string>
             <string>release_set_status</string>
           </jobNames>
