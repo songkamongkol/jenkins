@@ -103,7 +103,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -137,7 +137,7 @@ scons -j 12 -f SConstruct.bll debug=0 target=bll-win32-coreonly</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-SET STC_BUILD_ROOT=D:\dev\jenkins\workspace\release_ccp_packaging-new
+SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new
 scons -j 12 -f SConstruct.AutomationClient.Only.Gen.bll</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
