@@ -88,7 +88,7 @@
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>rawimage.map, *changelist*.txt</targets>
-      <recordBuildArtifacts>false</recordBuildArtifacts>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>scmteam@spirent.com</recipientList>
