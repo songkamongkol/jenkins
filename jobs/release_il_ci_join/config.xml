@@ -64,18 +64,17 @@
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
-      <project>release_il_chassisvm_ci</project>
-      <filter>*il_chassisvm_*changelist_*.txt</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
-      <flatten>true</flatten>
-    </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
       <project>release_il_testmodule_contents_ci</project>
       <filter>*il_testmodule_contents*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+      <project>release_il_chassisvm_ci</project>
+      <filter>*il_chassisvm_*changelist_*.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;IL build complete on all platforms&quot;</command>
@@ -89,7 +88,7 @@
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>rawimage.map, *changelist*.txt</targets>
-      <recordBuildArtifacts>false</recordBuildArtifacts>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
       <recipientList>scmteam@spirent.com</recipientList>
