@@ -78,7 +78,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -213,7 +213,7 @@ python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
 python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=C:/jenkins-tc/workspace/release_regression_changeling_ci/stc_install_dir  -m &apos;%FILTER%&apos; -n 3 --archive-tmpdir --keep-all-tmpdir --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;BLINK\&quot;:[(\&quot;//172.20.64.4/2/1\&quot;, \&quot;//172.20.64.4/2/2\&quot;),(\&quot;//172.20.64.4/2/3\&quot;, \&quot;//172.20.64.4/2/4\&quot;), (\&quot;//172.20.64.4/2/7\&quot;, \&quot;//172.20.64.4/2/8\&quot;)], \&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;
 
-REM hon regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=C:/jenkins/workspace/release_regression_changeling_ci/stc_install_dir  -m &apos;%FILTER%&apos; -n 3 --archive-tmpdir --keep-all-tmpdir --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;</command>
+REM hon regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=C:/jenkins-tc/workspace/release_regression_changeling_ci/stc_install_dir  -m &apos;%FILTER%&apos; -n 3 --archive-tmpdir --keep-all-tmpdir --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python regression\jenkins\junitEmail.py --junit result.junit.xml --output-file email.properties
