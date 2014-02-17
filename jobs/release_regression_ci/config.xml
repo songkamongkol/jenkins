@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -153,14 +153,14 @@ python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regres
     <hudson.tasks.BatchFile>
       <command>python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME%</command>
+python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME%_%BRANCH_NAME%</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>tclsh regression\util\unittest\all.tcl
 
 python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=C:/jenkins-tc/workspace/release_regression_ci/stc_install_dir -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos;</command>
+python regression/run.py --vm-user-id=%JOB_NAME%_%BRANCH_NAME% --stc-pkg-dir=C:/jenkins-tc/workspace/release_regression_ci/stc_install_dir -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos;</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python regression\jenkins\junitEmail.py --junit result.junit.xml --output-file email.properties
