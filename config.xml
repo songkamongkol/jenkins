@@ -888,7 +888,7 @@
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label></label>
+      <label>CIRegressionAgents</label>
       <nodeProperties/>
       <userId>mhall</userId>
     </slave>
