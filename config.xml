@@ -2651,13 +2651,13 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
             <string>release_bll_win_pkg_webhelp</string>
-            <string>release_bll_windows_packaging_fixed_4.37</string>
             <string>release_bll_windows_packaging_new</string>
             <string>release_ccp_packaging-new</string>
             <string>release_launch_smarttest</string>
             <string>release_launch_smarttest_remote</string>
             <string>release_reset_tag_file</string>
             <string>release_set_status</string>
+            <string>release_win_bll_copy_to_filer</string>
           </jobNames>
           <jobFilters/>
           <columns>
