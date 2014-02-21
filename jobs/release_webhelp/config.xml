@@ -21,7 +21,7 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -80,10 +80,15 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
   </scm>
   <assignedNode>spccalengec02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>5 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
