@@ -84,6 +84,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
 +//TestCenter/${BRANCH_NAME}/build/il/configs/scripts/... //ws/build/il/configs/scripts/...&#xd;
 </projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -126,7 +127,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
   </scm>
   <assignedNode>uibldwin-03</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -164,7 +165,10 @@ exit /B 0</command>
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv /rebuild Release TestCenter.UI.Gen.sln</command>
+      <command>pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+call vcvarsall.bat x86
+popd
+msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Release</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd bin\Release
