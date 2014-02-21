@@ -164,7 +164,10 @@ exit /B 0</command>
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv /rebuild Release TestCenter.UI.Gen.sln</command>
+      <command>pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+call vcvarsall.bat x86
+popd
+msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Release</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd bin\Release
