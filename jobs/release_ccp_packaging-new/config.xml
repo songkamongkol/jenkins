@@ -23,7 +23,7 @@
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
           <description>clean build</description>
-          <defaultValue>false</defaultValue>
+          <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -141,7 +141,11 @@ SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new
 scons -j 12 -f SConstruct.AutomationClient.Only.Gen.bll</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv Core.UI.Gen.sln /build Release
+      <command>rem devenv Core.UI.Gen.sln /build Release
+pushd D:\Program Files (x86)\Microsoft Visual Studio 10.0\vc
+call vcvarsall.bat x86
+popd
+msbuild.exe Core.UI.Gen.sln /t:build /p:Configuration=Release
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
