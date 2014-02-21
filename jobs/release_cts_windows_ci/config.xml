@@ -62,6 +62,7 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 -//TestCenter/${BRANCH_NAME}/other/...&#xd;
+-//TestCenter/${BRANCH_NAME}/common/lib/boost_1_34_0/...&#xd;
 -//TestCenter/${BRANCH_NAME}/documents/...&#xd;
 -//TestCenter/${BRANCH_NAME}/schedules/...&#xd;
 -//TestCenter/${BRANCH_NAME}/scm/...&#xd;
@@ -148,7 +149,11 @@ scons -j 4 -f SConstruct.bll debug=0 target=bll-win32
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv /build Release TestCenter.UI.Gen.sln</command>
+      <command>rem devenv /build Release TestCenter.UI.Gen.sln
+pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+call vcvarsall.bat x86
+popd
+msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Release</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>rem devenv /build Release CTS.sln
@@ -156,7 +161,11 @@ scons -j 4 -f SConstruct.bll debug=0 target=cts-bll-win32
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv /build Release CTS.UI.Gen.sln</command>
+      <command>rem devenv /build Release CTS.UI.Gen.sln
+pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+call vcvarsall.bat x86
+popd
+msbuild.exe  CTS.UI.Gen.sln /t:build /p:Configuration=Release</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd bin\Release
