@@ -114,7 +114,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -153,8 +153,12 @@ exit /B 0</command>
       <command>python genSln.py</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>devenv /rebuild Debug TestCenter.UI.Gen.sln
-rem C:\Windows\Microsoft.NET\Framework\v2.0.50727\msbuild.exe TestCenter.UI.Gen.sln /t:rebuild /p:Configuration=Debug</command>
+      <command>rem devenv /rebuild Debug TestCenter.UI.Gen.sln
+rem C:\Windows\Microsoft.NET\Framework\v2.0.50727\msbuild.exe TestCenter.UI.Gen.sln /t:rebuild /p:Configuration=Debug
+pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+call vcvarsall.bat x86
+popd
+msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Debug</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>del TestCenter*.tar.gz
