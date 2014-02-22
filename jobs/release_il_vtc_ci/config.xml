@@ -114,7 +114,7 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -264,7 +264,7 @@ fi
 
 cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
 cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
-cp $WORKSPACE/build/il/packages/rawimg/vtc.vmdk*.zip $STORAGE_DIR/rawimg
+cp $WORKSPACE/build/il/packages/rawimg/vtc*vmdk*.zip $STORAGE_DIR/rawimg
 </command>
         </hudson.tasks.Shell>
       </buildSteps>
