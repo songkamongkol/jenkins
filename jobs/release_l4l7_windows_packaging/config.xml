@@ -113,7 +113,7 @@ Requires L drive to be mapped to \\filer\home\qabuild&lt;br&gt;</description>
   </scm>
   <assignedNode>spccalengec02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
