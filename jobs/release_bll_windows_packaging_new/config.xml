@@ -123,7 +123,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -176,7 +176,7 @@ python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_vers
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>copy \\storage.cal.ci.spirentcom.com\isos\tmp\*.tar.gz . /y 
+      <command>rem copy \\storage.cal.ci.spirentcom.com\isos\tmp\*.tar.gz . /y 
 
 rem -- echo extracting ResultsReporter.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_RESULTS_REPORTER_WINDOWS%
 rem -- python framework\tools\buildUtil\package.py --install ResultsReporter.tar.gz --directory=framework/ui/resultsanalysis/dist
