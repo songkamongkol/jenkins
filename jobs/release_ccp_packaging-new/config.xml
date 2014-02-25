@@ -69,12 +69,10 @@
 -//TestCenter/${BRANCH_NAME}/build/il/cli/... //ws/build/il/cli/...&#xd;
 -//TestCenter/${BRANCH_NAME}/build/il/testframework/... //ws/build/il/testframework/...&#xd;
 -//TestCenter/*/build/il/version&#xd;
--//TestCenter/*/.../ui/...&#xd;
 +//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/ui/automation/... //ws/framework/ui/automation/...&#xd;
 +//TestCenter/${BRANCH_NAME}/bin/Release/ProvisionManagerHelp/WebHelp/...  //ws/bin/Release/ProvisionManagerHelp/WebHelp/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -104,7 +102,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -133,39 +131,39 @@
       <command>genSln.bat</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
+      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%&#xd;
 scons -j 12 -f SConstruct.bll debug=0 target=bll-win32-coreonly</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new
+      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%&#xd;
+SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new&#xd;
 scons -j 12 -f SConstruct.AutomationClient.Only.Gen.bll</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>rem devenv Core.UI.Gen.sln /build Release
-pushd D:\Program Files (x86)\Microsoft Visual Studio 10.0\vc
-call vcvarsall.bat x86
-popd
-msbuild.exe Core.UI.Gen.sln /t:build /p:Configuration=Release
+      <command>rem devenv Core.UI.Gen.sln /build Release&#xd;
+pushd D:\Program Files (x86)\Microsoft Visual Studio 10.0\vc&#xd;
+call vcvarsall.bat x86&#xd;
+popd&#xd;
+msbuild.exe Core.UI.Gen.sln /t:build /p:Configuration=Release&#xd;
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-set STC_SRC_PATH=%WORKSPACE%
-set STC_REL_PATH=%WORKSPACE%\bin\Release
-rd /s /q CCPApplication
+      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%&#xd;
+set STC_SRC_PATH=%WORKSPACE%&#xd;
+set STC_REL_PATH=%WORKSPACE%\bin\Release&#xd;
+rd /s /q CCPApplication&#xd;
 hg clone http://mercurial.cal.ci.spirentcom.com/CCPApplication/</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-set STC_SRC_PATH=%WORKSPACE%
-set STC_REL_PATH=%WORKSPACE%\bin\Release
-cd CCPApplication
-dir media\scripts\provmanager.js
-echo &quot;c:\Python27\Scripts\scons.bat&quot;
-cmd /k c:\Python27\Scripts\scons.bat
-cd provmanager
-echo &quot;set_version.bat %STC_MAJ_MIN_VERSION%&quot;
+      <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%&#xd;
+set STC_SRC_PATH=%WORKSPACE%&#xd;
+set STC_REL_PATH=%WORKSPACE%\bin\Release&#xd;
+cd CCPApplication&#xd;
+dir media\scripts\provmanager.js&#xd;
+echo &quot;c:\Python27\Scripts\scons.bat&quot;&#xd;
+cmd /k c:\Python27\Scripts\scons.bat&#xd;
+cd provmanager&#xd;
+echo &quot;set_version.bat %STC_MAJ_MIN_VERSION%&quot;&#xd;
 set_version.bat %STC_MAJ_MIN_VERSION%</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
@@ -176,101 +174,101 @@ set_version.bat %STC_MAJ_MIN_VERSION%</command>
       <flatten>true</flatten>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os 
-import sys
-import subprocess
-import shutil
-
-
-
-# retrieving the current STC build number
-# pattern=&apos;STC_Build=&apos;
-branchID=&apos;6&apos;
-# fin = open(os.environ[&apos;WORKSPACE&apos;] + &quot;/stc&quot;+os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]+&quot;.ver&quot;, &quot;r&quot;)
-# for line in fin.readlines():
-#      if pattern in line:      
-#          print line
-#          line = line.replace(pattern,&apos;&apos;)
-#          buildno = line.rstrip()
-#fin.close
-stc_build_num_raw = os.environ[&apos;BLL_BUILD_NUMBER&apos;] + branchID
-stc_build_num = stc_build_num_raw.zfill(4)
-print &quot;Build Number is &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num
-os.environ[&apos;STC_BUILD_NUMBER&apos;] = stc_build_num
-fullnum = stc_build_num + &quot;0000&quot;
-print &quot;Full version number is &quot; +  fullnum
-
-# call setver.py for STC files in CCP
-os.system(&quot;cd&quot;)
-os.chdir(&quot;CCPApplication\\provmanager\stc&quot;)
-print &quot;python ..\\..\\..\\framework\\tools\\buildUtil\\setver.py &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot; &quot; +  fullnum
-#os.system(&quot;python ..\\..\\..\\framework\\tools\\buildUtil\\setver.py os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] &quot; + fullnum);
-# trying out using subprocess
-sys.stdout.flush()
-retcode = subprocess.call([&quot;Python.exe&quot;, &quot;..\\..\\..\\framework\\tools\\buildUtil\\setver.py&quot;, os.environ[&apos;STC_MAJ_MIN_VERSION&apos;], fullnum])
-print &quot;setver returned: &quot;+str(retcode)
-
-# generate installer for the build
-ws = os.environ[&apos;WORKSPACE&apos;]
-os.chdir(ws)
-ci_installer_cmd = &quot;perl &quot; + ws + &quot;/Build_Scripts/STC_Build_Scripts/ci_packageinstaller.pl &quot; + ws +  &quot; &quot; + ws + &quot;/Installer&quot; + &quot; &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num + &quot; PACKAGE_DMCP &quot; + ws
-ci_installer_cmd.replace(&apos;/&apos;, &apos;\\&apos;)
-print &quot;Executing &quot; + ci_installer_cmd
-sys.stdout.flush()
-os.system(ci_installer_cmd)
-
-# copy the final installer to \\martin and \\spccafs03
-ws.replace(&apos;/&apos;, &apos;\\&apos;)
-ccp_installer = ws + &quot;\\Installer\\Cloud Core Provisioning.exe&quot;
-martin_dir = &quot;\\\\martin\\archive\\pv\\TestCenter\\&quot; +  os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]  + &quot;\\Engineering_Builds\\GUI_BLL\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num
-fs03_dir = &quot;\\\\spccalfs03\\development\\scm\\release\\STC\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]  + &quot;\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num
-
-# make sure target directory exists before copying file
-if os.path.exists(martin_dir):
-        print &quot;srcdir: &quot;, martin_dir, &quot; exists&quot;
-else:
-        try:
-            print &quot;creating: &quot;, martin_dir
-            sys.stdout.flush()
-            pipe = subprocess.Popen([&quot;cmd&quot;, &quot;/c&quot;, &quot;mkdir&quot;, martin_dir], stdin=subprocess.PIPE)
-            pipe.wait()
-            pipe.stdin.close()
-        except IOError, e:
-            print &quot;Unable to create directory. %s&quot; % e    
-   
-print &quot;Copying &quot; + ccp_installer +  &quot; to &quot; + martin_dir
-shutil.copy(ccp_installer, martin_dir)
-
-# make sure target directory exists before copying file
-if os.path.exists(fs03_dir):
-        print &quot;srcdir: &quot;, fs03_dir, &quot; exists&quot;
-else:
-        try:
-            print &quot;creating: &quot;, fs03_dir
-            sys.stdout.flush()
-            pipe = subprocess.Popen([&quot;cmd&quot;, &quot;/c&quot;, &quot;mkdir&quot;, fs03_dir], stdin=subprocess.PIPE)
-            pipe.wait()
-            pipe.stdin.close()
-        except IOError, e:
-            print &quot;Unable to create directory. %s&quot; % e
-
-print &quot;Copying &quot; + ccp_installer + &quot; to &quot; + fs03_dir
-shutil.copy(ccp_installer, fs03_dir )
-
+      <command>import os &#xd;
+import sys&#xd;
+import subprocess&#xd;
+import shutil&#xd;
+&#xd;
+&#xd;
+&#xd;
+# retrieving the current STC build number&#xd;
+# pattern=&apos;STC_Build=&apos;&#xd;
+branchID=&apos;6&apos;&#xd;
+# fin = open(os.environ[&apos;WORKSPACE&apos;] + &quot;/stc&quot;+os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]+&quot;.ver&quot;, &quot;r&quot;)&#xd;
+# for line in fin.readlines():&#xd;
+#      if pattern in line:      &#xd;
+#          print line&#xd;
+#          line = line.replace(pattern,&apos;&apos;)&#xd;
+#          buildno = line.rstrip()&#xd;
+#fin.close&#xd;
+stc_build_num_raw = os.environ[&apos;BLL_BUILD_NUMBER&apos;] + branchID&#xd;
+stc_build_num = stc_build_num_raw.zfill(4)&#xd;
+print &quot;Build Number is &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num&#xd;
+os.environ[&apos;STC_BUILD_NUMBER&apos;] = stc_build_num&#xd;
+fullnum = stc_build_num + &quot;0000&quot;&#xd;
+print &quot;Full version number is &quot; +  fullnum&#xd;
+&#xd;
+# call setver.py for STC files in CCP&#xd;
+os.system(&quot;cd&quot;)&#xd;
+os.chdir(&quot;CCPApplication\\provmanager\stc&quot;)&#xd;
+print &quot;python ..\\..\\..\\framework\\tools\\buildUtil\\setver.py &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot; &quot; +  fullnum&#xd;
+#os.system(&quot;python ..\\..\\..\\framework\\tools\\buildUtil\\setver.py os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] &quot; + fullnum);&#xd;
+# trying out using subprocess&#xd;
+sys.stdout.flush()&#xd;
+retcode = subprocess.call([&quot;Python.exe&quot;, &quot;..\\..\\..\\framework\\tools\\buildUtil\\setver.py&quot;, os.environ[&apos;STC_MAJ_MIN_VERSION&apos;], fullnum])&#xd;
+print &quot;setver returned: &quot;+str(retcode)&#xd;
+&#xd;
+# generate installer for the build&#xd;
+ws = os.environ[&apos;WORKSPACE&apos;]&#xd;
+os.chdir(ws)&#xd;
+ci_installer_cmd = &quot;perl &quot; + ws + &quot;/Build_Scripts/STC_Build_Scripts/ci_packageinstaller.pl &quot; + ws +  &quot; &quot; + ws + &quot;/Installer&quot; + &quot; &quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num + &quot; PACKAGE_DMCP &quot; + ws&#xd;
+ci_installer_cmd.replace(&apos;/&apos;, &apos;\\&apos;)&#xd;
+print &quot;Executing &quot; + ci_installer_cmd&#xd;
+sys.stdout.flush()&#xd;
+os.system(ci_installer_cmd)&#xd;
+&#xd;
+# copy the final installer to \\martin and \\spccafs03&#xd;
+ws.replace(&apos;/&apos;, &apos;\\&apos;)&#xd;
+ccp_installer = ws + &quot;\\Installer\\Cloud Core Provisioning.exe&quot;&#xd;
+martin_dir = &quot;\\\\martin\\archive\\pv\\TestCenter\\&quot; +  os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]  + &quot;\\Engineering_Builds\\GUI_BLL\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num&#xd;
+fs03_dir = &quot;\\\\spccalfs03\\development\\scm\\release\\STC\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]  + &quot;\\&quot; + os.environ[&apos;STC_MAJ_MIN_VERSION&apos;] + &quot;.&quot; + stc_build_num&#xd;
+&#xd;
+# make sure target directory exists before copying file&#xd;
+if os.path.exists(martin_dir):&#xd;
+        print &quot;srcdir: &quot;, martin_dir, &quot; exists&quot;&#xd;
+else:&#xd;
+        try:&#xd;
+            print &quot;creating: &quot;, martin_dir&#xd;
+            sys.stdout.flush()&#xd;
+            pipe = subprocess.Popen([&quot;cmd&quot;, &quot;/c&quot;, &quot;mkdir&quot;, martin_dir], stdin=subprocess.PIPE)&#xd;
+            pipe.wait()&#xd;
+            pipe.stdin.close()&#xd;
+        except IOError, e:&#xd;
+            print &quot;Unable to create directory. %s&quot; % e    &#xd;
+   &#xd;
+print &quot;Copying &quot; + ccp_installer +  &quot; to &quot; + martin_dir&#xd;
+shutil.copy(ccp_installer, martin_dir)&#xd;
+&#xd;
+# make sure target directory exists before copying file&#xd;
+if os.path.exists(fs03_dir):&#xd;
+        print &quot;srcdir: &quot;, fs03_dir, &quot; exists&quot;&#xd;
+else:&#xd;
+        try:&#xd;
+            print &quot;creating: &quot;, fs03_dir&#xd;
+            sys.stdout.flush()&#xd;
+            pipe = subprocess.Popen([&quot;cmd&quot;, &quot;/c&quot;, &quot;mkdir&quot;, fs03_dir], stdin=subprocess.PIPE)&#xd;
+            pipe.wait()&#xd;
+            pipe.stdin.close()&#xd;
+        except IOError, e:&#xd;
+            print &quot;Unable to create directory. %s&quot; % e&#xd;
+&#xd;
+print &quot;Copying &quot; + ccp_installer + &quot; to &quot; + fs03_dir&#xd;
+shutil.copy(ccp_installer, fs03_dir )&#xd;
+&#xd;
 </command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>echo &quot;END&quot;
-rem cd provmanager\stc
-rem SET FULLNUM=0%BUILD_NUMBER%60000
-rem if %BUILD_NUMBER% gtr 99 SET FULLNUM=%BUILD_NUMBER%30000
-rem echo %FULLNUM%
-rem SET FULLVER=00%BUILD_NUMBER%6
-rem if %BUILD_NUMBER% gtr 9 SET FULLVER=0%BUILD_NUMBER%3
-rem if %BUILD_NUMBER% gtr 99 SET FULLVER=%BUILD_NUMBER%3
-rem echo FULLVER is %FULLVER%
-rem python ..\..\framework\tools\buildUtil\setver.py &quot;4.20&quot; %FULLNUM%
-rem cd %WORKSPACE%
+      <command>echo &quot;END&quot;&#xd;
+rem cd provmanager\stc&#xd;
+rem SET FULLNUM=0%BUILD_NUMBER%60000&#xd;
+rem if %BUILD_NUMBER% gtr 99 SET FULLNUM=%BUILD_NUMBER%30000&#xd;
+rem echo %FULLNUM%&#xd;
+rem SET FULLVER=00%BUILD_NUMBER%6&#xd;
+rem if %BUILD_NUMBER% gtr 9 SET FULLVER=0%BUILD_NUMBER%3&#xd;
+rem if %BUILD_NUMBER% gtr 99 SET FULLVER=%BUILD_NUMBER%3&#xd;
+rem echo FULLVER is %FULLVER%&#xd;
+rem python ..\..\framework\tools\buildUtil\setver.py &quot;4.20&quot; %FULLNUM%&#xd;
+rem cd %WORKSPACE%&#xd;
 rem  perl %WORKSPACE%\Build_Scripts\STC_Build_Scripts\ci_packageinstaller.pl %WORKSPACE% %WORKSPACE%\Installer %STC_MAJ_MIN_VERSION%.%FULLVER% PACKAGE_DMCP %WORKSPACE%</command>
     </hudson.tasks.BatchFile>
   </builders>
