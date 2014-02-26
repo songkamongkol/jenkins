@@ -121,7 +121,7 @@ DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
-if [ ${P4_CHANGELIST} &gt; ${LAST_CHANGE} ] ; then
+if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
     LAST_CHANGE=${P4_CHANGELIST}
 fi
 
