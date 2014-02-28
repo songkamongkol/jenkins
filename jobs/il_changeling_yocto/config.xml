@@ -82,7 +82,6 @@
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4UpstreamProject>il_ci</p4UpstreamProject>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -112,7 +111,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -145,18 +144,11 @@ sudo scons target=packageclean</command>
 export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
 
 # $WORKSPACE/build/il/scripts/phxbld centralboot_changeling
-$WORKSPACE/build/il/scripts/phxbld centralboot_changeling_yocto
+$WORKSPACE/build/il/scripts/phxbld yocto_lxc
 
-export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
+# export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
 
-sudo scons reversion_il $RELEASE_NUM.$PAD_BUILD_NUMBER $RELEASE_NUM.$PAD_BUILD_NUMBER</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>python /home/spirent/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling/</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>python $WORKSPACE/framework/tools/buildUtil/pw_build_tracker.py --build_dir=$WORKSPACE/build/il --job_name=il
-python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
+# sudo scons reversion_il $RELEASE_NUM.$PAD_BUILD_NUMBER $RELEASE_NUM.$PAD_BUILD_NUMBER</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -168,14 +160,6 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>regression_changeling</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
@@ -187,14 +171,14 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
-      <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
+            <sendToDevelopers>false</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
@@ -216,90 +200,6 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.9">
-      <consolePrefix>FTP: </consolePrefix>
-      <delegate>
-        <publishers>
-          <jenkins.plugins.publish__over__ftp.BapFtpPublisher>
-            <configName>storage.cal</configName>
-            <verbose>false</verbose>
-            <transfers>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_changeling/build-$BUILD_NUMBER/</remoteDirectory>
-                <sourceFiles>build/il/packages/central/testcenter*.*</sourceFiles>
-                <excludes></excludes>
-                <removePrefix>build/il/packages/central</removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>true</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_changeling/build-$BUILD_NUMBER/</remoteDirectory>
-                <sourceFiles>build/il/pw_unknown_files_report, build/il/pw_packages_to_test, build/il/pw_packages_to_test_report</sourceFiles>
-                <excludes></excludes>
-                <removePrefix>build/il</removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_changeling/build-$BUILD_NUMBER/</remoteDirectory>
-                <sourceFiles>il_idl_crc.txt</sourceFiles>
-                <excludes></excludes>
-                <removePrefix></removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_changeling/build-$BUILD_NUMBER/</remoteDirectory>
-                <sourceFiles> build/il/packages/central/rawimage.map</sourceFiles>
-                <excludes></excludes>
-                <removePrefix>build/il/packages/central</removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_changeling/build-$BUILD_NUMBER/</remoteDirectory>
-                <sourceFiles>${JOB_NAME}_changelist_${P4_CHANGELIST}.txt</sourceFiles>
-                <excludes></excludes>
-                <removePrefix></removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-            </transfers>
-            <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-            <usePromotionTimestamp>false</usePromotionTimestamp>
-          </jenkins.plugins.publish__over__ftp.BapFtpPublisher>
-        </publishers>
-        <continueOnError>false</continueOnError>
-        <failOnError>false</failOnError>
-        <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-        <hostConfigurationAccess class="jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin" reference="../.."/>
-      </delegate>
-    </jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
