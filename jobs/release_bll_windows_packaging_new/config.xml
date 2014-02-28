@@ -278,7 +278,7 @@ del EAT.Unix.tar</command>
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_bll_linux_packaging, release_set_status, release_l4l7_windows_packaging</projects>
+          <projects>release_bll_linux_packaging,release_set_status,release_l4l7_windows_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

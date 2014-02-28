@@ -145,7 +145,7 @@ paramfile.write(&quot;BLL_BUILD_NUMBER=&quot; + bll_build_number)</command>
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_bll_win_pkg_webhelp,</projects>
+          <projects>release_bll_win_pkg_webhelp</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
