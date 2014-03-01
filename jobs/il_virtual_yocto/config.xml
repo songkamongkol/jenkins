@@ -132,7 +132,7 @@ $WORKSPACE/build/il/scripts/phxbld -j16 stca&lt;BR&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>45</quietPeriod>
-  <assignedNode>ilbuild-test2</assignedNode>
+  <assignedNode>ilpkg-03</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
