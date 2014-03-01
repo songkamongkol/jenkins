@@ -67,7 +67,7 @@ $WORKSPACE/build/il/scripts/phxbld -j16 stca&lt;BR&gt;&#xd;
     <configVersion>1</configVersion>
     <p4User>scmbuild</p4User>
     <p4Passwd></p4Passwd>
-    <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
+    <p4Port>perforce.spirentcom.com1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
 +//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
@@ -120,7 +120,7 @@ $WORKSPACE/build/il/scripts/phxbld -j16 stca&lt;BR&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -132,7 +132,7 @@ $WORKSPACE/build/il/scripts/phxbld -j16 stca&lt;BR&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>45</quietPeriod>
-  <assignedNode>ilpkg-03</assignedNode>
+  <assignedNode>ilbuild-test4</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
