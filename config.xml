@@ -3192,8 +3192,8 @@
             <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
           </columns>
           <recurse>false</recurse>
-          <useCssStyle>false</useCssStyle>
-          <includeStdJobList>false</includeStdJobList>
+          <useCssStyle>true</useCssStyle>
+          <includeStdJobList>true</includeStdJobList>
           <leftPortletWidth>50%</leftPortletWidth>
           <rightPortletWidth>50%</rightPortletWidth>
           <leftPortlets/>
