@@ -122,7 +122,7 @@ Wait 10 minutes&lt;br&gt;</description>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>15</quietPeriod>
-  <assignedNode>ilbuild-23</assignedNode>
+  <assignedNode>ilbuild-test5</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
