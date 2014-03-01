@@ -82,7 +82,6 @@ Wait 10 minutes&lt;br&gt;</description>
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4UpstreamProject>il_ci</p4UpstreamProject>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -112,7 +111,7 @@ Wait 10 minutes&lt;br&gt;</description>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -124,7 +123,7 @@ Wait 10 minutes&lt;br&gt;</description>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>15</quietPeriod>
-  <assignedNode>ilbuild-test2</assignedNode>
+  <assignedNode>ilbuild-23</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -155,25 +154,13 @@ sudo scons target=packageclean
 sudo scons target=kernelclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># export SOURCE_OS=IL
-# python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createversionfile=no --createpropfile=yes</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
       <command>env
 p4 info
-# $WORKSPACE/build/il/scripts/phxbld -j8 chos2
-# $WORKSPACE/build/il/scripts/phxbld -j8 controller3_yocto
-$WORKSPACE/build/il/scripts/phxbld -j8 chos2_yocto
-$WORKSPACE/build/il/scripts/phxbld -j8 controller3_yocto_yocto
+$WORKSPACE/build/il/scripts/phxbld -j8 chos2_yocto2
+$WORKSPACE/build/il/scripts/phxbld -j8 controller3_yocto_chhvvm
 sudo -S rm -rf $WORKSPACE/build/il/bld_*
 $WORKSPACE/build/il/scripts/phxbld idltarball
 sudo -S rm -rf $WORKSPACE/build/il/bld_*</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command># rm -f il_chos2_$STC_MAJ_MIN_VERSION.tar
-# tar cvf il_chos2_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
-echo &quot;Finished creating il_chos2_$STC_MAJ_MIN_VERSION.tar&quot;
-python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_chos2/</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -196,14 +183,14 @@ python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jen
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
-      <recipientList>scmteam@spirent.com</recipientList>
+      <recipientList>songkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
+            <sendToDevelopers>false</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
@@ -225,51 +212,6 @@ python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jen
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.9">
-      <consolePrefix>FTP: </consolePrefix>
-      <delegate>
-        <publishers>
-          <jenkins.plugins.publish__over__ftp.BapFtpPublisher>
-            <configName>storage.cal</configName>
-            <verbose>false</verbose>
-            <transfers>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_chos2/build-$P4_CHANGELIST/bundle</remoteDirectory>
-                <sourceFiles>build/il/packages/bundle/*.*</sourceFiles>
-                <excludes></excludes>
-                <removePrefix>build/il/packages/bundle</removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-              <jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-                <remoteDirectory>il_chos2/build-$P4_CHANGELIST/idltar</remoteDirectory>
-                <sourceFiles>build/il/packages/idltar/*.*</sourceFiles>
-                <excludes></excludes>
-                <removePrefix>build/il/packages/idltar</removePrefix>
-                <remoteDirectorySDF>false</remoteDirectorySDF>
-                <flatten>false</flatten>
-                <cleanRemote>false</cleanRemote>
-                <noDefaultExcludes>false</noDefaultExcludes>
-                <makeEmptyDirs>false</makeEmptyDirs>
-                <patternSeparator>[, ]+</patternSeparator>
-                <asciiMode>false</asciiMode>
-              </jenkins.plugins.publish__over__ftp.BapFtpTransfer>
-            </transfers>
-            <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-            <usePromotionTimestamp>false</usePromotionTimestamp>
-          </jenkins.plugins.publish__over__ftp.BapFtpPublisher>
-        </publishers>
-        <continueOnError>false</continueOnError>
-        <failOnError>false</failOnError>
-        <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-        <hostConfigurationAccess class="jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin" reference="../.."/>
-      </delegate>
-    </jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
