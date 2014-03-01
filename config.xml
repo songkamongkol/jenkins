@@ -3233,7 +3233,6 @@
           <bottomPortlets/>
         </hudson.plugins.view.dashboard.Dashboard>
       </views>
-      <defaultView>yocto_ci</defaultView>
       <columns>
         <columns/>
       </columns>
