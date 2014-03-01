@@ -2325,6 +2325,7 @@
         <string>il_ci_join</string>
         <string>il_lxc_yocto</string>
         <string>il_qemu_test</string>
+        <string>il_qemu_yocto</string>
         <string>il_testmodule_contents</string>
         <string>il_virtual</string>
         <string>il_vtc</string>
