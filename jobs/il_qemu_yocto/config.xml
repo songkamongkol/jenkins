@@ -122,7 +122,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>ilbuild-test6</assignedNode>
+  <assignedNode>ilpkg-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -138,8 +138,7 @@ echo $JOB_NAME $BUILD_NUMBER $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changeli
       <command>sudo scons target=packageclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>
-$WORKSPACE/build/il/scripts/phxbld qemu_yocto</command>
+      <command>$WORKSPACE/build/il/scripts/phxbld qemu_yocto</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>if [ &quot;$BUILD_IMAGE&quot; = &quot;true&quot; ]; then
