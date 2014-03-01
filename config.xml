@@ -3172,6 +3172,12 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[95]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <string>il_changeling_all_yocto</string>
+            <string>il_changeling_yocto</string>
+            <string>il_chos2_yocto</string>
+            <string>il_lxc_yocto</string>
+            <string>il_qemu_yocto</string>
+            <string>il_virtual_yocto</string>
           </jobNames>
           <jobFilters/>
           <columns>
