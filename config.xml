@@ -2328,6 +2328,7 @@
         <string>il_qemu_yocto</string>
         <string>il_testmodule_contents</string>
         <string>il_virtual</string>
+        <string>il_virtual_yocto</string>
         <string>il_vtc</string>
         <string>integration_cts_linux</string>
         <string>regression</string>
