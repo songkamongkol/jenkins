@@ -92,7 +92,7 @@
     <p4Tool>p4</p4Tool>
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
-    <forceSync>true</forceSync>
+    <forceSync>false</forceSync>
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
@@ -110,7 +110,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -141,8 +141,8 @@ sudo scons target=packageclean</command>
     <hudson.tasks.Shell>
       <command># export CCACHE_DISABLE=1 
 export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
-
 # $WORKSPACE/build/il/scripts/phxbld centralboot_changeling
+scons target=raw_yocto arch=yocto_i686
 $WORKSPACE/build/il/scripts/phxbld centralboot_changeling_yocto2
 
 </command>
