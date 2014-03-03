@@ -141,8 +141,8 @@ sudo scons target=packageclean</command>
     <hudson.tasks.Shell>
       <command># export CCACHE_DISABLE=1 
 export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
-
 # $WORKSPACE/build/il/scripts/phxbld centralboot_changeling
+scons target=raw_yocto arch=yocto_i686
 $WORKSPACE/build/il/scripts/phxbld centralboot_changeling_yocto2
 
 </command>
