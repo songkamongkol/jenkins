@@ -110,7 +110,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -138,18 +138,6 @@ echo $JOB_NAME $BUILD_NUMBER $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changeli
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>$WORKSPACE/build/il/scripts/phxbld qemu_yocto</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>if [ &quot;$BUILD_IMAGE&quot; = &quot;true&quot; ]; then
-    export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
-
-    $WORKSPACE/build/il/scripts/phxbld qemu_raw
-
-    export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
-
-    sudo scons reversion_il $RELEASE_NUM.$PAD_BUILD_NUMBER $RELEASE_NUM.$PAD_BUILD_NUMBER
-
-fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>python $WORKSPACE/framework/tools/buildUtil/pw_build_tracker.py --build_dir=$WORKSPACE/build/il --job_name=il
