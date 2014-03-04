@@ -3175,7 +3175,6 @@
             <string>il_changeling_all_yocto</string>
             <string>il_changeling_yocto</string>
             <string>il_chos2_yocto</string>
-            <string>il_ci_yocto</string>
             <string>il_lxc_yocto</string>
             <string>il_qemu_yocto</string>
             <string>il_virtual_yocto</string>
@@ -3234,7 +3233,6 @@
           <bottomPortlets/>
         </hudson.plugins.view.dashboard.Dashboard>
       </views>
-      <defaultView>yocto_ci</defaultView>
       <columns>
         <columns/>
       </columns>
