@@ -27,7 +27,7 @@ exit 1
       <groovyScript>import hudson.model.*
 manager.listener.logger.println(&quot;hello&quot;)
 if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
-    manager.addBadge(&quot;Build unstable.&quot;)
+    //manager.addWarningBadge(&quot;Build unstable.&quot;)
     manager.createSummary(&quot;folder.gif&quot;).appendText(&quot;&lt;a href=\&quot;\\\\storage\\builds\\jenkins\\il_changeling\\build-6435\&quot;&gt;\\\\storage\\builds\\jenkins\\il_changeling\\build-6435&lt;/a&gt;&quot;, false, false, false, &quot;orange&quot;)
      manager.buildSuccess()
     // manager.buildUnstable()
