@@ -28,7 +28,7 @@ exit 1
 manager.listener.logger.println(&quot;hello&quot;)
 if(manager.logContains(&quot;.*UNSTABLE BUILD.*&quot;)) {
     manager.addWarningBadge(&quot;Build unstable.&quot;)
-    manager.createSummary(&quot;info.gif&quot;).appendText(&quot;&lt;a href=\\\\storage\\builds\\jenkins\\il_changeling\\build-6435&gt;Build Artifacts&lt;/a&gt;&quot;, false, false, false, &quot;orange&quot;)
+    manager.createSummary(&quot;info.gif&quot;).appendText(&quot;&lt;a href=\&quot;\\\\storage\\builds\\jenkins\\il_changeling\\build-6435\&quot;&gt;Build Artifacts&lt;/a&gt;&quot;, false, false, false, &quot;orange&quot;)
      manager.buildSuccess()
     // manager.buildUnstable()
    manager.listener.logger.println(&quot;Marking build unstable&quot;) 
