@@ -31,7 +31,7 @@
       <numExecutors>2</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.21.7</host>
         <port>22</port>
         <credentialsId>5e227c1b-756f-4ab6-91c0-1f33576f5e81</credentialsId>
@@ -50,7 +50,7 @@
       <numExecutors>2</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.20.91</host>
         <port>22</port>
         <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
@@ -76,7 +76,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.19.99</host>
         <port>22</port>
         <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
@@ -135,7 +135,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.19.19</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -164,7 +164,7 @@
       <numExecutors>2</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.19.55</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -193,7 +193,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.19.243</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -224,7 +224,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.19.208</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -269,7 +269,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.10.157</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -302,7 +302,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.10.158</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -357,7 +357,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>Tableubuntu01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>c94238b9-a5ab-4928-b10e-63a22f2a7a1b</credentialsId>
@@ -372,7 +372,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.10.91</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -405,7 +405,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.10.134</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -438,7 +438,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>10.2.10.146</host>
         <port>22</port>
         <credentialsId>f01a3cbf-2781-49bf-a761-55a7f3faa130</credentialsId>
@@ -473,7 +473,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -502,7 +502,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-03.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -531,7 +531,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-04.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -560,7 +560,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-05.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -589,7 +589,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-06.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -618,7 +618,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-07.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -647,7 +647,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-08.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -676,7 +676,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-09.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -705,7 +705,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-10.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -795,7 +795,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-11.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -824,7 +824,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-12.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1023,7 +1023,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1053,7 +1053,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-03.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1083,7 +1083,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1113,7 +1113,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-04.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1143,7 +1143,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-v01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1159,7 +1159,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldbsd63-tmp.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1189,7 +1189,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldbsd71-tmp.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1219,7 +1219,7 @@
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>CIReg-Linux-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>4ccf7afd-ae3d-4d27-acf8-97bb216ec2f9</credentialsId>
@@ -1235,7 +1235,7 @@
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>CIReg-Linux-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>4ccf7afd-ae3d-4d27-acf8-97bb216ec2f9</credentialsId>
@@ -1251,7 +1251,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-v05.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1279,7 +1279,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-13.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1309,7 +1309,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>CIReg-bsd71-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
@@ -1325,7 +1325,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-14.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1355,7 +1355,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-15.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1385,7 +1385,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-16.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1415,7 +1415,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-17.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1445,7 +1445,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-18.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1475,7 +1475,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-19.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1505,7 +1505,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-20.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1535,7 +1535,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilpkg-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1565,7 +1565,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-05.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1595,7 +1595,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-06.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1696,7 +1696,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldlnx-07.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1726,7 +1726,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bldmisclnx-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1756,7 +1756,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldbsd71-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1786,7 +1786,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllbldbsd63-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1802,7 +1802,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>bllpkglnxc-v01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1832,7 +1832,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>klocwork-ilbld.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1874,7 +1874,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbldchassis-v02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1904,7 +1904,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>hw-toolbuilder-x64-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1920,7 +1920,7 @@
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>fpga-sim-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1936,7 +1936,7 @@
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>fpga-sim-02.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1952,7 +1952,7 @@
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>jazz-fpga-regression-1.ad.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -1982,7 +1982,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>klocwork.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2012,7 +2012,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>test-ubuntu1310.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2042,7 +2042,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-test1.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2072,7 +2072,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-test2.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2102,7 +2102,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-test3.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2132,7 +2132,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-test4.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2162,7 +2162,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-test5.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2204,7 +2204,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-21.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2234,7 +2234,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-22.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2264,7 +2264,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilbuild-23.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2294,7 +2294,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.5">
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
         <host>ilpkg-03.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
@@ -2375,7 +2375,7 @@
       <includeRegex>(bll|ui|il).*</includeRegex>
       <recurse>false</recurse>
     </listView>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>summary</name>
       <filterExecutors>false</filterExecutors>
@@ -2490,7 +2490,7 @@
       </columns>
       <recurse>false</recurse>
     </listView>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>wip</name>
       <filterExecutors>false</filterExecutors>
@@ -2696,7 +2696,7 @@
       <topPortlets/>
       <bottomPortlets/>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>release</name>
       <filterExecutors>false</filterExecutors>
@@ -2857,6 +2857,7 @@
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>kw_bll_ui</string>
         <string>kw_il</string>
+        <string>kw_license_report</string>
         <string>kw_usage_report</string>
       </jobNames>
       <jobFilters/>
@@ -2881,7 +2882,7 @@
       <topPortlets/>
       <bottomPortlets/>
     </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>HW</name>
       <description>Spirent Hardware Project Builds</description>
@@ -3072,7 +3073,7 @@
         </columns>
       </columns>
     </hudson.plugins.nested__view.NestedView>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>4.37_rel</name>
       <filterExecutors>false</filterExecutors>
@@ -3157,7 +3158,7 @@
         <columns/>
       </columns>
     </hudson.plugins.nested__view.NestedView>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.10">
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>yocto_test</name>
       <filterExecutors>false</filterExecutors>
@@ -3175,6 +3176,7 @@
             <string>il_changeling_all_yocto</string>
             <string>il_changeling_yocto</string>
             <string>il_chos2_yocto</string>
+            <string>il_ci_yocto</string>
             <string>il_lxc_yocto</string>
             <string>il_qemu_yocto</string>
             <string>il_virtual_yocto</string>
@@ -3233,6 +3235,7 @@
           <bottomPortlets/>
         </hudson.plugins.view.dashboard.Dashboard>
       </views>
+      <defaultView>yocto_ci</defaultView>
       <columns>
         <columns/>
       </columns>
