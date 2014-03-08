@@ -40,20 +40,9 @@ rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_testmodule_contents-
 rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_virtual-%BRANCH_NAME%
 rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_vtc-%BRANCH_NAME%
 
-echo &quot;testing&quot;
-echo testing &gt; test.txt</command>
+echo &quot;testing&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
-  <publishers>
-    <hudson.tasks.ArtifactArchiver>
-      <artifacts>test.txt</artifacts>
-      <latestOnly>false</latestOnly>
-      <allowEmptyArchive>false</allowEmptyArchive>
-    </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.Fingerprinter>
-      <targets>test.txt</targets>
-      <recordBuildArtifacts>false</recordBuildArtifacts>
-    </hudson.tasks.Fingerprinter>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>
