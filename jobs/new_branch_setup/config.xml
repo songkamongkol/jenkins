@@ -16,25 +16,30 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.17">
+      <activeProcessNames>
+        <string>test promotion</string>
+      </activeProcessNames>
+    </hudson.plugins.promoted__builds.JobPropertyImpl>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling_all-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_chos2-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_testmodule_contents-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_virtual-%BRANCH_NAME%
-mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_vtc-%BRANCH_NAME%
+      <command>rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling_all-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_chos2-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_testmodule_contents-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_virtual-%BRANCH_NAME%
+rem mkdir \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_vtc-%BRANCH_NAME%
 
-</command>
+echo &quot;testing&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
