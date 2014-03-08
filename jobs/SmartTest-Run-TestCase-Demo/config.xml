@@ -33,13 +33,13 @@ This job includes the following tasks:&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>4.10.3186</defaultValue>
+          <defaultValue>4.10.3196</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.TextParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>IL_BUILD_NUMBER</name>
           <description></description>
-          <defaultValue>4.10.3186</defaultValue>
-        </hudson.model.TextParameterDefinition>
+          <defaultValue>4.10.3196</defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.TextParameterDefinition>
           <name>WINRESPATH</name>
           <description>Windows Results Path</description>
@@ -169,8 +169,8 @@ Example: &#xd;
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.21">
-    <configVersion>0</configVersion>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
+    <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
@@ -196,6 +196,7 @@ Example: &#xd;
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
     <disableSyncOnly>false</disableSyncOnly>
     <showIntegChanges>false</showIntegChanges>
     <useOldClientName>false</useOldClientName>
@@ -217,6 +218,7 @@ Example: &#xd;
     <useViewMask>false</useViewMask>
     <useViewMaskForPolling>false</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <assignedNode>scmbuild2-xp</assignedNode>
@@ -238,17 +240,14 @@ c:\python27\python.exe %WORKSPACE%\Scripts\SmartTest_Email_Results.py %BLL_BUILD
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>SMResultEmail.html</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.1"/>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.3"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
