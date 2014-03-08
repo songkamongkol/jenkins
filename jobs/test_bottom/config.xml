@@ -13,14 +13,24 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
       <command>echo &quot;UNSTABLE BUILD&quot;
-exit 1
+
 </command>
     </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>new_branch_setup</project>
+      <filter>test.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
   </builders>
   <publishers>
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
