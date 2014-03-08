@@ -26,7 +26,7 @@
       <filter>test.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
+        <id>test promotion</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
