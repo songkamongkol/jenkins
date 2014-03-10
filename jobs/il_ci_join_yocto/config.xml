@@ -15,7 +15,7 @@
     </hudson.plugins.buildblocker.BuildBlockerProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>ilpkg-01</assignedNode>
+  <assignedNode>ilpkg-03</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -24,7 +24,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_changeling</project>
+      <project>il_changeling_yocto</project>
       <filter>il_changeling_*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -34,7 +34,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_qemu</project>
+      <project>il_qemu_yocto</project>
       <filter>il_qemu_*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -44,7 +44,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_virtual</project>
+      <project>il_virtual_yocto</project>
       <filter>il_virtual_*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
@@ -52,15 +52,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_vtc</project>
-      <filter>il_vtc_*changelist*.txt</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
-      <flatten>true</flatten>
-      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
-    </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_changeling_all</project>
+      <project>il_changeling_all_yocto</project>
       <filter>il_changeling_all*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
@@ -68,37 +60,29 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_chos2</project>
+      <project>il_chos2_yocto</project>
       <filter>il_chos2*changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>il_testmodule_contents</project>
-      <filter>il_testmodule_contents*changelist*.txt</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
-      <flatten>true</flatten>
-      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
-    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>echo &quot;IL build complete on all platforms&quot;</command>
+      <command>echo &quot;IL yocto build complete on all platforms&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>rawimage.map, *changelist*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>scmteam@spirent.com</recipientList>
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -113,6 +97,7 @@
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
