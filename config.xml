@@ -13,10 +13,11 @@
     <disableSignup>false</disableSignup>
     <enableCaptcha>false</enableCaptcha>
   </securityRealm>
+  <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter">
+  <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter" plugin="antisamy-markup-formatter@1.0">
     <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
   </markupFormatter>
   <jdks/>
@@ -757,7 +758,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -776,7 +777,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -887,7 +888,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -907,7 +908,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -927,7 +928,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -947,7 +948,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -967,7 +968,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>uibldwin-v01\spirent</userName>
         <password>RAALhkwxZoMmt8bieukSWlfGe79BPVLLb7DcUGMvqMGR6YG022cvLfMMtBVHEUH3SDoOgZOFtWjB+cVREdmbLQ==</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -1625,7 +1626,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>bllbuild-win-06\spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
@@ -1642,7 +1643,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
@@ -1662,7 +1663,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>bllbuild-win-07\spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
@@ -1679,7 +1680,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher">
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
         <userName>bldmiscwin-01\spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
@@ -3176,6 +3177,7 @@
             <string>il_changeling_all_yocto</string>
             <string>il_changeling_yocto</string>
             <string>il_chos2_yocto</string>
+            <string>il_ci_join_yocto</string>
             <string>il_ci_yocto</string>
             <string>il_lxc_yocto</string>
             <string>il_qemu_yocto</string>
