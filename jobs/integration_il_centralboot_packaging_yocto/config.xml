@@ -54,27 +54,26 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
-+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/regression/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/framework/ui/...&#xd;
--//TestCenter/*/content/.../ui/...&#xd;
--//TestCenter/*/.../bll/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...&#xd;
+    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
++//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/regression/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/framework/ui/...
+-//TestCenter/*/content/.../ui/...
+-//TestCenter/*/.../bll/...
++//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...
++//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...
++//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...
 //hypervisor/mainline/amara/ChassisImage/...  //ws/ChassisImage/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4Label>${CHANGELIST}</p4Label>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -104,13 +103,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -144,56 +143,75 @@ rm -f $WORKSPACE/*.txt</command>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_changeling_all_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_changeling_all_yocto_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_all_packaging.txt
-echo Copying il_changeling_all build artifacts from /mnt/builds/jenkins/il_changeling_all/build-packaging/
-ls -algh /mnt/builds/jenkins/il_changeling_all/build-packaging/*.txt
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_all_yocto_packaging.txt
+echo Copying il_changeling_all_yocto build artifacts from /mnt/builds/jenkins/il_changeling_all_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_changeling_all_yocto/build-packaging/*.txt
 mkdir -p $WORKSPACE/build/il/packages
-cp -r /mnt/builds/jenkins/il_changeling_all/build-packaging/* $WORKSPACE/build/il/packages
+cp -r /mnt/builds/jenkins/il_changeling_all_yocto/build-packaging/* $WORKSPACE/build/il/packages
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/changeling_rawimage.map
 echo &quot;Finished copying il_changeling_all files&quot;
-rm -f /mnt/builds/jenkins/il_changeling_all_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_changeling_all_yocto_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_chos2_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_changeling_yocto_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chos2_packaging.txt
-echo Copying il_chos2 build artifacts from /mnt/builds/jenkins/il_chos2/build-packaging/
-ls -algh /mnt/builds/jenkins/il_chos2/build-packaging/*.txt
-cp -r /mnt/builds/jenkins/il_chos2/build-packaging/* $WORKSPACE/build/il/packages
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_yocto_packaging.txt
+echo Copying il_changeling_yocto build artifacts from /mnt/builds/jenkins/il_changeling_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_changeling_yocto/build-packaging/*.txt
+mkdir -p $WORKSPACE/build/il/packages
+cp -r /mnt/builds/jenkins/il_changeling_yocto/build-packaging/* $WORKSPACE/build/il/packages
+cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/changeling_rawimage.map
+echo &quot;Finished copying il_changeling files&quot;
+rm -f /mnt/builds/jenkins/il_changeling_yocto_packaging.txt</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+if [ -f /mnt/builds/jenkins/il_chos2_yocto_promoting.txt ]; then
+echo &quot;Promotion is in progress, wait for 5 minutes&quot;
+sleep 300
+else
+echo &quot;No promotion is in progress, proceeding with packaging&quot;
+fi
+
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chos2_yocto_packaging.txt
+echo Copying il_chos2_yocto build artifacts from /mnt/builds/jenkins/il_chos2_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_chos2_yocto/build-packaging/*.txt
+cp -r /mnt/builds/jenkins/il_chos2_yocto/build-packaging/* $WORKSPACE/build/il/packages
 echo &quot;Finished copying il_chos2 files&quot;
-rm -f /mnt/builds/jenkins/il_chos2_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_chos2_yocto_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_virtual_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_virtual_yocto_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_virtual_packaging.txt
-echo Copying il_virtual build artifacts from /mnt/builds/jenkins/il_virtual/build-packaging/
-ls -algh /mnt/builds/jenkins/il_virtual/build-packaging/*.txt
-cp -r /mnt/builds/jenkins/il_virtual/build-packaging/* $WORKSPACE/build/il/packages
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_virtual_yocto_packaging.txt
+echo Copying il_virtual build artifacts from /mnt/builds/jenkins/il_virtual_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_virtual_yocto/build-packaging/*.txt
+cp -r /mnt/builds/jenkins/il_virtual_yocto/build-packaging/* $WORKSPACE/build/il/packages
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/virtual_rawimage.map
 echo &quot;Finished copying il_virtual files&quot;
-rm -f /mnt/builds/jenkins/il_virtual_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_virtual_packaging_yocto.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -212,6 +230,40 @@ cp -r /mnt/builds/jenkins/il_vtc/build-packaging/* $WORKSPACE/build/il/packages
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/vtc_rawimage.map
 echo &quot;Finished copying il_vtc files&quot;
 rm -f /mnt/builds/jenkins/il_vtc_packaging.txt</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+if [ -f /mnt/builds/jenkins/il_lxc_yocto_promoting.txt ]; then
+echo &quot;Promotion is in progress, wait for 5 minutes&quot;
+sleep 300
+else
+echo &quot;No promotion is in progress, proceeding with packaging&quot;
+fi
+
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_lxc_yocto_packaging.txt
+echo Copying il_lxcbuild artifacts from /mnt/builds/jenkins/il_lxc_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_lxc_yocto/build-packaging/*.txt
+cp /mnt/builds/jenkins/il_lxc_yocto/build-packaging/rawimg/*lxc* $WORKSPACE/build/il/packages/rawimg
+echo &quot;Finished copying il_lxcfiles&quot;
+rm -f /mnt/builds/jenkins/il_lxc_packaging_yocto.txt</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+if [ -f /mnt/builds/jenkins/il_qemu_yocto_promoting.txt ]; then
+echo &quot;Promotion is in progress, wait for 5 minutes&quot;
+sleep 300
+else
+echo &quot;No promotion is in progress, proceeding with packaging&quot;
+fi
+
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_qemu_yocto_packaging.txt
+echo Copying il_qemu build artifacts from /mnt/builds/jenkins/il_qemu_yocto/build-packaging/
+ls -algh /mnt/builds/jenkins/il_qemu_yocto/build-packaging/*.txt
+cp /mnt/builds/jenkins/il_qemu_yocto/build-packaging/rawimg/yocto* $WORKSPACE/build/il/packages/rawimg
+echo &quot;Finished copying il_qemu files&quot;
+rm -f /mnt/builds/jenkins/il_qemu_packaging_yocto.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -246,12 +298,12 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createpropfile
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo Creating Central Boot image file
-sudo scons target=centralboot packaging=1</command>
+sudo scons target=centralboot_yoctovm packaging=1</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Creating Amara C3 image file&quot;
 # $WORKSPACE/build/il/scripts/phxbld -j8 c3_yocto
-sudo scons target=c3_pkg packaging=1</command>
+sudo scons target=c3_pkg_yocto packaging=1</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copying tmos bundle from vtc job for Avalanche build ...&quot;
@@ -266,7 +318,7 @@ rm -f $WORKSPACE/tmos-*.zip</command>
     <hudson.tasks.Shell>
       <command># echo &quot;Creating controller3 fsimg file to be use for Amara recovery USB disk ...&quot;
 # ln -s $WORKSPACE/ChassisImage/chassis.img.gz $WORKSPACE/build/il/packages/rawimg/chassis.img.gz
-# sudo $WORKSPACE/build/il/scripts/phxbld -j32 amara_yocto</command>
+sudo $WORKSPACE/build/il/scripts/phxbld -j32 amara_yocto</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>export DEPENDENT_JOB_NAME=integration_il_centralboot_packaging
@@ -286,21 +338,22 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>$DEFAULT_RECIPIENTS</recipientList>
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
+            <sendToDevelopers>false</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>false</sendToRecipientList>
+            <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>
@@ -323,7 +376,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>integration_il_ftp_centralboot</projects>
+          <projects>integration_il_ftp_centralboot_yocto</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
