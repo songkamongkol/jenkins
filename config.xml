@@ -3213,6 +3213,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[95]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <string>integration_il_centralboot_packaging_yocto</string>
           </jobNames>
           <jobFilters/>
           <columns>
