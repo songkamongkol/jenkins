@@ -30,6 +30,9 @@
     <hudson.search.UserSearchProperty>
       <insensitiveSearch>false</insensitiveSearch>
     </hudson.search.UserSearchProperty>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
     <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
   </properties>
 </user>
