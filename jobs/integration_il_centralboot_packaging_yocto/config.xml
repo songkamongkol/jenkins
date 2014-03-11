@@ -115,7 +115,7 @@
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>ilpkg-01</assignedNode>
+  <assignedNode>ilpkg-03</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
