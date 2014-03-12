@@ -67,6 +67,14 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>il_lxc_yocto</project>
+      <filter>il_lxc*changelist*.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;IL yocto build complete on all platforms&quot;</command>
     </hudson.tasks.Shell>
@@ -78,7 +86,7 @@
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
-      <targets>rawimage.map, *changelist*.txt</targets>
+      <targets>*changelist*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
