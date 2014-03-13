@@ -103,7 +103,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -264,6 +264,30 @@ ls -algh /mnt/builds/jenkins/il_qemu_yocto/build-packaging/*.txt
 cp /mnt/builds/jenkins/il_qemu_yocto/build-packaging/rawimg/yocto* $WORKSPACE/build/il/packages/rawimg
 echo &quot;Finished copying il_qemu files&quot;
 rm -f /mnt/builds/jenkins/il_qemu_packaging_yocto.txt</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+if [ -f /mnt/builds/jenkins/il_chassisvm_promoting.txt ]; then
+echo &quot;Promotion is in progress, wait for 5 minutes&quot;
+sleep 300
+else
+echo &quot;No promotion is in progress, proceeding with packaging&quot;
+fi
+
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chassisvm_packaging.txt
+echo Copying il_chassisvm build artifacts from /mnt/builds/jenkins/il_chassisvm/build-packaging/
+ls -algh /mnt/builds/jenkins/il_chassisvm/build-packaging/*.txt
+
+# chassisvm files need to be of a certain name per Ramana&apos;s request
+export fixtargettgz=testcenter_c3_vm-4.30.0423-1.1.tgz
+export fulltgzname=`ls /mnt/builds/jenkins/il_chassisvm/build-packaging/fsimg/testcenter_c3*.tgz`
+export tgzname=`basename $fulltgzname`
+cp -f /mnt/builds/jenkins/il_chassisvm/build-packaging/fsimg/$tgzname $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/$fixtargettgz
+cp -f /mnt/builds/jenkins/il_chassisvm/build-packaging/fsimg/${tgzname}.md5 $WORKSPACE/framework/il/platform/scripts/chassis/i686/c3_vm_patch/${fixtargettgz}.md5
+echo &quot;Finished copying il_chassisvm files&quot;
+rm -f /mnt/builds/jenkins/il_chassisvm_packaging.txt
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
