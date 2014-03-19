@@ -2037,12 +2037,6 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.node_monitors.DiskSpaceMonitorDescriptor$DiskSpace">
-        <path>/home/spirent/jenkins</path>
-        <size>777289728</size>
-        <triggered>true</triggered>
-        <trigger>hudson.node_monitors.DiskSpaceMonitor</trigger>
-      </temporaryOfflineCause>
       <name>ilbuild-test1</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins/</remoteFS>
