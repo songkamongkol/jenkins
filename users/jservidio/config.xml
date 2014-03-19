@@ -5,7 +5,7 @@
     <jenkins.security.ApiTokenProperty>
       <apiToken>ma+maW2lzf0EWqOMl7RmkqAH9RVqBgIwrcTTycBDqwqk1eH8Z7GQDgngaHvJXhf5pGTlivN0RL1hSW94uLogv+qVbBNlVZnEhqgbYdAj5rE=</apiToken>
     </jenkins.security.ApiTokenProperty>
-    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.9.3">
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
         <entry>
           <com.cloudbees.plugins.credentials.domains.Domain>
@@ -32,9 +32,12 @@
     <hudson.security.HudsonPrivateSecurityRealm_-Details>
       <passwordHash>#jbcrypt:$2a$10$Uo3Y7IjYCvhEMWkzb.LyWOtlmE5J0HcI7FZ2q.pJ10cm9jWutA7O2</passwordHash>
     </hudson.security.HudsonPrivateSecurityRealm_-Details>
-    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.5">
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
       <emailAddress>John.Servidio@spirent.com</emailAddress>
     </hudson.tasks.Mailer_-UserProperty>
-    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.26"/>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
   </properties>
 </user>
