@@ -25,17 +25,22 @@
           <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</description>
           <defaultValue>2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MAX_ABS_TIMING_DELTA</name>
+          <description>Absolute value to use as range check on post-routing timing summary to determine if timing should be considered as failure</description>
+          <defaultValue>0.050</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v  //ws/SourceCode/include/VERSION_ColossusDX_1x100G.v&#xd;
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/... //ws/Vivado/...&#xd;
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v  //ws/SourceCode/include/VERSION_ColossusDX_1x100G.v
++//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/... //ws/Vivado/...
 -//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/Vivado/ColossusDX_1x100G.edf //ws/ColossusDX_1x100G.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -67,14 +72,14 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
@@ -84,7 +89,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
       <spec>* * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -92,7 +97,7 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_syn_colossus_dx_100g_nic</project>
       <filter>changelist.txt</filter>
       <target></target>
@@ -100,8 +105,9 @@
         <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_syn_colossus_dx_100g_nic</project>
       <filter>Synplify/rev_1/ColossusDX_1x100G.edf</filter>
       <target>Vivado</target>
@@ -109,6 +115,7 @@
         <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>export LM_LICENSE_FILE=${LM_LICENSE_FILE}
@@ -165,11 +172,13 @@ vivado -mode batch -source ./myImp.tcl</command>
           <name>UNSTABLE</name>
           <ordinal>1</ordinal>
           <color>YELLOW</color>
+          <completeBuild>true</completeBuild>
         </worstResult>
         <bestResult>
           <name>SUCCESS</name>
           <ordinal>0</ordinal>
           <color>BLUE</color>
+          <completeBuild>true</completeBuild>
         </bestResult>
       </runCondition>
       <conditionalbuilders>
@@ -204,13 +213,41 @@ md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
             <failNoFilesDeploy>false</failNoFilesDeploy>
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <hudson.tasks.Shell>
+          <command>#MAX_ABS_TIMING_DELTA=0.050
+
+echo &quot;Checking Post Routing Timing Summary...&quot;
+echo &quot;MAX_ABS_TIMING_DELTA=${MAX_ABS_TIMING_DELTA}&quot;
+
+eval $(cat ./vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
+
+#debug prints
+#echo $WNS
+#echo $TNS
+#echo $WHS
+#echo $THS
+
+#convert to absolute values
+WNS=${WNS#-}
+TNS=${TNS#-}
+WHS=${WHS#-}
+THS=${THS#-}
+
+#debug prints
+#echo $WNS
+#echo $TNS
+#echo $WHS
+#echo $THS
+
+echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &gt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &gt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &gt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &gt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
+
+echo &quot;Done checking Post Routing Timing Summary.&quot;
+</command>
+        </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
@@ -237,7 +274,7 @@ md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
       </entries>
       <deployEvenBuildFail>true</deployEvenBuildFail>
     </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS; alex.su@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
@@ -309,13 +346,13 @@ rm -rf ${WORKSPACE}/*</command>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
-    <hudson.tasks.Mailer plugin="mailer@1.5">
+    <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients></recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
