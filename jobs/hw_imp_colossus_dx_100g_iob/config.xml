@@ -220,7 +220,7 @@ md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
 echo &quot;Checking Post Routing Timing Summary...&quot;
 echo &quot;MAX_ABS_TIMING_DELTA=${MAX_ABS_TIMING_DELTA}&quot;
 
-eval $(cat ./vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
+eval $(cat $WORKSPACE/Vivado/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
 
 #debug prints
 #echo $WNS
