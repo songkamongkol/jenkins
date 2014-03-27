@@ -122,12 +122,10 @@
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
-          </configs>
+          <configs class="empty-list"/>
           <projects>il_changeling_all_yocto, il_changeling_yocto, il_virtual_yocto, il_qemu_yocto, il_lxc_yocto, il_chos2_yocto</projects>
           <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
+          <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
       </configs>
     </hudson.plugins.parameterizedtrigger.BuildTrigger>
