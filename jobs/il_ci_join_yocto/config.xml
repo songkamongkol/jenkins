@@ -127,7 +127,7 @@
               <properties>BLL_BUILD_NUMBER=${BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>integration_il_centralboot_packaging_yocto, </projects>
+          <projects></projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
