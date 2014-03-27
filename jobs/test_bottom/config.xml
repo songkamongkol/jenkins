@@ -31,6 +31,18 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import sys,os,string,re,subprocess,smtplib,urllib2,time
+jenkins_url = &quot;http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_packaging/job/integration_launch_nightly_builds/lastSuccessfulBuild/api/xml?xpath=/*/artifact[1]/fileName&quot;
+output1 = urllib2.urlopen( jenkins_url).read()
+output1 = output1.replace(&quot;fileName&quot;, &apos;&apos;)
+output1 = output1.replace(&quot;&lt;&quot;, &apos;&apos;)
+output1 = output1.replace(&quot;&gt;&quot;, &apos;&apos;)
+output1 = output1.replace(&quot;/&quot;, &apos;&apos;)
+print output1
+
+</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers>
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
