@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_ABS_TIMING_DELTA</name>
           <description>Absolute value to use as range check on post-routing timing summary to determine if timing should be considered as failure</description>
-          <defaultValue>0.050</defaultValue>
+          <defaultValue>0.000</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -72,7 +72,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
