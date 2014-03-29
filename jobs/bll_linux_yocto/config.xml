@@ -116,7 +116,7 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
