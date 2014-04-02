@@ -2,7 +2,7 @@
 <user>
   <fullName>ymliu</fullName>
   <properties>
-    <hudson.tasks.Mailer_-UserProperty/>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8"/>
     <hudson.model.MyViewsProperty>
       <views>
         <hudson.model.AllView>
@@ -14,6 +14,18 @@
         </hudson.model.AllView>
       </views>
     </hudson.model.MyViewsProperty>
-    <hudson.plugins.perforce.PerforceUserProperty/>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>3kr35WaInSext5DXQOU3Idrkv3ie2D3m44yor79ESzXqlWwTZVWZxIaoG2HQI+ax</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
   </properties>
 </user>
