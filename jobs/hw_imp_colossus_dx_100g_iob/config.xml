@@ -72,7 +72,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
