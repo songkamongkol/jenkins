@@ -26,8 +26,8 @@
           <defaultValue>2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>MAX_ABS_TIMING_DELTA</name>
-          <description>Absolute value to use as range check on post-routing timing summary to determine if timing should be considered as failure</description>
+          <name>MAX_TIMING_DELTA</name>
+          <description>Value to use as check on post-routing timing summary to determine if timing should be considered as failure</description>
           <defaultValue>0.000</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -72,7 +72,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -214,10 +214,10 @@ md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
         <hudson.tasks.Shell>
-          <command>#MAX_ABS_TIMING_DELTA=0.050
+          <command>#MAX_TIMING_DELTA=0.050
 
 #echo &quot;Checking Post Routing Timing Summary...&quot;
-#echo &quot;MAX_ABS_TIMING_DELTA=${MAX_ABS_TIMING_DELTA}&quot;
+#echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
 
 eval $(cat $WORKSPACE/Vivado/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
 
@@ -227,21 +227,9 @@ eval $(cat $WORKSPACE/Vivado/vivado.log | grep &quot;Post Routing Timing Summary
 #echo $WHS
 #echo $THS
 
-#convert to absolute values
-WNS=${WNS#-}
-TNS=${TNS#-}
-WHS=${WHS#-}
-THS=${THS#-}
+#echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &lt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &lt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &lt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &lt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
 
-#debug prints
-#echo $WNS
-#echo $TNS
-#echo $WHS
-#echo $THS
-
-#echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &gt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &gt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &gt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &gt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
-
-echo &quot;Done checking Post Routing Timing Summary.&quot;
+#echo &quot;Done checking Post Routing Timing Summary.&quot;
 </command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
