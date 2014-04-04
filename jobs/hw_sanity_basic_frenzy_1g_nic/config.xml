@@ -42,28 +42,27 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...&#xd;
-//TestCenter/${BRANCH_NAME}/build/il/phxTclLib/... //ws/build/il/phxTclLib/...&#xd;
-//TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...&#xd;
--//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt&#xd;
-&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/tools/xcg/... //ws/framework/tools/xcg/...&#xd;
-&#xd;
-+//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py&#xd;
-+//TestCenter/${BRANCH_NAME}/regression/run.py  //ws/build/il/testframework/testcases/run.py&#xd;
-+//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl&#xd;
-+//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py&#xd;
-+//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py&#xd;
-&#xd;
-+//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini&#xd;
-+//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini&#xd;
-</projectPath>
+    <projectPath>//TestCenter/${BRANCH_NAME}/common/lib/java/...  //ws/common/lib/java/...
+//TestCenter/${BRANCH_NAME}/build/il/phxTclLib/... //ws/build/il/phxTclLib/...
+//TestCenter/${BRANCH_NAME}/build/il/testframework/...  //ws/build/il/testframework/...
+-//TestCenter/${BRANCH_NAME}/build/il/testframework/testcases/sanity/testfile.txt  //ws/build/il/testframework/testcases/sanity/testfile.txt
+
++//TestCenter/${BRANCH_NAME}/framework/tools/xcg/... //ws/framework/tools/xcg/...
+
++//TestCenter/${BRANCH_NAME}/regression/equipServer.py  //ws/build/il/testframework/testcases/equipServer.py
++//TestCenter/${BRANCH_NAME}/regression/run.py  //ws/build/il/testframework/testcases/run.py
++//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl
++//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py
++//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py
+
++//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini
++//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -99,8 +98,8 @@
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
@@ -110,16 +109,17 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_test_framework_idl2jar</project>
       <filter>build/il/testframework/testexecuter/java.tar.gz, build/il/testframework/testexecuter/idl_tcl.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>#echo generate idl
@@ -186,7 +186,16 @@ sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/il_regression_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <xunit plugin="xunit@1.65">
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_sanity_dsg_frenzy_1g_nic</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <xunit plugin="xunit@1.84">
       <types>
         <JUnitType>
           <pattern>build/il/testframework/*.junit.xml</pattern>
@@ -211,9 +220,12 @@ sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
         </org.jenkinsci.plugins.xunit.threshold.SkippedThreshold>
       </thresholds>
       <thresholdMode>1</thresholdMode>
+      <extraConfiguration>
+        <testTimeMargin>3000</testTimeMargin>
+      </extraConfiguration>
     </xunit>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
