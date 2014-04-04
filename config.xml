@@ -2123,6 +2123,7 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
             <string>hw_sanity_basic_frenzy_1g_nic</string>
+            <string>hw_sanity_sfpga_frenzy_1g_nic</string>
             <string>hw_sim_frenzy2_1g_nic</string>
             <string>hw_sim_frenzy_1g_nic</string>
           </jobNames>
