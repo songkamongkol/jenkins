@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Patch FPGA image on Colossus DX 1x100G NIC</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_CHASSIS_IP</name>
+          <description>IP address of Spirent TestCenter chassis</description>
+          <defaultValue>10.100.21.109</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_FPGA_DIR</name>
+          <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/hypervisor/fpga</description>
+          <defaultValue>/mnt/spirent/hypervisor/fpga</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALL_DIR</name>
+          <description>Spirent TestCenter BLL/UI installation target directory</description>
+          <defaultValue>stc_install_dir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>jazz-fpga-regression-1</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_imp_colossus_dx_100g_nic</project>
+      <filter>Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>bll_linux</project>
+      <filter>build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
+#sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+
+echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
+#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+
+
+#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
+#sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;prepare workspace&quot;
+rm -rf ./${STC_INSTALL_DIR}
+rm -rf ./Spirent_TestCenter_Application_Linux_Server/
+
+echo &quot;extract application files&quot;
+tar -zxvf TestCenter.Linux.tar.gz
+mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
+
+ls -al
+
+echo &quot;use API/Python/StcPython.py&quot;
+#mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
+cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
+
+echo &quot;free up some space&quot;
+rm -rf TestCenter.Linux.tar.gz
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::get physicalchassismanager1&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList \$hPhysicalChassis&quot; &gt;&gt; reboot.tcl
+echo &quot;exit&quot; &gt;&gt; reboot.tcl
+
+tclsh ./reboot.tcl</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>echo &quot;!!! CLEAN OUT WORKSPACE !!!&quot;
+rm -rf ./${STC_INSTALL_DIR}</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
+  </buildWrappers>
+</project>
