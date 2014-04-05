@@ -2122,6 +2122,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+            <string>hw_patch_fpga_frenzy_1g_nic</string>
             <string>hw_sanity_basic_frenzy_1g_nic</string>
             <string>hw_sanity_dsg_frenzy_1g_nic</string>
             <string>hw_sanity_sfpga_frenzy_1g_nic</string>
