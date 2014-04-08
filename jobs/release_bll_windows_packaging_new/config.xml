@@ -27,7 +27,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -47,7 +47,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -70,7 +70,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
@@ -94,6 +94,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 //ISDE_China/SDE/Java/... //ws/framework/ui/EAT/...&#xd;
 //TestCenter/${BRANCH_NAME}/framework/bll/serverManager/scripts/... //ws/framework/bll/serverManager/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -139,7 +140,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <customWorkspace>${JOB_NAME}</customWorkspace>
   <builders>
@@ -148,7 +149,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
 del UI_changelist*.txt
 exit /B 0</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_ui_ci</project>
       <filter>bin/Release/TestCenter.Windows.no_version.tar.gz, BLL_changelist*.txt, UI_changelist*.txt</filter>
       <target></target>
@@ -156,24 +157,27 @@ exit /B 0</command>
         <id>lastBuild</id>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
       <command>echo extracting TestCenter.Windows.no_version.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
 python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_version.tar.gz --directory=bin/Release</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_webhelp</project>
       <filter>TestCenter_WebHelp.tar.gz, Provisioning_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_results_reporter_windows_ci</project>
       <filter>ResultsReporter.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
       <command>rem -- echo extracting ResultsReporter.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_RESULTS_REPORTER_WINDOWS%
@@ -225,9 +229,6 @@ del EAT.Unix.tar</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>ResultsReporter.Unix.tar.gz, EAT.Unix.tar.gz, BLL_changelist*.txt, UI_changelist*.txt</artifacts>
       <latestOnly>true</latestOnly>
@@ -239,7 +240,7 @@ del EAT.Unix.tar</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>scmteam@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -269,7 +270,7 @@ del EAT.Unix.tar</command>
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
@@ -286,6 +287,6 @@ del EAT.Unix.tar</command>
     </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>

@@ -19,7 +19,7 @@ Does not need to store builds</description>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -44,7 +44,7 @@ Does not need to store builds</description>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>klei</p4User>
     <p4Passwd></p4Passwd>
@@ -113,7 +113,7 @@ Does not need to store builds</description>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
       <spec>* * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -149,7 +149,7 @@ source /opt/pyenv27/bin/activate ; $WORKSPACE/build/il/scripts/phxbld py_utest ;
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <xunit plugin="xunit@1.65">
+    <xunit plugin="xunit@1.84">
       <types>
         <CppUnitJunitHudsonTestType>
           <pattern>${UTEST_OUTPUT_DIR}/*.xml</pattern>
@@ -176,7 +176,7 @@ source /opt/pyenv27/bin/activate ; $WORKSPACE/build/il/scripts/phxbld py_utest ;
       <thresholdMode>1</thresholdMode>
     </xunit>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>cliff.cordeiro@spirent.com, engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com,ramana.pureti@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
@@ -244,6 +244,6 @@ source /opt/pyenv27/bin/activate ; $WORKSPACE/build/il/scripts/phxbld py_utest ;
       <failBuild>true</failBuild>
       <writingDescription>true</writingDescription>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>

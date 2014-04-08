@@ -20,7 +20,7 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BUILD_OUTPUT_DIR</name>
@@ -30,7 +30,7 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -46,7 +46,7 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <customWorkspace>${JOB_NAME}</customWorkspace>
   <builders>
@@ -67,16 +67,13 @@ copy %BUILD_OUTPUT_DIR%\bin\Release\*.* %FILER_DIR% /y
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -115,6 +112,6 @@ copy %BUILD_OUTPUT_DIR%\bin\Release\*.* %FILER_DIR% /y
       <failBuild>false</failBuild>
       <writingDescription>false</writingDescription>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>

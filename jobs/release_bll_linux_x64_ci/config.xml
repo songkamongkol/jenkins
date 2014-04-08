@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -43,7 +43,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version TODO: get this from a file</description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>RELEASE_BUILD</name>
@@ -53,7 +53,7 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
@@ -130,7 +130,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
       <spec>0,10,20,30,40,50 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -187,9 +187,6 @@ fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>${BUILD_OUTPUT_DIR}/TestCenter*.tar.gz, build/il/bld_bll-el3-64_x86_64/Release/bin/TestCenter.Linux.x64.full.tar.gz</artifacts>
       <latestOnly>true</latestOnly>
@@ -212,7 +209,7 @@ fi</command>
       <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
@@ -276,6 +273,6 @@ fi</command>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>

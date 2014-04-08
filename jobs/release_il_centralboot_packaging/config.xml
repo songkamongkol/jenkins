@@ -22,7 +22,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -37,7 +37,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SOURCE_OS</name>
@@ -47,7 +47,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>scmbuild</p4User>
     <p4Passwd></p4Passwd>
@@ -119,7 +119,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -306,9 +306,6 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>properties.txt</artifacts>
       <latestOnly>true</latestOnly>
@@ -319,7 +316,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -349,7 +346,7 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
       <replyTo>$DEFAULT_RECIPIENTS</replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.21">
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
@@ -366,6 +363,6 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion
     </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>

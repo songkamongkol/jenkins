@@ -20,12 +20,12 @@ pw_packages_to_test and clean out the same file in \\spccalfs04\SCM\SCMSmartTest
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.40_rel</defaultValue>
+          <defaultValue>4.41_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.40</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -46,7 +46,7 @@ pw_packages_to_test and clean out the same file in \\spccalfs04\SCM\SCMSmartTest
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
@@ -70,13 +70,13 @@ rem touch \\spccalfs04\SCM\SCMSmartTest\%STC_MAJ_MIN_VERSION%\pw_packages_to_tes
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.tasks.Mailer plugin="mailer@1.5">
+    <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients>somboon.ongkamongkol@spirent.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
