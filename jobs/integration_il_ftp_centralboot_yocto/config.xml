@@ -73,7 +73,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -102,6 +102,26 @@ SET ILWORKSPACE=/home/spirent/jenkins-tc/workspace/integration_il_centralboot_pa
 SET DEPENDENT_JOB_NAME=integration_il_ftp_centralboot_yocto
 c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=no --runsetver=no --runciftpcentralboot=yes --updatelatestbuildtext=no</command>
     </hudson.tasks.BatchFile>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+
+bll_build_number = os.environ[&apos;BUILD_NUMBER&apos;]
+branch_id = &quot;3&quot;
+buildver = bll_build_number+branch_id
+stc_maj_min_ver=os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]
+martindir=&quot;\\\\martin\\archive\\pv\\TestCenter\\&quot; + stc_maj_min_ver + &quot;\\Engineering_Builds&quot;
+# read the previous changelist from the changelist file and then update it
+out_file = martindir + &quot;\\latestbuild-yocto.txt&quot;
+print out_file
+
+# update the changelist file with the changelist from this build
+outfile = open(out_file , &quot;w&quot;)
+outfile.write(&quot;BLL=&quot;+stc_maj_min_ver + &quot;.&quot; + buildver +&quot;\nIL=&quot; + stc_maj_min_ver + &quot;.&quot; + buildver+&quot;\nL4L7=&quot;) 
+outfile.close()
+
+# now copy the file to the dashboard server
+print &quot;Finished with update latestbuild-yocto.txt&quot;</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers/>
   <buildWrappers>
