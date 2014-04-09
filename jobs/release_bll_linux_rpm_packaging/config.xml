@@ -59,10 +59,8 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>//SCM/Installer/tar2rpm/... //ws/...&#xd;
-</projectPath>
+    <projectPath>//SCM/Installer/tar2rpm/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -97,8 +95,8 @@
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -121,7 +119,7 @@ if [ &quot;$BRANCH_NAME&quot; = &quot;release&quot; ]; then
 fi
 
 # -- setup build number and path based on the branch name
-if [ &quot;$BRANCH_NAME&quot; = &quot;4.40_rel&quot; ]; then
+if [[ $BRANCH_NAME == *_rel* ]]; then
      export BRANCH_ID=&apos;6&apos;
 fi
 
