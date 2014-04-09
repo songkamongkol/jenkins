@@ -2239,55 +2239,6 @@
     </hudson.plugins.nested__view.NestedView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
-      <name>4.37_rel</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <views>
-        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
-          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-          <name>4.37_rel_summary_packaging</name>
-          <filterExecutors>false</filterExecutors>
-          <filterQueue>false</filterQueue>
-          <properties class="hudson.model.View$PropertyList"/>
-          <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../hudson.plugins.nested__view.NestedView[4]/views/listView/jobNames/comparator"/>
-            <string>4.37_rel_bll_freebsd63_packaging</string>
-            <string>4.37_rel_bll_freebsd71_packaging</string>
-            <string>4.37_rel_bll_linux_packaging</string>
-            <string>4.37_rel_bll_linux_x64_packaging</string>
-            <string>4.37_rel_ftp_tarball_packaging</string>
-          </jobNames>
-          <jobFilters/>
-          <columns>
-            <hudson.views.StatusColumn/>
-            <hudson.views.WeatherColumn/>
-            <hudson.views.JobColumn/>
-            <hudson.views.LastSuccessColumn/>
-            <hudson.views.LastFailureColumn/>
-            <hudson.views.LastDurationColumn/>
-            <hudson.views.BuildButtonColumn/>
-            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
-            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-          </columns>
-          <recurse>false</recurse>
-          <useCssStyle>true</useCssStyle>
-          <includeStdJobList>true</includeStdJobList>
-          <leftPortletWidth>50%</leftPortletWidth>
-          <rightPortletWidth>50%</rightPortletWidth>
-          <leftPortlets/>
-          <rightPortlets/>
-          <topPortlets/>
-          <bottomPortlets/>
-        </hudson.plugins.view.dashboard.Dashboard>
-      </views>
-      <defaultView>4.37_rel_summary_ci</defaultView>
-      <columns>
-        <columns/>
-      </columns>
-    </hudson.plugins.nested__view.NestedView>
-    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
-      <owner class="hudson" reference="../../.."/>
       <name>yocto_test</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
