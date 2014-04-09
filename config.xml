@@ -2246,42 +2246,6 @@
       <views>
         <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-          <name>4.37_rel_summary_ci</name>
-          <filterExecutors>false</filterExecutors>
-          <filterQueue>false</filterQueue>
-          <properties class="hudson.model.View$PropertyList"/>
-          <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../hudson.plugins.nested__view.NestedView[4]/views/listView/jobNames/comparator"/>
-            <string>4.37_rel_bll_ci</string>
-            <string>4.37_rel_bll_linux_ci</string>
-            <string>4.37_rel_bll_linux_x64_ci</string>
-            <string>4.37_rel_bll_windows_ci</string>
-            <string>4.37_rel_ui_ci</string>
-          </jobNames>
-          <jobFilters/>
-          <columns>
-            <hudson.views.StatusColumn/>
-            <hudson.views.WeatherColumn/>
-            <hudson.views.JobColumn/>
-            <hudson.views.LastSuccessColumn/>
-            <hudson.views.LastFailureColumn/>
-            <hudson.views.LastDurationColumn/>
-            <hudson.views.BuildButtonColumn/>
-            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
-            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-          </columns>
-          <recurse>false</recurse>
-          <useCssStyle>true</useCssStyle>
-          <includeStdJobList>true</includeStdJobList>
-          <leftPortletWidth>50%</leftPortletWidth>
-          <rightPortletWidth>50%</rightPortletWidth>
-          <leftPortlets/>
-          <rightPortlets/>
-          <topPortlets/>
-          <bottomPortlets/>
-        </hudson.plugins.view.dashboard.Dashboard>
-        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
-          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>4.37_rel_summary_packaging</name>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
