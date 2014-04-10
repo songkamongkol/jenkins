@@ -73,7 +73,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -105,7 +105,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 
-bll_build_number = os.environ[&apos;BUILD_NUMBER&apos;]
+bll_build_number = os.environ[&apos;BLL_BUILD_NUMBER&apos;]
 branch_id = &quot;3&quot;
 buildver = bll_build_number+branch_id
 stc_maj_min_ver=os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]
