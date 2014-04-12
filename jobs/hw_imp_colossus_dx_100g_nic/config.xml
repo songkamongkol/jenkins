@@ -158,9 +158,9 @@ echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force -mode funcsim colossus_nic_imp_funcsim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_nic_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
 #echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_nic_imp.sdf colossus_nic_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force -mode timesim –sdf_anno true colossus_nic_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_nic_imp_timesim.v -mode timesim –sdf_anno true&quot; &gt;&gt; myImp.tcl
 echo &quot;write_sdf -force colossus_nic_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
