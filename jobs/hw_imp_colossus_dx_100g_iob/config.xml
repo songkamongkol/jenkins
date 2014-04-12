@@ -162,7 +162,7 @@ echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_des
 echo &quot;write_verilog -force -mode funcsim colossus_iob_imp_funcsim.v&quot; &gt;&gt; myImp.tcl
 #echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
 echo &quot;write_verilog -mode timesim -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_sdf -force colossus_iob_imp.sdf&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf colossus_iob_imp.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit&quot; &gt;&gt; myImp.tcl
