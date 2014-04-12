@@ -161,8 +161,8 @@ echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
 echo &quot;write_verilog -force -mode funcsim colossus_iob_imp_funcsim.v&quot; &gt;&gt; myImp.tcl
 #echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -mode timesim -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_sdf colossus_iob_imp.sdf&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force -mode timesim –sdf_anno true colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit&quot; &gt;&gt; myImp.tcl
@@ -195,7 +195,7 @@ md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
         </hudson.tasks.Shell>
         <hudson.tasks.Shell>
           <command>cd VivadoBlade
-tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./colossus_iob_imp.sdf</command>
+tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
