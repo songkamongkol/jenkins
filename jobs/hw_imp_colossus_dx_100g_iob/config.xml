@@ -72,7 +72,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -165,7 +165,7 @@ echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_an
 echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/colossus_100g.bit&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -190,7 +190,7 @@ vivado -mode batch -source ./myImp.tcl</command>
       <conditionalbuilders>
         <hudson.tasks.Shell>
           <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
-md5sum -b ColossusDX_BLADE100G.bit &gt; ColossusDX_BLADE100G.bit.md5
+md5sum -b colossus_100g.bit &gt; colossus_100g.bit.md5
 </command>
         </hudson.tasks.Shell>
         <hudson.tasks.Shell>
@@ -252,7 +252,7 @@ tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/ColossusDX_BLADE100G.bit*, VivadoBlade/version.txt</artifacts>
+      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit*, VivadoBlade/version.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
