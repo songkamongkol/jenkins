@@ -22,7 +22,7 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description></description>
-          <defaultValue>4.42</defaultValue>
+          <defaultValue>4.41</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
