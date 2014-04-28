@@ -66,32 +66,31 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/Layer1/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../il/...&#xd;
--//TestCenter/*/.../hw/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/content/cts/...&#xd;
--//TestCenter/*/common/lib/java/...&#xd;
--//TestCenter/*/common/tools/scons/...&#xd;
--//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/scm/...&#xd;
--//TestCenter/*/regression/...&#xd;
-+//TestCenter/${BRANCH_NAME}/build/il/... //ws/build/il/...&#xd;
--//TestCenter/${BRANCH_NAME}/build/il/cli/... //ws/build/il/cli/...&#xd;
--//TestCenter/${BRANCH_NAME}/build/il/testframework/... //ws/build/il/testframework/...&#xd;
--//TestCenter/*/.../ui/...&#xd;
-+//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...&#xd;
+    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/Layer1/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../il/...
+-//TestCenter/*/.../hw/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/content/cts/...
+-//TestCenter/*/common/lib/java/...
+-//TestCenter/*/common/tools/scons/...
+-//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/scm/...
+-//TestCenter/*/regression/...
++//TestCenter/${BRANCH_NAME}/build/il/... //ws/build/il/...
+-//TestCenter/${BRANCH_NAME}/build/il/cli/... //ws/build/il/cli/...
+-//TestCenter/${BRANCH_NAME}/build/il/testframework/... //ws/build/il/testframework/...
+-//TestCenter/*/.../ui/...
++//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...
 +//TestCenter/${BRANCH_NAME}/framework/ui/automation/... //ws/framework/ui/automation/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -103,7 +102,7 @@
     <p4Tool>p4</p4Tool>
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
-    <forceSync>false</forceSync>
+    <forceSync>true</forceSync>
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
@@ -121,13 +120,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
