@@ -1501,15 +1501,7 @@
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
-        <userName>spirent</userName>
-        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
-        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
-          <userName>techpubbld\spirent</userName>
-          <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
-        </account>
-        <host>techpubbld</host>
-      </launcher>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
       <label></label>
       <nodeProperties/>
       <userId>mhaber</userId>
