@@ -1494,6 +1494,26 @@
       <nodeProperties/>
       <userId>ASu</userId>
     </slave>
+    <slave>
+      <name>techpubbld</name>
+      <description></description>
+      <remoteFS>c:\jenkins-tc</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
+        <userName>spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
+          <userName>klocwork-bllbld\spirent</userName>
+          <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        </account>
+        <host>klocwork-bllbld</host>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>mhaber</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
