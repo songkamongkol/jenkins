@@ -1505,10 +1505,10 @@
         <userName>spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
-          <userName>klocwork-bllbld\spirent</userName>
+          <userName>techpubbld\spirent</userName>
           <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         </account>
-        <host>klocwork-bllbld</host>
+        <host>techpubbld</host>
       </launcher>
       <label></label>
       <nodeProperties/>
