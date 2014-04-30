@@ -4,7 +4,7 @@
   <description>Uses MadCap Flare tool to compile webhelp files&lt;br&gt;&#xd;
 Creates STC and Server Manager help files&lt;br&gt;&#xd;
 Archives output as tar files for use during packaging jobs&lt;br&gt;&#xd;
-Triggers integration_package_bll_windows&lt;br&gt;</description>
+Triggers release_bll_win_pkg_webhelp&lt;br&gt;</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>10</numToKeep>
