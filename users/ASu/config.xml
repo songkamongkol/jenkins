@@ -31,6 +31,9 @@
     <hudson.model.PaneStatusProperties>
       <collapsed/>
     </hudson.model.PaneStatusProperties>
-    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27">
+      <perforceId>ASu</perforceId>
+      <perforceEmail>Alex.Su@spirentcom.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
   </properties>
 </user>
