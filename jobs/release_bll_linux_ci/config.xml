@@ -120,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -167,7 +167,8 @@ fi</command>
       <command>cd $WORKSPACE/$BUILD_OUTPUT_DIR
 rm -f TestCenter*.tar.gz
 if [ &quot;$BUILD_PACKAGE_BUILD&quot; = &quot;true&quot; ]; then
-    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=TestCenter 
+    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=TestCenter
+    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=STAKCommands.beta 
     #cp TestCenter.Linux.tar.gz TestCenter.Linux.no_version.tar.gz
     #python $WORKSPACE/framework/tools/buildUtil/setver.py --package=TestCenter.Linux.tar.gz $STC_MAJ_MIN_VERSION $P4_CHANGELIST
 fi</command>
@@ -197,7 +198,7 @@ for row in reader:
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>${BUILD_OUTPUT_DIR}/TestCenter*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz, ${BUILD_OUTPUT_DIR}/pw_packages_to_test_report.txt, ${BUILD_OUTPUT_DIR}/pw_packages_to_test.txt, ${BUILD_OUTPUT_DIR}/pw_unknown_files_report.txt, BLL_Linux_changelist*.txt,gcc_warning.log, bll_idl_crc.txt</artifacts>
+      <artifacts>${BUILD_OUTPUT_DIR}/TestCenter*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz, ${BUILD_OUTPUT_DIR}/pw_packages_to_test_report.txt, ${BUILD_OUTPUT_DIR}/pw_packages_to_test.txt, ${BUILD_OUTPUT_DIR}/pw_unknown_files_report.txt, BLL_Linux_changelist*.txt,gcc_warning.log, bll_idl_crc.txt, ${BUILD_OUTPUT_DIR}/STAKCommands.beta.Linux.tar.gz</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -214,8 +215,8 @@ for row in reader:
       </testDataPublishers>
     </hudson.tasks.junit.JUnitResultArchiver>
     <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
+      <targets>${BUILD_OUTPUT_DIR}/TestCenter*.tar.gz, BLL_Linux_changelist*.txt, bll_idl_crc.txt</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
