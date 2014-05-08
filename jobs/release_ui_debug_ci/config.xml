@@ -63,29 +63,28 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/Layer1/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../il/...&#xd;
--//TestCenter/*/.../hw/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/content/cts/...&#xd;
--//TestCenter/*/common/lib/java/...&#xd;
--//TestCenter/*/common/tools/scons/...&#xd;
--//TestCenter/*/framework/ui/resultsanalysis/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/scm/...&#xd;
--//TestCenter/*/regression/...&#xd;
-+//TestCenter/${BRANCH_NAME}/scm/tools/... //ws/scm/tools/...&#xd;
+    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/Layer1/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../il/...
+-//TestCenter/*/.../hw/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/content/cts/...
+-//TestCenter/*/common/lib/java/...
+-//TestCenter/*/common/tools/scons/...
+-//TestCenter/*/framework/ui/resultsanalysis/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/scm/...
+-//TestCenter/*/regression/...
++//TestCenter/${BRANCH_NAME}/scm/tools/... //ws/scm/tools/...
 +//TestCenter/${BRANCH_NAME}/build/il/configs/scripts/... //ws/build/il/configs/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4Label>${BUILD_LABEL}</p4Label>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -115,13 +114,13 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -148,8 +147,18 @@ exit /B 0</command>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>release_bll_windows_debug_ci</project>
+      <filter>STAKCommands.beta.Windows.tar.gz</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>python framework\tools\buildUtil\package.py --install TestCenterDebug.Windows.bll.tar.gz --remove-dir=bin/Debug</command>
+      <command>python framework\tools\buildUtil\package.py --install TestCenterDebug.Windows.bll.tar.gz --remove-dir=bin/Debug
+
+python framework\tools\buildUtil\package.py --install STAKCommands.beta.Windows.tar.gz --directory=bin/Debug --append</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python genSln.py</command>
@@ -169,6 +178,7 @@ xcopy /Y /R /D ..\..\scm\tools\devexpress .
 xcopy /Y /R /D ..\..\scm\tools\dundas .
 xcopy /Y /R /D ..\..\scm\tools\janus .
 python framework\tools\buildUtil\package.py --package=TestCenterDebug 
+python framework\tools\buildUtil\package.py --package=STAKCommands.beta
 REM python framework\tools\buildUtil\setver.py --package=TestCenterDebug.Windows.tar.gz %STC_MAJ_MIN_VERSION% %P4_CHANGELIST%
 )</command>
     </hudson.tasks.BatchFile>
@@ -182,7 +192,7 @@ python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=2 --ui --a
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>TestCenterDebug.Windows*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz</artifacts>
+      <artifacts>TestCenterDebug.Windows*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz, ${BUILD_OUTPUT_DIR}/STAKCommands.beta.Windows.tar.gz</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -192,8 +202,8 @@ python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=2 --ui --a
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
+      <targets>TestCenterDebug.Windows*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
