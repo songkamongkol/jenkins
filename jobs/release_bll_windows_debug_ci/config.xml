@@ -109,7 +109,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -150,7 +150,7 @@ python framework\tools\buildUtil\package.py --package=STAKCommands.beta
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>TestCenterDebug.Windows.bll.tar.gz</artifacts>
+      <artifacts>TestCenterDebug.Windows.bll.tar.gz, STAKCommands.beta.Windows.tar.gz</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
