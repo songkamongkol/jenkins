@@ -14,20 +14,30 @@
       </views>
     </hudson.model.MyViewsProperty>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>51KKe+WeN+zqI8mTYknVl+6YnXVo+dqFyu92KI203VSr4Y06FIA/BhVvdSRSD6Xn</apiToken>
+      <apiToken>kDhRZeydmKUq/2tE971BJlkNzJedfPHDM2DmY8DSP8eMUI312X1je9kzAs11ZCogpGTlivN0RL1hSW94uLogv+qVbBNlVZnEhqgbYdAj5rE=</apiToken>
     </jenkins.security.ApiTokenProperty>
     <hudson.security.HudsonPrivateSecurityRealm_-Details>
       <passwordHash>FjGFBk:0114f51a4f8dc19484b0dcf69e657af53c0e31ced62f2a034fe6fb2a7f0b67ae</passwordHash>
     </hudson.security.HudsonPrivateSecurityRealm_-Details>
-    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.4">
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
       <emailAddress>felma.duque@spirent.com</emailAddress>
     </hudson.tasks.Mailer_-UserProperty>
-    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.4">
-      <credentials/>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
     </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
     <hudson.search.UserSearchProperty>
       <insensitiveSearch>false</insensitiveSearch>
     </hudson.search.UserSearchProperty>
-    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.21"/>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
   </properties>
 </user>
