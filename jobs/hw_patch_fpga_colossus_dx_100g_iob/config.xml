@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Patch FPGA image on Colossus DX 1x100G NIC</description>
+  <description>Patch FPGA image on Colossus DX 1x100G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
@@ -12,12 +12,17 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
-          <defaultValue>10.100.21.108</defaultValue>
+          <defaultValue>10.100.254.188</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_SLOT_ID</name>
+          <description>Slot ID of Spirent test module (zero-based)</description>
+          <defaultValue>0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
-          <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/hypervisor/fpga</description>
-          <defaultValue>/mnt/spirent/hypervisor/fpga</defaultValue>
+          <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/testmodule/slot0/hypervisor/fpga</description>
+          <defaultValue>/mnt/spirent/testmodule/slot${STC_SLOT_ID}/hypervisor/fpga</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_INSTALL_DIR</name>
@@ -37,18 +42,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_imp_colossus_dx_100g_nic</project>
-      <filter>Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
-      </selector>
-      <flatten>true</flatten>
-      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
-    </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>bll_linux</project>
-      <filter>build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz</filter>
+      <project>hw_imp_colossus_dx_100g_iob</project>
+      <filter>Vivado/Vivado.runs/impl_1/colossus_100g.bit*</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -58,16 +53,15 @@
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
-#sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
-sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
+
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./colossus_100g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/colossus_100g_jenkins.bit
 
 echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
-#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf ColossusDX_1x100G_jenkins.bit ${STC_FPGA_DIR}/ColossusDX_1x100G.bit&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf colossus_100g_jenkins.bit ${STC_FPGA_DIR}/colossus_100g.bit&quot;
 
 
-#sshpass -f /etc/stc_chassis.pass ssh -t -v -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
-#sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}/; ls -al ColossusDX_1x100G.bit&quot;
+
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -75,11 +69,14 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
 rm -rf ./${STC_INSTALL_DIR}
 rm -rf ./Spirent_TestCenter_Application_Linux_Server/
 
+echo &quot;get Spirent TestCenter BLL artifact&quot;
+wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+
 echo &quot;extract application files&quot;
 tar -zxvf TestCenter.Linux.tar.gz
 mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
-ls -al
+#ls -al
 
 echo &quot;use API/Python/StcPython.py&quot;
 #mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
@@ -96,10 +93,11 @@ cd ${STC_INSTALL_DIR}
 
 echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::get physicalchassismanager1&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassisManager [stc::get system1 -children-physicalchassismanager]&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
-echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::perform RebootEquipment -EquipmentList \$hPhysicalChassis&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassis [stc::get $hPhysicalChassisManager -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
+echo &quot;set hTestModule [lindex [stc::get $hPhysicalChassis -children-physicaltestmodule] ${STC_SLOT_ID}]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList $hTestModule&quot; &gt;&gt; reboot.tcl
 echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
