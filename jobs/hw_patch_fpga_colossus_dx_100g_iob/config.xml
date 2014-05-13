@@ -43,7 +43,7 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_imp_colossus_dx_100g_iob</project>
-      <filter>Vivado/Vivado.runs/impl_1/colossus_100g.bit*</filter>
+      <filter>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit*</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
