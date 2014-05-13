@@ -46,16 +46,6 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>bll_linux</project>
-      <filter>build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
-      </selector>
-      <flatten>true</flatten>
-      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
-    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 #sshpass -f /etc/stc_chassis.pass scp -v -o StrictHostKeyChecking=no ./ColossusDX_1x100G.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/ColossusDX_1x100G_jenkins.bit
@@ -74,6 +64,9 @@ sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHAS
       <command>echo &quot;prepare workspace&quot;
 rm -rf ./${STC_INSTALL_DIR}
 rm -rf ./Spirent_TestCenter_Application_Linux_Server/
+
+echo &quot;get Spirent TestCenter BLL artifact&quot;
+wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
 
 echo &quot;extract application files&quot;
 tar -zxvf TestCenter.Linux.tar.gz
