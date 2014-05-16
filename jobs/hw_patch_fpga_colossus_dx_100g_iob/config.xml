@@ -105,6 +105,15 @@ tclsh ./reboot.tcl</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_sanity_basic_colossus_dx_100g_iob</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
         <hudson.tasks.Shell>
