@@ -115,7 +115,7 @@ Archive il_virtual_*.tar&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -185,7 +185,7 @@ $WORKSPACE/build/il/scripts/phxbld -j8 appliance_yocto
 $WORKSPACE/build/il/scripts/phxbld -j16 qemu
 $WORKSPACE/build/il/scripts/phxbld -j16 qemu_raw
 $WORKSPACE/build/il/scripts/phxbld -j16 stca
-sudo rm -rf $WORKSPACE/build/il/bld_*</command>
+# sudo rm -rf $WORKSPACE/build/il/bld_*</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command># rm -f il_virtual_$STC_MAJ_MIN_VERSION.tar
