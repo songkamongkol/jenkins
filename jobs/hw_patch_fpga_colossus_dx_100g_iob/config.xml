@@ -54,6 +54,13 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
+      <command>echo &quot;Original FPGA image version:&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+
+echo &quot;&quot;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
 sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./colossus_100g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/colossus_100g_jenkins.bit
@@ -103,6 +110,13 @@ echo &quot;stc::perform RebootEquipment -EquipmentList \$hTestModule&quot; &gt;&
 echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;New FPGA image version:&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+
+echo &quot;&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
