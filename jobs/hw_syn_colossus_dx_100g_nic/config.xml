@@ -29,7 +29,7 @@
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
           <description>FlexLM license server ports, example:  1709@spcsjcapp01.ad.spirentcom.com:1709@SPCCALFLEX02.ad.spirentcom.com</description>
-          <defaultValue>1709@SPCCALFLEX02.ad.spirentcom.com</defaultValue>
+          <defaultValue>1709@spcsjcapp01.ad.spirentcom.com:1709@SPCCALFLEX02.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
