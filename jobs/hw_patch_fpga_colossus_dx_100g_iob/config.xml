@@ -6,7 +6,7 @@
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>hw_sanity_*_colossus_dx_100g_iob</blockingJobs>
+      <blockingJobs>hw_sanity_.*_colossus_dx_100g_iob</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -138,7 +138,6 @@ rm -rf ./${STC_INSTALL_DIR}</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
