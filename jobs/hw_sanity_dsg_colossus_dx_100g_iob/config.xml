@@ -20,14 +20,14 @@
           <defaultValue>10.100.21.96</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>FILTER</name>
-          <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
-          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Spirent TestCenter testmodule slot ID (0-based)</description>
           <defaultValue>7</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>FILTER</name>
+          <description>filter (e.g. IL and HW_TBIRD and sanity_testlist_sanity_thunderbird)</description>
+          <defaultValue>IL and HW_COLOSSUS_DX_100G and sanity_testlist_sanity_thunderbird and sanity_fast_streams and not sanity_bi_dir and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TMP_DIR</name>
