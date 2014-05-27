@@ -49,7 +49,7 @@
     <hudson.tasks.Shell>
       <command>echo &quot;Original FPGA image version:&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh root@${STC_CHASSIS_IP} rsh ccpu1 /usr/spirent/bin/tp 0 0
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@10.100.21.108 &quot;/mnt/spirent/hypervisor/fpga/peek32 \`setpci -s 1:0 BASE_ADDRESS_0\`&quot;
 
 echo &quot;&quot;</command>
     </hudson.tasks.Shell>
@@ -107,7 +107,7 @@ tclsh ./reboot.tcl</command>
     <hudson.tasks.Shell>
       <command>echo &quot;New FPGA image version:&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh root@${STC_CHASSIS_IP} rsh ccpu1 /usr/spirent/bin/tp 0 0
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@10.100.21.108 &quot;/mnt/spirent/hypervisor/fpga/peek32 \`setpci -s 1:0 BASE_ADDRESS_0\`&quot;
 
 echo &quot;&quot;</command>
     </hudson.tasks.Shell>
