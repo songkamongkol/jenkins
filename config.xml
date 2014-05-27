@@ -1476,6 +1476,36 @@
       <nodeProperties/>
       <userId>mhaber</userId>
     </slave>
+    <slave>
+      <name>jazz-fpga-regression-1</name>
+      <description>Linux Ubuntu 12.04.1 LTS (32-bit)</description>
+      <remoteFS>/tmp</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
+        <host>jazz-fpga-regression-1.ad.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>d031eec0-5dbd-4681-8fda-99d7b4d8fb84</credentialsId>
+      </launcher>
+      <label>Linux Ubuntu12.04 32bit</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>PATH</string>
+              <string>/opt/perforce/p4_cli:$PATH</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+      <userId>ASu</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
