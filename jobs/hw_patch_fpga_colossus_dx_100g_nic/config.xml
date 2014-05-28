@@ -15,6 +15,11 @@
           <defaultValue>10.100.21.108</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
+          <name>STC_SLOT_ID</name>
+          <description>Slot ID of Spirent test module (zero-based)</description>
+          <defaultValue>0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
           <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/hypervisor/fpga</description>
           <defaultValue>/mnt/spirent/hypervisor/fpga</defaultValue>
