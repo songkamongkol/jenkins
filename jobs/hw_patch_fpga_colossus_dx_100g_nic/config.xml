@@ -103,12 +103,21 @@ rm -rf TestCenter.Linux.x64.full.tar.gz
 
 cd ${STC_INSTALL_DIR}
 
+#echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
+#echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
+#echo &quot;stc::get physicalchassismanager1&quot; &gt;&gt; reboot.tcl
+#echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
+#echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
+#echo &quot;stc::perform RebootEquipment -EquipmentList \$hPhysicalChassis&quot; &gt;&gt; reboot.tcl
+#echo &quot;exit&quot; &gt;&gt; reboot.tcl
+
 echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::get physicalchassismanager1&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassisManager [stc::get system1 -children-physicalchassismanager]&quot; &gt;&gt; reboot.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
-echo &quot;set hPhysicalChassis [stc::get physicalchassismanager1 -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::perform RebootEquipment -EquipmentList \$hPhysicalChassis&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassis [stc::get \$hPhysicalChassisManager -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
+echo &quot;set hTestModule [lindex [stc::get \$hPhysicalChassis -children-physicaltestmodule] ${STC_SLOT_ID}]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList \$hTestModule&quot; &gt;&gt; reboot.tcl
 echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
