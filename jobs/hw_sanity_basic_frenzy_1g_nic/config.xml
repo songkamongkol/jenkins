@@ -60,6 +60,7 @@
 +//TestCenter/${BRANCH_NAME}/regression/Thot.tcl  //ws/build/il/testframework/testcases/Thot.tcl
 +//TestCenter/${BRANCH_NAME}/regression/conftest.py  //ws/build/il/testframework/testcases/conftest.py
 +//TestCenter/${BRANCH_NAME}/regression/regression.py  //ws/build/il/testframework/testcases/regression.py
++//TestCenter/${BRANCH_NAME}/regression/usage.py  //ws/build/il/testframework/testcases/usage.py
 
 +//SPT_HW/Colossus/sandbox/bitstream/regression/il/testframework/configs/sanity/fast_streams.ini  //ws/build/il/testframework/configs/sanity/fast_streams.ini
 +//SPT_HW/regression/il/testframework/configs/sanity/bi_dir.ini  //ws/build/il/testframework/configs/sanity/bi_dir.ini</projectPath>
@@ -93,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
