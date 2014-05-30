@@ -20,7 +20,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.42_rel</defaultValue>
+          <defaultValue>4.43_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -45,7 +45,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version TODO: get this from a file</description>
-          <defaultValue>4.42</defaultValue>
+          <defaultValue>4.43</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -83,6 +83,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
 +//TestCenter/${BRANCH_NAME}/build/il/scripts/... //ws/build/il/scripts/...
 +//TestCenter/${BRANCH_NAME}/build/il/configs/scripts/... //ws/build/il/configs/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
