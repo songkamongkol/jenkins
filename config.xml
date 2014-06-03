@@ -2290,7 +2290,6 @@
             <string>il_lxc_yocto</string>
             <string>il_qemu_yocto</string>
             <string>il_virtual_yocto</string>
-            <string>ui_yocto</string>
           </jobNames>
           <jobFilters/>
           <columns>
