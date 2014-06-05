@@ -152,7 +152,7 @@ $WORKSPACE/build/il/scripts/phxbld centralboot_changeling_yocto2
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>build/il/pw_unknown_files_report, build/il/pw_packages_to_test, build/il/pw_packages_to_test_report,build/il/packages/central/rawimage.map, *_changelist_*.txt</artifacts>
+      <artifacts>build/il/pw_unknown_files_report, build/il/pw_packages_to_test, build/il/pw_packages_to_test_report,build/il/packages/central/rawimage.map, *_changelist_*.txt,changelist.properties</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -162,7 +162,7 @@ $WORKSPACE/build/il/scripts/phxbld centralboot_changeling_yocto2
       <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
-      <targets>build/il/packages/central/testcenter*.*, build/il/packages/central/rawimage.map,*_changelist_*.txt,changelist.properties</targets>
+      <targets>build/il/packages/central/testcenter*.*, build/il/packages/central/rawimage.map,*_changelist_*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
