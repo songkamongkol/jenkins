@@ -1787,66 +1787,12 @@
     </hudson.plugins.view.dashboard.Dashboard>
     <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
       <owner class="hudson" reference="../../.."/>
-      <name>SmartTest-Nightly</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>STR-Admin-Integration</string>
-        <string>STR-Admin-Release</string>
-        <string>STR-Admin-Results-Integration</string>
-        <string>STR-Admin-Results-Release</string>
-        <string>STR-Amara-Admin</string>
-        <string>STR-Amara-Admin-Results</string>
-        <string>STR-Karma-Integration</string>
-        <string>STR-Karma-Integration-Results</string>
-        <string>STR-Nightly-433-Release</string>
-        <string>STR-Nightly-433-Release-Results</string>
-        <string>STR-Nightly-4_1x_rel</string>
-        <string>STR-Nightly-Integration</string>
-        <string>STR-Nightly-Release</string>
-        <string>STR-Nightly-Release-S3</string>
-        <string>STR-Nightly-Release-S3-Results</string>
-        <string>STR-Nightly-Results-4_1x_rel</string>
-        <string>STR-Nightly-Results-Integration</string>
-        <string>STR-Nightly-Results-Release</string>
-        <string>STR-QTP-Integration</string>
-        <string>STR-QTP-Release</string>
-        <string>STR-QTP-Results-Integration</string>
-        <string>STR-QTP-Results-Release</string>
-        <string>STR-Wraith-Release</string>
-        <string>STR-Wraith-Release-Results</string>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-      </columns>
-      <recurse>false</recurse>
-      <useCssStyle>false</useCssStyle>
-      <includeStdJobList>true</includeStdJobList>
-      <leftPortletWidth>50%</leftPortletWidth>
-      <rightPortletWidth>50%</rightPortletWidth>
-      <leftPortlets/>
-      <rightPortlets/>
-      <topPortlets/>
-      <bottomPortlets/>
-    </hudson.plugins.view.dashboard.Dashboard>
-    <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
-      <owner class="hudson" reference="../../.."/>
       <name>SmartTest-Weekend</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard[2]/jobNames/comparator"/>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>STR-Admin-Results-Weekend-Integration</string>
         <string>STR-Admin-Results-Weekend-Release</string>
         <string>STR-Admin-Weekend-Integration</string>
