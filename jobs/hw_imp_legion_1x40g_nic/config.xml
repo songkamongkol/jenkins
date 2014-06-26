@@ -117,11 +117,24 @@ VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 
+echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
+cd ${WORKSPACE}
+
+p4 edit SourceCode/include/VERSION_Legion_1x40G.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_Legion_1x40G.v
+sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Legion_1x40G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_Legion_1x40G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Legion_1x40G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Legion_1x40G.v
+
+p4 submit -d &quot;Legion 1x40G NIC version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Legion_1x40G.v
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Legion_1x40G
 
-echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -230,20 +243,7 @@ fi</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.bit*</includes>
-            <basedir>Xilinx_Legion_1x40G</basedir>
-            <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/legion/${JOB_NAME}-${BUILD_NUMBER}</remote>
-            <flatten>true</flatten>
-            <deleteRemote>false</deleteRemote>
-            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
-            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
-            <failNoFilesDeploy>false</failNoFilesDeploy>
-          </entry>
-        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
-        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
-          <entry>
-            <includes>version.txt</includes>
+            <includes>*.bit*, version_*.txt</includes>
             <basedir>Xilinx_Legion_1x40G</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/legion/${JOB_NAME}-${BUILD_NUMBER}</remote>
@@ -264,7 +264,7 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Legion_1x40G/*.bit*, Xilinx_Legion_1x40G/version.txt</artifacts>
+      <artifacts>Xilinx_Legion_1x40G/*.bit*, Xilinx_Legion_1x40G/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
