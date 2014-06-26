@@ -79,7 +79,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -205,21 +205,31 @@ then
 fi
 </command>
     </hudson.tasks.Shell>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
+        <file>VivadoBlade/version_*.txt</file>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+      </condition>
+      <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
+        <entry>
+          <includes>version_*.txt</includes>
+          <basedir>VivadoBlade</basedir>
+          <excludes></excludes>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <flatten>true</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </entry>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
-      <runCondition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
-        <worstResult>
-          <name>FAILURE</name>
-          <ordinal>2</ordinal>
-          <color>RED</color>
-          <completeBuild>true</completeBuild>
-        </worstResult>
-        <bestResult>
-          <name>SUCCESS</name>
-          <ordinal>0</ordinal>
-          <color>BLUE</color>
-          <completeBuild>true</completeBuild>
-        </bestResult>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
+        <file>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit</file>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
@@ -227,27 +237,10 @@ fi
 md5sum -b colossus_100g.bit &gt; colossus_100g.bit.md5
 </command>
         </hudson.tasks.Shell>
-        <hudson.tasks.Shell>
-          <command>cd VivadoBlade
-tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
-        </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
             <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
-            <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
-            <flatten>true</flatten>
-            <deleteRemote>false</deleteRemote>
-            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
-            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
-            <failNoFilesDeploy>false</failNoFilesDeploy>
-          </entry>
-        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
-        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
-          <entry>
-            <includes>version_*.txt</includes>
-            <basedir>VivadoBlade</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -275,6 +268,20 @@ tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
 
 #echo &quot;Done checking Post Routing Timing Summary.&quot;
 </command>
+        </hudson.tasks.Shell>
+      </conditionalbuilders>
+    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
+        <includes>VivadoBlade/colossus_iob_imp*.v</includes>
+        <excludes></excludes>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+      </runCondition>
+      <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>cd VivadoBlade
+tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
