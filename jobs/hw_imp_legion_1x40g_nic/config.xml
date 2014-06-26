@@ -44,10 +44,7 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit  //ws/bitstream/candidate/nic/legion_40g.bit
-+//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit.md5  //ws/bitstream/candidate/nic/legion_40g.bit.md5
-
-+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/...  //ws/SourceCode/...
+    <projectPath>+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/...  //ws/SourceCode/...
 
 +//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Legion_1x40G/... //ws/Xilinx_Legion_1x40G/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
@@ -80,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -113,7 +110,7 @@
     <hudson.tasks.Shell>
       <command>ls -al ${WORKSPACE}
 p4 have //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
-p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
+#p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 ls -al ${WORKSPACE}
 
 #set up environment
