@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>XILINX_PATH</name>
           <description>path to the intended version of Xilinx, example:  /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2013.4</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/ISE/14.7/ISE_DS</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/ISE/14.6/ISE_DS</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
@@ -195,7 +195,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Warpath_1x40G.ut
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m 12 -max_time &quot;08:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
