@@ -23,12 +23,12 @@
         <hudson.model.StringParameterDefinition>
           <name>FIRST_REBOOT_PORT_GROUP</name>
           <description>ID of the first port group to be rebooted (one-based)</description>
-          <defaultValue>1</defaultValue>
+          <defaultValue>5</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LAST_REBOOT_PORT_GROUP</name>
           <description>ID of the last port group to be rebooted (one-based)</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>8</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
