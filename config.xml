@@ -2204,6 +2204,7 @@
             <string>hw_imp_warpath_4x10g_an_iob</string>
             <string>hw_imp_warpath_4x10g_iob</string>
             <string>hw_patch_fpga_warpath_1x40g_iob</string>
+            <string>hw_patch_fpga_warpath_4x10g_iob</string>
             <string>hw_sanity_basic_warpath_1x40g_iob</string>
             <string>hw_sanity_basic_warpath_4x10g_iob</string>
             <string>hw_sanity_dsg_warpath_1x40g_iob</string>
