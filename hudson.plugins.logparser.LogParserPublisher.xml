@@ -41,5 +41,9 @@
       <name>Xilinx Vivado Rules</name>
       <path>/opt/jenkins/jenkins-root/xilinx_vivado_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>Xilinx ise rule</name>
+      <path>/opt/jenkins/jenkins-root/xilinx_ise_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>
 </hudson.plugins.logparser.LogParserPublisher_-DescriptorImpl>

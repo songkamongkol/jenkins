@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<hudson.tasks.Mailer_-DescriptorImpl plugin="mailer@1.5">
+<hudson.tasks.Mailer_-DescriptorImpl plugin="mailer@1.8">
   <hudsonUrl>http://jenkins.cal.ci.spirentcom.com:8080/</hudsonUrl>
   <adminAddress>Chuck Norris &lt;table-no-reply@spirentcom.com&gt;</adminAddress>
   <useSsl>false</useSsl>
