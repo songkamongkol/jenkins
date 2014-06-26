@@ -79,7 +79,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/WarpathTop_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Legion_4x10G.v
@@ -225,6 +225,7 @@ TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apo
 if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
 then
     echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+    exit 1
 fi
 </command>
     </hudson.tasks.Shell>
