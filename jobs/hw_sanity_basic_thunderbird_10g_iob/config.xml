@@ -94,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -147,9 +147,9 @@ cd build/il/testframework/testexecuter
 
 #./idltojar.sh
 
-tar -zxvf ./java.tar.gz
+tar -zxf ./java.tar.gz
 
-tar -zxvf ./idl_tcl.tar.gz</command>
+tar -zxf ./idl_tcl.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>cd build/il/testframework
