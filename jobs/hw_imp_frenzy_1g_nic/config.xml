@@ -48,7 +48,9 @@
 
 +//SPT_HW/frenzy/sandbox/Xilinx/ucf/Frenzy.ucf //ws/Xilinx/ucf/Frenzy.ucf
 
-+//SPT_HW/frenzy/sandbox/Xilinx/Frenzy_ISE.xise  //ws/Xilinx/Frenzy_ISE.xise</projectPath>
++//SPT_HW/frenzy/sandbox/Xilinx/Frenzy_ISE.xise  //ws/Xilinx/Frenzy_ISE.xise
+
++//SPT_HW/frenzy/sandbox/bitstream/candidate/frenzy.bit*  //ws/bitstream/candidate/frenzy.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -62,7 +64,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
+    <alwaysForceSync>true</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -81,6 +83,7 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/frenzy/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -104,14 +107,43 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#set up environment
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/frenzy/sandbox/bitstream/candidate/frenzy.bit*
+ls -al ${WORKSPACE}
+mkdir -p ${WORKSPACE}/bitstream/candidate/
+ls -al ${WORKSPACE}
+p4 sync -f //SPT_HW/frenzy/sandbox/bitstream/candidate/frenzy.bit*
+ls -al ${WORKSPACE}/bitstream/candidate/
+
+#set up environment
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
 
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+
+#update version file information
+echo &quot;Update VERSION.v&quot;
+cd ${WORKSPACE}
+
+p4 edit SourceCode/include/VERSION.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION.v
+sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION.v
+
+p4 submit -d &quot;Frenzy 1G NIC version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION.v
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx
+
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
