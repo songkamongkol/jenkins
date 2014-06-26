@@ -91,7 +91,7 @@
   <quietPeriod>600</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -166,20 +166,20 @@ fi
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd Xilinx_Warpath_4x10G/
+          <command>cd Xilinx_Legion_4x10G/
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
-    cp ${BIT_FILE} ./warpath_10g.bit
-    md5sum -b warpath_10g.bit &gt; warpath_10g.bit.md5
+    cp ${BIT_FILE} ./legion_10g.bit
+    md5sum -b legion_10g.bit &gt; legion_10g.bit.md5
 fi</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>Xilinx_Warpath_4x10G</basedir>
+            <basedir>Xilinx_Legion_4x10G</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/legion/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -197,19 +197,10 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Warpath_4x10G/*.bit*</artifacts>
+      <artifacts>Xilinx_Legion_4x10G/*.bit*</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>hw_patch_fpga_warpath_4x10g_iob</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries class="empty-list"/>
       <deployEvenBuildFail>true</deployEvenBuildFail>
