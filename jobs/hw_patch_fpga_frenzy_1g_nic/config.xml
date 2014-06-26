@@ -105,7 +105,7 @@ echo &quot;get Spirent TestCenter BLL artifact&quot;
 wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
 
 echo &quot;extract application files&quot;
-tar -zxvf TestCenter.Linux.tar.gz
+tar -zxf TestCenter.Linux.tar.gz
 mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
 ls -al
