@@ -81,7 +81,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -143,6 +143,12 @@ done
 echo &quot;Start smartxplorer process&quot;
 smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
 
+#check timing score
+TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
+if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
+then
+    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+fi
 </command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
@@ -186,13 +192,6 @@ fi</command>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
-    <hudson.tasks.Shell>
-      <command>TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
-if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
-then
-    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
-fi</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
