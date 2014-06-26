@@ -83,7 +83,8 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//SPT_HW/frenzy/sandbox/bitstream/...</excludedFiles>
+    <excludedFiles>//SPT_HW/frenzy/sandbox/SourceCode/include/VERSION＊.v
+//SPT_HW/frenzy/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
