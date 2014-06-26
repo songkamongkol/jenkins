@@ -45,9 +45,9 @@
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>jazz-fpga-regression-1</assignedNode>
+  <assignedNode>ilbuild-test1</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
