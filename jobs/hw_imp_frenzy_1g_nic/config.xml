@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Thunderbird DX 4x10G I/O Board FPGA Implementation</description>
+  <description>Frenzy 4x1G NIC FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -44,15 +44,11 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/CoreGen/* //ws/SourceCode/CoreGen/*
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/CoreGen/PCIeRelatedCores/* //ws/SourceCode/CoreGen/PCIeRelatedCores/*
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen/* //ws/SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen/*
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/GenAnaFramerTop/Analyzer/coregen/* //ws/SourceCode/GenAnaFramerTop/Analyzer/coregen/*
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/CoreGen/chipscope/*  //ws/SourceCode/CoreGen/chipscope/*
+    <projectPath>+//SPT_HW/frenzy/sandbox/SourceCode/... //ws/SourceCode/...
 
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/Xilinx/ucf/ThunderbirdTop.ucf //ws/Xilinx/ucf/ThunderbirdTop.ucf
++//SPT_HW/frenzy/sandbox/Xilinx/ucf/Frenzy.ucf //ws/Xilinx/ucf/Frenzy.ucf
 
-+//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/Xilinx/ThunderbirdTop.xise  //ws/Xilinx/ThunderbirdTop.xise</projectPath>
++//SPT_HW/frenzy/sandbox/Xilinx/Frenzy_ISE.xise  //ws/Xilinx/Frenzy_ISE.xise</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
