@@ -167,8 +167,8 @@ smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
-    cp ${BIT_FILE} ./warpath_10g.bit
-    md5sum -b warpath_10g.bit &gt; warpath_10g.bit.md5
+    cp ${BIT_FILE} ./warpath_10g_an.bit
+    md5sum -b warpath_10g_an.bit &gt; warpath_10g_an.bit.md5
 fi</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
