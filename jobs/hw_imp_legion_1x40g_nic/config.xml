@@ -278,15 +278,24 @@ fi</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd ${WORKSPACE}
+          <command>if [ -f ${WORKSPACE}/Xilinx_Legion_1x40G/legion_40g.bit ];
+then
 
-p4 edit bitstream/candidate/nic/legion_40g.bit*
+    #submit FPGA image to Perforce
+    echo &quot;Submitting FPGA image to Perforce&quot;
 
-cp ${WORKSPACE}/Xilinx_Legion_1x40G/legion_40g.bit* bitstream/candidate/nic/
+    cd ${WORKSPACE}
 
-VER_DATECODE=`cat Xilinx_Legion_1x40G/version_*.txt`
+    p4 edit bitstream/candidate/nic/legion_40g.bit*
 
-p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; bitstream/candidate/nic/legion_40g.bit*</command>
+    cp ${WORKSPACE}/Xilinx_Legion_1x40G/legion_40g.bit* bitstream/candidate/nic/
+
+    VER_DATECODE=`cat Xilinx_Legion_1x40G/version_*.txt`
+
+    p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; bitstream/candidate/nic/legion_40g.bit*
+
+fi
+</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
