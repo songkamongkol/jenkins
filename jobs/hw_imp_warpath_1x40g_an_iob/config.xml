@@ -291,7 +291,7 @@ fi</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/legion_40g.bit ];
+          <command>if [ -f ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/warpath_40g_an.bit ];
 then
 
     #submit FPGA image to Perforce
@@ -303,11 +303,11 @@ then
 
     p4 edit //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 
-    cp ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/legion_40g.bit* bitstream/candidate/iob/
+    cp ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/warpath_40g_an.bit* bitstream/candidate/iob/
 
     VER_DATECODE=`cat Xilinx_Warpath_1x40G_AN/version_*.txt`
 
-    p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
+    p4 submit -d &quot;Warpath 1x40G-AN I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 
 fi
 </command>
