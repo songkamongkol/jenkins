@@ -2262,6 +2262,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[7]/jobNames/comparator"/>
+            <string>hw_imp_blackbird_1g_nic</string>
             <string>hw_sim_frenzy2_1g_nic</string>
           </jobNames>
           <jobFilters/>
