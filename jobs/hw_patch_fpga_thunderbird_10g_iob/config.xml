@@ -13,12 +13,12 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
-          <defaultValue>10.100.21.96</defaultValue>
+          <defaultValue>10.100.21.12</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Slot ID of Spirent test module (zero-based)</description>
-          <defaultValue>3</defaultValue>
+          <defaultValue>0</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FIRST_REBOOT_PORT_GROUP</name>
@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>LAST_REBOOT_PORT_GROUP</name>
           <description>ID of the last port group to be rebooted (one-based)</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>8</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
@@ -54,8 +54,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_imp_warpath_4x10g_iob</project>
-      <filter>Xilinx_Warpath_4x10G/*.bit*</filter>
+      <project>hw_imp_thunderbird_10g_iob</project>
+      <filter>Xilinx//*.bit*</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
