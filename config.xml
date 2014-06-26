@@ -2142,6 +2142,7 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
             <string>hw_imp_thunderbird_10g_iob</string>
+            <string>hw_patch_fpga_thunderbird_10g_iob</string>
             <string>hw_sanity_basic_tbonaonic_10g_nic</string>
             <string>hw_sanity_basic_thunderbird_10g_iob</string>
             <string>hw_sanity_dsg_thunderbird_10g_iob</string>
