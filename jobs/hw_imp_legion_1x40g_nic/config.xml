@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Warpath DX 1x40G I/O Board FPGA Implementation</description>
+  <description>Legion 1x40G NIC FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -46,7 +46,7 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Warpath_1x40G/... //ws/Xilinx_Warpath_1x40G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Legion_1x40G/... //ws/Xilinx_Legion_1x40G/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -88,9 +88,10 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
+  <quietPeriod>600</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -109,7 +110,7 @@ source ${XILINX_PATH}/settings64.sh
 
 #start implementation
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/Xilinx_Warpath_1x40G
+cd ${WORKSPACE}/Xilinx_Legion_1x40G
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -117,7 +118,7 @@ then
     rm myImp.tcl
 fi
 
-echo &quot;project open Warpath_1x40G_PCIe2x4.xise&quot; &gt;&gt; myImp.tcl
+echo &quot;project open Legion_1x40G_PCIe2x4.xise&quot; &gt;&gt; myImp.tcl
 echo &quot;process run \&quot;Translate\&quot;&quot; &gt;&gt; myImp.tcl
 
 #execute TCL script for translate process
@@ -137,7 +138,7 @@ done
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
+smartxplorer -p xc7k410t-ffg900-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Legion_1x40G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen|../SourceCode/PCIe/CoreGen|../SourceCode/GAFTop40G/Analyzer40G/coregen|../SourceCode/CoreGen/chipscope|../SourceCode/IP_HSEC/20130313&quot; Legion_1x40G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
@@ -164,20 +165,20 @@ fi</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd Xilinx_Warpath_1x40G/
+          <command>cd Xilinx_Legion_1x40G/
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
-    cp ${BIT_FILE} ./warpath_40g.bit
-    md5sum -b warpath_40g.bit &gt; warpath_40g.bit.md5
+    cp ${BIT_FILE} ./legion_40g.bit
+    md5sum -b legion_40g.bit &gt; legion_40g.bit.md5
 fi</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>Xilinx_Warpath_1x40G</basedir>
+            <basedir>Xilinx_Legion_1x40G</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/legion/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -195,19 +196,10 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Warpath_1x40G/*.bit*</artifacts>
+      <artifacts>Xilinx_Legion_1x40G/*.bit*</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>hw_patch_fpga_warpath_1x40g_iob</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries class="empty-list"/>
       <deployEvenBuildFail>true</deployEvenBuildFail>
