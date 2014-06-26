@@ -119,6 +119,7 @@ integration_ccp&lt;br&gt;&#xd;
 del ui_*.txt
 del bll_*.txt
 del mainline_il_*.txt
+del IL_*.txt
 del Report_*.txt
 del Build_*.txt
 rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchangereport=yes</command>
