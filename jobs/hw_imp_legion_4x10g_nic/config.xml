@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Warpath DX 4x10G I/O Board FPGA Implementation</description>
+  <description>Legion 4x10G NIC FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -46,7 +46,7 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_4x10G/... //ws/Xilinx_Warpath_4x10G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Legion_4x10G/... //ws/Xilinx_Legion_4x10G/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -88,6 +88,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
+  <quietPeriod>600</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
@@ -109,7 +110,7 @@ source ${XILINX_PATH}/settings64.sh
 
 #start implementation
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/Xilinx_Warpath_4x10G
+cd ${WORKSPACE}/Xilinx_Legion_4x10G
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -117,7 +118,7 @@ then
     rm myImp.tcl
 fi
 
-echo &quot;project open Warpath_4x10G_PCIe2x4.xise&quot; &gt;&gt; myImp.tcl
+echo &quot;project open Legion_4x10G_PCIe2x4.xise&quot; &gt;&gt; myImp.tcl
 echo &quot;process run \&quot;Translate\&quot;&quot; &gt;&gt; myImp.tcl
 
 #execute TCL script for translate process
@@ -137,7 +138,7 @@ done
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Legion_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen&quot; WarpathTop_4x10G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
