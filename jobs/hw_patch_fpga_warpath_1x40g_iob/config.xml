@@ -102,7 +102,8 @@ rm -rf TestCenter.Linux.tar.gz
       <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; oldFPGA.tcl
-echo &quot;append chassisSlotPort \&quot;/1\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${FIRST_REBOOT_PORT_GROUP} * 4 - 3]&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; oldFPGA.tcl
@@ -135,7 +136,8 @@ tclsh ./reboot.tcl</command>
       <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; newFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; newFPGA.tcl
-echo &quot;append chassisSlotPort \&quot;/1\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${FIRST_REBOOT_PORT_GROUP} * 4 - 3]&quot; &gt;&gt; newFPGA.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; newFPGA.tcl
 echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; newFPGA.tcl
 echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; newFPGA.tcl
