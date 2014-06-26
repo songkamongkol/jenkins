@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
           <description>Maximum number of CPUs/cores to use</description>
-          <defaultValue>3</defaultValue>
+          <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
@@ -80,7 +80,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -112,6 +112,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>p4 have //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
+ls -al ${WORKSPACE}
 
 #set up environment
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
