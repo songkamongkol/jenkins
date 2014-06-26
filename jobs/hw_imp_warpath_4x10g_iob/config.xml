@@ -46,7 +46,9 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_4x10G/... //ws/Xilinx_Warpath_4x10G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_4x10G/... //ws/Xilinx_Warpath_4x10G/...
+
++//SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g.bit*  //ws/bitstream/candidate/iob/warpath_10g.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -60,7 +62,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
+    <alwaysForceSync>true</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -82,7 +84,8 @@
     <excludedFiles>//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/Legion_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Legion_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G.v
-//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G_AN.v</excludedFiles>
+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G_AN.v
+//SPT_HW/legion/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -200,6 +203,7 @@ TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apo
 if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
 then
     echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+    exit 1
 fi
 </command>
     </hudson.tasks.Shell>
