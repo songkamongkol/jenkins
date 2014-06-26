@@ -92,7 +92,7 @@
   </scm>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -165,8 +165,8 @@ fi</command>
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
-    cp ${BIT_FILE} ./tbird_10g.bit
-    md5sum -b tbird_10g.bit &gt; tbird_10g.bit.md5
+    cp ${BIT_FILE} ./frenzy.bit
+    md5sum -b frenzy.bit &gt; frenzy.bit.md5
 fi
 
 </command>
@@ -176,7 +176,7 @@ fi
             <includes>*.bit*</includes>
             <basedir>Xilinx</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/thunderbird/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/frenzy/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
