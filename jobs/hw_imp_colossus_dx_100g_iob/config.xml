@@ -191,18 +191,18 @@ echo &quot;exit&quot; &gt;&gt; myImp.tcl
 vivado -mode batch -source ./myImp.tcl
 
 #parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
-then
-    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
-
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
-
-    if [ ${CRITICAL_WARNINGS} ];
-    then
-        echo &quot;ERROR: CRITICAL WARNING detected, set build as failure&quot;
-        exit 1
-    fi
-fi
+#if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
+#then
+#    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+#
+#    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+#
+#    if [ ${CRITICAL_WARNINGS} ];
+#    then
+#        echo &quot;ERROR: CRITICAL WARNING detected, set build as failure&quot;
+#        exit 1
+#    fi
+#fi
 </command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
