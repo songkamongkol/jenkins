@@ -104,9 +104,6 @@ export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
 
-#special export, need this to work (see Xilinx AR# 39434)
-export XIL_MAP_SKIP_LOGICAL_DRC=1
-
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx
