@@ -21,14 +21,9 @@
           <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>FIRST_REBOOT_PORT_GROUP</name>
-          <description>ID of the first port group to be rebooted (one-based)</description>
+          <name>STC_PORT_GROUP_ID</name>
+          <description>Port group ID of Spirent test module (one-based)</description>
           <defaultValue>1</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>LAST_REBOOT_PORT_GROUP</name>
-          <description>ID of the last port group to be rebooted (one-based)</description>
-          <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
@@ -44,7 +39,7 @@
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <quietPeriod>120</quietPeriod>
+  <quietPeriod>60</quietPeriod>
   <assignedNode>jazz-fpga-regression-1</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
