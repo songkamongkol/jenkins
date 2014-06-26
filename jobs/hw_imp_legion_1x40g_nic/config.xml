@@ -80,7 +80,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -314,16 +314,16 @@ fi
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
     <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
       <regexp>VER_DATECODE=(.*)</regexp>
       <regexpForFailed></regexpForFailed>
       <description>Version \1</description>
       <setForMatrix>false</setForMatrix>
     </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
-    <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
-      <entries class="empty-list"/>
-      <deployEvenBuildFail>true</deployEvenBuildFail>
-    </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
     <hudson.plugins.perforce.PerforceTagNotifier plugin="perforce@1.3.27">
       <rawLabelName>${JOB_NAME}-${BUILD_NUMBER}</rawLabelName>
       <rawLabelOwner></rawLabelOwner>
@@ -396,7 +396,6 @@ fi
       <buildSteps>
         <hudson.tasks.Shell>
           <command>echo &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
-p4 clean
 rm -rf ${WORKSPACE}/*</command>
         </hudson.tasks.Shell>
       </buildSteps>
