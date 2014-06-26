@@ -81,7 +81,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/frenzy/sandbox/SourceCode/include/VERSION*.v
 //SPT_HW/frenzy/sandbox/bitstream/...</excludedFiles>
@@ -277,7 +277,7 @@ fi
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_ise_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx/*.bit*, version_*.txt</artifacts>
+      <artifacts>Xilinx/*.bit*, Xilinx/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
