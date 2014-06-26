@@ -17,6 +17,9 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02&lt;br&gt;&#xd;
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
@@ -68,21 +71,20 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02&lt;br&gt;&#xd;
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
-//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
-//TestCenter/${BRANCH_NAME}/distribute_cts.bat //ws/distribute_cts.bat&#xd;
-//TestCenter/${BRANCH_NAME}/content/cts/... //ws/content/cts/...&#xd;
-//TestCenter/${BRANCH_NAME}/scm/installer/... //ws/scm/installer/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...&#xd;
-//TestCenter/${BRANCH_NAME}/bin/Release/Help/... //ws/bin/Release/Help/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/framework/automation/scripting/stc/SampleScripts/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/ui/automation/HelpInfo/... //ws/framework/ui/automation/HelpInfo/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/bin/release/Dpg/...&#xd;
-//TestCenter/${BRANCH_NAME}/common/lib/hexViewCtrl/... //ws/common/lib/hexViewCtrl/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/bin/Release/Dpg/DpgUpdate/...&#xd;
+    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
+//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
+//TestCenter/${BRANCH_NAME}/distribute_cts.bat //ws/distribute_cts.bat
+//TestCenter/${BRANCH_NAME}/content/cts/... //ws/content/cts/...
+//TestCenter/${BRANCH_NAME}/scm/installer/... //ws/scm/installer/...
+//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
+//TestCenter/${BRANCH_NAME}/bin/Release/Help/... //ws/bin/Release/Help/...
+//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/framework/automation/scripting/stc/SampleScripts/...
+//TestCenter/${BRANCH_NAME}/framework/ui/automation/HelpInfo/... //ws/framework/ui/automation/HelpInfo/...
+//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/bin/release/Dpg/...
+//TestCenter/${BRANCH_NAME}/common/lib/hexViewCtrl/... //ws/common/lib/hexViewCtrl/...
+//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/bin/Release/Dpg/DpgUpdate/...
 //TestCenter/${BRANCH_NAME}/common/lib/pduEditor/... //ws/common/lib/pduEditor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -112,13 +114,13 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -152,7 +154,12 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02&lt;br&gt;&#xd;
     <hudson.tasks.BatchFile>
       <command>rem copy n:\transfer\15th-transfer\CTS.Windows.all.tar.gz . /y
 echo extracting CTS.Windows.all.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
-python framework\tools\buildUtil\package.py --install CTS.Windows.all.tar.gz  --directory=bin/Release</command>
+python framework\tools\buildUtil\package.py --install CTS.Windows.all.tar.gz  --directory=bin/Release
+copy \\storage.cal.ci.spirentcom.com\builds\temp\CTS\Content.Routing.Bfd.UI.dll %WORKSPACE%\bin\release /y
+copy \\storage.cal.ci.spirentcom.com\builds\temp\CTS\Content.Routing.Bfd.UI.dll %WORKSPACE%\bin\CTS_Distribution\TestSuiteManager\TSM /y
+copy \\storage.cal.ci.spirentcom.com\builds\temp\CTS\TestSuiteManagerCatalog.xml %WORKSPACE%\bin\release /y
+copy \\storage.cal.ci.spirentcom.com\builds\temp\CTS\TestSuiteManagerCatalog.xml %WORKSPACE%\bin\CTS_Distribution\TestSuiteManager\TSM /y
+</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd %WORKSPACE%\bin\release
@@ -168,7 +175,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
   </publishers>
