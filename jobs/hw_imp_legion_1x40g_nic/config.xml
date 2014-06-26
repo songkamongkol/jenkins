@@ -167,7 +167,6 @@ echo &quot;-g TdoPin:PullUp&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g TmsPin:PullUp&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g Disable_JTAG:No&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g UnusedPin:PullDown&quot; &gt;&gt; Legion_1x40G.ut
-echo &quot;-g USR_ACCESS:${VER_DATECODE}&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g UserID:0x${VER_DATECODE}&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g ExtMasterCclk_en:div-1&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g ConfigFallback:Disable&quot; &gt;&gt; Legion_1x40G.ut
@@ -177,7 +176,7 @@ echo &quot;-g SPI_32bit_addr:No&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g SPI_buswidth:1&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g SPI_Fall_Edge:No&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g OverTempPowerDown:Disable&quot; &gt;&gt; Legion_1x40G.ut
-echo &quot;-g USR_ACCESS:None&quot; &gt;&gt; Legion_1x40G.ut
+echo &quot;-g USR_ACCESS:${VER_DATECODE}&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g JTAG_XADC:Enable&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g DCIUpdateMode:AsRequired&quot; &gt;&gt; Legion_1x40G.ut
 echo &quot;-g StartUpClk:CClk&quot; &gt;&gt; Legion_1x40G.ut
