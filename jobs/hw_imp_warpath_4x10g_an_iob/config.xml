@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Warpath DX 4x10G I/O Board FPGA Implementation</description>
+  <description>Warpath DX 4x10G-AN I/O Board FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -46,7 +46,11 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_4x10G/... //ws/Xilinx_Warpath_4x10G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/... //ws/Xilinx_Warpath_AN_4x10G/...
+
+-//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/Warpath_4x10G__AN_PROTOTYPE.xise  //ws/Xilinx_Warpath_AN_4x10G/Warpath_4x10G__AN_PROTOTYPE.xise
+
+-//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf  //ws/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -109,7 +113,7 @@ source ${XILINX_PATH}/settings64.sh
 
 #start implementation
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/Xilinx_Warpath_4x10G
+cd ${WORKSPACE}/Xilinx_Warpath_AN_4x10G
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -159,7 +163,7 @@ smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd Xilinx_Warpath_4x10G/
+          <command>cd Xilinx_Warpath_AN_4x10G/
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
@@ -170,9 +174,9 @@ fi</command>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>Xilinx_Warpath_4x10G</basedir>
+            <basedir>Xilinx_Warpath_AN_4x10G</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/thunderbird/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -197,7 +201,7 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Warpath_4x10G/*.bit*</artifacts>
+      <artifacts>Xilinx_Warpath_AN_4x10G/*.bit*</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
