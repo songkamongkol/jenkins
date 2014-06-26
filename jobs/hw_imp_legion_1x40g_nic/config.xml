@@ -117,7 +117,8 @@ VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 
-echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
+#update version file information
+echo &quot;Update VERSION_Legion_1x40G.v&quot;
 cd ${WORKSPACE}
 
 p4 edit SourceCode/include/VERSION_Legion_1x40G.v
