@@ -62,7 +62,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
+    <alwaysForceSync>true</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
