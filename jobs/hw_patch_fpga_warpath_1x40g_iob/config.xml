@@ -82,10 +82,12 @@ rm -rf ./${STC_INSTALL_DIR}
 rm -rf ./Spirent_TestCenter_Application_Linux_Server/
 
 echo &quot;get Spirent TestCenter BLL artifact&quot;
-wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+#wget -nv http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+wget -nv http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux_x64/lastSuccessfulBuild/artifact/build/il/bld_bll-el3-64_x86_64/Release/bin/TestCenter.Linux.x64.full.tar.gz
 
 echo &quot;extract application files&quot;
-tar -zxvf TestCenter.Linux.tar.gz
+#tar -zxf TestCenter.Linux.tar.gz
+tar -zxf TestCenter.Linux.x64.full.tar.gz
 mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
 #ls -al
@@ -99,7 +101,11 @@ rm -rf TestCenter.Linux.tar.gz
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; oldFPGA.tcl
@@ -134,7 +140,11 @@ echo &quot;exit&quot; &gt;&gt; reboot.tcl
 tclsh ./reboot.tcl</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; newFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; newFPGA.tcl
 echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; newFPGA.tcl
