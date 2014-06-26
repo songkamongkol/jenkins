@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Patch FPGA image on Warpath 1x40G I/O Board</description>
+  <description>Patch FPGA image on Warpath 4x10G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>hw_sanity_.*_warpath_1x40g_iob</blockingJobs>
+      <blockingJobs>hw_sanity_.*_warpath_4x10g_iob</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -23,12 +23,12 @@
         <hudson.model.StringParameterDefinition>
           <name>FIRST_REBOOT_PORT_GROUP</name>
           <description>ID of the first port group to be rebooted (one-based)</description>
-          <defaultValue>5</defaultValue>
+          <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LAST_REBOOT_PORT_GROUP</name>
           <description>ID of the last port group to be rebooted (one-based)</description>
-          <defaultValue>8</defaultValue>
+          <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
@@ -54,8 +54,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_imp_warpath_1x40g_iob</project>
-      <filter>Xilinx_Warpath_1x40G/*.bit*</filter>
+      <project>hw_imp_warpath_4x10g_iob</project>
+      <filter>Xilinx_Warpath_4x10G/*.bit*</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -66,11 +66,11 @@
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./warpath_40g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/warpath_40g_jenkins.bit
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./warpath_10g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/warpath_10g_jenkins.bit
 
 echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf warpath_40g_jenkins.bit ${STC_FPGA_DIR}/warpath_40g.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf warpath_10g_jenkins.bit ${STC_FPGA_DIR}/warpath_10g.bit&quot;
 
 
 
@@ -165,7 +165,7 @@ tclsh ./newFPGA.tcl
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_sanity_basic_warpath_1x40g_iob</childProjects>
+      <childProjects>hw_sanity_basic_warpath_4x10g_iob</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
