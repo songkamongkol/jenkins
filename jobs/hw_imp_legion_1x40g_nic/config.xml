@@ -48,7 +48,8 @@
 
 +//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Legion_1x40G/... //ws/Xilinx_Legion_1x40G/...
 
-+//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*  //ws/bitstream/candidate/nic/legion_40g.bit*</projectPath>
++//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit  //ws/bitstream/candidate/nic/legion_40g.bit
++//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit.md5  //ws/bitstream/candidate/nic/legion_40g.bit.md5</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -79,7 +80,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -285,8 +286,6 @@ then
     echo &quot;Submitting FPGA image to Perforce&quot;
 
     cd ${WORKSPACE}
-
-    p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 
     p4 have //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 
