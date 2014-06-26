@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Patch FPGA image on Colossus DX 1x100G I/O Board</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>true</useBuildBlocker>
+      <blockingJobs>hw_sanity_.*_colossus_dx_100g_iob</blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_CHASSIS_IP</name>
+          <description>IP address of Spirent TestCenter chassis</description>
+          <defaultValue>10.100.21.96</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_SLOT_ID</name>
+          <description>Slot ID of Spirent test module (zero-based)</description>
+          <defaultValue>7</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_FPGA_DIR</name>
+          <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/testmodule/slot0/hypervisor/fpga</description>
+          <defaultValue>/mnt/spirent/testmodule/slot${STC_SLOT_ID}/hypervisor/fpga</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_INSTALL_DIR</name>
+          <description>Spirent TestCenter BLL/UI installation target directory</description>
+          <defaultValue>stc_install_dir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <quietPeriod>60</quietPeriod>
+  <assignedNode>jazz-fpga-regression-1</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_imp_colossus_dx_100g_iob</project>
+      <filter>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit*</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>echo &quot;Original FPGA image version:&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+
+echo &quot;&quot;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
+
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./colossus_100g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/colossus_100g_jenkins.bit
+
+echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf colossus_100g_jenkins.bit ${STC_FPGA_DIR}/colossus_100g.bit&quot;
+
+
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;prepare workspace&quot;
+rm -rf ./${STC_INSTALL_DIR}
+rm -rf ./Spirent_TestCenter_Application_Linux_Server/
+
+echo &quot;get Spirent TestCenter BLL artifact&quot;
+wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+
+echo &quot;extract application files&quot;
+tar -zxvf TestCenter.Linux.tar.gz
+mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
+
+#ls -al
+
+echo &quot;use API/Python/StcPython.py&quot;
+#mv  ${STC_INSTALL_DIR}/StcPython.py ${STC_INSTALL_DIR}/StcPython.py.stak
+cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
+
+echo &quot;free up some space&quot;
+rm -rf TestCenter.Linux.tar.gz
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::get system1&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassisManager [stc::get system1 -children-physicalchassismanager]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPhysicalChassis [stc::get \$hPhysicalChassisManager -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
+echo &quot;set hTestModule [lindex [stc::get \$hPhysicalChassis -children-physicaltestmodule] ${STC_SLOT_ID}]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList \$hTestModule&quot; &gt;&gt; reboot.tcl
+echo &quot;exit&quot; &gt;&gt; reboot.tcl
+
+tclsh ./reboot.tcl</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo &quot;New FPGA image version:&quot;
+
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+
+echo &quot;&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_sanity_basic_colossus_dx_100g_iob</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>echo &quot;!!! CLEAN OUT WORKSPACE !!!&quot;
+rm -rf ./${STC_INSTALL_DIR}</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
+  </buildWrappers>
+</project>
