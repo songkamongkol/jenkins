@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -120,6 +120,8 @@ VER_DATECODE=${VER}${DATECODE}
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Legion_1x40G
+
+echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -239,6 +241,19 @@ fi</command>
             <failNoFilesDeploy>false</failNoFilesDeploy>
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>version.txt</includes>
+            <basedir>Xilinx_Legion_1x40G</basedir>
+            <excludes></excludes>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/legion/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
   </builders>
@@ -249,7 +264,7 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Legion_1x40G/*.bit*</artifacts>
+      <artifacts>Xilinx_Legion_1x40G/*.bit*, Xilinx_Legion_1x40G/version.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
