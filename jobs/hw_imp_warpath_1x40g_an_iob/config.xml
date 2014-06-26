@@ -134,7 +134,7 @@ then
     rm hosts.txt
 fi
 
-for i in {1..${MAX_CPU_USAGE}}
+for (( i=0; i&lt;${MAX_CPU_USAGE}; i++))
 do
    echo &quot;localhost&quot; &gt;&gt; hosts.txt
 done
