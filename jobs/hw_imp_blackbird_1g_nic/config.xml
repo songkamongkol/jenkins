@@ -46,9 +46,9 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/frenzy/sandbox/SourceCode/... //ws/SourceCode/...
 
-+//SPT_HW/frenzy/sandbox/Xilinx/ucf/Frenzy.ucf //ws/Xilinx/ucf/Frenzy.ucf
++//SPT_HW/frenzy/sandbox/Xilinx/ucf/Frenzy2.ucf //ws/Xilinx/ucf/Frenzy2.ucf
 
-+//SPT_HW/frenzy/sandbox/Xilinx/Frenzy_ISE.xise  //ws/Xilinx/Frenzy_ISE.xise</projectPath>
++//SPT_HW/frenzy/sandbox/Xilinx/Frenzy2_ISE.xise  //ws/Xilinx/Frenzy2_ISE.xise</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -119,7 +119,7 @@ then
     rm myImp.tcl
 fi
 
-echo &quot;project open Frenzy_ISE.xise&quot; &gt;&gt; myImp.tcl
+echo &quot;project open Frenzy2_ISE.xise&quot; &gt;&gt; myImp.tcl
 echo &quot;process run \&quot;Translate\&quot;&quot; &gt;&gt; myImp.tcl
 
 #execute TCL script for translate process
@@ -139,7 +139,7 @@ done
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k325t-fbg676-1 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Frenzy.ucf -sd  &quot;../SourceCode/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/GAFTop1G/Analyzer/coregen;../SourceCode/GAFTop1G/Analyzer/EEDM/coregen;../SourceCode/PCIe/CoreGen&quot; FrenzyTop.ngd
+smartxplorer -p xc7k325t-fbg676-1 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Frenzy2.ucf -sd  &quot;../SourceCode/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/GAFTop1G/Analyzer/coregen;../SourceCode/GAFTop1G/Analyzer/EEDM/coregen;../SourceCode/PCIe/CoreGen&quot; FrenzyTop.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
