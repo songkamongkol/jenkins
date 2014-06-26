@@ -55,7 +55,7 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_imp_warpath_1x40g_iob</project>
-      <filter>Xilinx_Warpath_1x40G/*.bit*</filter>
+      <filter>Xilinx_Warpath_1x40G/*.bit*, Xilinx_Warpath_1x40G/version_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -63,6 +63,10 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>VER_DATECODE=`cat version_*.txt`
+echo &quot;Upstream FPGA image version: ${VER_DATECODE}&quot;</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
@@ -173,6 +177,16 @@ tclsh ./newFPGA.tcl
         <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
+      <regexp>VER_DATECODE=(.*)</regexp>
+      <regexpForFailed></regexpForFailed>
+      <description>Version \1</description>
+      <setForMatrix>false</setForMatrix>
+    </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
         <hudson.tasks.Shell>
