@@ -1681,17 +1681,17 @@
     </slave>
     <slave>
       <name>fpga-reg-01</name>
-      <description>Linux Ubuntu 12.04.1 LTS (32-bit)</description>
+      <description>Linux Ubuntu 14.04.1 LTS (32-bit)</description>
       <remoteFS>/tmp</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
-        <host>10.2.20.68</host>
+        <host>fpga-reg-01.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
       </launcher>
-      <label>Linux Ubuntu12.04 32bit</label>
+      <label>Linux Ubuntu14.04 32bit</label>
       <nodeProperties>
         <hudson.slaves.EnvironmentVariablesNodeProperty>
           <envVars serialization="custom">
@@ -2283,7 +2283,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_test_framework_idl2jar</string>
           </jobNames>
           <jobFilters/>
@@ -2308,7 +2308,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[7]/jobNames/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_imp_blackbird_1g_nic</string>
             <string>hw_sim_blackbird_1g_nic</string>
             <string>hw_sim_frenzy2_1g_nic</string>
