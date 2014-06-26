@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
           <description>Maximum number of CPUs/cores to use</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
