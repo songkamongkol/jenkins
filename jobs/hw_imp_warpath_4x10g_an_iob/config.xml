@@ -50,7 +50,9 @@
 
 -//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/Warpath_4x10G__AN_PROTOTYPE.xise  //ws/Xilinx_Warpath_AN_4x10G/Warpath_4x10G__AN_PROTOTYPE.xise
 
--//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf  //ws/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf</projectPath>
+-//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf  //ws/Xilinx_Warpath_AN_4x10G/ucf/Warpath_4x10G_AN_PROTOTYPE.ucf
+
++//SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*  //ws/bitstream/candidate/iob/warpath_10g_an.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -64,7 +66,7 @@
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
     <forceSync>false</forceSync>
-    <alwaysForceSync>false</alwaysForceSync>
+    <alwaysForceSync>true</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
     <disableChangeLogOnly>false</disableChangeLogOnly>
@@ -86,7 +88,8 @@
     <excludedFiles>//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/Legion_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Legion_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G.v
-//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G_AN.v</excludedFiles>
+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G_AN.v
+//SPT_HW/legion/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -111,7 +114,15 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#set up environment
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
+ls -al ${WORKSPACE}
+mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
+ls -al ${WORKSPACE}
+p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
+ls -al ${WORKSPACE}/bitstream/candidate/iob/
+
+#set up environment
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
@@ -121,11 +132,25 @@ VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 
+#update version file information
+echo &quot;Update VERSION_Warpath_4x10G_AN.v&quot;
+cd ${WORKSPACE}
+
+p4 edit SourceCode/include/VERSION_Warpath_4x10G_AN.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+
+p4 submit -d &quot;Warpath 4x10G-AN I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_4x10G_AN.v
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Warpath_AN_4x10G
 
-echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -204,6 +229,7 @@ TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apo
 if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
 then
     echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+    exit 1
 fi
 </command>
     </hudson.tasks.Shell>
@@ -235,20 +261,7 @@ fi</command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.bit*</includes>
-            <basedir>Xilinx_Warpath_AN_4x10G</basedir>
-            <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
-            <flatten>true</flatten>
-            <deleteRemote>false</deleteRemote>
-            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
-            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
-            <failNoFilesDeploy>false</failNoFilesDeploy>
-          </entry>
-        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
-        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
-          <entry>
-            <includes>version.txt</includes>
+            <includes>*.bit*, version_*.txt</includes>
             <basedir>Xilinx_Warpath_AN_4x10G</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
@@ -261,6 +274,47 @@ fi</command>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+        <worstResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </worstResult>
+        <bestResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </bestResult>
+      </runCondition>
+      <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>if [ -f ${WORKSPACE}/Xilinx_Warpath_AN_4x10G/warpath_10g_an.bit ];
+then
+
+    #submit FPGA image to Perforce
+    echo &quot;Submitting FPGA image to Perforce&quot;
+
+    cd ${WORKSPACE}
+
+    p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
+
+    p4 edit //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
+
+    cp ${WORKSPACE}/Xilinx_Warpath_AN_4x10G/warpath_10g_an.bit* bitstream/candidate/iob/
+
+    VER_DATECODE=`cat Xilinx_Warpath_AN_4x10G/version_*.txt`
+
+    p4 submit -d &quot;Warpath 4x10G-AN I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
+
+fi
+</command>
+        </hudson.tasks.Shell>
+      </conditionalbuilders>
+    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
@@ -269,10 +323,20 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Warpath_AN_4x10G/*.bit*, Xilinx_Warpath_AN_4x10G/version.txt</artifacts>
+      <artifacts>Xilinx_Warpath_AN_4x10G/*.bit*, Xilinx_Warpath_AN_4x10G/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
+      <regexp>VER_DATECODE=(.*)</regexp>
+      <regexpForFailed></regexpForFailed>
+      <description>Version \1</description>
+      <setForMatrix>false</setForMatrix>
+    </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries class="empty-list"/>
       <deployEvenBuildFail>true</deployEvenBuildFail>
