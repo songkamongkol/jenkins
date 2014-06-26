@@ -66,11 +66,11 @@
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./warpath_10g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/warpath_10g_jenkins.bit
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./tbird_10g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/tbird_10g_jenkins.bit
 
 echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf warpath_10g_jenkins.bit ${STC_FPGA_DIR}/warpath_10g.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf tbird_10g_jenkins.bit ${STC_FPGA_DIR}/tbird_10g.bit&quot;
 
 
 
