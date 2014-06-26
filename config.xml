@@ -2133,6 +2133,7 @@
             <string>hw_sim_colossus_dx_100g_nic</string>
             <string>hw_syn_colossus_dx_100g_iob</string>
             <string>hw_syn_colossus_dx_100g_nic</string>
+            <string>hw_syn_colossus_fx2_100g_iob</string>
           </jobNames>
           <jobFilters/>
           <columns>
