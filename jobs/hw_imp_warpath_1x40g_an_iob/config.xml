@@ -303,7 +303,7 @@ then
 
     p4 edit //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 
-    cp ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/legion_40g.bit* bitstream/candidate/iob/
+    cp ${WORKSPACE}/Xilinx_Warpath_1x40G_AN/warpath_40g_an.bit* bitstream/candidate/iob/
 
     VER_DATECODE=`cat Xilinx_Warpath_1x40G_AN/version_*.txt`
 
