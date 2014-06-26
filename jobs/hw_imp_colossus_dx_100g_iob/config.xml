@@ -79,7 +79,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -191,7 +191,7 @@ echo &quot;exit&quot; &gt;&gt; myImp.tcl
 vivado -mode batch -source ./myImp.tcl
 
 #parse log to check for errors
-if [ &quot;${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log&quot; ];
+if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
 then
     #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
 
