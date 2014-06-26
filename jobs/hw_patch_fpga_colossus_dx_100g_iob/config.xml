@@ -21,6 +21,16 @@
           <defaultValue>7</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
+          <name>FIRST_REBOOT_PORT_GROUP</name>
+          <description>ID of the first port group to be rebooted (one-based)</description>
+          <defaultValue>1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>LAST_REBOOT_PORT_GROUP</name>
+          <description>ID of the last port group to be rebooted (one-based)</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
           <description>Directory on remote chassis where FPGA image files are located, example: /mnt/spirent/testmodule/slot0/hypervisor/fpga</description>
           <defaultValue>/mnt/spirent/testmodule/slot${STC_SLOT_ID}/hypervisor/fpga</defaultValue>
@@ -53,13 +63,6 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.tasks.Shell>
-      <command>echo &quot;Original FPGA image version:&quot;
-
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
-
-echo &quot;&quot;</command>
-    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
@@ -94,7 +97,29 @@ echo &quot;use API/Python/StcPython.py&quot;
 cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
 echo &quot;free up some space&quot;
-rm -rf TestCenter.Linux.tar.gz
+#rm -rf TestCenter.Linux.tar.gz
+rm -rf TestCenter.Linux.x64.full.tar.gz</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort ${FIRST_REBOOT_PORT_GROUP}&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;stc::perform setupPortMappings&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;set cmdRtn [stc::perform genericExecution -portList \$myPort -cmd \&quot;/usr/spirent/bin/tp 0 0\&quot;]&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;set myOutputList [lindex \$cmdRtn [expr [lsearch \$cmdRtn -OutputList] + 1] ]&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;set myOutput [lindex \$myOutputList 0]&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;puts \&quot;Original FPGA image version: \$myOutput\&quot;&quot; &gt;&gt; oldFPGA.tcl
+
+tclsh ./oldFPGA.tcl
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -108,17 +133,33 @@ echo &quot;set hPhysicalChassisManager [stc::get system1 -children-physicalchass
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
 echo &quot;set hPhysicalChassis [stc::get \$hPhysicalChassisManager -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
 echo &quot;set hTestModule [lindex [stc::get \$hPhysicalChassis -children-physicaltestmodule] ${STC_SLOT_ID}]&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::perform RebootEquipment -EquipmentList \$hTestModule&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPortGroups [lrange [stc::get \$hTestModule -children-physicalportgroup] [expr ${FIRST_REBOOT_PORT_GROUP} - 1] [expr ${LAST_REBOOT_PORT_GROUP} - 1]]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList \$hPortGroups&quot; &gt;&gt; reboot.tcl
 echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;New FPGA image version:&quot;
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+cd ${STC_INSTALL_DIR}
 
-echo &quot;&quot;</command>
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
+echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort ${FIRST_REBOOT_PORT_GROUP}&quot; &gt;&gt; newFPGA.tcl
+echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; newFPGA.tcl
+echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; newFPGA.tcl
+echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; newFPGA.tcl
+echo &quot;stc::perform setupPortMappings&quot; &gt;&gt; newFPGA.tcl
+echo &quot;set cmdRtn [stc::perform genericExecution -portList \$myPort -cmd \&quot;/usr/spirent/bin/tp 0 0\&quot;]&quot; &gt;&gt; newFPGA.tcl
+echo &quot;set myOutputList [lindex \$cmdRtn [expr [lsearch \$cmdRtn -OutputList] + 1] ]&quot; &gt;&gt; newFPGA.tcl
+echo &quot;set myOutput [lindex \$myOutputList 0]&quot; &gt;&gt; newFPGA.tcl
+echo &quot;puts \&quot;New FPGA image version: \$myOutput\&quot;&quot; &gt;&gt; newFPGA.tcl
+
+tclsh ./newFPGA.tcl
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
