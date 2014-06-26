@@ -110,7 +110,15 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#set up environment
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g.bit*
+ls -al ${WORKSPACE}
+mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
+ls -al ${WORKSPACE}
+p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g.bit*
+ls -al ${WORKSPACE}/bitstream/candidate/iob/
+
+#set up environment
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
@@ -120,11 +128,25 @@ VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
 
+#update version file information
+echo &quot;Update VERSION_Warpath_4x10G.v&quot;
+cd ${WORKSPACE}
+
+p4 edit SourceCode/include/VERSION_Warpath_4x10G.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_Warpath_4x10G.v
+sed -i &quot;1i //Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_4x10G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_Warpath_4x10G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Warpath_4x10G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Warpath_4x10G.v
+
+p4 submit -d &quot;Warpath 4x10G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_4x10G.v
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Warpath_4x10G
 
-echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
