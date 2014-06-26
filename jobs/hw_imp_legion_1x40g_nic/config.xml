@@ -286,13 +286,13 @@ then
 
     cd ${WORKSPACE}
 
-    p4 edit bitstream/candidate/nic/legion_40g.bit*
+    p4 edit //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 
     cp ${WORKSPACE}/Xilinx_Legion_1x40G/legion_40g.bit* bitstream/candidate/nic/
 
     VER_DATECODE=`cat Xilinx_Legion_1x40G/version_*.txt`
 
-    p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; bitstream/candidate/nic/legion_40g.bit*
+    p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 
 fi
 </command>
