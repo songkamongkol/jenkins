@@ -116,6 +116,11 @@ export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
 
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Warpath_AN_4x10G
@@ -144,9 +149,53 @@ do
    echo &quot;localhost&quot; &gt;&gt; hosts.txt
 done
 
+#create bitgen options file
+if [ -f WarpathTop_4x10G.ut ];
+then
+    rm WarpathTop_4x10G.ut
+fi
+echo &quot;-w&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Binary:no&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Compress&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g CRC:Enable&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g ConfigRate:22&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g CclkPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g M0Pin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g M1Pin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g M2Pin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g ProgPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g InitPin:Pullup&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g TckPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g TdiPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g TdoPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g TmsPin:PullUp&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Disable_JTAG:No&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g UnusedPin:PullDown&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g UserID:0x${VER_DATECODE}&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g ExtMasterCclk_en:Disable&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g ConfigFallback:Disable&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g BPI_page_size:1&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g BPI_sync_mode:Type2&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g SPI_32bit_addr:No&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g SPI_buswidth:1&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g SPI_Fall_Edge:No&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g OverTempPowerDown:Disable&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g USR_ACCESS:${VER_DATECODE}&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g JTAG_XADC:Enable&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g DCIUpdateMode:AsRequired&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g StartUpClk:CClk&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g DONE_cycle:4&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g GTS_cycle:5&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g GWE_cycle:6&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Match_cycle:Auto&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Security:None&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g ICAP_select:Top&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g DonePipe:Yes&quot; &gt;&gt; WarpathTop_4x10G.ut
+echo &quot;-g Encrypt:No&quot; &gt;&gt; WarpathTop_4x10G.ut
+
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo WarpathTop_4x10G.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
