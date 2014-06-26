@@ -396,6 +396,7 @@ fi
       <buildSteps>
         <hudson.tasks.Shell>
           <command>echo &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
+p4 clean
 rm -rf ${WORKSPACE}/*</command>
         </hudson.tasks.Shell>
       </buildSteps>
