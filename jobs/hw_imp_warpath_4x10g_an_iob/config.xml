@@ -81,8 +81,12 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/Legion_4x10G.v
+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Legion_4x10G.v
+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G.v
+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Warpath_4x10G_AN.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -92,6 +96,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
+  <quietPeriod>600</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
