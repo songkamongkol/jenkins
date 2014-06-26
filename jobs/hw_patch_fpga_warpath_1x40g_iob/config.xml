@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Patch FPGA image on Colossus DX 1x100G I/O Board</description>
+  <description>Patch FPGA image on Warpath 1x40G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>hw_sanity_.*_colossus_dx_100g_iob</blockingJobs>
+      <blockingJobs>hw_sanity_.*_warpath_1x40g_iob</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -18,7 +18,12 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Slot ID of Spirent test module (zero-based)</description>
-          <defaultValue>7</defaultValue>
+          <defaultValue>3</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_PORT_GROUP_ID</name>
+          <description>Port group ID of Spirent test module (one-based)</description>
+          <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
@@ -44,8 +49,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_imp_colossus_dx_100g_iob</project>
-      <filter>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit*</filter>
+      <project>hw_imp_warpath_1x40g_iob</project>
+      <filter>Xilinx_Warpath_1x40G/*.bit*</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -56,18 +61,18 @@
     <hudson.tasks.Shell>
       <command>echo &quot;Original FPGA image version:&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu${STC_PORT_GROUP_ID} \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
 
 echo &quot;&quot;</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./colossus_100g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/colossus_100g_jenkins.bit
+sshpass -f /etc/stc_chassis.pass scp -o StrictHostKeyChecking=no ./warpath_40g.bit root@${STC_CHASSIS_IP}:${STC_FPGA_DIR}/warpath_40g_jenkins.bit
 
 echo &quot;Configure FPGA image soft-link to remote STC chassis&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf colossus_100g_jenkins.bit ${STC_FPGA_DIR}/colossus_100g.bit&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;cd ${STC_FPGA_DIR}; ln -sf warpath_40g_jenkins.bit ${STC_FPGA_DIR}/warpath_40g.bit&quot;
 
 
 
@@ -114,14 +119,14 @@ tclsh ./reboot.tcl</command>
     <hudson.tasks.Shell>
       <command>echo &quot;New FPGA image version:&quot;
 
-sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu1 \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
+sshpass -f /etc/stc_chassis.pass ssh -o StrictHostKeyChecking=no root@${STC_CHASSIS_IP} &quot;rsh card${STC_SLOT_ID}.ccpu${STC_PORT_GROUP_ID} \&quot;/usr/spirent/bin/tp 0 0\&quot;&quot;
 
 echo &quot;&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_sanity_basic_colossus_dx_100g_iob</childProjects>
+      <childProjects>hw_sanity_basic_warpath_1x40g_iob</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
