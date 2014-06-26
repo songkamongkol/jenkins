@@ -85,7 +85,6 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//TestCenter/p2_dev_hw/Thunderbird/FPGA/ThunderBirdTop/SourceCode/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
