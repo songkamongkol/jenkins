@@ -46,7 +46,9 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Legion_1x40G/... //ws/Xilinx_Legion_1x40G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Legion_1x40G/... //ws/Xilinx_Legion_1x40G/...
+
++//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*  //ws/bitstream/candidate/nic/legion_40g.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -82,7 +84,8 @@
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Warpath_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G.v
-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G_AN.v</excludedFiles>
+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G_AN.v
+//SPT_HW/legion/sandbox/bitstream/*</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
