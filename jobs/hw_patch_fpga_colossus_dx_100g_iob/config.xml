@@ -45,7 +45,7 @@
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <quietPeriod>60</quietPeriod>
-  <assignedNode>ilbuild-test1</assignedNode>
+  <assignedNode>fpga-sim-01||fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
