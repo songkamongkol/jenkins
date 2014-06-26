@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Frenzy-2 1G NIC FPGA Simulation</description>
+  <description>Blackbird (Frenzy2) 1G NIC FPGA Simulation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
