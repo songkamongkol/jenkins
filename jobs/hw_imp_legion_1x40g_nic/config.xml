@@ -111,7 +111,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>p4 have //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
+p4 sync -f //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 ls -al ${WORKSPACE}
 
 #set up environment
