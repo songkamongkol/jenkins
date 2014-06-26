@@ -307,7 +307,7 @@ then
 
     VER_DATECODE=`cat Xilinx_Warpath_1x40G_AN/version_*.txt`
 
-    p4 submit -d &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
+    p4 submit -d &quot;Warpath 1x40G-AN FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 
 fi
 </command>
