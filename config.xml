@@ -2256,11 +2256,13 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Blackbird</name>
+          <description>Blackbird (Frenzy2) builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[7]/jobNames/comparator"/>
+            <string>hw_sim_frenzy2_1g_nic</string>
           </jobNames>
           <jobFilters/>
           <columns>
