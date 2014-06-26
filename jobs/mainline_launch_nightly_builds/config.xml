@@ -90,7 +90,7 @@ integration_ccp&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -146,11 +146,11 @@ rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchang
 import glob
 import re
 
-files = glob.glob(&quot;*il_testmodule_contents_ci_changelist*.txt&quot;)
+files = glob.glob(&quot;mainline_il_testmodule_contents_ci_changelist_*.txt&quot;)
 # files = glob.glob(&quot;BLL_*.txt&quot;)
 changelistfile = files[0]
 changelist = re.sub(r&apos;.txt$&apos;, &quot;&quot;, changelistfile )
-changelist = re.sub(r&apos;il_testmodule_contents_ci_changelist_&apos;, &quot;&quot;, changelist )
+changelist = re.sub(r&apos;mainline_il_testmodule_contents_ci_changelist_&apos;, &quot;&quot;, changelist )
 build_number = os.environ[&apos;BUILD_NUMBER&apos;]
 print &quot;IL Changelist is &quot; + changelist
 il_changelist_file=&apos;IL_&apos; + changelist + &apos;.txt&apos;
