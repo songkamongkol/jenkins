@@ -2233,6 +2233,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>hw_test_framework_idl2jar</string>
           </jobNames>
           <jobFilters/>
           <columns>
