@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Frenzy 4x1G NIC FPGA Implementation</description>
+  <description>Blackbird (Frenzy2) 4x1G NIC FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -139,7 +139,7 @@ done
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k325t-fbg676-1 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Frenzy2.ucf -sd  &quot;../SourceCode/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/GAFTop1G/Analyzer/coregen;../SourceCode/GAFTop1G/Analyzer/EEDM/coregen;../SourceCode/PCIe/CoreGen&quot; FrenzyTop.ngd
+smartxplorer -p xc7k325t-fbg676-1 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Frenzy2.ucf -sd  &quot;../SourceCode/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/GAFTop1G/Analyzer/coregen;../SourceCode/GAFTop1G/Analyzer/EEDM/coregen;../SourceCode/PCIe/CoreGen&quot; Frenzy2Top.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
@@ -170,8 +170,8 @@ fi</command>
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
-    cp ${BIT_FILE} ./frenzy.bit
-    md5sum -b frenzy.bit &gt; frenzy.bit.md5
+    cp ${BIT_FILE} ./frenzy2.bit
+    md5sum -b frenzy2.bit &gt; frenzy2.bit.md5
 fi
 
 </command>
@@ -181,7 +181,7 @@ fi
             <includes>*.bit*</includes>
             <basedir>Xilinx</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/frenzy/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/blackbird/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
