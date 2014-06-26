@@ -48,6 +48,7 @@
 +//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/... //ws/VivadoBlade/...
 -//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/ColossusDX_BLADE100G.edf //ws/VivadoBlade/ColossusDX_BLADE100G.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -89,11 +90,12 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
+  <quietPeriod>1800</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
       <spec>* * * * *</spec>
@@ -375,6 +377,7 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients></recipients>
