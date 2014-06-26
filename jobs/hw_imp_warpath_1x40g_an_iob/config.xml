@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
           <description>Maximum number of CPUs/cores to use</description>
-          <defaultValue>3</defaultValue>
+          <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
@@ -86,7 +86,8 @@
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G.v
-//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G_AN.v</excludedFiles>
+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Warpath_1x40G_AN.v
+//SPT_HW/legion/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
