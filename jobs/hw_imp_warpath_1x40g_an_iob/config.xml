@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Warpath DX 4x10G I/O Board FPGA Implementation</description>
+  <description>Warpath DX 1x40G-AN I/O Board FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>XILINX_PATH</name>
           <description>path to the intended version of Xilinx, example:  /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2013.4</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/ISE/14.6/ISE_DS</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/ISE/14.7/ISE_DS</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
@@ -44,9 +44,13 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/...  //ws/SourceCode/...
+    <projectPath>+//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/...  //ws/SourceCode/...
 
-+//SPT_HW/legion/sandbox/legion_4x10g/fpga/Xilinx_Warpath_4x10G/... //ws/Xilinx_Warpath_4x10G/...</projectPath>
++//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Warpath_1x40G_AN/... //ws/Xilinx_Warpath_1x40G_AN/...
+
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Warpath_1x40G_AN/Warpath_1x40G_AN _PROTOTYPE.xise //ws/Xilinx_Warpath_1x40G_AN/Warpath_1x40G_AN _PROTOTYPE.xise
+
+-//SPT_HW/legion/sandbox/legion_1x40g/fpga/Xilinx_Warpath_1x40G_AN/ucf/Warpath_1x40G_AN_PROTOTYPE.ucf  //ws/Xilinx_Warpath_1x40G_AN/ucf/Warpath_1x40G_AN_PROTOTYPE.ucf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -109,7 +113,7 @@ source ${XILINX_PATH}/settings64.sh
 
 #start implementation
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/Xilinx_Warpath_4x10G
+cd ${WORKSPACE}/Xilinx_Warpath_1x40G_AN
 
 #create TCL script for translate process
 if [ -f myImp.tcl ];
@@ -117,7 +121,7 @@ then
     rm myImp.tcl
 fi
 
-echo &quot;project open Warpath_4x10G_PCIe2x4.xise&quot; &gt;&gt; myImp.tcl
+echo &quot;project open Warpath_1x40G_AN.xise.xise&quot; &gt;&gt; myImp.tcl
 echo &quot;process run \&quot;Translate\&quot;&quot; &gt;&gt; myImp.tcl
 
 #execute TCL script for translate process
@@ -137,7 +141,7 @@ done
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
 
 </command>
     </hudson.tasks.Shell>
@@ -159,7 +163,7 @@ smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -m 12 -max_time &quot;04:00:00
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd Xilinx_Warpath_4x10G/
+          <command>cd Xilinx_Warpath_1x40G_AN/
 BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
@@ -170,9 +174,9 @@ fi</command>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>Xilinx_Warpath_4x10G</basedir>
+            <basedir>Xilinx_Warpath_1x40G_AN</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/thunderbird/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/warpath/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -197,7 +201,7 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Xilinx_Warpath_4x10G/*.bit*</artifacts>
+      <artifacts>Xilinx_Warpath_1x40G_AN/*.bit*</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
