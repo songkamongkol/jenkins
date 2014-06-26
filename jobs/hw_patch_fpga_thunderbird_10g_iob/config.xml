@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Patch FPGA image on Warpath 4x10G I/O Board</description>
+  <description>Patch FPGA image on Thunderbird 4x10G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>hw_sanity_.*_warpath_4x10g_iob</blockingJobs>
+      <blockingJobs>hw_sanity_.*_thunderbird_10g_iob</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
