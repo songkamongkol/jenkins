@@ -112,6 +112,11 @@ export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
 
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+
 #start implementation
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/Xilinx_Legion_4x10G
