@@ -174,7 +174,7 @@ smartxplorer -p xc6vsx315t-ff1156-1 -l hosts.txt -b -m 12 -max_time &quot;04:00:
       <conditionalbuilders>
         <hudson.tasks.Shell>
           <command>cd Xilinx/
-BIT_FILE=`ls ./*/*.bit`
+BIT_FILE=`ls ./best_run/*.bit`
 if [ ${BIT_FILE} ];
 then
     cp ${BIT_FILE} ./tbird_10g.bit
