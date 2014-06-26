@@ -83,7 +83,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -198,6 +198,13 @@ fi
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <hudson.tasks.Shell>
+      <command>TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
+if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
+then
+    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+fi</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
