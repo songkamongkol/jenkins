@@ -139,9 +139,9 @@ cd build/il/testframework/testexecuter
 
 #./idltojar.sh
 
-tar -zxvf ./java.tar.gz
+tar -zxf ./java.tar.gz
 
-tar -zxvf ./idl_tcl.tar.gz</command>
+tar -zxf ./idl_tcl.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>cd build/il/testframework
