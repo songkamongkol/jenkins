@@ -333,7 +333,7 @@ then
 
     VER_DATECODE=`cat VivadoBlade/version_*.txt`
 
-    p4 submit -d &quot;Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    p4 submit -d &quot;Description: Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
