@@ -1,0 +1,479 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Colossus DX 1x100G I/O Board FPGA Implementation</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>50</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>XILINX_PATH</name>
+          <description>path to the intended version of Xilinx, example:  /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2013.4</description>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2014.1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>LM_LICENSE_FILE</name>
+          <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</description>
+          <defaultValue>2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MAX_CPU_USAGE</name>
+          <description>Maximum number of CPUs/cores to use</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MAX_TIMING_DELTA</name>
+          <description>Value to use as check on post-routing timing summary to determine if timing should be considered as failure</description>
+          <defaultValue>0.000</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
+    <configVersion>1</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforce.spirentcom.com:1666</p4Port>
+    <p4Client>${JOB_NAME}</p4Client>
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
++//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/... //ws/VivadoBlade/...
+-//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/ColossusDX_BLADE100G.edf //ws/VivadoBlade/ColossusDX_BLADE100G.edf
+
++//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*  //ws/bitstream/candidate/iob/colossus_100g.bit*</projectPath>
+    <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive></p4SysDrive>
+    <p4SysRoot></p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>true</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>true</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+//SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <quietPeriod>1800</quietPeriod>
+  <assignedNode>fpga-imp-01</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>* * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_syn_colossus_dx_100g_iob</project>
+      <filter>changelist.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_syn_colossus_dx_100g_iob</project>
+      <filter>SynplifyBlade/rev_1/ColossusDX_BLADE100G.edf</filter>
+      <target>VivadoBlade</target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+ls -al ${WORKSPACE}
+mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
+ls -al ${WORKSPACE}
+p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+ls -al ${WORKSPACE}/bitstream/candidate/iob/
+
+#set up environment
+export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+
+source ${XILINX_PATH}/settings64.sh
+
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
+
+if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
+    LAST_CHANGE=${P4_CHANGELIST}
+fi
+
+echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
+cd ${WORKSPACE}
+
+p4 edit SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+
+p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+
+echo &quot;Start implementation&quot;
+cd ${WORKSPACE}/VivadoBlade
+
+chmod u+w ./*.xpr
+chmod u+w ./VivadoBlade.data/runs/*
+
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
+
+echo &quot;open_project VivadoBlade.xpr&quot; &gt;&gt; myImp.tcl
+echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
+echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
+#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
+#echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
+echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/colossus_100g.bit&quot; &gt;&gt; myImp.tcl
+echo &quot;close_project&quot; &gt;&gt; myImp.tcl
+echo &quot;exit&quot; &gt;&gt; myImp.tcl
+
+vivado -mode batch -source ./myImp.tcl
+
+#parse log to check for errors
+#if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
+#then
+#    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+#
+#    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+#
+#    if [ ${CRITICAL_WARNINGS} ];
+#    then
+#        echo &quot;ERROR: CRITICAL WARNING detected, set build as failure&quot;
+#        exit 1
+#    fi
+#fi
+</command>
+    </hudson.tasks.Shell>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
+        <file>VivadoBlade/version_*.txt</file>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+      </condition>
+      <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
+        <entry>
+          <includes>version_*.txt</includes>
+          <basedir>VivadoBlade</basedir>
+          <excludes></excludes>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <flatten>true</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </entry>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
+        <file>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit</file>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+      </runCondition>
+      <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
+md5sum -b colossus_100g.bit &gt; colossus_100g.bit.md5
+</command>
+        </hudson.tasks.Shell>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
+          <entry>
+            <includes>*.bit*</includes>
+            <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
+            <excludes></excludes>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <flatten>true</flatten>
+            <deleteRemote>false</deleteRemote>
+            <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+            <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+            <failNoFilesDeploy>false</failNoFilesDeploy>
+          </entry>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
+        <hudson.tasks.Shell>
+          <command>#MAX_TIMING_DELTA=0.000
+
+#echo &quot;Checking Post Routing Timing Summary...&quot;
+#echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
+
+#eval $(cat $WORKSPACE/VivadoBlade/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
+
+#debug prints
+#echo $WNS
+#echo $TNS
+#echo $WHS
+#echo $THS
+
+#echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &lt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &lt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &lt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &lt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
+
+#echo &quot;Done checking Post Routing Timing Summary.&quot;
+</command>
+        </hudson.tasks.Shell>
+      </conditionalbuilders>
+    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
+        <includes>VivadoBlade/colossus_iob_imp*.v</includes>
+        <excludes></excludes>
+        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
+      </runCondition>
+      <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>cd VivadoBlade
+tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
+        </hudson.tasks.Shell>
+      </conditionalbuilders>
+    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+      <runCondition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+        <worstResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </worstResult>
+        <bestResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </bestResult>
+      </runCondition>
+      <conditionalbuilders>
+        <hudson.tasks.Shell>
+          <command>if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit ];
+then
+
+    #submit FPGA image to Perforce
+    echo &quot;Submitting FPGA image to Perforce&quot;
+
+    cd ${WORKSPACE}
+
+    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+
+    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+
+    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit* bitstream/candidate/iob/
+
+    VER_DATECODE=`cat VivadoBlade/version_*.txt`
+
+    p4 submit -d &quot;Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+
+fi
+</command>
+        </hudson.tasks.Shell>
+      </conditionalbuilders>
+    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>true</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/colossus_100g.bit*, VivadoBlade/version_*.txt</artifacts>
+      <latestOnly>true</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
+      <regexp>VER_DATECODE=(.*)</regexp>
+      <regexpForFailed></regexpForFailed>
+      <description>Version \1</description>
+      <setForMatrix>false</setForMatrix>
+    </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
+    <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
+      <entries>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+          <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
+          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <excludes></excludes>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <flatten>true</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+        <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+          <includes>colossus_iob_imp_sim.tar.gz</includes>
+          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <excludes></excludes>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <flatten>true</flatten>
+          <deleteRemote>false</deleteRemote>
+          <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
+          <deleteRemoteArtifactsByScript>false</deleteRemoteArtifactsByScript>
+          <failNoFilesDeploy>false</failNoFilesDeploy>
+        </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
+      </entries>
+      <deployEvenBuildFail>true</deployEvenBuildFail>
+    </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
+    <hudson.plugins.perforce.PerforceTagNotifier plugin="perforce@1.3.27">
+      <rawLabelName>${JOB_NAME}-${BUILD_NUMBER}</rawLabelName>
+      <rawLabelOwner></rawLabelOwner>
+      <rawLabelDesc>${BUILD_TAG}-${BUILD_NUMBER}</rawLabelDesc>
+      <onlyOnSuccess>true</onlyOnSuccess>
+    </hudson.plugins.perforce.PerforceTagNotifier>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>hw_patch_fpga_colossus_dx_100g_iob</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
+      <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList>$DEFAULT_RECIPIENTS;</recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>true</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList>$DEFAULT_RECIPIENTS;</recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>true</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+          <email>
+            <recipientList>$DEFAULT_RECIPIENTS;</recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>true</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo>$DEFAULT_REPLYTO</replyTo>
+      <saveOutput>false</saveOutput>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>echo &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
+rm -rf ${WORKSPACE}/*</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+    <hudson.tasks.Mailer plugin="mailer@1.8">
+      <recipients></recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.blame__upstream__commiters.BlameUpstreamCommitersPublisher plugin="blame-upstream-commiters@1.2">
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.plugins.blame__upstream__commiters.BlameUpstreamCommitersPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
+  </buildWrappers>
+</project>
