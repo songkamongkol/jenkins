@@ -132,7 +132,16 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+      <command>ls -al ${WORKSPACE}
+p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+ls -al ${WORKSPACE}
+mkdir -p ${WORKSPACE}/bitstream/candidate/nic/
+ls -al ${WORKSPACE}
+p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+ls -al ${WORKSPACE}/bitstream/candidate/nic/
+
+#set up environment
+export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 
 source ${XILINX_PATH}/settings64.sh
 
@@ -164,7 +173,7 @@ cd ${WORKSPACE}/Vivado
 chmod u+w ./*.xpr
 chmod u+w ./Vivado.data/runs/*
 
-echo &quot;${VER_DATECODE}&quot; &gt; ./version.txt
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 echo &quot;open_project Vivado.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
