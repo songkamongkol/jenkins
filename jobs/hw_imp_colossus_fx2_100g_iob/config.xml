@@ -95,7 +95,6 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <quietPeriod>1800</quietPeriod>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
@@ -133,23 +132,23 @@ VER_DATECODE=${VER}${DATECODE}
 #    LAST_CHANGE=${P4_CHANGELIST}
 #fi
 
-#echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
-#cd ${WORKSPACE}
+echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
+cd ${WORKSPACE}
 
-#p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
-#sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-#sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-#sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-#sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-#sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
 #p4 submit -d &quot;Colossus FX2 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
 
-#chmod u+w ./*.xpr
+chmod u+w ./*.xpr
 #chmod u+w ./VivadoBlade.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
