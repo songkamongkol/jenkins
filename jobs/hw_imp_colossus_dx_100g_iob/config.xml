@@ -84,7 +84,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -169,7 +169,7 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 
-p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+p4 submit -d &quot;Description: Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
