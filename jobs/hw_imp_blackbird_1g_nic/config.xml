@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
           <description>Maximum number of CPUs/cores to use</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
@@ -81,6 +81,7 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
+    <excludedFiles>//SPT_HW/frenzy/sandbox/SourceCode/include/VERSION.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -92,7 +93,7 @@
   </scm>
   <assignedNode>fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -196,7 +197,7 @@ fi
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_ise_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>Xilinx/*.bit*</artifacts>
@@ -214,7 +215,7 @@ fi
       <onlyOnSuccess>true</onlyOnSuccess>
     </hudson.plugins.perforce.PerforceTagNotifier>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com</recipientList>
+      <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com, James.Bauder@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
           <email>
