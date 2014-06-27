@@ -84,7 +84,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -208,7 +208,7 @@ then
 
     CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/Vivado/Vivado.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
-    if [ ${CRITICAL_WARNINGS} ];
+    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
         echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
         exit 1
