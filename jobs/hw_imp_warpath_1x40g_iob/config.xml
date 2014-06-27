@@ -96,7 +96,7 @@
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
   <quietPeriod>600</quietPeriod>
-  <assignedNode>fpga-imp-01</assignedNode>
+  <assignedNode>fpga-imp-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -110,7 +110,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ls -al ${WORKSPACE}
+      <command>#sanity check, make sure no files are checked out from Perforce at the beginning
+p4 revert //...
+
+ls -al ${WORKSPACE}
 p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g.bit*
 ls -al ${WORKSPACE}
 mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
@@ -315,7 +318,7 @@ fi
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_ise_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>Xilinx_Warpath_1x40G/*.bit*, Xilinx_Warpath_1x40G/version_*.txt</artifacts>
