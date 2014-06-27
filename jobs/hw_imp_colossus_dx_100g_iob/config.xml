@@ -35,6 +35,11 @@
           <description>Value to use as check on post-routing timing summary to determine if timing should be considered as failure</description>
           <defaultValue>0.000</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BITSTREAM_NAME</name>
+          <description>File name for the generated bitstream</description>
+          <defaultValue>colossus_100g.bit</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -127,7 +132,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>#sanity check, make sure no files form Perforce are checked out at the beginning
+      <command>#sanity check, make sure no files are checked out from Perforce at the beginning
 p4 revert //...
 
 ls -al ${WORKSPACE}
@@ -192,7 +197,6 @@ echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
 vivado -mode batch -source ./myImp.tcl
-
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
