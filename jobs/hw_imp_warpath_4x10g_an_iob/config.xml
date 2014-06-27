@@ -114,7 +114,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ls -al ${WORKSPACE}
+      <command>#sanity check, make sure no files are checked out from Perforce at the beginning
+p4 revert //...
+
+ls -al ${WORKSPACE}
 p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_10g_an.bit*
 ls -al ${WORKSPACE}
 mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
