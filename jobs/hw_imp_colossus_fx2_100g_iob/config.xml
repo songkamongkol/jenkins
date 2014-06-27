@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus DX 1x100G I/O Board FPGA Implementation</description>
+  <description>Colossus FX2 1x100G I/O Board FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -144,7 +144,7 @@ VER_DATECODE=${VER}${DATECODE}
 #sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 #sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
-#p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#p4 submit -d &quot;Colossus FX2 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
@@ -302,7 +302,7 @@ then
 
 #    VER_DATECODE=`cat VivadoBlade/version_*.txt`
 
-#    p4 submit -d &quot;Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+#    p4 submit -d &quot;Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
