@@ -44,11 +44,9 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/... //ws/VivadoBlade/...
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/ColossusDX_BLADE100G.edf //ws/VivadoBlade/ColossusDX_BLADE100G.edf
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
-+//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*  //ws/bitstream/candidate/iob/colossus_100g.bit*</projectPath>
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/...  //ws/VivadoBlade/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -81,7 +79,7 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
