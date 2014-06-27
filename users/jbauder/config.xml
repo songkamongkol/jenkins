@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <user>
-  <fullName>jbauder</fullName>
+  <fullName>Jim Bauder</fullName>
   <properties>
-    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8"/>
     <hudson.model.MyViewsProperty>
       <views>
         <hudson.model.AllView>
@@ -33,6 +32,15 @@
     <hudson.model.PaneStatusProperties>
       <collapsed/>
     </hudson.model.PaneStatusProperties>
-    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
+    <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27">
+      <perforceId>jbauder</perforceId>
+      <perforceEmail>James.Bauder@spirent.com</perforceEmail>
+    </hudson.plugins.perforce.PerforceUserProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>#jbcrypt:$2a$10$mV367ts4kxEHRJKYt8H32u5ZCWIBBSjBXnZqSlgSzpH/1yrgBjFFK</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
+      <emailAddress>james.bauder@spirent.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
   </properties>
 </user>
