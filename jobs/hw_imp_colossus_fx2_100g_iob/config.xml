@@ -112,6 +112,16 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_syn_colossus_fx2_100g_iob</project>
+      <filter>changelist.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_syn_colossus_fx2_100g_iob</project>
       <filter>SynplifyBlade/rev_1/ColossusFX2_BLADE100G.edf</filter>
       <target>VivadoBlade</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -138,11 +148,11 @@ echo &quot;Derive FPGA image version/datecode&quot;
 VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
-#LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
+LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
-#if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
-#    LAST_CHANGE=${P4_CHANGELIST}
-#fi
+if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
+    LAST_CHANGE=${P4_CHANGELIST}
+fi
 
 echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
 cd ${WORKSPACE}
