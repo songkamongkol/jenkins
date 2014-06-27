@@ -51,7 +51,9 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/IP_Vivado/...  //ws/IP_Vivado/...
 
-+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/...  //ws/VivadoBlade/...</projectPath>
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/...  //ws/VivadoBlade/...
+
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/ColossusFX2_BLADE100G.edf  //ws/VivadoBlade/ColossusFX2_BLADE100G.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -82,7 +84,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -108,6 +110,16 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>hw_syn_colossus_fx2_100g_iob</project>
+      <filter>SynplifyBlade/rev_1/ColossusFX2_BLADE100G.edf</filter>
+      <target>VivadoBlade</target>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>#ls -al ${WORKSPACE}
 #p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
