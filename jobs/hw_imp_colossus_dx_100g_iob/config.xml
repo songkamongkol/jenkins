@@ -127,12 +127,15 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>ls -al ${WORKSPACE}
+      <command>#sanity check, make sure no files form Perforce are checked out at the beginning
+p4 revert //...
+
+ls -al ${WORKSPACE}
 p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
-ls -al ${WORKSPACE}
-mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
-ls -al ${WORKSPACE}
-p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
+#ls -al ${WORKSPACE}
+#mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
+#ls -al ${WORKSPACE}
+#p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*
 ls -al ${WORKSPACE}/bitstream/candidate/iob/
 
 #set up environment
