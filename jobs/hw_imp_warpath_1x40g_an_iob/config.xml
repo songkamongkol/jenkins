@@ -114,7 +114,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ls -al ${WORKSPACE}
+      <command>#sanity check, make sure no files are checked out from Perforce at the beginning
+p4 revert //...
+
+ls -al ${WORKSPACE}
 p4 have //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 ls -al ${WORKSPACE}
 mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
@@ -222,7 +225,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Warpath_1x40G.ut
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m 12 -max_time &quot;08:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m 20 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
@@ -319,7 +322,7 @@ fi
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_ise_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>Xilinx_Warpath_1x40G_AN/*.bit*, Xilinx_Warpath_1x40G_AN/version_*.txt</artifacts>
