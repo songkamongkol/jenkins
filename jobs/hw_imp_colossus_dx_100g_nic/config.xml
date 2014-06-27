@@ -189,11 +189,32 @@ echo &quot;write_verilog -force colossus_nic_imp_timesim.v -mode timesim -sdf_an
 echo &quot;write_sdf -force colossus_nic_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./Vivado.runs/impl_1/ColossusDX_1x100G.bit&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./Vivado.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
 vivado -mode batch -source ./myImp.tcl</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/sh
+
+#Jenkins by default runs shell executions with &quot;-xe&quot; option, which will exit immediately when a command returns non-zero value
+#grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
+
+#parse log to check for errors
+if [ -f ${WORKSPACE}/Vivado/Vivado.runs/impl_1/runme.log ];
+then
+    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/Vivado/Vivado.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+
+    if [ ${CRITICAL_WARNINGS} ];
+    then
+        echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
+        exit 1
+    fi
+fi
+</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
@@ -214,7 +235,7 @@ vivado -mode batch -source ./myImp.tcl</command>
       <conditionalbuilders>
         <hudson.tasks.Shell>
           <command>cd Vivado/Vivado.runs/impl_1/
-md5sum -b ColossusDX_1x100G.bit &gt; ColossusDX_1x100G.bit.md5
+md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 </command>
         </hudson.tasks.Shell>
         <hudson.tasks.Shell>
@@ -236,7 +257,7 @@ tar zcvf colossus_nic_imp_sim.tar.gz ./colossus_nic_imp*.v ./*.sdf</command>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>version.txt</includes>
+            <includes>version_*.txt</includes>
             <basedir>Vivado</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
@@ -268,6 +289,45 @@ eval $(cat $WORKSPACE/Vivado/vivado.log | grep &quot;Post Routing Timing Summary
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
+      <condition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
+        <worstResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </worstResult>
+        <bestResult>
+          <name>SUCCESS</name>
+          <ordinal>0</ordinal>
+          <color>BLUE</color>
+          <completeBuild>true</completeBuild>
+        </bestResult>
+      </condition>
+      <buildStep class="hudson.tasks.Shell">
+        <command>if [ -f ${WORKSPACE}/Vivado/Vivado.runs/impl_1/${BITSTREAM_NAME} ];
+then
+
+    #submit FPGA image to Perforce
+    echo &quot;Submitting FPGA image to Perforce&quot;
+
+    cd ${WORKSPACE}
+
+    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+
+    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+
+    cp ${WORKSPACE}/Vivado/Vivado.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
+
+    VER_DATECODE=`cat Vivado/version_*.txt`
+
+    p4 submit -d &quot;Colossus DX 100G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+
+fi
+</command>
+      </buildStep>
+      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
+    </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
@@ -276,10 +336,20 @@ eval $(cat $WORKSPACE/Vivado/vivado.log | grep &quot;Post Routing Timing Summary
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>Vivado/Vivado.runs/impl_1/ColossusDX_1x100G.bit*, Vivado/version.txt</artifacts>
+      <artifacts>Vivado/Vivado.runs/impl_1/${BITSTREAM_NAME}*, Vivado/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
+      <regexp>VER_DATECODE=(.*)</regexp>
+      <regexpForFailed></regexpForFailed>
+      <description>Version \1</description>
+      <setForMatrix>false</setForMatrix>
+    </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
