@@ -86,7 +86,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -159,6 +159,7 @@ fi
 echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
 cd ${WORKSPACE}
 
+p4 revert SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
 sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
