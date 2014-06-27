@@ -127,30 +127,30 @@ echo &quot;Derive FPGA image version/datecode&quot;
 VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
-LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
+#LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
-if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
-    LAST_CHANGE=${P4_CHANGELIST}
-fi
+#if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
+#    LAST_CHANGE=${P4_CHANGELIST}
+#fi
 
-echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
-cd ${WORKSPACE}
+#echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
+#cd ${WORKSPACE}
 
-p4 edit SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+#p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
-sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+#sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
-p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+#p4 submit -d &quot;Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
 
-chmod u+w ./*.xpr
-chmod u+w ./VivadoBlade.data/runs/*
+#chmod u+w ./*.xpr
+#chmod u+w ./VivadoBlade.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
