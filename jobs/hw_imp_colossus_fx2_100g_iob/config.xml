@@ -49,7 +49,9 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/IP_Vivado/...  //ws/IP_Vivado/...
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/IP_Vivado/...  //ws/IP_Vivado/...
 
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/...  //ws/VivadoBlade/...
 
