@@ -214,7 +214,7 @@ then
 
     CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
-    if [ ${CRITICAL_WARNINGS} != &quot;&quot; ];
+    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
         echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
         exit 1
