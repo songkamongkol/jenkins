@@ -44,15 +44,14 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/frenzy/sandbox/SourceCode/... //ws/SourceCode/...&#xd;
-+//SPT_HW/frenzy/sandbox/SimSource/... //ws/SimSource/...&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/frenzy/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+    <projectPath>+//SPT_HW/frenzy/sandbox/SourceCode/... //ws/SourceCode/...
++//SPT_HW/frenzy/sandbox/SimSource/... //ws/SimSource/...
+-//SPT_HW/frenzy/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
+-//SPT_HW/frenzy/sandbox/SimSource/*.exe //ws/SimSource/*.exe
+-//SPT_HW/frenzy/sandbox/SimSource/*.dll //ws/SimSource/*.dll
+-//SPT_HW/frenzy/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -82,13 +81,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
@@ -172,7 +171,7 @@ echo &quot;Simulation completed&quot;</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/vsim_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com</recipientList>
+      <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com, James.Bauder@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
           <email>
@@ -242,7 +241,6 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
