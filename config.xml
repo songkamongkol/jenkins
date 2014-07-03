@@ -1580,6 +1580,12 @@
       <userId>mhaber</userId>
     </slave>
     <slave>
+      <temporaryOfflineCause class="hudson.node_monitors.DiskSpaceMonitorDescriptor$DiskSpace">
+        <path>/tmp</path>
+        <size>827142144</size>
+        <triggered>true</triggered>
+        <trigger>hudson.node_monitors.DiskSpaceMonitor</trigger>
+      </temporaryOfflineCause>
       <name>jazz-fpga-regression-1</name>
       <description>Linux Ubuntu 12.04.1 LTS (32-bit)</description>
       <remoteFS>/tmp</remoteFS>
