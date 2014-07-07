@@ -1584,7 +1584,7 @@
         <path>/tmp</path>
         <size>827146240</size>
         <triggered>true</triggered>
-        <trigger>hudson.node_monitors.DiskSpaceMonitor</trigger>
+        <trigger>hudson.node_monitors.TemporarySpaceMonitor</trigger>
       </temporaryOfflineCause>
       <name>jazz-fpga-regression-1</name>
       <description>Linux Ubuntu 12.04.1 LTS (32-bit)</description>
