@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.44_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -29,23 +29,23 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/scm/...&#xd;
--//TestCenter/*/dmcp/...&#xd;
--//TestCenter/*/regression/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/framework/ui/...&#xd;
--//TestCenter/*/content/.../ui/...&#xd;
--//TestCenter/*/.../bll/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
+    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/scm/...
+-//TestCenter/*/dmcp/...
+-//TestCenter/*/regression/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/framework/ui/...
+-//TestCenter/*/content/.../ui/...
+-//TestCenter/*/.../bll/...
++//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...
++//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -83,13 +83,13 @@
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>bldmisclnx-01</assignedNode>
+  <assignedNode>ilpkg-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -108,15 +108,15 @@
 export rev=`head -1 $WORKSPACE/framework/il/kernel/yocto/revision.hg`
 # --- sync the latest crosstools
 cd /export/crosstools
-# p4 -u scmbuild -p perforce.spirentcom.com:1666 -c bldmisclnx-01 sync ...
-# cd /export/crosstools/yocto-1.0
-# sudo python install_yocto_crosstools.py -r $rev
+p4 -u scmbuild -p perforce.spirentcom.com:1666 -c ilpkg-02 sync ...
+cd /export/crosstools/yocto-1.0
+sudo python install_yocto_crosstools.py -r $rev
 </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>release_il_changeling_ci, release_il_chos2_ci, release_il_testmodule_contents_ci, release_il_changeling_all_ci, release_il_virtual_ci, release_il_vtc_ci, release_il_qemu_ci,release_il_chassisvm_ci</childProjects>
+      <childProjects>release_il_changeling_yocto_ci,release_il_chos2_yocto_ci,release_il_testmodule_contents_ci,release_il_changeling_all_yocto_ci,release_il_virtual_yocto_ci,release_il_vtc_ci,release_il_qemu_ci,release_il_chassisvm_ci,release_il_qemu_yocto_ci,release_il_lxc_yocto_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -127,7 +127,7 @@ cd /export/crosstools
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <join.JoinTrigger plugin="join@1.15">
       <joinProjects>release_il_ci_join</joinProjects>
