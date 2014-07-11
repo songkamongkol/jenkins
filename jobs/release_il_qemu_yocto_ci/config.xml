@@ -238,7 +238,7 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_qemu_
       <buildSteps>
         <hudson.tasks.Shell>
           <command># copy the build output to storage server
-export STORAGE_DIR=/mnt/builds/jenkins/il_qemu_yocto-release/build-$BUILD_NUMBER
+export STORAGE_DIR=/mnt/builds/jenkins/il_qemu_yocto-$BRANCH_NAME/build-$BUILD_NUMBER
 
 if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
   mkdir -p $STORAGE_DIR
