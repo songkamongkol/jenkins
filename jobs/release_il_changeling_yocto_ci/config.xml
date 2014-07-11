@@ -165,7 +165,7 @@ for file in ctl_images:
 </command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling-release/
+      <command># python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling-$BRANCH_NAME/
 # python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_changeling-$BRANCH_NAME
 python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_changeling_yocto-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
