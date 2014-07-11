@@ -120,7 +120,7 @@ Wait 10 minutes&lt;br&gt;</description>
   <quietPeriod>15</quietPeriod>
   <assignedNode>ilbuild-06</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
