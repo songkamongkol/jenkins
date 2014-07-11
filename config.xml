@@ -1932,7 +1932,7 @@
     </hudson.plugins.nested__view.NestedView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
-      <name>release (4.43_rel)</name>
+      <name>release (4.44_rel)</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
