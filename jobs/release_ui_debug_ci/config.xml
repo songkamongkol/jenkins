@@ -164,7 +164,9 @@ python framework\tools\buildUtil\package.py --install STAKCommands.beta.Windows.
       <command>python genSln.py</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+      <command>rem devenv /rebuild Debug TestCenter.UI.Gen.sln
+rem C:\Windows\Microsoft.NET\Framework\v2.0.50727\msbuild.exe TestCenter.UI.Gen.sln /t:rebuild /p:Configuration=Debug
+pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
 call vcvarsall.bat x86
 popd
 msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Debug</command>
