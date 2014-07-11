@@ -50,7 +50,6 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
     <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
 //SCM/Scripts/... //ws/Build_Scripts/Scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <p4Tool>p4</p4Tool>
@@ -74,7 +73,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -111,10 +110,10 @@ net use I: \\martin\archive\pv
 net use
 
 rem SET ILHOST=10.2.19.55
-SET ILHOST=ilpkg-02.cal.ci.spirentcom.com
+SET ILHOST=ilpkg-01.cal.ci.spirentcom.com
 
-rem SET ILWORKSPACE=/home/scmbuild/jenkins/workspace/release_il_centralboot_packaging
-SET ILWORKSPACE=/home/spirent/jenkins/workspace/release_il_centralboot_packaging
+rem SET ILWORKSPACE=/home/scmbuild/jenkins-tc/workspace/release_il_centralboot_packaging
+SET ILWORKSPACE=/home/spirent/jenkins-tc/workspace/release_il_centralboot_packaging
 SET DEPENDENT_JOB_NAME=release_il_ftp_centralboot_packaging
 c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=no --runsetver=no --runciftpcentralboot=yes --updatelatestbuildtext=yes</command>
     </hudson.tasks.BatchFile>
