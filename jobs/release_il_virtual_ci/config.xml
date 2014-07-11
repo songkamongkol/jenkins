@@ -128,9 +128,9 @@ Archive il_virtual_*.tar&lt;br&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>45</quietPeriod>
-  <assignedNode>ilbuild-19</assignedNode>
+  <assignedNode>ilbuild-09</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -205,7 +205,7 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_virtu
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt</targets>

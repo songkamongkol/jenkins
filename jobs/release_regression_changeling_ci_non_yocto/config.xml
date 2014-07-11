@@ -12,7 +12,7 @@
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>release_regression_nightly</blockingJobs>
+      <blockingJobs>release_regression_cl_nightly</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -24,17 +24,18 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
           <description>stc install dir</description>
-          <defaultValue>C:\jenkins\workspace\release_regression_ci\stc_install_dir</defaultValue>
+          <defaultValue>C:\jenkins\workspace\release_regression_changeling_ci\stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_EXECUTOR</name>
           <description>number of executors </description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
-          <description>filter (e.g. DEV_CI and PGA)</description>
-          <defaultValue>DEV_CI and (HW_NONE or HW_QEMU) and not disabled</defaultValue>
+          <description>filter (e.g. DEV_CI and PGA)
+</description>
+          <defaultValue>DEV_CI and (HW_BLINK or HW_TBIRD) and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -91,15 +92,10 @@
   </scm>
   <assignedNode>CIRegressionAgents</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
@@ -110,7 +106,7 @@
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, bll_idl_crc.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -120,7 +116,7 @@
       <filter>bin/Release/STAKCommands.beta.Windows.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
@@ -128,14 +124,16 @@
     <hudson.tasks.BatchFile>
       <command>del UI_changelist*.txt
 del BLL_Linux_changelist_*.txt
-del il_qemu_changelist_*.txt
+del *il_changeling*changelist_*.txt
 exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_il_qemu_ci</project>
-      <filter>*il_qemu*changelist_*.txt</filter>
+      <project>release_il_changeling_yocto_ci</project>
+      <filter>*il_changeling*changelist_*.txt</filter>
       <target></target>
-      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
+        <id>lastSuccessfulBuild</id>
+      </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -152,35 +150,43 @@ exit /B 0</command>
       <filter>BLL_Linux_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>rmdir /q /s regression\il_img
-mkdir regression\il_img\
-copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-release\build-latest\* regression\il_img
-
-python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt 
-</command>
+      <command>p4 revert //...</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>REM python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
+      <command>rmdir /q /s regression\il_img
+mkdir regression\il_img\</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>python regression\jenkins\copy_artifacts.py release_il_changeling_ci \\storage.cal.ci.spirentcom.com\builds\jenkins\il_changeling-release regression\il_img --clean-target
+
+python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
+
+REM install BLL/IL
+
+python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=&quot;172.20.64.4 1 172.20.64.3 1&quot; --slotWaitTimeInSec 600 --fw-image-dir=regression\il_img --stc-res-package=STAKCommands.beta.Windows.tar.gz
+
+REM python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=&quot;172.20.64.3 1&quot; --slotWaitTimeInSec 600 --fw-image-dir=regression\il_img</command>
+    </hudson.tasks.BatchFile>
+    <hudson.tasks.BatchFile>
+      <command>REM run test
+
+tclsh regression\util\unittest\all.tcl
+
+
+python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=C:/jenkins/workspace/release_regression_changeling_ci/stc_install_dir  -m &apos;%FILTER%&apos; -n 4 --archive-tmpdir --keep-all-tmpdir --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;BLINK\&quot;:[(\&quot;//172.20.64.4/2/1\&quot;, \&quot;//172.20.64.4/2/2\&quot;),(\&quot;//172.20.64.4/2/3\&quot;, \&quot;//172.20.64.4/2/4\&quot;), (\&quot;//172.20.64.4/2/7\&quot;, \&quot;//172.20.64.4/2/8\&quot;)], \&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;
+
+REM hon regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=C:/jenkins/workspace/release_regression_changeling_ci/stc_install_dir  -m &apos;%FILTER%&apos; -n 3 --archive-tmpdir --keep-all-tmpdir --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;
 
 python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
-
-
-python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME% --stc-res-package=STAKCommands.beta.Windows.tar.gz</command>
-    </hudson.tasks.BatchFile>
-    <hudson.tasks.BatchFile>
-      <command>tclsh regression\util\unittest\all.tcl
-
-python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
-
-python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=C:/jenkins/workspace/release_regression_ci/stc_install_dir -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos;
-
-python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
 exit /B 0</command>
     </hudson.tasks.BatchFile>
@@ -242,7 +248,7 @@ if(manager.logContains(&quot;.*crc mismatch.*&quot;)) {
     </org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
+      <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com,$EMAIL_DEV</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -263,7 +269,9 @@ if(manager.logContains(&quot;.*crc mismatch.*&quot;)) {
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <defaultContent>$DEFAULT_CONTENT
+
+Check test result at ${BUILD_URL}testReport/ .</defaultContent>
       <attachmentsPattern></attachmentsPattern>
       <presendScript></presendScript>
       <attachBuildLog>false</attachBuildLog>

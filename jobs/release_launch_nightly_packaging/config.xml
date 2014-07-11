@@ -50,7 +50,7 @@ release_ccp&lt;br&gt;&#xd;
     <p4User>scmbuild</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//SCM/Scripts/ci_* //ws/Scripts/ci_*
 +//TestCenter/${BRANCH_NAME}/... //ws/...
 -//TestCenter/*/sandbox/...
@@ -67,6 +67,7 @@ release_ccp&lt;br&gt;&#xd;
 -//TestCenter/*/framework/il/freebsd/sys/dev/digi/...
 -//TestCenter/*/framework/il/platform/scripts/chassis/i686/filesys/etc/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <p4Tool>p4</p4Tool>
@@ -103,12 +104,12 @@ release_ccp&lt;br&gt;&#xd;
   </scm>
   <assignedNode>spccalengec02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>00 18 * * *</spec>
+      <spec>00 20 * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>

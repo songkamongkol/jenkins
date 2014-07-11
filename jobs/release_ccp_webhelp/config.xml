@@ -64,7 +64,7 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -75,16 +75,16 @@ Triggers integration_package_bll_windows&lt;br&gt;</description>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>spccalengec02</assignedNode>
+  <assignedNode>techpubbld</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>&quot;D:\Program Files (x86)\MadCap Software\MadCap Flare V8\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Provisioning_Manager\provision-mgr.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true</command>
+      <command>&quot;c:\Program Files (x86)\MadCap Software\MadCap Flare V10\Flare.app\madbuild&quot; -project &quot;%WORKSPACE%\online_help\Provisioning_Manager\provision-mgr.flprj&quot; -target &quot;WebHelp.fltar&quot; -log true</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>7z a -ttar Provisioning_WebHelp.tar %WORKSPACE%\online_help\Provisioning_Manager\Output\spirent\WebHelp

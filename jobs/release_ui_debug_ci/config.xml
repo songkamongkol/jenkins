@@ -165,9 +165,7 @@ python framework\tools\buildUtil\package.py --install STAKCommands.beta.Windows.
       <command>python genSln.py</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>rem devenv /rebuild Debug TestCenter.UI.Gen.sln
-rem C:\Windows\Microsoft.NET\Framework\v2.0.50727\msbuild.exe TestCenter.UI.Gen.sln /t:rebuild /p:Configuration=Debug
-pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+      <command>pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
 call vcvarsall.bat x86
 popd
 msbuild.exe TestCenter.UI.Gen.sln /t:build /p:Configuration=Debug</command>
@@ -200,7 +198,7 @@ python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=2 --ui --a
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>TestCenterDebug.Windows*.tar.gz, ${BUILD_OUTPUT_DIR}/UnitTestLogs.tar.gz</targets>
@@ -274,7 +272,7 @@ python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=2 --ui --a
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
     <EnvInjectBuildWrapper plugin="envinject@1.89">
       <info>
-        <propertiesContent>STC_BUILD_ROOT=c:\jenkins-tc\workspace\release_ui_debug_ci</propertiesContent>
+        <propertiesContent>STC_BUILD_ROOT=c:\jenkins\workspace\release_ui_debug_ci</propertiesContent>
         <loadFilesFromMaster>false</loadFilesFromMaster>
       </info>
     </EnvInjectBuildWrapper>

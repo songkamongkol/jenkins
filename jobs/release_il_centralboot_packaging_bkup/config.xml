@@ -102,7 +102,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -116,7 +116,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
   <quietPeriod>120</quietPeriod>
   <assignedNode>ilpkg-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -137,82 +137,61 @@ sudo -S rm -rf $WORKSPACE/build/il/packages/*
 
 
 sudo scons target=packageclean
-sudo scons target=kernelclean
-
-rm -f $WORKSPACE/*.txt</command>
+sudo scons target=kernelclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_changeling_all_yocto-${BRANCH_NAME}_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_changeling_all-${BRANCH_NAME}_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_all_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_changeling_all build artifacts from /mnt/builds/jenkins/il_changeling_all_yocto-$BRANCH_NAME/build-packaging/
-ls -algh /mnt/builds/jenkins/il_changeling_all_yocto-$BRANCH_NAME/build-packaging/*.txt
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_all-${BRANCH_NAME}_packaging.txt
+echo Copying il_changeling_all build artifacts from /mnt/builds/jenkins/il_changeling_all-$BRANCH_NAME/build-packaging/
+ls -algh /mnt/builds/jenkins/il_changeling_all-$BRANCH_NAME/build-packaging/*.txt
 mkdir -p $WORKSPACE/build/il/packages
-cp -r /mnt/builds/jenkins/il_changeling_all_yocto-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
+cp -r /mnt/builds/jenkins/il_changeling_all-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/changeling_rawimage.map
 echo &quot;Finished copying il_changeling_all files&quot;
-rm -f /mnt/builds/jenkins/il_changeling_all_yocto-${BRANCH_NAME}_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_changeling_all_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_chos2-${BRANCH_NAME}_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_changeling_yocto build artifacts from /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}/build-packaging/
-ls -algh /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}/build-packaging/*.txt
-mkdir -p $WORKSPACE/build/il/packages
-cp -r /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}/build-packaging/* $WORKSPACE/build/il/packages
-cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/changeling_rawimage.map
-echo &quot;Finished copying il_changeling files&quot;
-rm -f /mnt/builds/jenkins/il_changeling_yocto-${BRANCH_NAME}_packaging.txt</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
-
-if [ -f /mnt/builds/jenkins/il_chos2_yocto-${BRANCH_NAME}_promoting.txt ]; then
-echo &quot;Promotion is in progress, wait for 5 minutes&quot;
-sleep 300
-else
-echo &quot;No promotion is in progress, proceeding with packaging&quot;
-fi
-
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chos2_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_chos2 build artifacts from /mnt/builds/jenkins/il_chos2_yocto-$BRANCH_NAME/build-packaging/
-ls -algh /mnt/builds/jenkins/il_chos2_yocto-${BRANCH_NAME}/build-packaging/*.txt
-cp -r /mnt/builds/jenkins/il_chos2_yocto-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_chos2-${BRANCH_NAME}_packaging.txt
+echo Copying il_chos2 build artifacts from /mnt/builds/jenkins/il_chos2-$BRANCH_NAME/build-packaging/
+ls -algh /mnt/builds/jenkins/il_chos2-${BRANCH_NAME}/build-packaging/*.txt
+cp -r /mnt/builds/jenkins/il_chos2-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
 echo &quot;Finished copying il_chos2 files&quot;
-rm -f /mnt/builds/jenkins/il_chos2_yocto-${BRANCH_NAME}_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_chos2-${BRANCH_NAME}_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-if [ -f /mnt/builds/jenkins/il_virtual_yocto-${BRANCH_NAME}_promoting.txt ]; then
+if [ -f /mnt/builds/jenkins/il_virtual-${BRANCH_NAME}_promoting.txt ]; then
 echo &quot;Promotion is in progress, wait for 5 minutes&quot;
 sleep 300
 else
 echo &quot;No promotion is in progress, proceeding with packaging&quot;
 fi
 
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_virtual_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_virtual build artifacts from /mnt/builds/jenkins/il_virtual_yocto-$BRANCH_NAME/build-packaging/
-ls -algh /mnt/builds/jenkins/il_virtual_yocto-${BRANCH_NAME}/build-packaging/*.txt
-cp -r /mnt/builds/jenkins/il_virtual_yocto-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
+echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_virtual-${BRANCH_NAME}_packaging.txt
+echo Copying il_virtual build artifacts from /mnt/builds/jenkins/il_virtual-$BRANCH_NAME/build-packaging/
+ls -algh /mnt/builds/jenkins/il_virtual-${BRANCH_NAME}/build-packaging/*.txt
+cp -r /mnt/builds/jenkins/il_virtual-$BRANCH_NAME/build-packaging/* $WORKSPACE/build/il/packages
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/virtual_rawimage.map
 echo &quot;Finished copying il_virtual files&quot;
-rm -f /mnt/builds/jenkins/il_virtual_yocto-${BRANCH_NAME}_packaging.txt</command>
+rm -f /mnt/builds/jenkins/il_virtual-${BRANCH_NAME}_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -231,40 +210,6 @@ cp -r /mnt/builds/jenkins/il_vtc-$BRANCH_NAME/build-packaging/* $WORKSPACE/build
 cp $WORKSPACE/build/il/packages/fsimg/rawimage.map $WORKSPACE/build/il/packages/fsimg/vtc_rawimage.map
 echo &quot;Finished copying il_vtc files&quot;
 rm -f /mnt/builds/jenkins/il_vtc-${BRANCH_NAME}_packaging.txt</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
-
-if [ -f /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}_promoting.txt ]; then
-echo &quot;Promotion is in progress, wait for 5 minutes&quot;
-sleep 300
-else
-echo &quot;No promotion is in progress, proceeding with packaging&quot;
-fi
-
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_lxcbuild artifacts from /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}/build-packaging/
-ls -algh /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}/build-packaging/*.txt
-cp /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}/build-packaging/rawimg/*lxc* $WORKSPACE/build/il/packages/rawimg
-echo &quot;Finished copying il_lxcfiles&quot;
-rm -f /mnt/builds/jenkins/il_lxc_yocto-${BRANCH_NAME}_packaging.txt</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
-
-if [ -f /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}_promoting.txt ]; then
-echo &quot;Promotion is in progress, wait for 5 minutes&quot;
-sleep 300
-else
-echo &quot;No promotion is in progress, proceeding with packaging&quot;
-fi
-
-echo &quot;Packaging started&quot; &gt; /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}_packaging.txt
-echo Copying il_qemu build artifacts from /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}/build-packaging/
-ls -algh /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}/build-packaging/*.txt
-cp /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}/build-packaging/rawimg/yocto* $WORKSPACE/build/il/packages/rawimg
-echo &quot;Finished copying il_qemu files&quot;
-rm -f /mnt/builds/jenkins/il_qemu_yocto-${BRANCH_NAME}_packaging.txt</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -324,12 +269,12 @@ python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createpropfile
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo Creating Central Boot image file
-sudo scons target=centralboot_yoctovm packaging=1</command>
+sudo scons target=centralboot packaging=1</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Creating Amara C3 image file&quot;
 # $WORKSPACE/build/il/scripts/phxbld -j8 c3_yocto
-sudo scons target=c3_pkg_yocto packaging=1</command>
+sudo scons target=c3_pkg packaging=1</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copying tmos bundle from vtc job for Avalanche build ...&quot;

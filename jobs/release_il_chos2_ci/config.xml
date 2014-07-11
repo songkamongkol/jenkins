@@ -119,7 +119,7 @@ Wait 10 minutes&lt;br&gt;</description>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>15</quietPeriod>
-  <assignedNode>ilbuild-18</assignedNode>
+  <assignedNode>ilbuild-06</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -181,7 +181,7 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_chos2
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt</targets>

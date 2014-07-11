@@ -4,12 +4,12 @@
   <description>Sync SCM build scripts, EAT, help files and other files as needed for packaging.&lt;br&gt;&#xd;
 Retrieve tar.gz files from UI and RR build.&lt;br&gt;&#xd;
 Extract TestCenter.Windows.no_version.tar.gz, ResultsReporter.tar.gz UI and RR tar.gz files to bin/release folder.&lt;br&gt;&#xd;
-Retrieve TestCenter_WebHelp.tar.gz,ServerManager_WebHelp.tar.gz from webhelp build.&lt;br&gt;&#xd;
+Retrieve TestCenter_WebHelp.tar.gz, Provisioning_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz from webhelp build.&lt;br&gt;&#xd;
 Run EAT ANT build&lt;br&gt;&#xd;
 Run setver.py to set the version of the TestCenter binary files.&lt;br&gt;&#xd;
 Run ci_packageinstaller.pl to create P2_installer and FORTHOT installer files.&lt;br&gt;&#xd;
 Run ci_packageinstaller.pl to create DMCP installer files.&lt;br&gt;&#xd;
-Copy build results to \\martin\archive\pv\TestCenter\4.43\Engineering_Builds\integration\BUILDVERSION&lt;br&gt;&#xd;
+Copy build results to \\martin\archive\pv\TestCenter\4.10\Engineering_Builds\integration\BUILDVERSION&lt;br&gt;&#xd;
 Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -165,7 +165,7 @@ python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_vers
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_webhelp</project>
-      <filter>TestCenter_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz</filter>
+      <filter>TestCenter_WebHelp.tar.gz, Provisioning_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
@@ -226,7 +226,7 @@ del EAT.Unix.tar</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
   </publishers>

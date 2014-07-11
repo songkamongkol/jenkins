@@ -116,7 +116,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>ilbldchassis-v02</assignedNode>
+  <assignedNode>ilbldchassis-v01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -131,7 +131,8 @@ echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties
 echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>sudo scons target=packageclean</command>
+      <command>sudo scons target=distclean
+sudo scons target=packageclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>$WORKSPACE/build/il/scripts/phxbld -j32 c3</command>
@@ -162,7 +163,7 @@ cp $WORKSPACE/build/il/packages/fsimg/testcenter_c3_vm-*.tgz* $STORAGE_DIR/fsimg
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt,changelist.properties</targets>

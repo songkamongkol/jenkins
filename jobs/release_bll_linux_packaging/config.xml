@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Sync SCM build scripts and other files as needed for packaging.&lt;br&gt;&#xd;
+  <description>_Sync SCM build scripts and other files as needed for packaging.&lt;br&gt;&#xd;
 Retrieve TestCenter.Linux.tar.gz files from bll_linux build.&lt;br&gt;&#xd;
 Retrieve ResultsReporter.Unix.tar.gz file from integration_package_bll_windows build.&lt;br&gt;&#xd;
 Extract TestCenter.linux.tar.gz.&lt;br&gt;&#xd;
@@ -72,11 +72,11 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
-//SCM/Scripts/... //ws/Build_Scripts/Scripts/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/SampleScripts/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...&#xd;
+    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
+//SCM/Scripts/... //ws/Build_Scripts/Scripts/...
+//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
+//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/SampleScripts/...
+//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...
 //TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/DpgUpdate/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -114,8 +114,8 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -217,7 +217,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>TestCenter.Linux.tar.gz,BUILD_*.txt</targets>
@@ -274,7 +274,7 @@ c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --c
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_BV_Launch_all,</projects>
+          <projects>release_BV_Launch_all</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

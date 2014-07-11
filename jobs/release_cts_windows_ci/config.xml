@@ -62,7 +62,7 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
 -//TestCenter/${BRANCH_NAME}/other/...&#xd;
--//TestCenter/${BRANCH_NAME}/common/lib/boost_1_34_0/...&#xd;
+-//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
 -//TestCenter/${BRANCH_NAME}/documents/...&#xd;
 -//TestCenter/${BRANCH_NAME}/schedules/...&#xd;
 -//TestCenter/${BRANCH_NAME}/scm/...&#xd;
@@ -114,7 +114,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>bllbuild-win-07</assignedNode>
+  <assignedNode>bllbuild-win-09</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -166,7 +166,7 @@ scons -j 4 -f SConstruct.bll debug=0 target=cts-bll-win32
 pushd C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
 call vcvarsall.bat x86
 popd
-msbuild.exe  CTS.UI.Gen.sln /t:build /p:Configuration=Release</command>
+msbuild.exe CTS.UI.Gen.sln /t:build /p:Configuration=Release</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>cd bin\Release
@@ -223,7 +223,7 @@ if %BUILD_PACKAGE_BUILD% == true (
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets></targets>
@@ -246,7 +246,6 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -262,7 +261,6 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
         <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
@@ -278,7 +276,6 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
-            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
       </configuredTriggers>

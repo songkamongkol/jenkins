@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>4IL Build job for Changeling targets:&lt;br&gt;&#xd;
+  <description>IL Build job for Changeling targets:&lt;br&gt;&#xd;
 $WORKSPACE/build/il/scripts/phxbld -j16 changeling&lt;br&gt;&#xd;
 $WORKSPACE/build/il/scripts/phxbld -j16 changeling_raw&lt;br&gt;&#xd;
 $WORKSPACE/build/il/scripts/phxbld -j16 changeling_64&lt;br&gt;&#xd;
@@ -120,9 +120,9 @@ Archive il_changeling_*.tar&lt;br&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>30</quietPeriod>
-  <assignedNode>ilbuild-17</assignedNode>
+  <assignedNode>ilbuild-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -130,7 +130,7 @@ Archive il_changeling_*.tar&lt;br&gt;&#xd;
   <builders>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo ${JOB_NAME} $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
+echo $JOB_NAME $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
 echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -180,11 +180,11 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_chang
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>build/il/packages/fsimg/rawimage.map, *_changelist_*.txt</targets>
-      <recordBuildArtifacts>true</recordBuildArtifacts>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">

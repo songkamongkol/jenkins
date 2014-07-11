@@ -24,12 +24,12 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
           <description>stc install dir</description>
-          <defaultValue>C:\jenkins-tc\workspace\release_regression_cl_nightly\stc_install_dir</defaultValue>
+          <defaultValue>C:\jenkins\workspace\release_regression_cl_nightly\stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_EXECUTOR</name>
           <description>number of executors </description>
-          <defaultValue>1</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
@@ -44,7 +44,7 @@
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
-    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
 //TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
@@ -78,7 +78,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -91,7 +91,7 @@
   </scm>
   <assignedNode>CIRegressionAgents</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -128,7 +128,7 @@ exit /B 0</command>
       <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_il_changeling_ci</project>
+      <project>release_il_changeling_yocto_ci</project>
       <filter>*il_changeling*changelist_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
@@ -158,66 +158,31 @@ exit /B 0</command>
       <command>rmdir /q /s regression\il_img
 mkdir regression\il_img\</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-import glob
-import shutil
-
-path = &quot;\\\\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling-4.40_rel&quot;
-destPath = &quot;regression/il_img&quot;
-
-listing = os.listdir(path)
-latestbuild = 0
-dirtouse = &quot;NA&quot;
-for name in listing:
-    #skip build-latest
-    if name == &apos;build-latest&apos;:
-    	continue
-    subpath = os.path.join(path, name)
-    if not os.path.isdir(subpath):
-    	continue
-    
-    #make sure dir contains rawmap file
-    contList = glob.glob(os.path.join(subpath, &quot;*.map&quot;))
-    if not contList:
-    	print &quot;Dir does not contain rawmap file:&quot; + subpath
-    	continue
-    	
-    #print &quot;current dir is: &quot; + name
-    seplist = name.split(&apos;-&apos;)
-    #print &quot;names:&quot; + seplist[1]
-    if latestbuild &lt;  seplist[1]:
-    	latestbuild = seplist[1]
-    	dirtouse = subpath
-    	
-
-
-print &quot;Dir to use for build:&quot; + dirtouse
-
-fileList = os.listdir(dirtouse)
-for file in fileList:
-	copyfile = os.path.join(dirtouse, file)
-	print &quot;Copying file:&quot; + copyfile
-	shutil.copy2(copyfile, destPath)
-
-print &apos;Done&apos;</command>
-    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
+      <command>python regression\jenkins\copy_artifacts.py release_il_changeling_yocto_ci \\storage.cal.ci.spirentcom.com\builds\jenkins\il_changeling_yocto-release regression\il_img --clean-target
+
+python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>REM install BLL/IL
 
-python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=&quot;172.20.64.4 1 172.20.64.3 1&quot; --slotWaitTimeInSec 600 --fw-image-dir=regression\il_img --stc-res-package=STAKCommands.beta.Windows.tar.gz</command>
+python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=&quot;172.20.64.11 2&quot; --slotWaitTimeInSec 600 --fw-image-dir=regression\il_img --stc-res-package=STAKCommands.beta.Windows.tar.gz</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>REM run test
 
 tclsh regression\util\unittest\all.tcl
 
-python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
+REM python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=&apos;%INSTALL_DIR%&apos;  -m &apos;%FILTER%&apos; -n 4 --archive-tmpdir --keep-all-tmpdir --timeout 1800 --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;BLINK\&quot;:[(\&quot;//172.20.64.4/2/1\&quot;, \&quot;//172.20.64.4/2/2\&quot;),(\&quot;//172.20.64.4/2/3\&quot;, \&quot;//172.20.64.4/2/4\&quot;), (\&quot;//172.20.64.4/2/7\&quot;, \&quot;//172.20.64.4/2/8\&quot;)], \&quot;TBIRD\&quot;:[(\&quot;//172.20.64.3/1/1\&quot;, \&quot;//172.20.64.3/1/2\&quot;),(\&quot;//172.20.64.3/1/5\&quot;, \&quot;//172.20.64.3/1/6\&quot;), (\&quot;//172.20.64.3/1/9\&quot;, \&quot;//172.20.64.3/1/10\&quot;), (\&quot;//172.20.64.3/1/13\&quot;, \&quot;//172.20.64.3/1/14\&quot;)]}&apos;</command>
+python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
+
+
+python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=&apos;%INSTALL_DIR%&apos;  -m &apos;%FILTER%&apos; -n 3 --archive-tmpdir --keep-all-tmpdir --timeout 1800 --basetemp=c:/pytest_tmp --hw=&apos;{\&quot;BLINK\&quot;:[(\&quot;//172.20.64.11/8/1\&quot;, \&quot;//172.20.64.11/8/2\&quot;),(\&quot;//172.20.64.11/8/3\&quot;, \&quot;//172.20.64.11/8/4\&quot;), (\&quot;//172.20.64.11/8/7\&quot;, \&quot;//172.20.64.11/8/8\&quot;)], \&quot;TBIRD\&quot;:[(\&quot;//172.20.64.11/11/1\&quot;, \&quot;//172.20.64.11/11/2\&quot;),(\&quot;//172.20.64.11/11/5\&quot;, \&quot;//172.20.64.11/11/6\&quot;), (\&quot;//172.20.64.11/11/9\&quot;, \&quot;//172.20.64.11/11/10\&quot;), (\&quot;//172.20.64.11/11/13\&quot;, \&quot;//172.20.64.11/11/14\&quot;)]}&apos;
+
+python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
+
+exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python regression\jenkins\junitEmail.py --junit result.junit.xml --output-file email.properties</command>
@@ -237,7 +202,7 @@ python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=&apos;%INSTALL
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/regression_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>*.junit.xml</testResults>

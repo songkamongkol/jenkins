@@ -45,7 +45,7 @@ Wait 20 minutes to stagger builds (1200) seconds.&lt;br&gt;&#xd;
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version TODO: get this from a file</description>
-          <defaultValue>4.44</defaultValue>
+          <defaultValue>4.43</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
@@ -81,28 +81,28 @@ Wait 20 minutes to stagger builds (1200) seconds.&lt;br&gt;&#xd;
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
-+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/Layer1/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../il/...&#xd;
--//TestCenter/*/.../hw/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/common/lib/java/...&#xd;
--//TestCenter/*/common/tools/scons/...&#xd;
--//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/scm/...&#xd;
--//TestCenter/*/regression/...&#xd;
-+//TestCenter/${BRANCH_NAME}/build/il/... //ws/build/il/...&#xd;
--//TestCenter/${BRANCH_NAME}/build/il/cli/... //ws/build/il/cli/...&#xd;
--//TestCenter/${BRANCH_NAME}/build/il/testframework/... //ws/build/il/testframework/...&#xd;
-+//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...&#xd;
+    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
++//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/Layer1/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../il/...
+-//TestCenter/*/.../hw/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/common/lib/java/...
+-//TestCenter/*/common/tools/scons/...
+-//TestCenter/*/framework/ui/resultsanalysis/tools/jvm/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/scm/...
+-//TestCenter/*/regression/...
++//TestCenter/${BRANCH_NAME}/build/il/... //ws/build/il/...
+-//TestCenter/${BRANCH_NAME}/build/il/cli/... //ws/build/il/cli/...
+-//TestCenter/${BRANCH_NAME}/build/il/testframework/... //ws/build/il/testframework/...
++//TestCenter/${BRANCH_NAME}/common/.../ui/... //ws/common/.../ui/...
 +//TestCenter/${BRANCH_NAME}/framework/ui/automation/... //ws/framework/ui/automation/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -135,13 +135,13 @@ Wait 20 minutes to stagger builds (1200) seconds.&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -283,8 +283,8 @@ echo &quot;Finished creating tar files&quot;</command>
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>600</timeoutMinutes>
       </strategy>
-      <failBuild>true</failBuild>
-      <writingDescription>true</writingDescription>
+      <failBuild>false</failBuild>
+      <writingDescription>false</writingDescription>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>

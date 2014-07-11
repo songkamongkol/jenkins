@@ -57,8 +57,8 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
-//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
+    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
+//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
 //TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -96,14 +96,14 @@ Triggers integration_ftp_tarball which restructures the tarball and copies the o
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>1320</quietPeriod>
-  <assignedNode>bllbldlnx-06</assignedNode>
+  <assignedNode>bllbldlnx-04</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -135,7 +135,7 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
       <configs>
@@ -146,7 +146,7 @@ echo &quot;Finished creating Spirent_TestCenter_Auto_Linux64Client_$STC_MAJ_MIN_
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>release_ftp_tarball_packaging,</projects>
+          <projects>release_ftp_tarball_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

@@ -132,7 +132,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>bllbldlnx-05</assignedNode>
+  <assignedNode>bllbldlnx-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -168,8 +168,8 @@ fi</command>
       <command>cd $WORKSPACE/$BUILD_OUTPUT_DIR
 rm -f TestCenter*.tar.gz
 if [ &quot;$BUILD_PACKAGE_BUILD&quot; = &quot;true&quot; ]; then
-    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=TestCenter
-    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=STAKCommands.beta 
+    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=TestCenter 
+    python $WORKSPACE/framework/tools/buildUtil/package.py --arch-dir=Spirent_TestCenter_Application_Linux_Server --package=STAKCommands.beta
     #cp TestCenter.Linux.tar.gz TestCenter.Linux.no_version.tar.gz
     #python $WORKSPACE/framework/tools/buildUtil/setver.py --package=TestCenter.Linux.tar.gz $STC_MAJ_MIN_VERSION $P4_CHANGELIST
 fi</command>
@@ -206,7 +206,7 @@ for row in reader:
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>${BUILD_OUTPUT_DIR}/*Result.html.xml</testResults>

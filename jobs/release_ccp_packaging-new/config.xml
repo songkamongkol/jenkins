@@ -47,7 +47,7 @@
     <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...
 //SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
 //SCM/*${STC_MAJ_MIN_VERSION}*.ver //ws/*${STC_MAJ_MIN_VERSION}*.ver
-//SCM/Installer/ProvManager_4.43_rel/... //ws/DMCP_Installer/...
+//SCM/Installer/ProvManager/... //ws/DMCP_Installer/...
 -//TestCenter/*/Layer1/...
 -//TestCenter/*/userdocauto/...
 -//TestCenter/*/sandbox/...
@@ -137,7 +137,7 @@ scons -j 12 -f SConstruct.bll debug=0 target=bll-win32-coreonly</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>SET PATH=C:\Python27\;C:\Python27\Scripts\;%PATH%
-SET STC_BUILD_ROOT=D:\dev\jenkins-tomcat\workspace\release_ccp_packaging-new
+SET STC_BUILD_ROOT=D:\dev\jenkins\workspace\release_ccp_packaging-new
 scons -j 12 -f SConstruct.AutomationClient.Only.Gen.bll</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
@@ -278,7 +278,7 @@ rem  perl %WORKSPACE%\Build_Scripts\STC_Build_Scripts\ci_packageinstaller.pl %WO
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.tasks.Mailer plugin="mailer@1.8">

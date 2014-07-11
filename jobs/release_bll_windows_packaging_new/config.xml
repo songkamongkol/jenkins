@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Sync SCM build scripts, EAT, help files and other files as needed for packaging.&lt;br&gt;&#xd;
+  <description>cSync SCM build scripts, EAT, help files and other files as needed for packaging.&lt;br&gt;&#xd;
 Retrieve tar.gz files from UI and RR build.&lt;br&gt;&#xd;
 Extract TestCenter.Windows.no_version.tar.gz, ResultsReporter.tar.gz UI and RR tar.gz files to bin/release folder.&lt;br&gt;&#xd;
 Retrieve TestCenter_WebHelp.tar.gz, Provisioning_WebHelp.tar.gz, ServerManager_WebHelp.tar.gz from webhelp build.&lt;br&gt;&#xd;
@@ -75,7 +75,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
 //SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
 //SCM/Installer/ProvManager/... //ws/DMCP_Installer/...
@@ -164,7 +164,8 @@ exit /B 0</command>
 python framework\tools\buildUtil\package.py --install TestCenter.Windows.no_version.tar.gz --directory=bin/Release
 echo extracting STAKCommands.beta.Windows.tar.gz file from job %COPYARTIFACT_BUILD_NUMBER_UI%
 python framework\tools\buildUtil\package.py --install STAKCommands.beta.Windows.tar.gz --directory=STAKCommands
-xcopy  /S /I /E /Y  D:\dev\jenkins\release_bll_windows_packaging_new\STAKCommands\STAKCommands\*.* M:\TestCenter\%STC_MAJ_MIN_VERSION%\Engineering_Builds\GUI_BLL\%STC_MAJ_MIN_VERSION%.%BLL_BUILD_NUMBER%6\STAKCommands</command>
+xcopy  /S /I /E /Y  D:\dev\jenkins\release_bll_windows_packaging_new\STAKCommands\STAKCommands\*.* M:\TestCenter\%STC_MAJ_MIN_VERSION%\Engineering_Builds\GUI_BLL\%STC_MAJ_MIN_VERSION%.%BLL_BUILD_NUMBER%6\STAKCommands
+</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_webhelp</project>
@@ -207,6 +208,7 @@ ant unixDist</command>
     <hudson.tasks.BatchFile>
       <command>cd %WORKSPACE%\bin\release
 SET DEPENDENT_JOB_NAME=%JOB_NAME%
+copy D:\dev\jenkins\release_bll_windows_packaging_new\bin\Release\NTAF\tool\Stc450Publication.xml D:\dev\jenkins\release_bll_windows_packaging_new\bin\Release\NTAF\tool\Stc441Publication.xml
 c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=no --runsetver=yes --updateilversionxml=yes --updatereleasetag=yes --updatepkgindextcl=yes --updatespirenttestcentertcl=yes --updatestclibtcl=yes --updategemspecversion=yes --updatentafxml=yes
 
 perl %WORKSPACE%\Build_Scripts\STC_Build_Scripts\ci_packageinstaller.pl %WORKSPACE% %WORKSPACE%\Installer %STC_MAJ_MIN_VERSION%.%FULLVER% STC_APP_COPY_ONLY
@@ -240,7 +242,7 @@ del EAT.Unix.tar</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">

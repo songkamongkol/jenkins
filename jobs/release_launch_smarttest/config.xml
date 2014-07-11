@@ -54,7 +54,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
             </org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
             <org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
               <day>5</day>
-              <selected>true</selected>
+              <selected>false</selected>
             </org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
             <org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
               <day>6</day>
@@ -75,7 +75,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
         <configs>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs class="empty-list"/>
-            <projects>STR-Nightly-Release,STR-QTP-Release,STR-Admin-Release,STR-QEMU-Release,release-nightly-regression-jenkins2,STR-AVNext,STR-AVCMDR-Nightly-Release,STR-Nightly-Amara-Admin</projects>
+            <projects>STR-Nightly-Release,STR-QTP-Release,STR-Admin-Release,STR-QEMU-Release,release-nightly-regression-jenkins2,STR-RTP-AVCMDR-Nightly-Release,STR-RTP-Nightly-Platform-Admin</projects>
             <condition>ALWAYS</condition>
             <triggerWithNoParameters>false</triggerWithNoParameters>
             <buildAllNodesWithLabel>false</buildAllNodesWithLabel>
@@ -103,11 +103,11 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
             </org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
             <org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
               <day>5</day>
-              <selected>false</selected>
+              <selected>true</selected>
             </org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
             <org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
               <day>6</day>
-              <selected>true</selected>
+              <selected>false</selected>
             </org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
             <org.jenkins__ci.plugins.run__condition.core.DayCondition_-Day>
               <day>7</day>
@@ -124,7 +124,7 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
         <configs>
           <hudson.plugins.parameterizedtrigger.BlockableBuildTriggerConfig>
             <configs class="empty-list"/>
-            <projects>STR-Weekend-Release,STR-QTP-Release,STR-Admin-Weekend-Release,release-nightly-regression-jenkins2,STR-AVNext,STR-AVCMDR-Nightly-Release,STR-Nightly-Amara-Admin</projects>
+            <projects>STR-RTP-Weekend-Release,STR-QTP-Release,STR-RTP-Admin-Weekend-Release,release-nightly-regression-jenkins2,STR-RTP-AVCMDR-Weekend-Release,STR-RTP-Nightly-Platform-Admin</projects>
             <condition>ALWAYS</condition>
             <triggerWithNoParameters>false</triggerWithNoParameters>
             <buildAllNodesWithLabel>false</buildAllNodesWithLabel>

@@ -49,23 +49,23 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*&#xd;
-+//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/*/sandbox/...&#xd;
--//TestCenter/*/.../WebHelp/...&#xd;
--//TestCenter/*/Bakeoff_TestCaseScripts/...&#xd;
--//TestCenter/*/other/...&#xd;
--//TestCenter/*/documents/...&#xd;
--//TestCenter/*/schedules/...&#xd;
--//TestCenter/*/regression/...&#xd;
--//TestCenter/*/userdocauto/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/*/framework/ui/...&#xd;
--//TestCenter/*/content/.../ui/...&#xd;
--//TestCenter/*/.../bll/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...&#xd;
-+//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...&#xd;
+    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
++//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/*/sandbox/...
+-//TestCenter/*/.../WebHelp/...
+-//TestCenter/*/Bakeoff_TestCaseScripts/...
+-//TestCenter/*/other/...
+-//TestCenter/*/documents/...
+-//TestCenter/*/schedules/...
+-//TestCenter/*/regression/...
+-//TestCenter/*/userdocauto/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/*/framework/ui/...
+-//TestCenter/*/content/.../ui/...
+-//TestCenter/*/.../bll/...
++//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...
++//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...
++//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...
 //hypervisor/mainline/amara/ChassisImage/...  //ws/ChassisImage/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -80,7 +80,7 @@
     <p4Tool>p4</p4Tool>
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
-    <forceSync>false</forceSync>
+    <forceSync>true</forceSync>
     <alwaysForceSync>false</alwaysForceSync>
     <dontUpdateServer>false</dontUpdateServer>
     <disableAutoSync>false</disableAutoSync>
@@ -98,13 +98,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
@@ -150,10 +150,10 @@ fi
 
 # check if the build specified in the parameter exists
 export FULL_BUILD=${STC_MAJ_MIN_VERSION}.${BLL_BUILD_NUMBER}${BRANCH_ID}
-export aonic_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz
-export aonic_md5_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz.md5
-export c3_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz
-export c3_md5_file=/mnt/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz.md5
+export aonic_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz
+export aonic_md5_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/aonic-${FULL_BUILD}-fs-1.1.tgz.md5
+export c3_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz
+export c3_md5_file=/gibson/TestCenter/${STC_MAJ_MIN_VERSION}/Engineering_Builds/IL/${FULL_BUILD}/fsimg/controller3-${FULL_BUILD}-fs-1.1.tgz.md5
 if [ -f $aonic_file ]; then
 echo &quot;Aonic file: $aonic_file&quot;
 else
@@ -204,6 +204,7 @@ gzip $WORKSPACE/framework/il/kernel/yocto/Install/usb_amara.img</command>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
       </configuredTriggers>

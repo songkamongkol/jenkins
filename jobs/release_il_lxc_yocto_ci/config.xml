@@ -1,15 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>IL Build job for virtual targets:&lt;br&gt;&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc&lt;br&gt;&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc_raw&lt;br&gt;&#xd;
-and BoF&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j4 tsvm&lt;br&gt;&#xd;
-sudo $WORKSPACE/build/il/scripts/phxbld tsvm_raw&lt;br&gt;&#xd;
-Archive il_vtc_*.tar&lt;br&gt;&#xd;
-&#xd;
-</description>
+  <description>The latest build is stored at \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_changeling\build-latest</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>10</numToKeep>
@@ -33,6 +25,11 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
           <description>clean build</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>BUILD_RUN_UNITTEST</name>
+          <description>run unittest</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>UTEST_OUTPUT_DIR</name>
           <description>unittest output dir</description>
@@ -44,9 +41,14 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>STC_MAJ_MIN_VERSION</name>
-          <description></description>
+          <name>RELEASE_NUM</name>
+          <description>release number</description>
           <defaultValue>4.44</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CHANGELIST</name>
+          <description></description>
+          <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -58,12 +60,11 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
-    <p4User>scmbuild</p4User>
+    <p4User>klei</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
-+//TestCenter/${BRANCH_NAME}/... //ws/...
+    <projectPath>+//TestCenter/${BRANCH_NAME}/... //ws/...
 -//TestCenter/*/sandbox/...
 -//TestCenter/*/.../WebHelp/...
 -//TestCenter/*/Bakeoff_TestCaseScripts/...
@@ -78,13 +79,9 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
 -//TestCenter/*/.../bll/...
 +//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...
 +//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...
-+//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/bllvm.os.img.gz //ws/content/traffic/mobi/il/blink/bllvm.os.img.gz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/bll.tgz //ws/content/traffic/mobi/il/blink/bll.tgz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/ts/tsvm.qcow2.gz //ws/content/traffic/mobi/il/ts/tsvm.qcow2.gz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/GlueServer //ws/content/traffic/mobi/il/blink/GlueServer
-//TARDIS/Studio/pretardis/4.17_studio/il/vm/studio.qcow2.gz //ws/content/traffic/studio/il/vm/studio.qcow2.gz</projectPath>
++//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <p4Label>${CHANGELIST}</p4Label>
     <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
@@ -126,8 +123,7 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <quietPeriod>55</quietPeriod>
-  <assignedNode>ilbuild-13</assignedNode>
+  <assignedNode>ilbuild-05</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -137,76 +133,33 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
   <builders>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo $JOB_NAME $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
+echo $JOB_NAME $BUILD_NUMBER $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
 echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># sync the latest cross compiler tool using a pre-defined p4 workspace 
-# p4 -c $HOSTNAME sync //$HOSTNAME/...
-
-# make the version file write able to set version for build
-sudo chmod 777 $WORKSPACE/build/il/version
-
-# need to remove information in repos directory and packages directory
-# sudo -S rm -rf $WORKSPACE/build/il/repos/*
-# sudo -S rm -rf $WORKSPACE/build/il/packages/*
-
-sudo scons target=packageclean
-sudo scons target=kernelclean</command>
+      <command>#remove the previous build
+#rm -rf $WORKSPACE/build/il/packages/central/testcenter*.*
+sudo scons target=packageclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>#!/bin/bash
+      <command># export CCACHE_DISABLE=1 
+export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
 
-# get the list of in-use loopback devices
-lbd=`sudo losetup -a`
+# $WORKSPACE/build/il/scripts/phxbld centralboot_changeling
+$WORKSPACE/build/il/scripts/phxbld yocto_lxc
 
-# remove each in-use loop back device to prepare for a new build
-# (this only works because we assume each build machine are only allowed
-# to run one build at a time)
-for line in $lbd; do
-        echo $line | grep dev
-        if [ $? -eq 0 ] ; then
-                # echo $line | awk &apos;{ print substr ($0, 0, 10) }&apos;;
-                echo &quot;Cleaning up loopback device ...&quot;
-                sudo losetup -d `echo $line | awk &apos;{ print substr ($0, 0, 10) }i&apos;`
-        fi
-done</command>
+# export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
+
+# sudo scons reversion_il $RELEASE_NUM.$PAD_BUILD_NUMBER $RELEASE_NUM.$PAD_BUILD_NUMBER</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createversionfile=yes</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command># -- for Ubuntu 12.04, newer version of vmware tools (installed in /opt/bin must be used)
-cd $WORKSPACE/common/tools/bin/linux
-sudo rm -rf vmware-mount
-sudo rm -rf vmware-vdiskmanager
-ln -s /opt/lib/vmware-vix-disklib/bin64/vmware-mount $WORKSPACE/common/tools/bin/linux/vmware-mount
-ln -s /opt/lib/vmware-vix-disklib/bin64/vmware-vdiskmanager $WORKSPACE/common/tools/bin/linux/vmware-vdiskmanager
+      <command>python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_lxc_yocto-$BRANCH_NAME
 </command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>env
-p4 info
-
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc_raw
-# added BoF build commands
-$WORKSPACE/build/il/scripts/phxbld -j4 tsvm
-sudo $WORKSPACE/build/il/scripts/phxbld tsvm_raw
-sudo $WORKSPACE/build/il/scripts/phxbld studio
-sudo rm -rf $WORKSPACE/build/il/bld_*</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command># rm -f il_vtc_$STC_MAJ_MIN_VERSION.tar
-# tar cvf il_vtc_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
-echo &quot;Finished creating il_vtc_$STC_MAJ_MIN_VERSION.tar&quot;
-# python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_vtc-$BRANCH_NAME/
-python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_vtc-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>*_changelist_*.txt,changelist.properties</artifacts>
+      <artifacts>build/il/pw_unknown_files_report, build/il/pw_packages_to_test, build/il/pw_packages_to_test_report,build/il/packages/central/rawimage.map, *_changelist_*.txt,changelist.properties</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -216,18 +169,38 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_vtc-$
       <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
-      <targets>*_changelist_*.txt</targets>
+      <targets>build/il/packages/central/testcenter*.*, build/il/packages/central/rawimage.map,*_changelist_*.txt</targets>
       <recordBuildArtifacts>false</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command># copy the build output to storage server
+export STORAGE_DIR=/mnt/builds/jenkins/il_lxc_yocto-$BRANCH_NAME/build-$P4_CHANGELIST
+
+if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
+  mkdir -p $STORAGE_DIR
+fi
+
+cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
+cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
+cp -r $WORKSPACE/build/il/packages/rawimg $STORAGE_DIR</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>scmteam@spirent.com</recipientList>
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
+            <sendToDevelopers>false</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
@@ -249,27 +222,6 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_vtc-$
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
-      <buildSteps>
-        <hudson.tasks.Shell>
-          <command># copy the build output to storage server
-export STORAGE_DIR=/mnt/builds/jenkins/il_vtc-$BRANCH_NAME/build-$P4_CHANGELIST/
-
-if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
-  mkdir -p $STORAGE_DIR
-  mkdir -p $STORAGE_DIR/rawimg
-fi
-
-cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
-cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
-cp $WORKSPACE/build/il/packages/rawimg/vtc*vmdk*.zip $STORAGE_DIR/rawimg
-</command>
-        </hudson.tasks.Shell>
-      </buildSteps>
-      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
-      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
-    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>

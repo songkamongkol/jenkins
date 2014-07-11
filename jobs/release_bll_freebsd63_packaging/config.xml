@@ -81,7 +81,7 @@ Wait 12 minutes&lt;br&gt;&#xd;
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}</p4Client>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
 //SCM/Scripts/... //ws/Build_Scripts/Scripts/...
 +//TestCenter/${BRANCH_NAME}/... //ws/...
@@ -290,7 +290,7 @@ echo &quot;Finished creating tar files&quot;</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
@@ -333,7 +333,7 @@ echo &quot;Finished creating tar files&quot;</command>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
             <hudson.plugins.parameterizedtrigger.CurrentBuildParameters/>
           </configs>
-          <projects>release_ftp_tarball_packaging,</projects>
+          <projects>release_ftp_tarball_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

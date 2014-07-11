@@ -2,12 +2,16 @@
 <project>
   <actions/>
   <description>IL Build job for virtual targets:&lt;br&gt;&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc&lt;br&gt;&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc_raw&lt;br&gt;&#xd;
-and BoF&#xd;
-$WORKSPACE/build/il/scripts/phxbld -j4 tsvm&lt;br&gt;&#xd;
-sudo $WORKSPACE/build/il/scripts/phxbld tsvm_raw&lt;br&gt;&#xd;
-Archive il_vtc_*.tar&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j8 aonic&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j8 aonic_raw&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j8 aonic_64&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j8 aonic_64_raw&lt;br&gt;&#xd;
+sudo rm $WORKSPACE/build/il/packages/fsimg/aonic-*&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j8 appliance&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j16 qemu&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j16 qemu_raw&lt;br&gt;&#xd;
+$WORKSPACE/build/il/scripts/phxbld -j16 stca&lt;br&gt;&#xd;
+Archive il_virtual_*.tar&lt;br&gt;&#xd;
 &#xd;
 </description>
   <logRotator class="hudson.tasks.LogRotator">
@@ -79,11 +83,8 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
 +//TestCenter/${BRANCH_NAME}/framework/bll/base/... //ws/framework/bll/base/...
 +//TestCenter/${BRANCH_NAME}/framework/bll/unittestdrv/... //ws/framework/bll/unittestdrv/...
 +//TestCenter/${BRANCH_NAME}/framework/bll/vendor/... //ws/framework/bll/vendor/...
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/bllvm.os.img.gz //ws/content/traffic/mobi/il/blink/bllvm.os.img.gz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/bll.tgz //ws/content/traffic/mobi/il/blink/bll.tgz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/ts/tsvm.qcow2.gz //ws/content/traffic/mobi/il/ts/tsvm.qcow2.gz
-//LandSlide_Binaries/bof/content/traffic/mobi/il/blink/GlueServer //ws/content/traffic/mobi/il/blink/GlueServer
-//TARDIS/Studio/pretardis/4.17_studio/il/vm/studio.qcow2.gz //ws/content/traffic/studio/il/vm/studio.qcow2.gz</projectPath>
+//TARDIS/avalanche_release/... //ws/content/traffic/l4l7vm/...
+//TARDIS/Studio_release/avanext/... //ws/content/traffic/studio_perf/avanext/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
@@ -126,8 +127,8 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <quietPeriod>55</quietPeriod>
-  <assignedNode>ilbuild-13</assignedNode>
+  <quietPeriod>45</quietPeriod>
+  <assignedNode>ilbuild-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -136,8 +137,21 @@ Archive il_vtc_*.tar&lt;br&gt;&#xd;
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
+      <command>export avail=`df -h | grep \/dev\/sda1 | sed &apos;s/\(.*\)G\(.*\)G\(.*\)[G|M].*/\3/g&apos; | sed &apos;s/\ //g&apos; | cut -d . -f 1`
+export cutoff_limit=10
+# clear ccache is disk space is too low
+if [[ $avail -ge $cutoff_limit ]]; then 
+     echo &quot;Available disk space is $avail and is greater than $cutoff_limit, ccache not clear&quot;; 
+else 
+     echo &quot;Cut-off limit for disk space is $cutoff_limit and is greater than available disk space of $avail, clearing ccache&quot;;
+     ccache -C
+     export avail=`df -h | grep \/dev\/sda1 | sed &apos;s/\(.*\)G\(.*\)G\(.*\)G.*/\3/g&apos;`
+     echo &quot;Available disk space after ccache cleared is now $avail&quot;
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo $JOB_NAME $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
+echo $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
 echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -155,53 +169,20 @@ sudo scons target=packageclean
 sudo scons target=kernelclean</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>#!/bin/bash
-
-# get the list of in-use loopback devices
-lbd=`sudo losetup -a`
-
-# remove each in-use loop back device to prepare for a new build
-# (this only works because we assume each build machine are only allowed
-# to run one build at a time)
-for line in $lbd; do
-        echo $line | grep dev
-        if [ $? -eq 0 ] ; then
-                # echo $line | awk &apos;{ print substr ($0, 0, 10) }&apos;;
-                echo &quot;Cleaning up loopback device ...&quot;
-                sudo losetup -d `echo $line | awk &apos;{ print substr ($0, 0, 10) }i&apos;`
-        fi
-done</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command># python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createversionfile=yes</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command># -- for Ubuntu 12.04, newer version of vmware tools (installed in /opt/bin must be used)
-cd $WORKSPACE/common/tools/bin/linux
-sudo rm -rf vmware-mount
-sudo rm -rf vmware-vdiskmanager
-ln -s /opt/lib/vmware-vix-disklib/bin64/vmware-mount $WORKSPACE/common/tools/bin/linux/vmware-mount
-ln -s /opt/lib/vmware-vix-disklib/bin64/vmware-vdiskmanager $WORKSPACE/common/tools/bin/linux/vmware-vdiskmanager
-</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
       <command>env
 p4 info
 
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc
-$WORKSPACE/build/il/scripts/phxbld -j8 vtc_raw
-# added BoF build commands
-$WORKSPACE/build/il/scripts/phxbld -j4 tsvm
-sudo $WORKSPACE/build/il/scripts/phxbld tsvm_raw
-sudo $WORKSPACE/build/il/scripts/phxbld studio
-sudo rm -rf $WORKSPACE/build/il/bld_*</command>
+
+$WORKSPACE/build/il/scripts/phxbld -j32 appliance_yocto_tardis2
+$WORKSPACE/build/il/scripts/phxbld -j32 stca
+sudo rm -rf $WORKSPACE/build/il/bld_*
+chmod a+r $WORKSPACE/build/il/packages/rawimg/*.ova</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># rm -f il_vtc_$STC_MAJ_MIN_VERSION.tar
-# tar cvf il_vtc_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
-echo &quot;Finished creating il_vtc_$STC_MAJ_MIN_VERSION.tar&quot;
-# python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_vtc-$BRANCH_NAME/
-python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_vtc-$BRANCH_NAME</command>
+      <command># rm -f il_virtual_$STC_MAJ_MIN_VERSION.tar
+# tar cvf il_virtual_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
+echo &quot;Finished creating il_virtual_$STC_MAJ_MIN_VERSION.tar&quot;
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_virtual_yocto-$BRANCH_NAME</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -253,16 +234,16 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_vtc-$
       <buildSteps>
         <hudson.tasks.Shell>
           <command># copy the build output to storage server
-export STORAGE_DIR=/mnt/builds/jenkins/il_vtc-$BRANCH_NAME/build-$P4_CHANGELIST/
+export STORAGE_DIR=/mnt/builds/jenkins/il_virtual_yocto-$BRANCH_NAME/build-$P4_CHANGELIST/
 
 if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
   mkdir -p $STORAGE_DIR
-  mkdir -p $STORAGE_DIR/rawimg
 fi
 
-cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
 cp -r $WORKSPACE/build/il/packages/bundle $STORAGE_DIR
-cp $WORKSPACE/build/il/packages/rawimg/vtc*vmdk*.zip $STORAGE_DIR/rawimg
+cp -r $WORKSPACE/build/il/packages/fsimg $STORAGE_DIR
+cp -r $WORKSPACE/build/il/packages/rawimg $STORAGE_DIR
+cp -r $WORKSPACE/build/il/packages/stca $STORAGE_DIR
 </command>
         </hudson.tasks.Shell>
       </buildSteps>

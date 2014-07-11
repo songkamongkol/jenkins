@@ -77,11 +77,11 @@ release_bll_freebsd_packaging</description>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...&#xd;
-//SCM/Scripts/... //ws/Build_Scripts/Scripts/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...&#xd;
-//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/SampleScripts/...&#xd;
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...&#xd;
+    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
+//SCM/Scripts/... //ws/Build_Scripts/Scripts/...
+//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
+//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/SampleScripts/...
+//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...
 //TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/DpgUpdate/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -119,8 +119,8 @@ release_bll_freebsd_packaging</description>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>

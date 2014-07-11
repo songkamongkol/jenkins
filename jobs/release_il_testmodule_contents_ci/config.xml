@@ -112,7 +112,7 @@ Archive il_testmodule_contents_*.tar&lt;br&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>5</quietPeriod>
-  <assignedNode>ilbuild-15</assignedNode>
+  <assignedNode>ilbuild-10</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -135,7 +135,7 @@ fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
-echo $JOB_NAME $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
+echo $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
 echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -198,8 +198,8 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_testm
     </hudson.tasks.ArtifactArchiver>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
+      <failBuildOnError>false</failBuildOnError>
+      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt</targets>

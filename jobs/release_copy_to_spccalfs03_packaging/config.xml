@@ -12,6 +12,9 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
@@ -43,7 +46,7 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/ci_* //ws/Build_Scripts/STC_Build_Scripts/ci_*&#xd;
+    <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/ci_* //ws/Build_Scripts/STC_Build_Scripts/ci_*
 //SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
@@ -75,8 +78,8 @@ then Copy build output from Martin to spccalfs03 share&lt;br&gt;&#xd;
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>

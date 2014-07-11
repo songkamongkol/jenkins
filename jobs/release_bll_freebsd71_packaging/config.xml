@@ -71,7 +71,7 @@ Wait 20 minutes to stagger builds (1200) seconds.&lt;br&gt;&#xd;
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
-    <p4Client>${JOB_NAME}</p4Client>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//SCM/Scripts/ci_* //ws/Build_Scripts/Scripts/ci_*
 +//TestCenter/${BRANCH_NAME}/... //ws/...
 -//TestCenter/*/Layer1/...
@@ -242,7 +242,7 @@ echo &quot;Finished creating tar files&quot;</command>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">

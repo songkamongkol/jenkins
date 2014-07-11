@@ -24,7 +24,7 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
           <description>stc install dir</description>
-          <defaultValue>C:\jenkins-tc\workspace\release_regression_nightly\stc_install_dir</defaultValue>
+          <defaultValue>C:\jenkins\workspace\release_regression_nightly\stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_EXECUTOR</name>
@@ -36,6 +36,11 @@
           <description>filter (e.g. DEV_CI and PGA)</description>
           <defaultValue>DEV_CI_NIGHTLY and (HW_NONE or HW_QEMU) and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>EMAIL_DEV</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -44,7 +49,7 @@
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
-    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
 //TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
@@ -78,7 +83,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -91,7 +96,7 @@
   </scm>
   <assignedNode>CIRegressionAgents</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -156,7 +161,7 @@ exit /B 0</command>
     <hudson.tasks.BatchFile>
       <command>rmdir /q /s regression\il_img
 mkdir regression\il_img\
-copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-4.40_rel\build-latest\* regression\il_img
+copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-release\build-latest\* regression\il_img
 
 python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt</command>
     </hudson.tasks.BatchFile>
@@ -166,9 +171,16 @@ python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regres
     <hudson.tasks.BatchFile>
       <command>tclsh regression\util\unittest\all.tcl
 
-python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
+REM python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=&apos;%INSTALL_DIR%&apos; -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos; --timeout 1800</command>
+python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
+
+
+python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=&apos;%INSTALL_DIR%&apos; -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos; --timeout 1800
+
+python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
+
+exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>python regression\jenkins\junitEmail.py --junit result.junit.xml --output-file email.properties</command>
@@ -188,7 +200,7 @@ python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=&apos;%INSTALL_DI
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/regression_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>*.junit.xml</testResults>
@@ -203,7 +215,7 @@ python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=&apos;%INSTALL_DI
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com , $EMAIL_DEV</recipientList>
+      <recipientList>engstciteam@spirent.com,ENGCIFirstResponderTeam@spirent.com,$EMAIL_DEV</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
