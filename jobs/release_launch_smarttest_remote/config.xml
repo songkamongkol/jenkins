@@ -43,8 +43,8 @@ import urllib2
 
 
  
-job = &apos;release_patch_launch_smarttest&apos;
-url = &quot;http://jenkins.cal.ci.spirentcom.com:8080/job/&quot; + job +&quot;/build&quot;
+job = &apos;SMT-Remote-Regression-SYS-01&apos;
+url = &quot;http://jenkins-smt.cal.ci.spirentcom.com:8080/job/&quot; + job +&quot;/build&quot;
 print url
 data=&quot;token=mosheallowedtodothis&quot;
 #creating HTTP Req
