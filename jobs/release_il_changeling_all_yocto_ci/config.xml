@@ -173,7 +173,7 @@ sudo rm -rf $WORKSPACE/build/il/bld_*</command>
 # tar cvf il_changeling_$STC_MAJ_MIN_VERSION.tar ./build/il/packages
 echo &quot;Finished creating il_changeling_$STC_MAJ_MIN_VERSION.tar&quot;
 # python $HOME/jenkins/ftp.py --ip=storage.cal.ci.spirentcom.com --n=30 --file=jenkins/il_changeling_all/
-python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_changeling_all_yocto-release
+python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_changeling_all_yocto-$BRANCH_NAME
 </command>
     </hudson.tasks.Shell>
   </builders>
@@ -196,7 +196,7 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_chang
       <buildSteps>
         <hudson.tasks.Shell>
           <command># copy the build output to storage server
-export STORAGE_DIR=/mnt/builds/jenkins/il_changeling_all_yocto-release/build-$P4_CHANGELIST/
+export STORAGE_DIR=/mnt/builds/jenkins/il_changeling_all_yocto-$BRANCH_NAME/build-$P4_CHANGELIST/
 
 if [ ! -d &quot;$STORAGE_DIR&quot; ]; then
   mkdir -p $STORAGE_DIR
