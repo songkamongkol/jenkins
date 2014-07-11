@@ -136,7 +136,7 @@ import sys
 
 if os.environ[&apos;BRANCH_NAME&apos;]==&apos;integration&apos;:      
     branch_id=&quot;3&quot;  
-if os.environ[&apos;BRANCH_NAME&apos;]==&apos;releasel&apos;:    
+if os.environ[&apos;BRANCH_NAME&apos;]==&apos;release&apos;:    
     branch_id=&quot;6&quot;  
 if os.environ[&apos;BRANCH_NAME&apos;]==&apos;4.44_rel&apos;:    
     branch_id=&quot;6&quot;  
