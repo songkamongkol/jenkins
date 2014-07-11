@@ -86,7 +86,6 @@ Archive il_virtual_*.tar&lt;br&gt;&#xd;
 //TARDIS/avalanche_release/... //ws/content/traffic/l4l7vm/...
 //TARDIS/Studio_release/avanext/... //ws/content/traffic/studio_perf/avanext/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -116,7 +115,7 @@ Archive il_virtual_*.tar&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -128,7 +127,7 @@ Archive il_virtual_*.tar&lt;br&gt;&#xd;
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
   <quietPeriod>45</quietPeriod>
-  <assignedNode>ilbuild-09</assignedNode>
+  <assignedNode>ilbuild-19</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -152,7 +151,8 @@ fi</command>
     <hudson.tasks.Shell>
       <command>rm -rf ${JOB_NAME}_changelist_*.txt
 echo $P4_CHANGELIST &gt; $WORKSPACE/${JOB_NAME}_changelist_${P4_CHANGELIST}.txt
-echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties</command>
+echo P4_CHANGESET=$P4_CHANGELIST &gt; $WORKSPACE/changelist.properties
+echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command># sync the latest cross compiler tool using a pre-defined p4 workspace 
@@ -205,7 +205,7 @@ python $HOME/jenkins/build_cleanup.py --n=50 --file=/mnt/builds/jenkins/il_virtu
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/il_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/il_log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets>*_changelist_*.txt</targets>
@@ -260,7 +260,6 @@ cp -r $WORKSPACE/build/il/packages/stca $STORAGE_DIR
       </buildSteps>
       <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
