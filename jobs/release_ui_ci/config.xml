@@ -20,7 +20,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.44_rel</defaultValue>
+          <defaultValue>release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>P4CLEANWORKSPACE</name>
@@ -124,7 +124,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>uibldwin-03</assignedNode>
+  <assignedNode>bllbuild-win-04-ui</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -152,7 +152,7 @@ exit /B 0</command>
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, BLL_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -162,7 +162,7 @@ exit /B 0</command>
       <filter>bin/Release/STAKCommands.beta.Windows.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
@@ -217,7 +217,7 @@ mv *_CoverageReport unit_test_report
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
-      <childProjects>release_regression_ci, release_regression_changeling_ci, release_bll_windows_debug_ci</childProjects>
+      <childProjects>release_regression_ci,release_regression_changeling_ci,release_bll_windows_debug_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -228,7 +228,7 @@ mv *_CoverageReport unit_test_report
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <htmlpublisher.HtmlPublisher plugin="htmlpublisher@1.3">
       <reportTargets>
