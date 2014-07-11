@@ -151,7 +151,7 @@ exit /B 0</command>
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, BLL_changelist*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -161,7 +161,7 @@ exit /B 0</command>
       <filter>bin/Release/STAKCommands.beta.Windows.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastBuild</id>
+        <id>Release Build Passed on all OS</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
