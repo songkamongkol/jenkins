@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Disable temporary to allow for regression from 4.4x_rel branch</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -24,7 +24,7 @@
         <hudson.model.StringParameterDefinition>
           <name>INSTALL_DIR</name>
           <description>stc install dir</description>
-          <defaultValue>C:\jenkins\workspace\release_regression_changeling_ci\stc_install_dir</defaultValue>
+          <defaultValue>C:\jenkins-tc\workspace\release_regression_changeling_ci\stc_install_dir</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_EXECUTOR</name>
@@ -49,7 +49,6 @@
     <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
 //TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -79,7 +78,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -90,7 +89,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>CIRegressionAgents</assignedNode>
+  <assignedNode>CIReg-07</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -111,7 +110,7 @@
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, bll_idl_crc.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -121,7 +120,7 @@
       <filter>bin/Release/STAKCommands.beta.Windows.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
+        <id>lastSuccessfulBuild</id>
       </selector>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>true</doNotFingerprintArtifacts>
@@ -154,9 +153,7 @@ exit /B 0</command>
       <project>release_bll_linux_ci</project>
       <filter>BLL_Linux_changelist*.txt</filter>
       <target></target>
-      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>Release Build Passed on all OS</id>
-      </selector>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
@@ -216,7 +213,7 @@ python regression\jenkins\removeResults.py --location %WORKSPACE%\regression</co
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/regression_log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>*.junit.xml</testResults>
