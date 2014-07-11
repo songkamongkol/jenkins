@@ -60,20 +60,19 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
-    <projectPath>//TestCenter/${BRANCH_NAME}/... //ws/...&#xd;
--//TestCenter/${BRANCH_NAME}/other/...&#xd;
--//TestCenter/*/common/lib/boost_1_34_0/...&#xd;
--//TestCenter/${BRANCH_NAME}/documents/...&#xd;
--//TestCenter/${BRANCH_NAME}/schedules/...&#xd;
--//TestCenter/${BRANCH_NAME}/scm/...&#xd;
--//TestCenter/${BRANCH_NAME}/regression/...&#xd;
--//TestCenter/${BRANCH_NAME}/framework/il/freebsd/...&#xd;
--//TestCenter/${BRANCH_NAME}/framework/il/platform/scripts/...&#xd;
--//TestCenter/${BRANCH_NAME}/framework/ui/resultsanalysis/tools/jvm/...&#xd;
--//TestCenter/${BRANCH_NAME}/.../WebHelp/...&#xd;
+    <projectPath>//TestCenter/${BRANCH_NAME}/... //ws/...
+-//TestCenter/${BRANCH_NAME}/other/...
+-//TestCenter/*/common/lib/boost_1_34_0/...
+-//TestCenter/${BRANCH_NAME}/documents/...
+-//TestCenter/${BRANCH_NAME}/schedules/...
+-//TestCenter/${BRANCH_NAME}/scm/...
+-//TestCenter/${BRANCH_NAME}/regression/...
+-//TestCenter/${BRANCH_NAME}/framework/il/freebsd/...
+-//TestCenter/${BRANCH_NAME}/framework/il/platform/scripts/...
+-//TestCenter/${BRANCH_NAME}/framework/ui/resultsanalysis/tools/jvm/...
+-//TestCenter/${BRANCH_NAME}/.../WebHelp/...
 +//TestCenter/${BRANCH_NAME}/scm/tools/... //ws/scm/tools/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -103,18 +102,18 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>true</pollOnlyOnMaster>
   </scm>
-  <assignedNode>bllbuild-win-09</assignedNode>
+  <assignedNode>bllbuild-win-07</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -223,7 +222,7 @@ if %BUILD_PACKAGE_BUILD% == true (
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/var/lib/jenkins/log_parse_rule</parsingRulesPath>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.Fingerprinter>
       <targets></targets>
@@ -246,6 +245,7 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -261,6 +261,7 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
         <hudson.plugins.emailext.plugins.trigger.FixedTrigger>
@@ -276,6 +277,7 @@ if %BUILD_PACKAGE_BUILD% == true (
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
             <replyTo></replyTo>
+            <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FixedTrigger>
       </configuredTriggers>
