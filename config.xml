@@ -136,7 +136,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -165,7 +165,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[6]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -350,7 +350,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[6]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -379,7 +379,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[6]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1198,53 +1198,7 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder>
-            <owner>hudson.slaves.Messages</owner>
-          </holder>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user>
-          <fullName>Somboon Ongkamongkol</fullName>
-          <properties>
-            <hudson.model.MyViewsProperty>
-              <views>
-                <hudson.model.AllView>
-                  <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
-                  <name>All</name>
-                  <filterExecutors>false</filterExecutors>
-                  <filterQueue>false</filterQueue>
-                  <properties class="hudson.model.View$PropertyList"/>
-                </hudson.model.AllView>
-              </views>
-            </hudson.model.MyViewsProperty>
-            <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
-            <hudson.security.HudsonPrivateSecurityRealm_-Details>
-              <passwordHash>twJJiS:6494a72bc83b23b093b215731e9fad32c713db6dcc6989e88a8a660f4ab90d52</passwordHash>
-            </hudson.security.HudsonPrivateSecurityRealm_-Details>
-            <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
-              <emailAddress>somboon.ongkamongkol@spirent.com</emailAddress>
-            </hudson.tasks.Mailer_-UserProperty>
-            <hudson.model.PaneStatusProperties>
-              <collapsed/>
-            </hudson.model.PaneStatusProperties>
-            <jenkins.security.ApiTokenProperty>
-              <apiToken>En2Wjv5D71vMBE+eTZEhz/w5J1adjkgE/hQzQKne0TDqlWwTZVWZxIaoG2HQI+ax</apiToken>
-            </jenkins.security.ApiTokenProperty>
-            <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
-              <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
-            </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
-            <hudson.search.UserSearchProperty>
-              <insensitiveSearch>false</insensitiveSearch>
-            </hudson.search.UserSearchProperty>
-          </properties>
-        </user>
-      </temporaryOfflineCause>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>ilbuild-test2</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins-tc</remoteFS>
@@ -1275,17 +1229,7 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder reference="../../../../slave[50]/temporaryOfflineCause/description/holder"/>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user reference="../../../slave[50]/temporaryOfflineCause/user"/>
-      </temporaryOfflineCause>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>ilbuild-test3</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins-tc</remoteFS>
@@ -1316,17 +1260,7 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder reference="../../../../slave[50]/temporaryOfflineCause/description/holder"/>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user reference="../../../slave[50]/temporaryOfflineCause/user"/>
-      </temporaryOfflineCause>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>ilbuild-test4</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins-tc</remoteFS>
@@ -1357,17 +1291,7 @@
       <userId>Somboon</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder reference="../../../../slave[50]/temporaryOfflineCause/description/holder"/>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user reference="../../../slave[50]/temporaryOfflineCause/user"/>
-      </temporaryOfflineCause>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>ilbuild-test5</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins-tc</remoteFS>
@@ -1442,14 +1366,50 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[50]/temporaryOfflineCause/description/holder"/>
+          <holder>
+            <owner>hudson.slaves.Messages</owner>
+          </holder>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
             <string></string>
           </args>
         </description>
-        <user reference="../../../slave[50]/temporaryOfflineCause/user"/>
+        <user>
+          <fullName>Somboon Ongkamongkol</fullName>
+          <properties>
+            <hudson.model.MyViewsProperty>
+              <views>
+                <hudson.model.AllView>
+                  <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+                  <name>All</name>
+                  <filterExecutors>false</filterExecutors>
+                  <filterQueue>false</filterQueue>
+                  <properties class="hudson.model.View$PropertyList"/>
+                </hudson.model.AllView>
+              </views>
+            </hudson.model.MyViewsProperty>
+            <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
+            <hudson.security.HudsonPrivateSecurityRealm_-Details>
+              <passwordHash>twJJiS:6494a72bc83b23b093b215731e9fad32c713db6dcc6989e88a8a660f4ab90d52</passwordHash>
+            </hudson.security.HudsonPrivateSecurityRealm_-Details>
+            <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
+              <emailAddress>somboon.ongkamongkol@spirent.com</emailAddress>
+            </hudson.tasks.Mailer_-UserProperty>
+            <hudson.model.PaneStatusProperties>
+              <collapsed/>
+            </hudson.model.PaneStatusProperties>
+            <jenkins.security.ApiTokenProperty>
+              <apiToken>En2Wjv5D71vMBE+eTZEhz/w5J1adjkgE/hQzQKne0TDqlWwTZVWZxIaoG2HQI+ax</apiToken>
+            </jenkins.security.ApiTokenProperty>
+            <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
+              <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+            </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+            <hudson.search.UserSearchProperty>
+              <insensitiveSearch>false</insensitiveSearch>
+            </hudson.search.UserSearchProperty>
+          </properties>
+        </user>
       </temporaryOfflineCause>
       <name>ilbuild-22</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
@@ -1483,14 +1443,14 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[50]/temporaryOfflineCause/description/holder"/>
+          <holder reference="../../../../slave[56]/temporaryOfflineCause/description/holder"/>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
             <string></string>
           </args>
         </description>
-        <user reference="../../../slave[50]/temporaryOfflineCause/user"/>
+        <user reference="../../../slave[56]/temporaryOfflineCause/user"/>
       </temporaryOfflineCause>
       <name>ilbuild-23</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
@@ -1728,7 +1688,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1758,7 +1718,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[67]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[5]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
