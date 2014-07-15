@@ -52,13 +52,13 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.10">
+    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.17">
       <activeProcessNames>
         <string>IL Build Passed on all platforms</string>
       </activeProcessNames>
     </hudson.plugins.promoted__builds.JobPropertyImpl>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>klei</p4User>
     <p4Passwd></p4Passwd>
@@ -128,7 +128,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -166,9 +166,6 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>build/il/packages/rawimg/rawimage.map, *_changelist_*.txt</artifacts>
       <latestOnly>false</latestOnly>
@@ -184,7 +181,7 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <recordBuildArtifacts>true</recordBuildArtifacts>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>engstciteam@spirent.com, ENGCIFirstResponderTeam@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
@@ -243,7 +240,7 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
-    <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.9">
+    <jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin plugin="publish-over-ftp@1.10">
       <consolePrefix>FTP: </consolePrefix>
       <delegate>
         <publishers>
@@ -354,15 +351,16 @@ python $WORKSPACE/common/idl/crc.py -f il_idl_crc.txt</command>
       </delegate>
     </jenkins.plugins.publish__over__ftp.BapFtpPublisherPlugin>
     <hudson.tasks.BuildTrigger>
-      <childProjects>regression, regression_linux, regression_linux_ls</childProjects>
+      <childProjects>regression,regression_linux,regression_linux_ls</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
         <color>BLUE</color>
+        <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
