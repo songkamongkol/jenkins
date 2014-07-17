@@ -126,7 +126,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -253,7 +253,7 @@ c:\Python26\python.exe common\idl\crc.py -f bll_idl_crc.txt --desc &quot;%JOB_NA
     <hudson.tasks.BatchFile>
       <command>if %BUILD_RUN_UNITTEST% == true (
 cd bin\Release
-python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=8 --bll --archive
+python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=8 --bll --stak --archive
 )</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
