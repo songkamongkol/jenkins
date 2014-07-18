@@ -101,7 +101,7 @@ Then runs Centralboot to generate centralboot image and run reversion script to 
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -322,9 +322,7 @@ rm -rf $WORKSPACE/build/il/packages/bundle/l4l7-*.zip
 python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=no --runsetver=no --runciftpcentralboot=no --runcimakelstarballs=no --runcopyl4l7=yes --createversionfile=no</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># Temporary - backup yocto*.img.gz as it will be needed later when we need to repackage the CII and CII image after the build
-cp $WORKSPACE/build/il/packages/rawimg/yocto.*.img.gz $WORKSPACE/build/il/packages
-echo Creating Central Boot image file
+      <command>echo Creating Central Boot image file
 sudo scons target=centralboot_yoctovm packaging=1</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -356,10 +354,7 @@ ln -s $WORKSPACE/ChassisImage/chassis.img.gz $WORKSPACE/build/il/packages/rawimg
 sudo $WORKSPACE/build/il/scripts/phxbld -j32 amara_yocto</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command># Temporary - move yocto*.img.gz file back to rawimg folder so it can be downloaded as part of the build output
-mv $WORKSPACE/build/il/packages/yocto.*.img.gz $WORKSPACE/build/il/packages/rawimg
-
-export DEPENDENT_JOB_NAME=integration_il_centralboot_packaging
+      <command>export DEPENDENT_JOB_NAME=integration_il_centralboot_packaging
 echo &quot;Running reversion_il.sh script ...&quot;
 python $WORKSPACE/Build_Scripts/Scripts/ci_run_jenkins_steps.py --runilreversion=yes</command>
     </hudson.tasks.Shell>
