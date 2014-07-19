@@ -120,7 +120,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -160,7 +160,7 @@ python $WORKSPACE/common/idl/crc.py -f bll_idl_crc.txt --desc &quot;$JOB_NAME $B
     <hudson.tasks.Shell>
       <command>if [ &quot;$BUILD_RUN_UNITTEST&quot; = &quot;true&quot; ]; then
     cd $WORKSPACE/$BUILD_OUTPUT_DIR
-    python $WORKSPACE/framework/tools/testRunner/testRunner.py --runInParallel=4 --archive
+    python $WORKSPACE/framework/tools/testRunner/testRunner.py --runInParallel=4 --stak --archive
 fi</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
