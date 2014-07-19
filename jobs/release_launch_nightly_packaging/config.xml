@@ -103,7 +103,7 @@ release_ccp&lt;br&gt;&#xd;
   </scm>
   <assignedNode>spccalengec02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -165,7 +165,7 @@ f.close</command>
 if %BUILD_NUMBER% gtr 9 SET FULLVER=0%BUILD_NUMBER%%BRANCH_ID%
 if %BUILD_NUMBER% gtr 99 SET FULLVER=%BUILD_NUMBER%%BRANCH_ID%
 echo FULLVER is %FULLVER%
-echo &quot;Build Number: %FULLVER%&quot; &gt; BUILD_%STC_MAJ_MIN_VERSION%.%FULLVER%.txt
+echo &quot;%BRANCH_NAME% Build Number: %FULLVER%&quot; &gt; BUILD_%STC_MAJ_MIN_VERSION%.%FULLVER%.txt
 
 perl %WORKSPACE%\Scripts\ci_update_database.pl ALL %STC_MAJ_MIN_VERSION% %FULLVER% %BUILD_ID% &quot;In Progress&quot; %BUILD_URL% %BRANCH_NAME%
 
