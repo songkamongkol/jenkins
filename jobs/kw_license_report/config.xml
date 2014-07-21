@@ -21,7 +21,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.TimerTrigger>
       <spec>30 13  * * *</spec>
     </hudson.triggers.TimerTrigger>
@@ -34,7 +34,7 @@
   </builders>
   <publishers>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>somboon.ongkamongkol@spirent.com,marc.hornbeek@spirent.com</recipientList>
+      <recipientList>somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
           <email>
