@@ -30,10 +30,6 @@
       <path>/opt/jenkins/jenkins-root/msvc_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
     <hudson.plugins.logparser.ParserRuleFile>
-      <name>Synplify Pro Rules</name>
-      <path>/opt/jenkins/jenkins-root/synplify_pro_rule</path>
-    </hudson.plugins.logparser.ParserRuleFile>
-    <hudson.plugins.logparser.ParserRuleFile>
       <name>ModelSim Rules</name>
       <path>/opt/jenkins/jenkins-root/vsim_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
@@ -44,6 +40,10 @@
     <hudson.plugins.logparser.ParserRuleFile>
       <name>Xilinx ISE Rules</name>
       <path>/opt/jenkins/jenkins-root/xilinx_ise_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>Synplify Pro Rules</name>
+      <path>/opt/jenkins/jenkins-root/synplify_pro_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>
 </hudson.plugins.logparser.LogParserPublisher_-DescriptorImpl>
