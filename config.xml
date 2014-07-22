@@ -390,6 +390,53 @@
       </nodeProperties>
     </slave>
     <slave>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
+        <description>
+          <holder>
+            <owner>hudson.slaves.Messages</owner>
+          </holder>
+          <key>SlaveComputer.DisconnectedBy</key>
+          <args>
+            <string>Somboon</string>
+            <string></string>
+          </args>
+        </description>
+        <user>
+          <fullName>Somboon Ongkamongkol</fullName>
+          <properties>
+            <hudson.model.MyViewsProperty>
+              <views>
+                <hudson.model.AllView>
+                  <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+                  <name>All</name>
+                  <filterExecutors>false</filterExecutors>
+                  <filterQueue>false</filterQueue>
+                  <properties class="hudson.model.View$PropertyList"/>
+                </hudson.model.AllView>
+              </views>
+            </hudson.model.MyViewsProperty>
+            <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
+            <hudson.security.HudsonPrivateSecurityRealm_-Details>
+              <passwordHash>twJJiS:6494a72bc83b23b093b215731e9fad32c713db6dcc6989e88a8a660f4ab90d52</passwordHash>
+            </hudson.security.HudsonPrivateSecurityRealm_-Details>
+            <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
+              <emailAddress>somboon.ongkamongkol@spirent.com</emailAddress>
+            </hudson.tasks.Mailer_-UserProperty>
+            <hudson.model.PaneStatusProperties>
+              <collapsed/>
+            </hudson.model.PaneStatusProperties>
+            <jenkins.security.ApiTokenProperty>
+              <apiToken>En2Wjv5D71vMBE+eTZEhz/w5J1adjkgE/hQzQKne0TDqlWwTZVWZxIaoG2HQI+ax</apiToken>
+            </jenkins.security.ApiTokenProperty>
+            <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
+              <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+            </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+            <hudson.search.UserSearchProperty>
+              <insensitiveSearch>false</insensitiveSearch>
+            </hudson.search.UserSearchProperty>
+          </properties>
+        </user>
+      </temporaryOfflineCause>
       <name>CIReg-06</name>
       <description></description>
       <remoteFS>c:\jenkins-tc</remoteFS>
@@ -401,6 +448,17 @@
       <nodeProperties/>
     </slave>
     <slave>
+      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
+        <description>
+          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
+          <key>SlaveComputer.DisconnectedBy</key>
+          <args>
+            <string>Somboon</string>
+            <string></string>
+          </args>
+        </description>
+        <user reference="../../../slave[16]/temporaryOfflineCause/user"/>
+      </temporaryOfflineCause>
       <name>CIReg-07</name>
       <description></description>
       <remoteFS>c:\jenkins-tc</remoteFS>
@@ -1366,9 +1424,7 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder>
-            <owner>hudson.slaves.Messages</owner>
-          </holder>
+          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
@@ -1443,7 +1499,7 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[56]/temporaryOfflineCause/description/holder"/>
+          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
