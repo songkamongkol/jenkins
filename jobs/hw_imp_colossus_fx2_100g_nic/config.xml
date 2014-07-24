@@ -38,7 +38,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BITSTREAM_NAME</name>
           <description>File name to use for the generated bitstream</description>
-          <defaultValue>colossus_fx2_100g.bit</defaultValue>
+          <defaultValue>ColossusFX2_NIC100G.bit</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -49,13 +49,13 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_1x100G.v  //ws/SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/IP_Vivado/...  //ws/IP_Vivado/...
 
-+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/...  //ws/VivadoBlade/...
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoNIC/...  //ws/VivadoNIC/...
 
--//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoBlade/ColossusFX2_BLADE100G.edf  //ws/VivadoBlade/ColossusFX2_BLADE100G.edf</projectPath>
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoNIC/*.edf  //ws/VivadoNIC/*.edf</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -113,7 +113,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_fx2_100g_iob</project>
+      <project></project>
       <filter>changelist.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -123,9 +123,9 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_fx2_100g_iob</project>
-      <filter>SynplifyBlade/rev_1/ColossusFX2_BLADE100G.edf</filter>
-      <target>VivadoBlade</target>
+      <project></project>
+      <filter>SynplifyNIC/rev_1/ColossusFX2_NIC100G.edf</filter>
+      <target>VivadoNIC</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
@@ -137,12 +137,12 @@
 p4 revert //...
 
 #ls -al ${WORKSPACE}
-#p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+#p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 #ls -al ${WORKSPACE}
-#mkdir -p ${WORKSPACE}/bitstream/candidate/iob/
+#mkdir -p ${WORKSPACE}/bitstream/candidate/nic/
 #ls -al ${WORKSPACE}
-#p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#ls -al ${WORKSPACE}/bitstream/candidate/iob/
+#p4 sync -f //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+#ls -al ${WORKSPACE}/bitstream/candidate/nic/
 
 #set up environment
 export LM_LICENSE_FILE=${LM_LICENSE_FILE}
@@ -159,42 +159,42 @@ if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
     LAST_CHANGE=${P4_CHANGELIST}
 fi
 
-echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
+echo &quot;Update VERSION_ColossusFX2_1x100G.v&quot;
 cd ${WORKSPACE}
 
-p4 revert SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+p4 revert SourceCode/include/VERSION_ColossusFX2_1x100G.v
+p4 edit SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
-sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
-sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_1x100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
-p4 submit -d &quot;Colossus FX2 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+p4 submit -d &quot;Colossus FX2 100G NIC version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/VivadoBlade
+cd ${WORKSPACE}/VivadoNIC
 
 chmod u+w ./*.xpr
-#chmod u+w ./VivadoBlade.data/runs/*
+#chmod u+w ./VivadoNIC.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
-echo &quot;open_project VivadoBlade.xpr&quot; &gt;&gt; myImp.tcl
+echo &quot;open_project VivadoNIC.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
 echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
-#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
-echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_fx2_nic_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
+#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_fx2_nic_imp.sdf colossus_fx2_nic_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_fx2_nic_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf -force colossus_fx2_nic_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoNIC.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -209,11 +209,11 @@ vivado -mode batch -source ./myImp.tcl
 #grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
 
 #parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
+if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/runme.log ];
 then
     #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
 
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
     if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
@@ -225,13 +225,13 @@ fi
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/version_*.txt</file>
+        <file>VivadoNIC/version_*.txt</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </condition>
       <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
         <entry>
           <includes>version_*.txt</includes>
-          <basedir>VivadoBlade</basedir>
+          <basedir>VivadoNIC</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
@@ -246,19 +246,19 @@ fi
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}</file>
+        <file>VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
+          <command>cd VivadoNIC/VivadoNIC.runs/impl_1/
 md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 </command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
+            <basedir>VivadoNIC/VivadoNIC.runs/impl_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -274,7 +274,7 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 #echo &quot;Checking Post Routing Timing Summary...&quot;
 #echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
 
-#eval $(cat $WORKSPACE/VivadoBlade/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
+#eval $(cat $WORKSPACE/VivadoNIC/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
 
 #debug prints
 #echo $WNS
@@ -292,14 +292,14 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
-        <includes>VivadoBlade/colossus_iob_imp*.v</includes>
+        <includes>VivadoNIC/colossus_fx2_nic_imp*.v</includes>
         <excludes></excludes>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoBlade
-tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
+          <command>cd VivadoNIC
+tar zcvf colossus_fx2_nic_imp_sim.tar.gz ./colossus_fx2_nic_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
@@ -321,7 +321,7 @@ tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME} ];
+          <command>if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME} ];
 then
 
     #submit FPGA image to Perforce
@@ -329,18 +329,17 @@ then
 
 #    cd ${WORKSPACE}
 
-#    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+#    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 
-#    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+#    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 
-#    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
+#    cp ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/nic/
 
-#    VER_DATECODE=`cat VivadoBlade/version_*.txt`
+#    VER_DATECODE=`cat VivadoNIC/version_*.txt`
 
-#    p4 submit -d &quot;Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+#    p4 submit -d &quot;Colossus FX2 100G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 
-fi
-</command>
+fi</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
@@ -352,7 +351,7 @@ fi
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
+      <artifacts>VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}*, VivadoNIC/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -370,7 +369,7 @@ fi
       <entries>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
           <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <basedir>${WORKSPACE}/VivadoNIC</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
@@ -380,8 +379,8 @@ fi
           <failNoFilesDeploy>false</failNoFilesDeploy>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-          <includes>colossus_iob_imp_sim.tar.gz</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <includes>colossus_fx2_nic_imp_sim.tar.gz</includes>
+          <basedir>${WORKSPACE}/VivadoNIC</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
