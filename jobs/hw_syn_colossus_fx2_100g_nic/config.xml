@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus FX2 1x100G I/O Board FPGA Synthesis</description>
+  <description>Colossus FX2 1x100G NIC FPGA Synthesis</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -44,7 +44,7 @@
 
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/... //ws/SourceCode/...
 
-+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SynplifyBlade/...  //ws/SynplifyBlade/...</projectPath>
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SynplifyNIC/...  //ws/SynplifyNIC/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -110,15 +110,15 @@ echo ${P4_CHANGELIST} &gt; changelist.txt
 
 #start synthesis
 echo &quot;Synthesizing&quot;
-${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./SynplifyBlade/ColossusFX2_BLADE100G.prj&quot; || cat ./SynplifyBlade/rev_1/*.srr
-cat ./SynplifyBlade/rev_1/*.srr
+${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./SynplifyNIC/ColossusFX2_NIC100G.prj&quot; || cat ./SynplifyNIC/rev_1/*.srr
+cat ./SynplifyNIC/rev_1/*.srr
 
 #generate MD5 checksum file for netlist
-if [ -f ./SynplifyBlade/rev_1/ColossusFX2_BLADE100G.edf ];
+if [ -f ./SynplifyNIC/rev_1/ColossusFX2_NIC100G.edf ];
 then
     echo &quot;Generating MD5 check sum file for netlist&quot;
-    cd ./SynplifyBlade/rev_1/
-    md5sum -b ColossusFX2_BLADE100G.edf &gt; ColossusFX2_BLADE100G.edf.md5
+    cd ./SynplifyNIC/rev_1/
+    md5sum -b ColossusFX2_NIC100G.edf &gt; ColossusFX2_NIC100G.edf.md5
 fi</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
@@ -141,7 +141,7 @@ fi</command>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.edf*, *.srr</includes>
-            <basedir>SynplifyBlade/rev_1</basedir>
+            <basedir>SynplifyNIC/rev_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -169,7 +169,7 @@ fi</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>SynplifyBlade/rev_1/*.edf*, changelist.txt</artifacts>
+      <artifacts>SynplifyNIC/rev_1/*.edf*, changelist.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
