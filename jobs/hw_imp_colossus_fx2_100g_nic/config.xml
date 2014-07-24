@@ -113,7 +113,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_fx2_100g_nic</project>
+      <project></project>
       <filter>changelist.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -123,7 +123,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_fx2_100g_nic</project>
+      <project></project>
       <filter>SynplifyNIC/rev_1/ColossusFX2_NIC100G.edf</filter>
       <target>VivadoNIC</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
