@@ -2205,6 +2205,7 @@
             <string>hw_imp_colossus_dx_100g_iob</string>
             <string>hw_imp_colossus_dx_100g_nic</string>
             <string>hw_imp_colossus_fx2_100g_iob</string>
+            <string>hw_imp_colossus_fx2_100g_nic</string>
             <string>hw_patch_fpga_colossus_dx_100g_iob</string>
             <string>hw_patch_fpga_colossus_dx_100g_nic</string>
             <string>hw_sanity_basic_colossus_dx_100g_iob</string>
