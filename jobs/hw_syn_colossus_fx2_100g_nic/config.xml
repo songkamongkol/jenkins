@@ -261,7 +261,7 @@ rm -rf ${WORKSPACE}/*</command>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_imp_colossus_fx2_100g_iob</childProjects>
+      <childProjects>hw_imp_colossus_fx2_100g_nic</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
