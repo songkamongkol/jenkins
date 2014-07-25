@@ -89,7 +89,7 @@
   </scm>
   <assignedNode>fpga-imp-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -140,7 +140,7 @@ fi</command>
       <conditionalbuilders>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
-            <includes>*.edf*, *.srr</includes>
+            <includes>*.edf*, *.srr, *_edif.xdc</includes>
             <basedir>SynplifyNIC/rev_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
@@ -169,7 +169,7 @@ fi</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>SynplifyNIC/rev_1/*.edf*, changelist.txt</artifacts>
+      <artifacts>SynplifyNIC/rev_1/*.edf*, changelist.txt, SynplifyNIC/rev_1/*_edif.xdc</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
