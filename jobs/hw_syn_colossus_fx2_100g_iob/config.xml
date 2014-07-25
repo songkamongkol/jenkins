@@ -169,7 +169,7 @@ fi</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>SynplifyBlade/rev_1/*.edf*, changelist.txt</artifacts>
+      <artifacts>SynplifyBlade/rev_1/*.edf*, changelist.txt, SynplifyBlade/rev_1/*_edif.xdc</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
