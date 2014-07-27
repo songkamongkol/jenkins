@@ -31,6 +31,11 @@
           <defaultValue>4</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
+          <name>MAX_RUNS</name>
+          <description>Maximum total number of SmartXplorer runs</description>
+          <defaultValue>27</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
           <description>Value to use as check on post-routing timing summary to determine if timing should be considered as failure</description>
           <defaultValue>0.000</defaultValue>
@@ -54,7 +59,6 @@
 
 +//SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*  //ws/bitstream/candidate/iob/warpath_40g_an.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -84,7 +88,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -226,7 +230,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Warpath_1x40G.ut
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m 20 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m ${MAX_RUNS} -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
 
 #check timing score
 TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
@@ -421,7 +425,6 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients></recipients>
