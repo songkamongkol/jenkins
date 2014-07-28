@@ -83,7 +83,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_2x40G/SourceCode/include/VERSION_*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -130,11 +130,11 @@ echo &quot;Derive FPGA image version/datecode&quot;
 VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
-LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
+#LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
 
-if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
+#if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
     LAST_CHANGE=${P4_CHANGELIST}
-fi
+#fi
 
 echo &quot;Update VERSION_Blade_2x40G.v&quot;
 cd ${WORKSPACE}
