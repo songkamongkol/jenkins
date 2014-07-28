@@ -2412,11 +2412,14 @@
         <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Colossus FX</name>
+          <description>Colossus DX builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>hw_imp_colossus_fx2_100g_iob</string>
+            <string>hw_imp_colossus_fx2_100g_nic</string>
             <string>hw_syn_colossus_fx2_100g_iob</string>
             <string>hw_syn_colossus_fx2_100g_nic</string>
           </jobNames>
