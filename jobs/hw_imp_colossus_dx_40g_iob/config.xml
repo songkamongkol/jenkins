@@ -148,16 +148,16 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Blade_2x40G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Blade_2x40G.v
 
-DESCRIPTION=`printf &quot;Description: Colossus DX 100G I/O Board version ${VER_DATECODE}.\nIncludes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
+DESCRIPTION=`printf &quot;Description: Colossus DX 40G I/O Board version ${VER_DATECODE}.\nIncludes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
 p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_Blade_2x40G.v
-#p4 submit -d &quot;Description: Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_Blade_2x40G.v
+#p4 submit -d &quot;Description: Colossus DX 40G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_Blade_2x40G.v
 
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoBlade
 
 chmod u+w ./*.xpr
-chmod u+w ./VivadoBlade.data/runs/*
+#chmod u+w ./ColossusDXBlade_2x40.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
@@ -174,7 +174,7 @@ echo &quot;write_verilog -force colossus_dx_40g_iob_imp_timesim.v -mode timesim 
 echo &quot;write_sdf -force colossus_dx_40g_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./ColossusDXBlade_2x40.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -187,11 +187,11 @@ vivado -mode batch -source ./myImp.tcl</command>
 #grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
 
 #parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
+if [ -f ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log ];
 then
     #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
 
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
     if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
@@ -224,12 +224,12 @@ fi
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}</file>
+        <file>VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/${BITSTREAM_NAME}</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
+          <command>cd VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/
 md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 </command>
         </hudson.tasks.Shell>
@@ -299,7 +299,7 @@ tar zcvf colossus_dx_40g_iob_imp_sim.tar.gz ./colossus_dx_40g_iob_imp*.v ./*.sdf
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME} ];
+          <command>if [ -f ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/${BITSTREAM_NAME} ];
 then
 
     #submit FPGA image to Perforce
@@ -311,14 +311,14 @@ then
 
     p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
-    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
+    cp ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
 
     VER_DATECODE=`cat VivadoBlade/version_*.txt`
 
-    DESCRIPTION=`printf &quot;Description: Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+    DESCRIPTION=`printf &quot;Description: Colossus DX 40G I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
     p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-    #p4 submit -d &quot;Description: Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    #p4 submit -d &quot;Description: Colossus DX 40G I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
@@ -333,7 +333,7 @@ fi
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
+      <artifacts>VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -380,15 +380,6 @@ fi
       <rawLabelDesc>${BUILD_TAG}-${BUILD_NUMBER}</rawLabelDesc>
       <onlyOnSuccess>true</onlyOnSuccess>
     </hudson.plugins.perforce.PerforceTagNotifier>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>hw_patch_fpga_colossus_dx_100g_iob</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com, James.Bauder@spirent.com</recipientList>
       <configuredTriggers>
