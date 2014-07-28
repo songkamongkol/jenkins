@@ -2195,8 +2195,8 @@
         </listView>
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-          <name>Colossus</name>
-          <description>Colossus builds</description>
+          <name>Colossus DX</name>
+          <description>Colossus DX builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
