@@ -2412,6 +2412,7 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Colossus FX</name>
+          <description>Colossus FX builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
