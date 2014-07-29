@@ -228,7 +228,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Warpath_1x40G.ut
 echo &quot;Start smartxplorer process&quot;
 smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m ${MAX_RUNS} -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
 
-#archive best run
+#archive best SmartXplorer run
 echo &quot;Archive SmartXplorer best_run&quot;
 tar zcvf ${JOB_NAME}-${BUILD_NUMBER}-smartxplorer_best_run.tar.gz ./best_run/*
 
