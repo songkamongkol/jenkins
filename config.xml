@@ -390,52 +390,14 @@
       </nodeProperties>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder>
-            <owner>hudson.slaves.Messages</owner>
-          </holder>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user>
-          <fullName>Somboon Ongkamongkol</fullName>
-          <properties>
-            <hudson.model.MyViewsProperty>
-              <views>
-                <hudson.model.AllView>
-                  <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
-                  <name>All</name>
-                  <filterExecutors>false</filterExecutors>
-                  <filterQueue>false</filterQueue>
-                  <properties class="hudson.model.View$PropertyList"/>
-                </hudson.model.AllView>
-              </views>
-            </hudson.model.MyViewsProperty>
-            <hudson.plugins.perforce.PerforceUserProperty plugin="perforce@1.3.27"/>
-            <hudson.security.HudsonPrivateSecurityRealm_-Details>
-              <passwordHash>twJJiS:6494a72bc83b23b093b215731e9fad32c713db6dcc6989e88a8a660f4ab90d52</passwordHash>
-            </hudson.security.HudsonPrivateSecurityRealm_-Details>
-            <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.8">
-              <emailAddress>somboon.ongkamongkol@spirent.com</emailAddress>
-            </hudson.tasks.Mailer_-UserProperty>
-            <hudson.model.PaneStatusProperties>
-              <collapsed/>
-            </hudson.model.PaneStatusProperties>
-            <jenkins.security.ApiTokenProperty>
-              <apiToken>En2Wjv5D71vMBE+eTZEhz/w5J1adjkgE/hQzQKne0TDqlWwTZVWZxIaoG2HQI+ax</apiToken>
-            </jenkins.security.ApiTokenProperty>
-            <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.10">
-              <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
-            </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
-            <hudson.search.UserSearchProperty>
-              <insensitiveSearch>false</insensitiveSearch>
-            </hudson.search.UserSearchProperty>
-          </properties>
-        </user>
+      <temporaryOfflineCause class="hudson.node_monitors.ResponseTimeMonitor$Data">
+        <past5>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+        </past5>
       </temporaryOfflineCause>
       <name>CIReg-06</name>
       <description></description>
@@ -448,16 +410,14 @@
       <nodeProperties/>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
-        <description>
-          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
-          <key>SlaveComputer.DisconnectedBy</key>
-          <args>
-            <string>Somboon</string>
-            <string></string>
-          </args>
-        </description>
-        <user reference="../../../slave[16]/temporaryOfflineCause/user"/>
+      <temporaryOfflineCause class="hudson.node_monitors.ResponseTimeMonitor$Data">
+        <past5>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+          <long>-1</long>
+        </past5>
       </temporaryOfflineCause>
       <name>CIReg-07</name>
       <description></description>
@@ -1424,7 +1384,9 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
+          <holder>
+            <owner>hudson.slaves.Messages</owner>
+          </holder>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
@@ -1499,7 +1461,7 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[16]/temporaryOfflineCause/description/holder"/>
+          <holder reference="../../../../slave[56]/temporaryOfflineCause/description/holder"/>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
@@ -1693,36 +1655,6 @@
       </launcher>
       <label>Linux x86_64 CentOS6.5 Vivado</label>
       <nodeProperties/>
-      <userId>ASu</userId>
-    </slave>
-    <slave>
-      <name>fpga-reg-01</name>
-      <description>Linux Ubuntu 14.04.1 LTS (32-bit)</description>
-      <remoteFS>/tmp</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>EXCLUSIVE</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
-        <host>fpga-reg-01.cal.ci.spirentcom.com</host>
-        <port>22</port>
-        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
-      </launcher>
-      <label>Linux Ubuntu14.04 32bit</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-              </default>
-              <int>1</int>
-              <string>PATH</string>
-              <string>/opt/perforce/p4_cli:$PATH</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
       <userId>ASu</userId>
     </slave>
     <slave>
@@ -2366,7 +2298,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
             <string>hw_test_framework_idl2jar</string>
           </jobNames>
           <jobFilters/>
@@ -2391,7 +2323,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[66]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[7]/jobNames/comparator"/>
             <string>hw_imp_blackbird_1g_nic</string>
             <string>hw_sim_blackbird_1g_nic</string>
             <string>hw_sim_frenzy2_1g_nic</string>
