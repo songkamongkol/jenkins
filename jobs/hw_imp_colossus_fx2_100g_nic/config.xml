@@ -183,10 +183,10 @@ echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
 echo &quot;open_project VivadoNIC.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
-echo &quot;reset_run impl_2&quot; &gt;&gt; myImp.tcl
-echo &quot;launch_runs impl_2&quot; &gt;&gt; myImp.tcl
-echo &quot;wait_on_run impl_2&quot; &gt;&gt; myImp.tcl
-echo &quot;open_run impl_2&quot; &gt;&gt; myImp.tcl
+echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
+echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
 echo &quot;write_verilog -force colossus_fx2_nic_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
 #echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_fx2_nic_imp.sdf colossus_fx2_nic_imp_timesim.v&quot; &gt;&gt; myImp.tcl
@@ -194,7 +194,7 @@ echo &quot;write_verilog -force colossus_fx2_nic_imp_timesim.v -mode timesim -sd
 echo &quot;write_sdf -force colossus_fx2_nic_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./VivadoNIC.runs/impl_2/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoNIC.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -209,11 +209,11 @@ vivado -mode batch -source ./myImp.tcl
 #grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
 
 #parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_2/runme.log ];
+if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/runme.log ];
 then
     #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
 
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_2/runme.log | grep ^CRITICAL\ WARNING:`
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
     if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
@@ -246,12 +246,12 @@ fi
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoNIC/VivadoNIC.runs/impl_2/${BITSTREAM_NAME}</file>
+        <file>VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoNIC/VivadoNIC.runs/impl_2/
+          <command>cd VivadoNIC/VivadoNIC.runs/impl_1/
 md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 </command>
         </hudson.tasks.Shell>
@@ -321,7 +321,7 @@ tar zcvf colossus_fx2_nic_imp_sim.tar.gz ./colossus_fx2_nic_imp*.v ./*.sdf</comm
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_2/${BITSTREAM_NAME} ];
+          <command>if [ -f ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME} ];
 then
 
     #submit FPGA image to Perforce
@@ -333,7 +333,7 @@ then
 
 #    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 
-#    cp ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_2/${BITSTREAM_NAME}* bitstream/candidate/nic/
+#    cp ${WORKSPACE}/VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/nic/
 
 #    VER_DATECODE=`cat VivadoNIC/version_*.txt`
 
@@ -351,7 +351,7 @@ fi</command>
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoNIC/VivadoNIC.runs/impl_2/${BITSTREAM_NAME}*, VivadoNIC/version_*.txt</artifacts>
+      <artifacts>VivadoNIC/VivadoNIC.runs/impl_1/${BITSTREAM_NAME}*, VivadoNIC/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
