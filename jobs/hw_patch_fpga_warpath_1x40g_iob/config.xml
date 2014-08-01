@@ -21,9 +21,14 @@
           <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>STC_PORT_GROUP_ID</name>
-          <description>Port group ID of Spirent test module (one-based)</description>
-          <defaultValue>1</defaultValue>
+          <name>FIRST_REBOOT_PORT_GROUP</name>
+          <description>ID of the first port group to be rebooted (one-based)</description>
+          <defaultValue>5</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>LAST_REBOOT_PORT_GROUP</name>
+          <description>ID of the last port group to be rebooted (one-based)</description>
+          <defaultValue>8</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_FPGA_DIR</name>
@@ -39,10 +44,10 @@
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <quietPeriod>60</quietPeriod>
-  <assignedNode>jazz-fpga-regression-1</assignedNode>
+  <quietPeriod>120</quietPeriod>
+  <assignedNode>fpga-sim-01||fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -50,7 +55,7 @@
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_imp_warpath_1x40g_iob</project>
-      <filter>Xilinx_Warpath_1x40G/*.bit*</filter>
+      <filter>Xilinx_Warpath_1x40G/*.bit*, Xilinx_Warpath_1x40G/version_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -58,6 +63,10 @@
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>VER_DATECODE=`cat version_*.txt`
+echo &quot;Upstream FPGA image version: ${VER_DATECODE}&quot;</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo &quot;Copy FPGA image to remote STC chassis&quot;
 
@@ -77,10 +86,12 @@ rm -rf ./${STC_INSTALL_DIR}
 rm -rf ./Spirent_TestCenter_Application_Linux_Server/
 
 echo &quot;get Spirent TestCenter BLL artifact&quot;
-wget http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+#wget -nv http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux/lastSuccessfulBuild/artifact/build/il/bld_bll-el3_x86/Release/bin/TestCenter.Linux.tar.gz
+wget -nv http://jenkins.cal.ci.spirentcom.com:8080/view/integration_summary_ci/job/bll_linux_x64/lastSuccessfulBuild/artifact/build/il/bld_bll-el3-64_x86_64/Release/bin/TestCenter.Linux.x64.full.tar.gz
 
 echo &quot;extract application files&quot;
-tar -zxvf TestCenter.Linux.tar.gz
+#tar -zxf TestCenter.Linux.tar.gz
+tar -zxf TestCenter.Linux.x64.full.tar.gz
 mv ./Spirent_TestCenter_Application_Linux_Server/ ./${STC_INSTALL_DIR}
 
 #ls -al
@@ -90,14 +101,19 @@ echo &quot;use API/Python/StcPython.py&quot;
 cp -f ${STC_INSTALL_DIR}/API/Python/StcPython.py ${STC_INSTALL_DIR}/
 
 echo &quot;free up some space&quot;
-rm -rf TestCenter.Linux.tar.gz
-</command>
+#rm -rf TestCenter.Linux.tar.gz
+rm -rf TestCenter.Linux.x64.full.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; oldFPGA.tcl
-echo &quot;append chassisSlotPort \&quot;/1\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; oldFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${FIRST_REBOOT_PORT_GROUP} * 4 - 3]&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; oldFPGA.tcl
 echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; oldFPGA.tcl
@@ -121,16 +137,22 @@ echo &quot;set hPhysicalChassisManager [stc::get system1 -children-physicalchass
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; reboot.tcl
 echo &quot;set hPhysicalChassis [stc::get \$hPhysicalChassisManager -children-physicalchassis]&quot; &gt;&gt; reboot.tcl
 echo &quot;set hTestModule [lindex [stc::get \$hPhysicalChassis -children-physicaltestmodule] ${STC_SLOT_ID}]&quot; &gt;&gt; reboot.tcl
-echo &quot;stc::perform RebootEquipment -EquipmentList \$hTestModule&quot; &gt;&gt; reboot.tcl
+echo &quot;set hPortGroups [lrange [stc::get \$hTestModule -children-physicalportgroup] [expr ${FIRST_REBOOT_PORT_GROUP} - 1] [expr ${LAST_REBOOT_PORT_GROUP} - 1]]&quot; &gt;&gt; reboot.tcl
+echo &quot;stc::perform RebootEquipment -EquipmentList \$hPortGroups&quot; &gt;&gt; reboot.tcl
 echo &quot;exit&quot; &gt;&gt; reboot.tcl
 
 tclsh ./reboot.tcl</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
+      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+
+cd ${STC_INSTALL_DIR}
+
+echo &quot;source SpirentTestCenter.tcl&quot; &gt;&gt; newFPGA.tcl
 echo &quot;set chassisSlotPort \&quot;//${STC_CHASSIS_IP}/\&quot;&quot; &gt;&gt; newFPGA.tcl
 echo &quot;append chassisSlotPort [expr ${STC_SLOT_ID} + 1]&quot; &gt;&gt; newFPGA.tcl
-echo &quot;append chassisSlotPort \&quot;/1\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort \&quot;/\&quot;&quot; &gt;&gt; newFPGA.tcl
+echo &quot;append chassisSlotPort [expr ${FIRST_REBOOT_PORT_GROUP} * 4 - 3]&quot; &gt;&gt; newFPGA.tcl
 echo &quot;stc::connect ${STC_CHASSIS_IP}&quot; &gt;&gt; newFPGA.tcl
 echo &quot;set myPort [stc::create port -under project1 -location \$chassisSlotPort]&quot; &gt;&gt; newFPGA.tcl
 echo &quot;stc::reserve \$chassisSlotPort&quot; &gt;&gt; newFPGA.tcl
@@ -146,6 +168,11 @@ tclsh ./newFPGA.tcl
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>version_*.txt</artifacts>
+      <latestOnly>true</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
       <childProjects>hw_sanity_basic_warpath_1x40g_iob</childProjects>
       <threshold>
@@ -155,11 +182,22 @@ tclsh ./newFPGA.tcl
         <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Fingerprinter>
+      <targets></targets>
+      <recordBuildArtifacts>true</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
+    <hudson.plugins.descriptionsetter.DescriptionSetterPublisher plugin="description-setter@1.8">
+      <regexp>VER_DATECODE=(.*)</regexp>
+      <regexpForFailed></regexpForFailed>
+      <description>Version \1</description>
+      <setForMatrix>false</setForMatrix>
+    </hudson.plugins.descriptionsetter.DescriptionSetterPublisher>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
         <hudson.tasks.Shell>
           <command>echo &quot;!!! CLEAN OUT WORKSPACE !!!&quot;
-rm -rf ./${STC_INSTALL_DIR}</command>
+rm -rf ./${STC_INSTALL_DIR}
+rm -rf ./version_*.txt</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
