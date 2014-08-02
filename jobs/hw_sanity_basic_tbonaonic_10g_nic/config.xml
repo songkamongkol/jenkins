@@ -94,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -176,7 +176,7 @@ sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
     <hudson.tasks.Shell>
       <command>echo &quot;switch to virtual environment&quot;
 cd $HOME/
-. virtualenvwrapper_init.sh
+. ./virtualenvwrapper_init.sh
 workon pytest-2.2.4
 
 cd ${WORKSPACE}/build/il/testframework
