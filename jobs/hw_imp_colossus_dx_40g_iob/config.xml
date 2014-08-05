@@ -83,7 +83,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_2x40G/SourceCode/include/VERSION_*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -157,6 +157,7 @@ cd ${WORKSPACE}/VivadoBlade
 
 chmod u+w ./*.xpr
 chmod u+w -R ./ColossusDXBlade_2x40.data/runs/*
+chmod u+w -R ./ColossusDXBlade_2x40.data/sources_1/*
 chmod u+w -R ../SourceCode/IP_Vivado/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
