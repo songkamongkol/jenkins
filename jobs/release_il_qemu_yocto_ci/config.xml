@@ -105,7 +105,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -140,7 +140,7 @@ echo BRANCH_NAME=$BRANCH_NAME &gt;&gt; $WORKSPACE/changelist.properties</command
       <command>if [ &quot;$BUILD_IMAGE&quot; = &quot;true&quot; ]; then
     export SCONSFLAGS=&quot;-j8 ccache=1 distcc=1&quot;
 
-    $WORKSPACE/build/il/scripts/phxbld qemu_raw
+    # $WORKSPACE/build/il/scripts/phxbld qemu_raw
 
     export PAD_BUILD_NUMBER=`printf &apos;%04i&apos; $BUILD_NUMBER`
 
