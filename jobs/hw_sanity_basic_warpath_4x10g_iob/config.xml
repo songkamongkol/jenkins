@@ -94,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -105,7 +105,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>jazz-fpga-regression-1</assignedNode>
+  <assignedNode>fpga-reg-01 || fpga-reg-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
@@ -135,7 +135,7 @@
     <hudson.tasks.Shell>
       <command>#echo execute idltojar
 
-cd build/il/testframework/testexecuter
+cd ${WORKSPACE}/build/il/testframework/testexecuter
 
 #./idltojar.sh
 
@@ -144,7 +144,7 @@ tar -zxf ./java.tar.gz
 tar -zxf ./idl_tcl.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>cd build/il/testframework
+      <command>cd ${WORKSPACE}/build/il/testframework
 
 echo clean up
 rm -rf ./testexecuter/Reports/*
@@ -155,24 +155,32 @@ rm -rf ./testcases/__pycache__/
 rm -f ./*.log
 rm -f ./result.junit.xml
 
-echo create script info XML files
-python ./tagger.py
+
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>echo change cli.tcl output to stdout
 
-chmod u+w build/il/testframework/testexecuter/cli.tcl
+chmod u+w ${WORKSPACE}/build/il/testframework/testexecuter/cli.tcl
 
 sed -i &apos;s/stderr/stdout/g&apos; build/il/testframework/testexecuter/cli.tcl
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>echo execute test suite
+      <command>echo &quot;switch to python virtual environment pytest-2.2.4&quot;
+cd $HOME/
+. $HOME/.virtualenvs/pytest-2.2.4/bin/activate
 
-cd build/il/testframework
+cd ${WORKSPACE}/build/il/testframework
 
+echo &quot;create script info XML files&quot;
+python ./tagger.py
+
+echo &quot;execute test suite&quot;
 python testcases/run.py --il-reg --vm-user-id=ci_regression -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --keep-all-tmpdir --archive-tmpdir --hw=\&apos;{\&quot;WARPATH_10G\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:0\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:0\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+
+echo &quot;exit from python virtual environment&quot;
+deactivate
 
 echo &quot;patch JUnit results file&quot;
 echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
