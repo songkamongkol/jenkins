@@ -28,12 +28,12 @@
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
           <description>Maximum number of CPUs/cores to use</description>
-          <defaultValue>4</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_RUNS</name>
           <description>Maximum total number of SmartXplorer runs</description>
-          <defaultValue>12</defaultValue>
+          <defaultValue>48</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_TIMING_DELTA</name>
