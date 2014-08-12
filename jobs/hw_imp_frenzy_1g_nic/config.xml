@@ -221,13 +221,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; FrenzyTop.ut
 echo &quot;Start smartxplorer process&quot;
 smartxplorer -p xc7k325t-fbg676-1 -l hosts.txt -b -bo FrenzyTop.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Frenzy.ucf -sd  &quot;../SourceCode/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/GAFTop1G/Analyzer/coregen;../SourceCode/GAFTop1G/Analyzer/EEDM/coregen;../SourceCode/PCIe/CoreGen&quot; FrenzyTop.ngd
 
-#check timing score
-TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
-if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
-then
-    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
-    exit 1
-fi</command>
+</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
@@ -288,7 +282,13 @@ fi
         </bestResult>
       </condition>
       <buildStep class="hudson.tasks.Shell">
-        <command>if [ -f ${WORKSPACE}/Xilinx/frenzy.bit ];
+        <command>#check timing score
+TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; ${WORKSPACE}/Xilinx/smartxplorer.log | awk &apos;{print $5}&apos;`
+if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
+then
+    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+    #exit 1
+elif [ -f ${WORKSPACE}/Xilinx/frenzy.bit ];
 then
     #submit FPGA image to Perforce
     echo &quot;Submitting FPGA image to Perforce&quot;
