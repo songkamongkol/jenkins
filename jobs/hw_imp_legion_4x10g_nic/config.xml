@@ -50,7 +50,6 @@
 
 +//SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_10g.bit*  //ws/bitstream/candidate/nic/legion_10g.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -80,7 +79,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/WarpathTop_4x10G.v
 //SPT_HW/legion/sandbox/legion_4x10g/fpga/SourceCode/include/VERSION_Legion_4x10G.v
@@ -224,13 +223,6 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Legion_4x10G.ut
 echo &quot;Start smartxplorer process&quot;
 smartxplorer -p xc7k410t-ffg900-2 -l hosts.txt -b -bo Legion_4x10G.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Legion_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen&quot; Legion_4x10G.ngd
 
-#check timing score
-TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
-if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
-then
-    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
-    exit 1
-fi
 </command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
@@ -292,7 +284,13 @@ fi</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/Xilinx_Legion_4x10G/legion_10g.bit ];
+          <command>#check timing score
+TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; ${WORKSPACE}/Xilinx_Legion_4x10G/smartxplorer.log | awk &apos;{print $5}&apos;`
+if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
+then
+    echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
+    #exit 1
+elif [ -f ${WORKSPACE}/Xilinx_Legion_4x10G/legion_10g.bit ];
 then
 
     #submit FPGA image to Perforce
@@ -418,7 +416,6 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients></recipients>
