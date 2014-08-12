@@ -313,7 +313,7 @@ fi</command>
       <conditionalbuilders>
         <hudson.tasks.Shell>
           <command>#check timing score
-TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; smartxplorer.log | awk &apos;{print $5}&apos;`
+TIMING_SCORE=`grep &quot;Achieved Timing Score&quot; ${WORKSPACE}/Xilinx_Warpath_1x40G/smartxplorer.log | awk &apos;{print $5}&apos;`
 if [ &quot;$TIMING_SCORE&quot; -ne &quot;0&quot; ];
 then
     echo &quot;ERROR: Build failed to meet timing (Timing Score = ${TIMING_SCORE})&quot;
