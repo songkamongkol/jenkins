@@ -2287,6 +2287,7 @@
             <string>hw_sim_tbonaonic_10g_nic</string>
             <string>hw_sim_thunderbird_10g_iob</string>
             <string>hw_syn_thunderbird_10g_iob</string>
+            <string>hw_sys_pga_thunderbird_10g_iob</string>
           </jobNames>
           <jobFilters/>
           <columns>
