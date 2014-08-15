@@ -85,7 +85,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -127,13 +127,21 @@ echo &quot;free up some space&quot;
 rm -rf TestCenter.Linux.tar.gz</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>export STC_PRIVATE_INSTALL_DIR=`pwd`/${STC_INSTALL_DIR}
+      <command>export STC_PRIVATE_INSTALL_DIR=${WORKSPACE}/${STC_INSTALL_DIR}
 
-#run test
+echo &quot;switch to python virtual environment pytest-2.2.4&quot;
+cd $HOME/
+. $HOME/.virtualenvs/pytest-2.2.4/bin/activate
 
+cd ${WORKSPACE}
+
+echo &quot;execute test suite&quot;
 tclsh regression/util/unittest/all.tcl
 
 python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=${WORKSPACE}/${STC_INSTALL_DIR} -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --archive-tmpdir --keep-all-tmpdir --basetemp=${WORKSPACE}/${TMP_DIR} --hw=\&apos;{\&quot;TBIRD\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:3\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+
+echo &quot;exit from python virtual environment&quot;
+deactivate
 
 echo &quot;patch JUnit results file&quot;
 echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
