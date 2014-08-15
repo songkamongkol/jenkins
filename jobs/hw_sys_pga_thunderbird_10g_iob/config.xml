@@ -11,6 +11,11 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>Perforce //TestCenter branch name</description>
+          <defaultValue>integration</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
           <defaultValue>10.100.21.12</defaultValue>
@@ -31,14 +36,14 @@
           <defaultValue>DEV_CI and HW_TBIRD and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
+          <name>NUM_CPU</name>
+          <description>Number of CPU (cores) available for parallel execution</description>
+          <defaultValue>4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>TMP_DIR</name>
           <description>temporary directory for testing</description>
           <defaultValue>tmp</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>NUM_CPU</name>
-          <description>Number of CPU (cores) available for parallel execution</description>
-          <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
