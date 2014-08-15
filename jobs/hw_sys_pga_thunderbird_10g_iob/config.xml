@@ -28,7 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. DEV_CI and PGA)</description>
-          <defaultValue>DEV_CI and HW_TBONAONIC and not slow and not disabled</defaultValue>
+          <defaultValue>DEV_CI and HW_TBIRD and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>TMP_DIR</name>
@@ -83,7 +83,7 @@
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
-    <slaveClientNameFormat></slaveClientNameFormat>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
     <useViewMask>true</useViewMask>
     <useViewMaskForPolling>true</useViewMaskForPolling>
@@ -94,7 +94,7 @@
   <quietPeriod>120</quietPeriod>
   <assignedNode>fpga-reg-01||fpga-reg-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
