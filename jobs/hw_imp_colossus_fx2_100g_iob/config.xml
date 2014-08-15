@@ -86,7 +86,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -258,7 +258,7 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
+            <basedir>VivadoBlade/VivadoBlade.runs/impl_2</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
