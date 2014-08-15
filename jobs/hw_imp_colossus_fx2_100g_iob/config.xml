@@ -86,7 +86,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -327,17 +327,19 @@ then
     #submit FPGA image to Perforce
     echo &quot;Submitting FPGA image to Perforce&quot;
 
-#    cd ${WORKSPACE}
+    cd ${WORKSPACE}
 
-#    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    p4 revert //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
-#    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
-#    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/${BITSTREAM_NAME}* bitstream/candidate/iob/
+    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
-#    VER_DATECODE=`cat VivadoBlade/version_*.txt`
+    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/${BITSTREAM_NAME}* bitstream/candidate/iob/
 
-#    p4 submit -d &quot;Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    VER_DATECODE=`cat VivadoBlade/version_*.txt`
+
+    p4 submit -d &quot;Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
