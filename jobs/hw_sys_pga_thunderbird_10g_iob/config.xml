@@ -50,9 +50,15 @@
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
-    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
+    <browser class="hudson.plugins.perforce.browsers.P4Web">
+      <url>http://jenkins.ad.spirentcom.com:5104/</url>
+      <p4WebEndShite>?ac=22</p4WebEndShite>
+      <p4DifEndShite>?ac=19</p4DifEndShite>
+      <p4ClEndShite>?ac=10</p4ClEndShite>
+    </browser>
     <p4Tool>p4</p4Tool>
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
@@ -70,10 +76,10 @@
     <updateCounterValue>false</updateCounterValue>
     <dontUpdateClient>false</dontUpdateClient>
     <exposeP4Passwd>false</exposeP4Passwd>
-    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <wipeBeforeBuild>true</wipeBeforeBuild>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
-    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -94,16 +100,6 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_imp_thunderbird_10g_iob</project>
-      <filter>Xilinx//*.bit*</filter>
-      <target></target>
-      <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
-        <id>lastSuccessfulBuild</id>
-      </selector>
-      <flatten>true</flatten>
-      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
-    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;prepare workspace&quot;
 rm -rf ./${STC_INSTALL_DIR}
@@ -132,8 +128,20 @@ rm -rf TestCenter.Linux.tar.gz</command>
 
 tclsh regression/util/unittest/all.tcl
 
-python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=${WORKSPACE}/${STC_INSTALL_DIR} -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --archive-tmpdir --keep-all-tmpdir --basetemp=${WORKSPACE}/${TMP_DIR} --hw=\&apos;{\&quot;TBONAONIC\&quot; :[ \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/1\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/2\&quot;\) ] }\&apos;
+python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=${WORKSPACE}/${STC_INSTALL_DIR} -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --archive-tmpdir --keep-all-tmpdir --basetemp=${WORKSPACE}/${TMP_DIR} --hw=\&apos;{\&quot;TBIRD\&quot; :[ \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:1:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:3:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:2:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:4:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:0\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:5:1\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:6:3\&quot;\) , \(\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:7:2\&quot;,\&quot;${STC_CHASSIS_IP}:${STC_SLOT_ID}:8:3\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+
+echo &quot;patch JUnit results file&quot;
+echo &quot;see https://issues.jenkins-ci.org/browse/JENKINS-18095 and https://issues.jenkins-ci.org/browse/JENKINS-17883 for more info&quot;
+
+sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
 </command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#clean up results
+echo clean up results
+#python regression/jenkins/junitEmail.py --junit-file result.junit.xml --output-file email.properties
+#python regression/jenkins/junitEmail.py --junit-file result.junit.xml
+python regression/jenkins/removeResults.py --location ${WORKSPACE}/regression</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
