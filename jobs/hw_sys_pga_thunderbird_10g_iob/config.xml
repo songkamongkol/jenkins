@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Patch FPGA image on Thunderbird 4x10G I/O Board</description>
+  <description>HW regression PGA system test (HW+IL+BLL) for Thunderbird 4x10G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
@@ -45,7 +45,7 @@
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <quietPeriod>120</quietPeriod>
-  <assignedNode>fpga-sim-01||fpga-sim-02</assignedNode>
+  <assignedNode>fpga-reg-01||fpga-reg-02</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
