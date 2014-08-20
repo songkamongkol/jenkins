@@ -2736,7 +2736,6 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
-        <string>wireshark_ubuntu32</string>
       </jobNames>
       <jobFilters/>
       <columns>
