@@ -112,9 +112,9 @@
     <hudson.tasks.Shell>
       <command>if [ &quot;$PACKAGE&quot; = &quot;YES&quot; ]; then
     echo &quot;Packaging&quot;
-    p4 -u tableuser -c $P4CLIENT edit //Wireshark_Spirent/mainline/src/config.nmake
-    p4 -u tableuser -c $P4CLIENT change -o | sed &apos;s/-spirent-3/-spirent-4/g&apos; //Wireshark_Spirent/mainline/src/config.nmake &gt; //Wireshark_Spirent/mainline/src/config.nmake
-    p4 -u tableuser -c $P4CLIENT submit
+    p4 edit //Wireshark_Spirent/mainline/src/config.nmake
+    p4 change -o | sed &apos;s/-spirent-3/-spirent-4/g&apos; config.nmake &gt; config.nmake
+    p4 submit -d &quot;$BUILD_NUMBER $P4CHANGELIST&quot;
 fi
 
  </command>
