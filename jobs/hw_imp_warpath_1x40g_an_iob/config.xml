@@ -45,6 +45,11 @@
           <description>Maximum number of best SmartXplorer runs to keep (SmartXplorer -best_n_runs option)</description>
           <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>TRCE_OPT</name>
+          <description>TRCE Options</description>
+          <defaultValue>-v 3 -nodatasheet -a -s 2 -n 3 -fastpaths -xml Warpath_1x40G.twx</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -235,7 +240,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; Warpath_1x40G.ut
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m ${MAX_RUNS} -best_n_runs ${BEST_N_RUNS} -max_time &quot;04:00:00&quot; -to &quot;-e 100&quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo Warpath_1x40G.ut -m ${MAX_RUNS} -best_n_runs ${BEST_N_RUNS} -max_time &quot;04:00:00&quot; -to &quot;${TRCE_OPT} &quot; -rcmd ssh -uc ./ucf/Warpath_1x40G_AN.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GAFTop40G/Analyzer40G/coregen;../SourceCode/IP_HSEC/20130313&quot; Warpath_1x40G.ngd
 
 #archive best SmartXplorer run
 echo &quot;Archive SmartXplorer best_run&quot;
