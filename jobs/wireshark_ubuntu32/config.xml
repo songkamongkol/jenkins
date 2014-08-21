@@ -105,7 +105,17 @@
 ./configure --enable-setcap-install
 make
 
+
+
 </command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>if [ $PACKAGE = &quot;YES&quot; ]; then
+    echo &quot;Packaging&quot;
+
+fi
+
+ </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
