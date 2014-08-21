@@ -33,7 +33,7 @@
         <hudson.model.StringParameterDefinition>
           <name>PACKAGE</name>
           <description></description>
-          <defaultValue>NO</defaultValue>
+          <defaultValue>YES</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -100,10 +100,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>chmod -R 777 .
-./autogen.sh
-./configure --enable-setcap-install
-make
+      <command>#chmod -R 777 .
+#./autogen.sh
+#./configure --enable-setcap-install
+#make
 
 
 
