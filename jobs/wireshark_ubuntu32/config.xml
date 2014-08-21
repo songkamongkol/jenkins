@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -113,7 +113,8 @@
       <command>if [ &quot;$PACKAGE&quot; = &quot;YES&quot; ]; then
     echo &quot;Packaging&quot;
     p4 edit //Wireshark_Spirent/mainline/src/config.nmake
-    p4 revert //Wireshark_Spirent/mainline/src/config.nmake
+    p4 change -o | sed &apos;s/-spirent-3/-spirent-4/g&apos; //Wireshark_Spirent/mainline/src/config.nmake &gt; //Wireshark_Spirent/mainline/src/config.nmake
+    p4 submit
 fi
 
  </command>
