@@ -129,7 +129,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02&lt;br&gt;&#xd;
   <quietPeriod>320</quietPeriod>
   <assignedNode>spccalengec01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers/>
