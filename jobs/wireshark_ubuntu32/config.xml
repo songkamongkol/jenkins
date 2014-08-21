@@ -110,7 +110,7 @@
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>if [ $PACKAGE = &quot;YES&quot; ]; then
+      <command>if [ &quot;$PACKAGE&quot; = &quot;YES&quot; ]; then
     echo &quot;Packaging&quot;
 fi
 
