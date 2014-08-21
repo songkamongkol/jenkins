@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description/>
+  <description></description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -41,12 +42,13 @@
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
-    <p4Passwd/>
+    <p4Passwd></p4Passwd>
     <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
 //TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -89,7 +91,7 @@
   </scm>
   <assignedNode>CIRegressionAgents</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -106,7 +108,7 @@
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_bll_windows_ci</project>
       <filter>bin/Release/TestCenter.Windows.bll.tar.gz, bll_idl_crc.txt</filter>
-      <target/>
+      <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
@@ -116,7 +118,7 @@
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_bll_windows_ci</project>
       <filter>bin/Release/STAKCommands.beta.Windows.tar.gz</filter>
-      <target/>
+      <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
@@ -132,7 +134,7 @@ exit /B 0</command>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_il_qemu_ci</project>
       <filter>*il_qemu*changelist_*.txt</filter>
-      <target/>
+      <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -140,7 +142,7 @@ exit /B 0</command>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_ui_ci</project>
       <filter>UI_changelist_*.txt</filter>
-      <target/>
+      <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
@@ -148,7 +150,7 @@ exit /B 0</command>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>release_bll_linux_ci</project>
       <filter>BLL_Linux_changelist*.txt</filter>
-      <target/>
+      <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
@@ -164,21 +166,21 @@ python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regres
 </command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
-      <command>REM python regression/killProcess.py --keywords "equipServer tclsh"
+      <command>REM python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/killProcess.py --keywords "equipServer tclsh TestCenterSession tshark"
+python regression/killProcess.py --keywords &quot;equipServer tclsh TestCenterSession tshark&quot;
 
 
-python regression/stcInstall.py --stc-install-dir="%INSTALL_DIR%" --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME% --stc-res-package=STAKCommands.beta.Windows.tar.gz</command>
+python regression/stcInstall.py --stc-install-dir=&quot;%INSTALL_DIR%&quot; --stc-package=TestCenter.Windows.bll.tar.gz --chassis=qmanager.cal.ci.spirentcom.com --fw-image-dir=regression\il_img --qm-uid %JOB_NAME% --stc-res-package=STAKCommands.beta.Windows.tar.gz</command>
     </hudson.tasks.BatchFile>
     <hudson.tasks.BatchFile>
       <command>tclsh regression\util\unittest\all.tcl
 
-python regression/killProcess.py --keywords "equipServer tclsh"
+python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
-python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=C:/jenkins/workspace/release_regression_ci/stc_install_dir -n %NUM_EXECUTOR% -m '%FILTER%' --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server='http://qmanager.cal.ci.spirentcom.com:8080'
+python regression/run.py --vm-user-id=%JOB_NAME% --stc-pkg-dir=C:/jenkins/workspace/release_regression_ci/stc_install_dir -n %NUM_EXECUTOR% -m &apos;%FILTER%&apos; --archive-tmpdir --keep-all-tmpdir --keep-bad-vm --basetemp=c:/pytest_tmp --maxfail=4 --vm-desc=%BUILD_TAG% --vm-server=&apos;http://qmanager.cal.ci.spirentcom.com:8080&apos;
 
-python regression/killProcess.py --keywords "equipServer tclsh"
+python regression/killProcess.py --keywords &quot;equipServer tclsh&quot;
 
 exit /B 0</command>
     </hudson.tasks.BatchFile>
@@ -217,20 +219,20 @@ python regression\jenkins\removeResults.py --location %WORKSPACE%\regression</co
     <org.jvnet.hudson.plugins.groovypostbuild.GroovyPostbuildRecorder plugin="groovy-postbuild@1.8">
       <groovyScript>import hudson.model.*
 
-if(manager.logContains(".*Aborting regression as.*")) {
-    manager.addWarningBadge("Gracefully Aborted")
-    manager.createSummary("warning.gif").appendText("&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;", false, false, false, "orange")
+if(manager.logContains(&quot;.*Aborting regression as.*&quot;)) {
+    manager.addWarningBadge(&quot;Gracefully Aborted&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted because it will be later triggered by upStream job&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
     // manager.buildUnstable()
-    //manager.listener.logger.println("Marking build unstable") 
+    //manager.listener.logger.println(&quot;Marking build unstable&quot;) 
     //manager.build.setResult(hudson.model.Result.UNSTABLE)
    manager.build.@result = hudson.model.Result.UNSTABLE
 }
 
-if(manager.logContains(".*crc mismatch.*")) {
-    manager.addWarningBadge("Gracefully Aborted due to crc mismatch in BLL and IL components")
-    manager.createSummary("warning.gif").appendText("&lt;i&gt;This run was aborted due to crc mismatch between BLL and IL component&lt;i&gt;", false, false, false, "orange")
+if(manager.logContains(&quot;.*crc mismatch.*&quot;)) {
+    manager.addWarningBadge(&quot;Gracefully Aborted due to crc mismatch in BLL and IL components&quot;)
+    manager.createSummary(&quot;warning.gif&quot;).appendText(&quot;&lt;i&gt;This run was aborted due to crc mismatch between BLL and IL component&lt;i&gt;&quot;, false, false, false, &quot;orange&quot;)
     // manager.buildUnstable()
-    //manager.listener.logger.println("Marking build unstable") 
+    //manager.listener.logger.println(&quot;Marking build unstable&quot;) 
     //manager.build.setResult(hudson.model.Result.UNSTABLE)
    manager.build.@result = hudson.model.Result.UNSTABLE
 }
@@ -244,17 +246,17 @@ if(manager.logContains(".*crc mismatch.*")) {
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
-            <recipientList/>
+            <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
-            <attachmentsPattern/>
+            <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
-            <replyTo/>
+            <replyTo></replyTo>
             <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -262,11 +264,11 @@ if(manager.logContains(".*crc mismatch.*")) {
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
       <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern/>
-      <presendScript/>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
       <attachBuildLog>false</attachBuildLog>
       <compressBuildLog>false</compressBuildLog>
-      <replyTo/>
+      <replyTo></replyTo>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <hudson.plugins.blame__upstream__commiters.BlameUpstreamCommitersPublisher plugin="blame-upstream-commiters@1.2">
