@@ -160,7 +160,7 @@ rm -f ./result.junit.xml
     <hudson.tasks.Shell>
       <command>echo change cli.tcl output to stdout
 
-chmod u+w build/il/testframework/testexecuter/cli.tcl
+chmod u+w ${WORKSPACE}/build/il/testframework/testexecuter/cli.tcl
 
 sed -i &apos;s/stderr/stdout/g&apos; ${WORKSPACE}/build/il/testframework/testexecuter/cli.tcl
 </command>
