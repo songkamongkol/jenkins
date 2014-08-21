@@ -1,9 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
-  <description>FTP central boot image file from 10.2.19.55 machine to martin&lt;br&gt;&#xd;
-Requires I: drive to be mapped to \\martin\archive\pv&lt;br&gt;&#xd;
-Update latestbuild.txt file in \\martin\archive\pv\TestCenter\&lt;version&gt;\Engineering_Builds to include the latest build number (for SmartTest)&#xd;
+  <description>FTP central boot image file from 10.2.19.55 machine to martin&lt;br&gt;
+Requires I: drive to be mapped to \\martin\archive\pv&lt;br&gt;
+Update latestbuild.txt file in \\martin\archive\pv\TestCenter\&lt;version&gt;\Engineering_Builds to include the latest build number (for SmartTest)
 Triggers integration_set_status job to create entry in build database&lt;br&gt;</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -20,8 +19,8 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description></description>
-          <defaultValue>4.44_rel</defaultValue>
+          <description/>
+          <defaultValue>4.45_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
