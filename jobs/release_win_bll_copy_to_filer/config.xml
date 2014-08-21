@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
-  <description>Copy build output raw files to \\filer.caw.com\home\qabuild\TestCenter\2.00\engineering_builds\GUI_BLL as per request from Nicolas&#xd;
-&#xd;
+  <description>Copy build output raw files to \\filer.caw.com\home\qabuild\TestCenter\2.00\engineering_builds\GUI_BLL as per request from Nicolas
+
 NOTE: This job must be setup to run on the same machine as the Windows </description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
@@ -20,7 +19,7 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description>branch name</description>
-          <defaultValue>4.44_rel</defaultValue>
+          <defaultValue>4.45_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BUILD_OUTPUT_DIR</name>
@@ -30,11 +29,11 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
           <description>major minor version</description>
-          <defaultValue>4.44</defaultValue>
+          <defaultValue>4.45</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
-          <description></description>
+          <description/>
           <defaultValue>BAD_BUILD_NUMBER</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -53,7 +52,7 @@ NOTE: This job must be setup to run on the same machine as the Windows </descrip
     <hudson.tasks.BatchFile>
       <command>set BRANCH_ID=6
 set FILER_DIR=L:TestCenter\2.00\engineering_builds\GUI_BLL\%STC_MAJ_MIN_VERSION%.%BLL_BUILD_NUMBER%%BRANCH_ID%
-echo &quot;Copying raw files from %BUILD_OUTPUT_DIR%\bin\Release to %FILER_DIR% ...&quot;
+echo "Copying raw files from %BUILD_OUTPUT_DIR%\bin\Release to %FILER_DIR% ..."
 mkdir %FILER_DIR%
 xcopy %BUILD_OUTPUT_DIR%\bin\Release\Model %FILER_DIR%\Model /e /i /y
 xcopy %BUILD_OUTPUT_DIR%\bin\Release\PDUs %FILER_DIR%\PDUs /e /i /y
@@ -78,17 +77,17 @@ copy %BUILD_OUTPUT_DIR%\bin\Release\*.* %FILER_DIR% /y
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
-            <recipientList></recipientList>
+            <recipientList/>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>false</sendToDevelopers>
             <sendToRequester>false</sendToRequester>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
-            <attachmentsPattern></attachmentsPattern>
+            <attachmentsPattern/>
             <attachBuildLog>false</attachBuildLog>
             <compressBuildLog>false</compressBuildLog>
-            <replyTo></replyTo>
+            <replyTo/>
             <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
@@ -96,11 +95,11 @@ copy %BUILD_OUTPUT_DIR%\bin\Release\*.* %FILER_DIR% /y
       <contentType>default</contentType>
       <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
       <defaultContent>$DEFAULT_CONTENT</defaultContent>
-      <attachmentsPattern></attachmentsPattern>
-      <presendScript></presendScript>
+      <attachmentsPattern/>
+      <presendScript/>
       <attachBuildLog>false</attachBuildLog>
       <compressBuildLog>false</compressBuildLog>
-      <replyTo></replyTo>
+      <replyTo/>
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
