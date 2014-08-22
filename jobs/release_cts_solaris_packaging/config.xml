@@ -149,7 +149,7 @@ Wait 20 minutes to stagger builds (1200) seconds.&lt;br&gt;
   <quietPeriod>1200</quietPeriod>
   <assignedNode>bll_solaris_spccalsolpv01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
