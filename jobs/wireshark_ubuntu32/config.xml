@@ -33,7 +33,7 @@
         <hudson.model.StringParameterDefinition>
           <name>PACKAGE</name>
           <description></description>
-          <defaultValue>YES</defaultValue>
+          <defaultValue>NO</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
