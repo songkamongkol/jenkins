@@ -106,7 +106,7 @@ import subprocess
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 print changelist
 
-proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 1&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
+proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
 output = proc.stdout.read()
 junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
 print &quot;latest change is committed by &quot;, user</command>
