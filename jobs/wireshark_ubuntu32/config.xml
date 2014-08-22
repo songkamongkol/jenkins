@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -112,8 +112,8 @@
 #print &quot;latest change is committed by &quot;, user</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command>echo $JOB_NAME
-echo $BRANCH_NAME
+      <command>cd ..
+python GetUserAccount.py
 #chmod -R 777 .
 #./autogen.sh
 #./configure --enable-setcap-install
