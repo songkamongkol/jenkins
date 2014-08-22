@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -119,8 +119,11 @@ descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
 #str=$(echo $descr | tr &apos; &apos;)
 #echo ${str[5]}
 
-IFS=&apos; &apos; read -a array &lt;&lt;&lt; &quot;$descr&quot;
-echo &quot;${array[1]}&quot;
+str=$(echo $descr | tr &quot; &quot;)
+for x in $arr
+do 
+   echo &quot;&gt; [$x]&quot;
+done
 
 
 #cd ..
