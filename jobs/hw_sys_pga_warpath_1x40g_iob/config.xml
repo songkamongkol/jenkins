@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>HW regression PGA system test (HW+IL+BLL) for Thunderbird 4x10G I/O Board</description>
+  <description>HW regression PGA system test (HW+IL+BLL) for Warpath 1x40G I/O Board</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
       <useBuildBlocker>true</useBuildBlocker>
-      <blockingJobs>hw_sanity_.*_thunderbird_10g_iob</blockingJobs>
+      <blockingJobs>hw_sanity_.*_warpath_1x40g_iob</blockingJobs>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -18,12 +18,12 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
-          <defaultValue>10.100.21.12</defaultValue>
+          <defaultValue>10.100.21.96</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
           <description>Spirent TestCenter testmodule slot ID (1-based)</description>
-          <defaultValue>1</defaultValue>
+          <defaultValue>3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_INSTALL_DIR</name>
@@ -33,7 +33,7 @@
         <hudson.model.StringParameterDefinition>
           <name>FILTER</name>
           <description>filter (e.g. DEV_CI and PGA)</description>
-          <defaultValue>DEV_CI and HW_TBIRD and not slow and not disabled</defaultValue>
+          <defaultValue>DEV_CI and HW_WARPATH_40G and not slow and not disabled</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>NUM_CPU</name>
@@ -138,7 +138,7 @@ cd ${WORKSPACE}
 echo &quot;execute test suite&quot;
 tclsh regression/util/unittest/all.tcl
 
-python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=${WORKSPACE}/${STC_INSTALL_DIR} -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --archive-tmpdir --keep-all-tmpdir --basetemp=${WORKSPACE}/${TMP_DIR} --hw=\&apos;{\&quot;TBIRD\&quot; :[ \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/1\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/10\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/7\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/16\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/17\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/18\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/23\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/24\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
+python regression/run.py --vm-user-id=ci_regression --stc-pkg-dir=${WORKSPACE}/${STC_INSTALL_DIR} -m \&apos;${FILTER}\&apos; -n ${NUM_CPU} --archive-tmpdir --keep-all-tmpdir --basetemp=${WORKSPACE}/${TMP_DIR} --hw=\&apos;{\&quot;WARPATH_40G\&quot; :[ \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/1\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/5\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/9\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/13\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/17\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/21\&quot;\) , \(\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/25\&quot;,\&quot;//${STC_CHASSIS_IP}/${STC_SLOT_ID}/29\&quot;\) ] }\&apos; || sed -i &apos;s/skips/skipped/g&apos; ./*.junit.xml
 
 echo &quot;exit from python virtual environment&quot;
 deactivate
