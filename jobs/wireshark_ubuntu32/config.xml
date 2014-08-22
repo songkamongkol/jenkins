@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -112,8 +112,14 @@
 #print &quot;latest change is committed by &quot;, user</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command>var=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
-echo $var
+      <command># Get the user of last check in. If it is tableuser, then the change is for wireshark version. Do not make a new build in this case.
+descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
+#echo $descr
+
+str=(&apos;echo $descr | tr &apos; &apos;&apos;)
+echo ${str[5]}
+
+
 
 #cd ..
 #python GetUserAccount.py
