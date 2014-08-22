@@ -99,7 +99,7 @@
   <quietPeriod>120</quietPeriod>
   <assignedNode>fpga-reg-01||fpga-reg-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
