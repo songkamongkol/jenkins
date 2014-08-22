@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -100,19 +100,20 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-import subprocess
+      <command>#import os
+#import subprocess
 
-changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-print changelist
+#changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+#print changelist
 
-proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
-output = proc.stdout.read()
-junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
-print &quot;latest change is committed by &quot;, user</command>
+#proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
+#output = proc.stdout.read()
+#junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
+#print &quot;latest change is committed by &quot;, user</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command>#chmod -R 777 .
+      <command>echo $Workspace
+#chmod -R 777 .
 #./autogen.sh
 #./configure --enable-setcap-install
 #make
