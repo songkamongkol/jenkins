@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -119,7 +119,7 @@ str=$(echo $descr | tr &quot; &quot; &quot;\n&quot;)
 i=0
 for substr in $str
 do
-  i = $[i+1]
+  i++
   echo &quot;&gt; $i [$substr]&quot;
 done  
 
