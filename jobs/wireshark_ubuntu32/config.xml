@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -116,15 +116,17 @@
 descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
 
 str=$(echo $descr | tr &quot; &quot; &quot;\n&quot;)
-echo &quot;Last user is $(str[5]).&quot;
+echo &quot;Last user is ${str[5]}.&quot;
 
-if [[$str[5] == *tableuser* ]]; then
+if [[${str[5]} == *tableuser* ]]; then
+    echo &quot;exit because last user is tableuser&quot;
     exit
 else
-    chmod -R 777 .
-    ./autogen.sh
-    ./configure --enable-setcap-install
-    make
+    echo &quot;Last user is not tableuser. Continue.&quot;
+    #chmod -R 777 .
+    #./autogen.sh
+    #./configure --enable-setcap-install
+    #make
 fi
 
 
