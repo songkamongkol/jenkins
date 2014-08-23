@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -114,25 +114,18 @@
     <hudson.tasks.Shell>
       <command># Get the user of last check in. If it is tableuser, then the change is for wireshark version. Do not make a new build in this case.
 descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
-#echo $descr
-
-#str=$(echo $descr | tr &apos; &apos;)
-#echo ${str[5]}
 
 str=$(echo $descr | tr &quot; &quot; &quot;\n&quot;)
-for x in $arr
-do 
-   echo &quot;&gt; [$x]&quot;
-done
+echo &quot;Last user is $(str[5]).&quot;
 
-
-#cd ..
-#python GetUserAccount.py
-
-#chmod -R 777 .
-#./autogen.sh
-#./configure --enable-setcap-install
-#make
+if [[$str[5] == *tableuser* ]]; then
+    exit
+else
+    chmod -R 777 .
+    ./autogen.sh
+    ./configure --enable-setcap-install
+    make
+fi
 
 
 
