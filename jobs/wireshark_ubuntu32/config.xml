@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -122,7 +122,7 @@ for substr in $str
 do
   i=$((i+1))
   echo &quot;&gt; $i [$substr]&quot;
-  if [ $i -eq 6]; then
+  if [ $i -eq &quot;6&quot;]; then
      if [[$substr == *tableuser* ]]; then
         echo &quot;exit&quot;
         exit
