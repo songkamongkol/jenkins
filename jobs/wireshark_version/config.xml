@@ -142,7 +142,7 @@
       <saveOutput>false</saveOutput>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>wireshark_ubuntu32_build</childProjects>
+      <childProjects>wireshark_ubuntu32_package</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

@@ -159,7 +159,7 @@ perl %WORKSPACE%\Build_Scripts\Scripts\ci_cleanup_by_date.pl</command>
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>mainline_set_status,</projects>
+          <projects>mainline_set_status</projects>
           <condition>ALWAYS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
