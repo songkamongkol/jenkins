@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -116,13 +116,14 @@
 descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
 
 str=$(echo $descr | tr &quot; &quot; &quot;\n&quot;)
-i=0
-for substr in $str
-do
-  echo &quot;&gt; [$substr]&quot;
-done  
+i=5
+#for substr in $str
+#do
+#  echo &quot;&gt; [$substr]&quot;
+#done  
+echo &quot;${str[$i]}&quot;
 
-if [[${str[5]} == *tableuser* ]]; then
+if [[${str[$i]} == *tableuser* ]]; then
     echo &quot;exit because last user is tableuser&quot;
     exit
 else
