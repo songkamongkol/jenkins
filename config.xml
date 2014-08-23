@@ -2691,7 +2691,6 @@
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[68]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
         <string>wireshark_ubuntu32</string>
         <string>wireshark_ubuntu32_build</string>
-        <string>wireshark_ubuntu32_package</string>
         <string>wireshark_version</string>
       </jobNames>
       <jobFilters/>
