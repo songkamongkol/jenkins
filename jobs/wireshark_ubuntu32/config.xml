@@ -123,7 +123,7 @@ do
   i=$((i+1))
   echo &quot;&gt; $i [$substr]&quot;
   if [$i == 6]; then
-     if [[${str[$i]} == *tableuser* ]]; then
+     if [[$substr == *tableuser* ]]; then
         echo &quot;exit&quot;
         exit
      fi
