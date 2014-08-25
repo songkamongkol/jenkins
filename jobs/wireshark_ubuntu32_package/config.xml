@@ -45,6 +45,7 @@
     <hudson.tasks.Shell>
       <command># Make wireshark ubuntu32 binary package
 echo &quot;Wireshark Ubuntu32 Package&quot;
+cd wireshark_ubuntu32_build
 make debian-package
 
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
