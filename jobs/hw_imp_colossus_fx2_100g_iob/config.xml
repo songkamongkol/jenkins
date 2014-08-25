@@ -86,7 +86,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -208,20 +208,41 @@ vivado -mode batch -source ./myImp.tcl
 #Jenkins by default runs shell executions with &quot;-xe&quot; option, which will exit immediately when a command returns non-zero value
 #grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
 
-#parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/runme.log ];
+##parse log to check for errors
+#if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/runme.log ];
+#then
+#    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+#
+#    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/runme.log | grep ^CRITICAL\ WARNING:`
+#
+#    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
+#    then
+#        echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
+#        exit 1
+#    fi
+#fi
+
+
+echo &quot;Parsing timing reports for errors...&quot;
+if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_postroute_physopted.rpt ];
 then
-    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+    TIMING_NOT_MET=`grep Timing\ constraints\ are\ not\ met ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_postroute_physopted.rpt`
 
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/runme.log | grep ^CRITICAL\ WARNING:`
-
-    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
+    if [ &quot;${TIMING_NOT_MET}&quot; != &quot;&quot; ];
     then
-        echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
+        echo &quot;ERROR: ${TIMING_NOT_MET} Mark build as failure&quot;
         exit 1
     fi
-fi
-</command>
+elif [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt ];
+then
+    TIMING_NOT_MET=`grep Timing\ constraints\ are\ not\ met ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt`
+
+    if [ &quot;${TIMING_NOT_MET}&quot; != &quot;&quot; ];
+    then
+        echo &quot;ERROR: ${TIMING_NOT_MET} Mark build as failure&quot;
+        exit 1
+    fi
+fi</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
