@@ -42,20 +42,12 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>#import os
-#import subprocess
-
-#changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-#print changelist
-
-#proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
-#output = proc.stdout.read()
-#junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
-#print &quot;latest change is committed by &quot;, user</command>
-    </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command>echo &quot;wireshark ubuntu32 package&quot;</command>
+      <command># Make wireshark ubuntu32 binary package
+echo &quot;Wireshark Ubuntu32 Package&quot;
+make debian-package
+
+# </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
