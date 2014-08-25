@@ -48,7 +48,6 @@
     <projectPath>//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
 //TestCenter/${BRANCH_NAME}/regression/... //ws/regression/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -158,9 +157,11 @@ exit /B 0</command>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>rmdir /q /s regression\il_img
-mkdir regression\il_img\
-copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-4.44_rel\build-latest\* regression\il_img
+      <command>rem rmdir /q /s regression\il_img
+rem mkdir regression\il_img\
+rem copy \\storage.cal.ci.spirentcom.com\Builds\jenkins\il_qemu-4.44_rel\build-latest\* regression\il_img
+
+python regression\jenkins\copy_artifacts.py release_il_qemu_yocto_ci \\storage.cal.ci.spirentcom.com\builds\jenkins\il_qemu_yocto-%BRANCH_NAME% regression\il_img --wildcards=&quot;qemu*.gz,*.txt&quot; --clean-target
 
 python regression\jenkins\compare_crc.py --first bll_idl_crc.txt --second regression\il_img\il_idl_crc.txt 
 </command>
