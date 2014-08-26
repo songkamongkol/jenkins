@@ -14,16 +14,16 @@
       <useBuildBlocker>false</useBuildBlocker>
     </hudson.plugins.buildblocker.BuildBlockerProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SpirentModelSimPli/mainline/... //ws/...&#xd;
--//SpirentModelSimPli/mainline/Bin/*.dll  //ws/Bin/*.dll&#xd;
--//SpirentModelSimPli/mainline/Bin/*.exe  //ws/Bin/*.exe&#xd;
--//SpirentModelSimPli/mainline/Bin/*.txt  //ws/Bin/*.txt&#xd;
+    <projectPath>+//SpirentModelSimPli/mainline/... //ws/...
+-//SpirentModelSimPli/mainline/Bin/*.dll  //ws/Bin/*.dll
+-//SpirentModelSimPli/mainline/Bin/*.exe  //ws/Bin/*.exe
+-//SpirentModelSimPli/mainline/Bin/*.txt  //ws/Bin/*.txt
 +//SpirentModelSimPli/mainline/Bin/mtipli.dll  //ws/Bin/mtipli.dll</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -55,13 +55,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
@@ -71,9 +71,9 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
+      <spec>H/30 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
@@ -94,11 +94,13 @@ devenv /Rebuild &quot;Release|Win32&quot; &quot;.\Code\modelsimworkspace\ModelSi
           <name>UNSTABLE</name>
           <ordinal>1</ordinal>
           <color>YELLOW</color>
+          <completeBuild>true</completeBuild>
         </worstResult>
         <bestResult>
           <name>SUCCESS</name>
           <ordinal>0</ordinal>
           <color>BLUE</color>
+          <completeBuild>true</completeBuild>
         </bestResult>
       </runCondition>
       <conditionalbuilders>
@@ -121,22 +123,19 @@ copy /V /Y /A TestBench\AddressMap\* \\storage.cal.ci.spirentcom.com\builds\dev\
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/msvc_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
-    <hudson.plugins.perforce.PerforceTagNotifier plugin="perforce@1.3.26">
+    <hudson.plugins.perforce.PerforceTagNotifier plugin="perforce@1.3.27">
       <rawLabelName>${JOB_NAME}-${BUILD_NUMBER}</rawLabelName>
       <rawLabelOwner></rawLabelOwner>
       <rawLabelDesc>${BUILD_TAG}-${BUILD_NUMBER}</rawLabelDesc>
       <onlyOnSuccess>true</onlyOnSuccess>
     </hudson.plugins.perforce.PerforceTagNotifier>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
@@ -210,6 +209,6 @@ del /F /S /Q %WORKSPACE%</command>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
