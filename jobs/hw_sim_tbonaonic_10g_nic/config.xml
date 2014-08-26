@@ -38,18 +38,18 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.26">
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
     <p4User>tableuser</p4User>
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/...&#xd;
-+//SPT_HW/tbonaonic/sandbox/SourceCode/... //ws/SourceCode/...&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/*.exe //ws/SimSource/*.exe&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/*.dll //ws/SimSource/*.dll&#xd;
--//SPT_HW/tbonaonic/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v&#xd;
+    <projectPath>+//SPT_HW/tbonaonic/sandbox/SimSource/... //ws/SimSource/...
++//SPT_HW/tbonaonic/sandbox/SourceCode/... //ws/SourceCode/...
+-//SPT_HW/tbonaonic/sandbox/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
+-//SPT_HW/tbonaonic/sandbox/SimSource/*.exe //ws/SimSource/*.exe
+-//SPT_HW/tbonaonic/sandbox/SimSource/*.dll //ws/SimSource/*.dll
+-//SPT_HW/tbonaonic/sandbox/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -81,13 +81,13 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
-    <useViewMask>false</useViewMask>
-    <useViewMaskForPolling>false</useViewMaskForPolling>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
@@ -97,15 +97,15 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
+  <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
+      <spec>H/15 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>SptModelSimPli_Lin32</project>
       <filter>Shell/ModelSimPliShell.v</filter>
       <target>SimSource</target>
@@ -113,8 +113,9 @@
         <stable>true</stable>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>SptModelSimPli_Lin32</project>
       <filter>Bin/libGeneratorParser.so.1</filter>
       <target>SimSource</target>
@@ -122,8 +123,9 @@
         <stable>true</stable>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.28">
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>SptModelSimPli_Lin32</project>
       <filter>Bin/libSpirentModelSimPli.so</filter>
       <target>SimSource</target>
@@ -131,6 +133,7 @@
         <stable>true</stable>
       </selector>
       <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>echo &quot;Create symbolic link for libGeneratorParser&quot;
@@ -162,15 +165,12 @@ echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/vsim_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.36">
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
@@ -244,6 +244,6 @@ rm -rf ${WORKSPACE}/*</command>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
