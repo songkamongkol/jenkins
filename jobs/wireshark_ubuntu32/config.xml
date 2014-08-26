@@ -75,7 +75,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -134,9 +134,10 @@
 #echo &quot;Last user is not tableuser. Continue.&quot;
 sudo chmod -R 777 .
 sudo ./autogen.sh
-sudo ./configure --enable-setcap-install
+#sudo ./configure --enable-setcap-install
+sudo ./configure 
 sudo make
-sudo make debian-package
+#sudo make debian-package
 
 
 
