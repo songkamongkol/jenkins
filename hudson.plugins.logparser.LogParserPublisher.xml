@@ -45,5 +45,9 @@
       <name>Synplify Pro Rules</name>
       <path>/opt/jenkins/jenkins-root/synplify_pro_rule</path>
     </hudson.plugins.logparser.ParserRuleFile>
+    <hudson.plugins.logparser.ParserRuleFile>
+      <name>Xilinx relaxed rule</name>
+      <path>/opt/jenkins/jenkins-root/xilinx_vivado_relaxed_rule</path>
+    </hudson.plugins.logparser.ParserRuleFile>
   </parsingRulesGlobal>
 </hudson.plugins.logparser.LogParserPublisher_-DescriptorImpl>
