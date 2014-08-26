@@ -53,9 +53,23 @@
 #sudo make debian-package
 
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
-echo &quot;&quot;
+echo &quot;tar wireshark debian package&quot;
 cd ..
-tar -zcvf </command>
+
+$ fn should be ./wireshark_.10.3-spirent-3_i386.deb. fn2 is wireshark_.10.3-spirent-3_i386, which is the folder name
+fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
+echo $fn
+len=${#fn}
+fn2=${fn:2:len-6}
+echo $fn2
+
+mkdir $fn2
+cp wireshark_1.10.3-spirent-*_i386.deb $fn2
+cp wireshark-common_1.10.3-spirent-*_i386.deb $fn2
+cp tshark_1.10.3-spirent-*_i386.deb $fn2
+
+fnend=&quot;.tar.gz&quot;
+tar -zcvf $fn2$fnend $fn</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
