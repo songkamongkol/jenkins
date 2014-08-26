@@ -43,7 +43,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># Make wireshark ubuntu32 binary package
+      <command>#!/bin/bash
+
+# Make wireshark ubuntu32 binary package
 #echo &quot;Wireshark Ubuntu32 Package&quot;
 #pwd
 #cd ..
