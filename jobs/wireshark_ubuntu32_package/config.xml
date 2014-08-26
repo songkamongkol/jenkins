@@ -43,7 +43,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># Make wireshark ubuntu32 binary package
+      <command>#!/bin/bash
+
+# Make wireshark ubuntu32 binary package
 #echo &quot;Wireshark Ubuntu32 Package&quot;
 #pwd
 #cd ..
@@ -64,13 +66,13 @@ len=${#fn}
 fnpre=${fn:2:len-6}
 echo $fnpre
 
-#mkdir $fn2
-#cp wireshark_1.10.3-spirent-*_i386.deb $fn2
-#cp wireshark-common_1.10.3-spirent-*_i386.deb $fn2
-#cp tshark_1.10.3-spirent-*_i386.deb $fn2
+mkdir $fnpre
+cp wireshark_1.10.3-spirent-*_i386.deb $fnpre
+cp wireshark-common_1.10.3-spirent-*_i386.deb $fnpre
+cp tshark_1.10.3-spirent-*_i386.deb $fnpre
 
-#fnend=&quot;.tar.gz&quot;
-#tar -zcvf $fn2$fnend $fn</command>
+fnend=&quot;.tar.gz&quot;
+tar -zcvf $fnpre$fnend $fnpre</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
