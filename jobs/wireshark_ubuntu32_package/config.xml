@@ -59,10 +59,9 @@ pwd
 
 #fn should be wireshark_1.10.3-spirent-3_i386.deb. fn2 is wireshark_1.10.3-spirent-3_i386, which is the folder name
 fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
-#fn=wireshark_1.10.3-spirent-*_i386.deb
 echo $fn
 len=${#fn}
-fnpre=${fn:0:30}
+fnpre=${fn:2:len-6}
 echo $fnpre
 
 #mkdir $fn2
