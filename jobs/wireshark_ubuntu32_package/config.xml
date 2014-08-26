@@ -48,6 +48,8 @@ echo &quot;Wireshark Ubuntu32 Package&quot;
 pwd
 cd ..
 cd wireshark_ubuntu32
+sudo chmod -R 777 .
+sudo make
 sudo make debian-package
 
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
