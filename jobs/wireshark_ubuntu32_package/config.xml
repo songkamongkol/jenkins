@@ -44,23 +44,24 @@
   <builders>
     <hudson.tasks.Shell>
       <command># Make wireshark ubuntu32 binary package
-echo &quot;Wireshark Ubuntu32 Package&quot;
-pwd
-cd ..
-cd wireshark_ubuntu32
-sudo chmod -R 777 .
-sudo make
-sudo make debian-package
+#echo &quot;Wireshark Ubuntu32 Package&quot;
+#pwd
+#cd ..
+#cd wireshark_ubuntu32
+#sudo chmod -R 777 .
+#sudo make
+#sudo make debian-package
 
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
-#cd ..
-#tar -zcvf </command>
+echo &quot;&quot;
+cd ..
+tar -zcvf </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>true</failBuildOnError>
+      <failBuildOnError>false</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
