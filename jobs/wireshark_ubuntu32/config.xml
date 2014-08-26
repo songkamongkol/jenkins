@@ -136,6 +136,7 @@ sudo chmod -R 777 .
 sudo ./autogen.sh
 sudo ./configure --enable-setcap-install
 sudo make
+sudo make debian-package
 
 
 
