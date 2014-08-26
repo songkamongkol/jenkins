@@ -55,7 +55,9 @@
 
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoNIC/...  //ws/VivadoNIC/...
 
--//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoNIC/*.edf  //ws/VivadoNIC/*.edf</projectPath>
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/VivadoNIC/*.edf  //ws/VivadoNIC/*.edf
+
++//SPT_HW/Colossus/sandbox/bitstream/candidate/nic/ColossusFX2_NIC100G.bit*  //ws/bitstream/candidate/nic/ColossusFX2_NIC100G.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -106,7 +108,7 @@
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
+      <spec>H/5 * * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
