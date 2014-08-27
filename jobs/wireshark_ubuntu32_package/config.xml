@@ -45,21 +45,28 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-# Make wireshark ubuntu32 binary package
-#echo &quot;Wireshark Ubuntu32 Package&quot;
-#pwd
-#cd ..
-#cd wireshark_ubuntu32
-#sudo chmod -R 777 .
-#sudo make
-#sudo make debian-package
-
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
 echo &quot;tar wireshark debian package&quot;
 cd ..
 pwd
 
+echo &quot;Clear files from last package&quot;
+rm -r -f *.deb
+rm -r -f *.tar.gz
+rm -r -f *.dsc
+rm -r -f *.changes
+foldername=$(find -type d -name &apos;wireshark_1.10.3-spirent-*_i386&apos;)
+rm -r -f $foldername
+
+# Make wireshark ubuntu32 binary package
+echo &quot;Wireshark Ubuntu32 Package&quot;
+cd wireshark_ubuntu32
+sudo chmod -R 777 .
+sudo make
+sudo make debian-package
+
 #fn should be wireshark_1.10.3-spirent-3_i386.deb. fn2 is wireshark_1.10.3-spirent-3_i386, which is the folder name
+cd ..
 fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
 echo $fn
 len=${#fn}
