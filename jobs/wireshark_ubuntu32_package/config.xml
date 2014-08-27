@@ -75,7 +75,7 @@ fnend=&quot;.tar.gz&quot;
 tar -zcvf $fnpre$fnend $fnpre
 
 # copy Ubuntu32 installer to \\martin
-cp $fnpre$fnend \\\\martin\\archive\\pv\\wireshark</command>
+cp $fnpre$fnend \\martin\archive\pv\wireshark</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
