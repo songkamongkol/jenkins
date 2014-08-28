@@ -97,8 +97,10 @@ cd ..
 
 p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
 
+python UpdateVersion.py
 
-p4 submit -d &quot;$BUILD_NUMBER $P4_CHANGELIST&quot;</command>
+#p4 submit -d &quot;$BUILD_NUMBER $P4_CHANGELIST&quot;
+p4 sumbit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
