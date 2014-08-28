@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -155,8 +155,8 @@ fi
 echo &quot;Create work directory&quot;
 vlib work
 echo &quot;Begin simulation&quot;
-#vsim -c -do &quot;do ./CompileAll.do; run 200us; quit&quot;
-vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
+vsim -c -do &quot;do ./CompileAll.do; run 350us; quit&quot;
+#vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
 echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
   </builders>
