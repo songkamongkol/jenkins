@@ -155,7 +155,7 @@ fi
 echo &quot;Create work directory&quot;
 vlib work
 echo &quot;Begin simulation&quot;
-vsim -c -do &quot;do ./CompileAll.do; run 350us; quit&quot;
+vsim -c -do &quot;do ./CompileAll.do; run 220us; quit&quot;
 #vsim -c -do &quot;do ./CompileAll.do; run -all; quit&quot;
 echo &quot;Simulation completed&quot;</command>
     </hudson.tasks.Shell>
@@ -240,6 +240,11 @@ rm -rf ${WORKSPACE}</command>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.12.2">
+      <strategy class="hudson.plugins.build_timeout.impl.LikelyStuckTimeOutStrategy"/>
+      <failBuild>true</failBuild>
+      <writingDescription>true</writingDescription>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
   </buildWrappers>
 </project>
