@@ -46,44 +46,51 @@
       <command>#!/bin/bash
 
 # Tar wireshark.deb, wireshark-common.deb and tshark.deb
-echo &quot;tar wireshark debian package&quot;
-cd ..
-pwd
+#echo &quot;tar wireshark debian package&quot;
+#cd ..
+#pwd
 
-echo &quot;Clear files from last package&quot;
-rm -r -f *.deb
-rm -r -f *.tar.gz
-rm -r -f *.dsc
-rm -r -f *.changes
-foldername=$(find -type d -name &apos;wireshark_1.10.3-spirent-*_i386&apos;)
-rm -r -f $foldername
+#echo &quot;Clear files from last package&quot;
+#rm -r -f *.deb
+#rm -r -f *.tar.gz
+#rm -r -f *.dsc
+#rm -r -f *.changes
+#foldername=$(find -type d -name &apos;wireshark_1.10.3-spirent-*_i386&apos;)
+#rm -r -f $foldername
 
 # Make wireshark ubuntu32 binary package
-echo &quot;Wireshark Ubuntu32 Package&quot;
-cd wireshark_ubuntu32
-sudo chmod -R 777 .
-sudo make
-sudo make debian-package
+#echo &quot;Wireshark Ubuntu32 Package&quot;
+#cd wireshark_ubuntu32
+#sudo chmod -R 777 .
+#sudo make
+#sudo make debian-package
 
 #fn should be wireshark_1.10.3-spirent-3_i386.deb. fn2 is wireshark_1.10.3-spirent-3_i386, which is the folder name
-cd ..
-fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
-echo $fn
-len=${#fn}
-fnpre=${fn:2:len-6}
-echo $fnpre
+#cd ..
+#fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
+#echo $fn
+#len=${#fn}
+#fnpre=${fn:2:len-6}
+#echo $fnpre
 
-mkdir $fnpre
-cp wireshark_1.10.3-spirent-*_i386.deb $fnpre
-cp wireshark-common_1.10.3-spirent-*_i386.deb $fnpre
-cp tshark_1.10.3-spirent-*_i386.deb $fnpre
+#mkdir $fnpre
+#cp wireshark_1.10.3-spirent-*_i386.deb $fnpre
+#cp wireshark-common_1.10.3-spirent-*_i386.deb $fnpre
+#cp tshark_1.10.3-spirent-*_i386.deb $fnpre
 
-fnend=&quot;.tar.gz&quot;
-tar -zcvf $fnpre$fnend $fnpre
+#fnend=&quot;.tar.gz&quot;
+#tar -zcvf $fnpre$fnend $fnpre
 
 # copy Ubuntu32 installer to \\martin
 #cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
     </hudson.tasks.Shell>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import subprocess
+
+changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+print changelist</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
