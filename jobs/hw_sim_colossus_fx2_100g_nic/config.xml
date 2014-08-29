@@ -39,7 +39,8 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/... //ws/SimSource/...
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/IP_Vivado/... //ws/IP_Vivado/...
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/... //ws/SimSource/...
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/... //ws/SourceCode/...
 -//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/work/... //ws/SimSource/work/...
 -//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
@@ -78,7 +79,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
