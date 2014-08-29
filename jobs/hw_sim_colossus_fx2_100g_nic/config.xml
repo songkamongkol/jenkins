@@ -41,6 +41,7 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/... //ws/SimSource/...
 +//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/... //ws/SourceCode/...
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/work/... //ws/SimSource/work/...
 -//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
 -//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/*.exe //ws/SimSource/*.exe
 -//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/*.dll //ws/SimSource/*.dll
@@ -147,7 +148,7 @@ export LM_LICENSE_FILE=$LM_LICENSE_FILE
 cd SimSource
 cp -f $SIM_LIB_PATH/modelsim.ini ./
 
-if [ -d  work ]; then
+if [ -e  work ]; then
     echo &quot;Delete existing work directory&quot;
     vdel -lib work -all
 fi
