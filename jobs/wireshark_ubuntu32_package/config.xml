@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -130,13 +130,14 @@
 import subprocess
 
 # to parent directory: /workspace/.
-print os.path.abspath(os.pardir)
-print os.getcwd()
+print os.path.abspath(os.curdir)
+os.chdir(&quot;..&quot;)
+print os.path.abspath(os.curdir)
 
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 print changelist
 
-fo = open(&quot;wireshark_changelist_&quot;+changelist, &apos;w&apos;)
+fo = open(&quot;wireshark_changelist_&quot;+changelist+&quot;.txt&quot;, &apos;w&apos;)
 fo.close();
 
 </command>
