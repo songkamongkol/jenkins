@@ -42,7 +42,7 @@
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
-    <slaveClientNameFormat></slaveClientNameFormat>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
     <useViewMask>true</useViewMask>
     <useViewMaskForPolling>true</useViewMaskForPolling>
@@ -50,7 +50,8 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <canRoam>true</canRoam>
+  <assignedNode>relpkg-01</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
