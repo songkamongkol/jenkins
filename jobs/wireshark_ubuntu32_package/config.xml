@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -129,14 +129,14 @@
       <command>import os
 import subprocess
 
+# to parent directory: /workspace/.
+print os.path.abspath(os.pardir)
+print os.path.dirname(os.path.abspath(__file__))
+
+
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 print changelist
-
-proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
-output = proc.stdout.read()
-print output
-#junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
-#print &quot;latest change is committed by &quot;, user</command>
+</command>
     </hudson.plugins.python.Python>
   </builders>
   <publishers>
