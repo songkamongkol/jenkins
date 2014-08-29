@@ -63,7 +63,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>perl ChangeList_reporter.pl</command>
+      <command>set P4PORT=perforce.spirentcom.com:1666
+set P4USER=scmbuild
+perl ChangeList_reporter.pl</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
