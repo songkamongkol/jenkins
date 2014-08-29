@@ -128,11 +128,16 @@
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import subprocess
+import glob
 
 # to parent directory: /workspace/.
 print os.path.abspath(os.curdir)
 os.chdir(&quot;..&quot;)
 print os.path.abspath(os.curdir)
+
+# delete previous files
+for filename in glob.glob(&quot;wireshark_changelist_*&quot;):
+        os.remove(filename)
 
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 print changelist
