@@ -1820,53 +1820,6 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <listView>
-      <owner class="hudson" reference="../../.."/>
-      <name>integration_summary_ci</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>bll_ci</string>
-        <string>bll_ci_join</string>
-        <string>cts_windows</string>
-        <string>il_changeling</string>
-        <string>il_changeling_all</string>
-        <string>il_chos2</string>
-        <string>il_ci</string>
-        <string>il_ci_join</string>
-        <string>il_qemu_test</string>
-        <string>il_testmodule_contents</string>
-        <string>il_virtual</string>
-        <string>il_vtc</string>
-        <string>integration_cts_linux</string>
-        <string>regression</string>
-        <string>regression_changeling</string>
-        <string>regression_cl_nightly</string>
-        <string>regression_linux</string>
-        <string>regression_linux_ls</string>
-        <string>regression_nightly</string>
-        <string>results_reporter_windows</string>
-        <string>ui_debug</string>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-        <hudson.plugins.claim.ClaimColumn plugin="claim@2.3"/>
-        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
-        <hudson.plugins.claim.ClaimColumn plugin="claim@2.3"/>
-      </columns>
-      <includeRegex>(bll|ui|il).*</includeRegex>
-      <recurse>false</recurse>
-    </listView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>summary</name>
