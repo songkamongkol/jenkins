@@ -1890,51 +1890,6 @@
         </listView>
       </views>
     </hudson.plugins.nested__view.NestedView>
-    <listView>
-      <owner class="hudson" reference="../../.."/>
-      <name>integration_summary_packaging</name>
-      <filterExecutors>true</filterExecutors>
-      <filterQueue>true</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-      <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>integration_bll_freebsd63_packaging</string>
-        <string>integration_bll_freebsd71_packaging</string>
-        <string>integration_bll_linux_packaging</string>
-        <string>integration_bll_solaris_packaging</string>
-        <string>integration_bll_win_pkg_webhelp</string>
-        <string>integration_bll_windows_packaging</string>
-        <string>integration_ccp_packaging-new</string>
-        <string>integration_ccp_webhelp</string>
-        <string>integration_copy_to_spccalfs03</string>
-        <string>integration_ftp_tarball</string>
-        <string>integration_il_centralboot_packaging</string>
-        <string>integration_il_ftp_centralboot</string>
-        <string>integration_launch_nightly_builds</string>
-        <string>integration_launch_smarttest</string>
-        <string>integration_ls_vm_packaging</string>
-        <string>integration_package_bll_linux_x64</string>
-        <string>integration_package_cts_linux</string>
-        <string>integration_package_cts_windows</string>
-        <string>integration_package_l4l7_windows</string>
-        <string>integration_reset_tag_file</string>
-        <string>integration_set_status</string>
-        <string>integration_webhelp</string>
-      </jobNames>
-      <jobFilters/>
-      <columns>
-        <hudson.views.StatusColumn/>
-        <hudson.views.WeatherColumn/>
-        <hudson.views.JobColumn/>
-        <hudson.views.LastSuccessColumn/>
-        <hudson.views.LastFailureColumn/>
-        <hudson.views.LastDurationColumn/>
-        <hudson.views.BuildButtonColumn/>
-        <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-        <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
-      </columns>
-      <recurse>false</recurse>
-    </listView>
     <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
       <owner class="hudson" reference="../../.."/>
       <name>wip</name>
