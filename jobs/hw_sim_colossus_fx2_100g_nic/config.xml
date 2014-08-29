@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus 1x100G NIC FPGA Simulation</description>
+  <description>Colossus FX2 1x100G NIC FPGA Simulation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -39,13 +39,13 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/... //ws/SimSource/...
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/... //ws/SourceCode/...
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/transcript //ws/SimSource/transcript
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.exe //ws/SimSource/*.exe
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/*.dll //ws/SimSource/*.dll
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/... //ws/SimSource/...
++//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/... //ws/SourceCode/...
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/modelsim.ini //ws/SimSource/modelsim.ini
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/*.exe //ws/SimSource/*.exe
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/*.dll //ws/SimSource/*.dll
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/ModelSimPliShell.v //ws/SimSource/ModelSimPliShell.v
+-//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SimSource/pli_files/RegressionTestSuite.log  //ws/SimSource/pli_files/RegressionTestSuite.log
 +//SpirentModelSimPli/mainline/TestBench/AddressMap/PhoenixPliAddressSingleBar.add  //ws/SimSource/PhoenixPliAddressSingleBar.add</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
@@ -90,7 +90,7 @@
   </scm>
   <assignedNode>fpga-sim-01 || fpga-sim-02</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
