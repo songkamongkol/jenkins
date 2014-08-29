@@ -1158,37 +1158,6 @@
     </slave>
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
-      <name>ilbuild-test3</name>
-      <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
-      <remoteFS>/home/spirent/jenkins-tc</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
-        <host>ilbuild-test3.cal.ci.spirentcom.com</host>
-        <port>22</port>
-        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
-      </launcher>
-      <label></label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-              </default>
-              <int>1</int>
-              <string>PATH</string>
-              <string>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/export/crosstools/sbtools/x86-linux-rh7.3/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/fp-be/bin:/export/perforce/bin:/export/crosstools/sbtools/x86-linux-rh7.3/sb1-elf-2.5.1/bin:/export/crosstools/x86/pentium4/bin:/export/crosstools/x86/pentium3/bin:/export/crosstools/ppc/405/bin:/export/crosstools/mips/mips2_fp_be/bin:/export/crosstools/mips/fp_be/bin:/export/crosstools/mips64/fp_be/bin:/export/crosstools/mips64/octeon_v2_be/bin:/usr/local/lib/java/bin:/usr/local/bin:/home/scmbuild/bin:/sbin:/usr/sbin</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-      <userId>Somboon</userId>
-    </slave>
-    <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>ilbuild-test4</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
       <remoteFS>/home/spirent/jenkins-tc</remoteFS>
@@ -1207,7 +1176,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[48]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1371,14 +1340,14 @@
     <slave>
       <temporaryOfflineCause class="hudson.slaves.OfflineCause$UserCause">
         <description>
-          <holder reference="../../../../slave[53]/temporaryOfflineCause/description/holder"/>
+          <holder reference="../../../../slave[52]/temporaryOfflineCause/description/holder"/>
           <key>SlaveComputer.DisconnectedBy</key>
           <args>
             <string>Somboon</string>
             <string></string>
           </args>
         </description>
-        <user reference="../../../slave[53]/temporaryOfflineCause/user"/>
+        <user reference="../../../slave[52]/temporaryOfflineCause/user"/>
       </temporaryOfflineCause>
       <name>ilbuild-23</name>
       <description>builds IL targets and used for SCM packaging jobs IP: ilbuild-01.cal.ci.spirentcom.com</description>
@@ -1428,7 +1397,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1616,7 +1585,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[63]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[62]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -1676,7 +1645,7 @@
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
               </default>
               <int>1</int>
               <string>PATH</string>
@@ -2262,7 +2231,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_imp_colossus_fx2_100g_iob</string>
             <string>hw_imp_colossus_fx2_100g_nic</string>
             <string>hw_sim_colossus_fx2_100g_nic</string>
@@ -2305,7 +2274,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>bll_linux_yocto</string>
             <string>bll_windows_yocto</string>
             <string>il_changeling_all_yocto</string>
@@ -2347,7 +2316,7 @@
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[52]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[51]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>integration_bll_linux_packaging_yocto</string>
             <string>integration_bll_windows_packaging_yocto</string>
             <string>integration_il_centralboot_packaging_yocto</string>
@@ -2395,7 +2364,7 @@
           <filterQueue>true</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[59]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[58]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>mainline_bll_ci</string>
             <string>mainline_bll_ci_join</string>
             <string>mainline_bll_linux_ci</string>
@@ -2453,7 +2422,7 @@
           <filterQueue>true</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[59]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[58]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>mainline_bll_freebsd63_packaging</string>
             <string>mainline_bll_freebsd71_packaging</string>
             <string>mainline_bll_linux_packaging</string>
@@ -2507,7 +2476,7 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
         <string>wireshark_ubuntu32</string>
         <string>wireshark_ubuntu32_build</string>
         <string>wireshark_ubuntu32_package</string>
@@ -2542,7 +2511,7 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
-        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../slaves/slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
         <string>Changelist_Reporter</string>
       </jobNames>
       <jobFilters/>
@@ -2578,7 +2547,7 @@
         <unserializable-parents/>
         <tree-map>
           <default>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[65]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[64]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
           </default>
           <int>1</int>
           <string>STR_LATEST_RESULTS_FOLDER</string>
