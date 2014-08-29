@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -131,11 +131,14 @@ import subprocess
 
 # to parent directory: /workspace/.
 print os.path.abspath(os.pardir)
-print os.path.dirname(os.path.abspath(__file__))
-
+print os.getcwd()
 
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 print changelist
+
+fo = open(&quot;wireshark_changelist_&quot;+changelist, &apos;w&apos;)
+fo.close();
+
 </command>
     </hudson.plugins.python.Python>
   </builders>
