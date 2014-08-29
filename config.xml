@@ -1626,6 +1626,23 @@
       <nodeProperties/>
       <userId>Somboon</userId>
     </slave>
+    <slave>
+      <name>relpkg-01</name>
+      <description></description>
+      <remoteFS>c:\jenkins-tc</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.os.windows.ManagedWindowsServiceLauncher" plugin="windows-slaves@1.0">
+        <userName>relpkg-01\spirent</userName>
+        <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
+        <account class="hudson.os.windows.ManagedWindowsServiceAccount$Administrator"/>
+        <host>relpkg-01</host>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>Somboon</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
