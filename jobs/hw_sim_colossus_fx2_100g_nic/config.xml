@@ -77,7 +77,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -147,7 +147,7 @@ export LM_LICENSE_FILE=$LM_LICENSE_FILE
 cd SimSource
 cp -f $SIM_LIB_PATH/modelsim.ini ./
 
-if [ -e  work ]; then
+if [ -d  work ]; then
     echo &quot;Delete existing work directory&quot;
     vdel -lib work -all
 fi
