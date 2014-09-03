@@ -1662,6 +1662,22 @@
       <nodeProperties/>
       <userId>lihuang</userId>
     </slave>
+    <slave>
+      <name>wshark-CentOS65-32</name>
+      <description></description>
+      <remoteFS>/home/spirent/jenkins-tomcat</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
+        <host>wshark-u1204-32.cal.ci.spirentcom.com</host>
+        <port>22</port>
+        <credentialsId>b07aa30b-5a72-4bcd-a610-99bb160fbaab</credentialsId>
+      </launcher>
+      <label></label>
+      <nodeProperties/>
+      <userId>lihuang</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
