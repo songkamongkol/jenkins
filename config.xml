@@ -2455,6 +2455,7 @@
         <string>wireshark_ubuntu32_build</string>
         <string>wireshark_ubuntu32_package</string>
         <string>wireshark_ubuntu64</string>
+        <string>wireshark_ubuntu64_package</string>
         <string>wireshark_version</string>
       </jobNames>
       <jobFilters/>

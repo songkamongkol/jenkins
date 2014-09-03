@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>50</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.4.1">
+      <useBuildBlocker>false</useBuildBlocker>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <defaultValue>mainline</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description>major minor version TODO: get this from a file</description>
+          <defaultValue>1.10.3</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
+    <configVersion>1</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
+    <p4SysDrive></p4SysDrive>
+    <p4SysRoot></p4SysRoot>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>-1</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>wshark-u1204-32</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+# Tar wireshark.deb, wireshark-common.deb and tshark.deb
+#echo &quot;tar wireshark debian package&quot;
+#cd ..
+#pwd
+
+#echo &quot;Clear files from last package&quot;
+#rm -r -f *.deb
+#rm -r -f *.tar.gz
+#rm -r -f *.dsc
+#rm -r -f *.changes
+#foldername=$(find -type d -name &apos;wireshark_1.10.3-spirent-*_i386&apos;)
+#rm -r -f $foldername
+
+# Make wireshark ubuntu32 binary package
+#echo &quot;Wireshark Ubuntu32 Package&quot;
+#cd wireshark_ubuntu32
+#sudo chmod -R 777 .
+#sudo make
+#sudo make debian-package
+
+#fn should be wireshark_1.10.3-spirent-3_i386.deb. fn2 is wireshark_1.10.3-spirent-3_i386, which is the folder name
+#cd ..
+#fn=$(find -name &apos;wireshark_1.10.3-spirent-*_i386.deb&apos;)
+#echo $fn
+#len=${#fn}
+#fnpre=${fn:2:len-6}
+#echo $fnpre
+
+#mkdir $fnpre
+#cp wireshark_1.10.3-spirent-*_i386.deb $fnpre
+#cp wireshark-common_1.10.3-spirent-*_i386.deb $fnpre
+#cp tshark_1.10.3-spirent-*_i386.deb $fnpre
+
+#fnend=&quot;.tar.gz&quot;
+#tar -zcvf $fnpre$fnend $fnpre
+
+# copy Ubuntu32 installer to \\martin
+#cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import subprocess
+import glob
+
+# to parent directory: /workspace/.
+print os.path.abspath(os.curdir)
+os.chdir(&quot;..&quot;)
+print os.path.abspath(os.curdir)
+
+# delete previous files
+for filename in glob.glob(&quot;wireshark_changelist_*&quot;):
+        os.remove(filename)
+
+changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+print changelist
+
+fo = open(&quot;wireshark_changelist_&quot;+changelist+&quot;.txt&quot;, &apos;w&apos;)
+fo.close();
+
+</command>
+    </hudson.plugins.python.Python>
+  </builders>
+  <publishers>
+    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
+      <unstableOnWarning>false</unstableOnWarning>
+      <failBuildOnError>false</failBuildOnError>
+      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
+    </hudson.plugins.logparser.LogParserPublisher>
+    <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
+      <recipientList>lili.huang@spirent.com,somboon.ongkamongkol@spirent.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <sendToRequester>false</sendToRequester>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo></replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+      <attachmentsPattern></attachmentsPattern>
+      <presendScript></presendScript>
+      <attachBuildLog>false</attachBuildLog>
+      <compressBuildLog>false</compressBuildLog>
+      <replyTo></replyTo>
+      <saveOutput>false</saveOutput>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
+  </buildWrappers>
+</project>
