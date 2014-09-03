@@ -96,11 +96,11 @@
   <builders>
     <hudson.tasks.Shell>
       <command>echo &quot;Last user is not tableuser. Continue.&quot;
-#sudo chmod -R 777 .
-#sudo ./autogen.sh
-#sudo ./configure 
-#sudo make
-#sudo make debian-package
+sudo chmod -R 777 .
+sudo ./autogen.sh
+sudo ./configure 
+sudo make
+
 
 
 
