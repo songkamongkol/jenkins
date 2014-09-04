@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>MODEL_TECH</name>
           <description>path to the intended version of ModelSim executable binaries, example: /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/DE/modelsim_dlx/bin</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/SE/modeltech/bin</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Mentor/ModelSim/10.2c/DE/modelsim_dlx/bin</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
@@ -81,7 +81,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
