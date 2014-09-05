@@ -1686,7 +1686,7 @@
       <mode>NORMAL</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.plugins.sshslaves.SSHLauncher" plugin="ssh-slaves@1.6">
-        <host>wshark-CentOS65-32.cal.ci.spirentcom.com</host>
+        <host>wshark-CentOS65-64.cal.ci.spirentcom.com</host>
         <port>22</port>
         <credentialsId>624e6849-f007-4a3e-9235-eb544db57455</credentialsId>
       </launcher>
