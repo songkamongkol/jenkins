@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -102,8 +102,10 @@ echo &quot;make wireshark rpm package&quot;
 echo &quot;Wireshark CentOS 32-bit Package&quot;
 #cd wireshark_ubuntu32
 sudo chmod -R 777 .
-sudo ./configure
+sudo ./autogen.sh
+sudo ./configure --enable-setcap-install
 sudo make
+sudo ./configure
 sudo make rpm-package
 
 #fn should be wireshark_1.10.3-spirent-3_i386.deb. fn2 is wireshark_1.10.3-spirent-3_i386, which is the folder name
