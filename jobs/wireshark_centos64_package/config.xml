@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,7 +95,7 @@ sudo make
 #sudo ./configure
 sudo make rpm-package
 
-# new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/wireshark-1.10.3-spirent_3.i686.rpm
+# new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos64_package/packaging/rpm/RPMS/x86_64/wireshark-1.10.3-spirent_3.x86_64.rpm
 
 # copy Ubuntu32 installer to \\martin
 #cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
