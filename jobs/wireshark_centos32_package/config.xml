@@ -41,7 +41,6 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <p4Tool>p4</p4Tool>
@@ -65,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -76,7 +75,7 @@
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <assignedNode>wshark-u1204-32</assignedNode>
+  <assignedNode>wshark-CentOS65-32</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -87,8 +86,7 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-# Tar wireshark.deb, wireshark-common.deb and tshark.deb
-#echo &quot;tar wireshark debian package&quot;
+echo &quot;make wireshark rpm package&quot;
 #cd ..
 #pwd
 
@@ -127,24 +125,24 @@
 #cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-import subprocess
-import glob
+      <command>#import os
+#import subprocess
+#import glob
 
 # to parent directory: /workspace/.
-print os.path.abspath(os.curdir)
-os.chdir(&quot;..&quot;)
-print os.path.abspath(os.curdir)
+#print os.path.abspath(os.curdir)
+#os.chdir(&quot;..&quot;)
+#print os.path.abspath(os.curdir)
 
 # delete previous files
-for filename in glob.glob(&quot;wireshark_changelist_*&quot;):
-        os.remove(filename)
+#for filename in glob.glob(&quot;wireshark_changelist_*&quot;):
+#       os.remove(filename)
 
-changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-print changelist
+#changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+#print changelist
 
-fo = open(&quot;wireshark_changelist_&quot;+changelist+&quot;.txt&quot;, &apos;w&apos;)
-fo.close();
+#fo = open(&quot;wireshark_changelist_&quot;+changelist+&quot;.txt&quot;, &apos;w&apos;)
+#fo.close();
 
 </command>
     </hudson.plugins.python.Python>
