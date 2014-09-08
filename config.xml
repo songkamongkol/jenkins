@@ -1705,7 +1705,7 @@
         <userName>spirent</userName>
         <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         <account class="hudson.os.windows.ManagedWindowsServiceAccount$AnotherUser">
-          <userName>SPIRENTCOM\spirent</userName>
+          <userName>wshark-Win7-64.cal.ci.spirentcom.com\spirent</userName>
           <password>Eg1WnofGKJEqkYrV8hJPYCbbfJHAEkALBIObfSoZSV8=</password>
         </account>
         <host>wshark-Win7-64.cal.ci.spirentcom.com</host>
