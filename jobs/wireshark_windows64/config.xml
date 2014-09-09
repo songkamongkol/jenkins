@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -94,8 +94,35 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import sys
+
+#fread = None
+#fwrite = None
+
+filename = &quot;./config.nmake&quot;
+fread  = open (&apos;./config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;./config_new.nmake&apos;, &apos;w&apos;)
+
+for line in fread:
+     if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
+          junk1, junk2 = line.split(&apos;=&apos;, 2)
+          junk2 = &apos;win&apos;
+          newline = junk1 + &apos;=&apos; + junk2
+          fwrite.write(newline)
+     else:
+          fwrite.write(line)
+
+fread.close()
+fwrite.close()
+
+os.remove(&apos;./config.nmake&apos;)
+os.renmae(&apos;./config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
+    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>echo &quot;Starting building windows 64-bit wireshark&quot;</command>
+      <command>echo &quot;Starting building windows 64-bit wireshark&quot;
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
