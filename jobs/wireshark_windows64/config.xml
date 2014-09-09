@@ -98,9 +98,10 @@
       <command>import os
 import sys
 
-filename = &quot;./config.nmake&quot;
-fread  = open (&apos;./config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;./config_new.nmake&apos;, &apos;w&apos;)
+os.getcwd()
+
+fread  = open (&apos;/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;/config_new.nmake&apos;, &apos;w&apos;)
 
 for line in fread:
      if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
@@ -114,8 +115,8 @@ for line in fread:
 fread.close()
 fwrite.close()
 
-os.remove(&apos;./config.nmake&apos;)
-os.rename(&apos;./config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
+os.remove(&apos;/config.nmake&apos;)
+os.rename(&apos;/config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Starting building windows 64-bit wireshark&quot;
