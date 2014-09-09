@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -100,8 +100,8 @@ import sys
 
 os.getcwd()
 
-fread  = open (&apos;/config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;/config_new.nmake&apos;, &apos;w&apos;)
+fread  = open (&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
 
 for line in fread:
      if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
@@ -115,8 +115,8 @@ for line in fread:
 fread.close()
 fwrite.close()
 
-os.remove(&apos;/config.nmake&apos;)
-os.rename(&apos;/config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
+os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Starting building windows 64-bit wireshark&quot;
