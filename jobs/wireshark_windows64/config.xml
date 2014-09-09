@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,13 +95,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>#!/usr/bin/python
-
-import os
+      <command>import os
 import sys
-
-#fread = None
-#fwrite = None
 
 filename = &quot;./config.nmake&quot;
 fread  = open (&apos;./config.nmake&apos;, &apos;r&apos;)
@@ -120,7 +115,7 @@ fread.close()
 fwrite.close()
 
 os.remove(&apos;./config.nmake&apos;)
-os.renmae(&apos;./config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
+os.rename(&apos;./config_new.nmake&apos;, &apos;./config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Starting building windows 64-bit wireshark&quot;
