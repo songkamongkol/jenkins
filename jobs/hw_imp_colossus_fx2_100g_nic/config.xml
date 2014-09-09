@@ -18,7 +18,7 @@
         <hudson.model.StringParameterDefinition>
           <name>XILINX_PATH</name>
           <description>path to the intended version of Xilinx, example:  /net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2013.4</description>
-          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2014.2</defaultValue>
+          <defaultValue>/net/storage_cal_ci/general/Development/Hardware/FPGA/Tools/Xilinx/Vivado/2014.1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
@@ -88,7 +88,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
