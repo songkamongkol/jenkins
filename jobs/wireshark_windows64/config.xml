@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -122,7 +122,14 @@ os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;,
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>echo &quot;Starting building windows 64-bit wireshark&quot;
-</command>
+
+&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
+set WIRESHARK_TARGET_PLATFORM=win64
+cd C:\jenkins\workspace\wireshark_windows64
+nmake -f Makefile.nmake verify_tools
+nmake -f Makefile.nmake setup
+nmake -f Makefile.nmake distclean
+nmake -f Makefile.nmake all</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
