@@ -41,7 +41,6 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -71,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,46 +94,9 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-
-fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
-
-for line in fread:
-     if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
-          junk1, junk2 = line.split(&apos;=&apos;, 2)
-          junk2 = &apos;win64&apos;
-          newline = junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
-          fwrite.write(newline)
-     elif &apos;CYGWIN_PATH=&apos; in line:
-          junk1, junk2 = line.split(&apos;=&apos;, 2)
-          junk2 = &apos;c:\\cygwin64\\bin&apos;
-          newline =  junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
-          fwrite.write(newline)
-     else:
-          fwrite.write(line)
-
-fread.close()
-fwrite.close()
-
-os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
-os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
-    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>ECHO Starting building windows 64-bit wireshark
-
-ECHO step 1
-&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64</command>
-    </hudson.tasks.BatchFile>
-    <hudson.tasks.BatchFile>
-      <command>ECHO step 2
-set WIRESHARK_TARGET_PLATFORM=win64
-cd C:\jenkins\workspace\wireshark_windows64
-nmake -f Makefile.nmake verify_tools
-nmake -f Makefile.nmake setup
-nmake -f Makefile.nmake distclean
-nmake -f Makefile.nmake all</command>
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
