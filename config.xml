@@ -2514,6 +2514,7 @@
         <string>wireshark_ubuntu64_package</string>
         <string>wireshark_version</string>
         <string>wireshark_windows64</string>
+        <string>wireshark_windows64_package</string>
       </jobNames>
       <jobFilters/>
       <columns>
