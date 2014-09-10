@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -94,6 +94,15 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+
+print &quot;Delete current installers&quot;
+os.chdir(&quot;c:/jenkins/workspace/wireshark_windows64/packaging/nsis&quot;)
+os.remove(&quot;Wireshark-win32-1.10.3-spirent-*.exe&quot;)
+os.remove(&quot;Wireshark-win64-1.10.3-spirent-*.exe&quot;)
+</command>
+    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>ECHO Starting building windows 64-bit wireshark
 </command>
