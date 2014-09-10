@@ -83,7 +83,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_2x40G/SourceCode/include/VERSION_*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -190,9 +190,9 @@ vivado -mode batch -source ./myImp.tcl</command>
 #parse log to check for errors
 if [ -f ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log ];
 then
-    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
-
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+#    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+#    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+    CRITICAL_WARNINGS=`grep ^CRITICAL\ WARNING: ${WORKSPACE}/VivadoBlade/ColossusDXBlade_2x40.runs/impl_1/runme.log`
 
     if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
