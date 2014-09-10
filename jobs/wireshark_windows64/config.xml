@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -103,8 +103,13 @@ fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&a
 for line in fread:
      if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
           junk1, junk2 = line.split(&apos;=&apos;, 2)
-          junk2 = &apos;win&apos;
-          newline = junk1 + &apos;=&apos; + junk2
+          junk2 = &apos;win64&apos;
+          newline = junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
+          fwrite.write(newline)
+     elif &apos;CYGWIN_PATH=&apos; in line:
+          junk1, junk2 = line.split(&apos;=&apos;, 2)
+          junk2 = &apos;c:\\cygwin64\\bin&apos;
+          newline =  junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
           fwrite.write(newline)
      else:
           fwrite.write(line)
