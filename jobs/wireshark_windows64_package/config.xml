@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -99,13 +99,46 @@
 from glob import glob
 
 print &quot;Delete current installers&quot;
-#os.chdir(&quot;c:/jenkins/workspace/wireshark_windows64/packaging/nsis&quot;)
 for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64/packaging/nsis/Wireshark-win*.exe&apos;):
    os.unlink (f)</command>
     </hudson.plugins.python.Python>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+
+print &quot;Set environment to 64-bit&quot;
+
+fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
+
+for line in fread:
+     if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
+          junk1, junk2 = line.split(&apos;=&apos;, 2)
+          junk2 = &apos;win64&apos;
+          newline = junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
+          fwrite.write(newline)
+     elif &apos;CYGWIN_PATH=&apos; in line:
+          junk1, junk2 = line.split(&apos;=&apos;, 2)
+          junk2 = &apos;c:\\cygwin64\\bin&apos;
+          newline =  junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
+          fwrite.write(newline)
+     else:
+          fwrite.write(line)
+
+fread.close()
+fwrite.close()
+
+os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
+    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>ECHO Starting building windows 64-bit wireshark
-</command>
+      <command>ECHO Build wireshark 64-bit 
+
+call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
+set WIRESHARK_TARGET_PLATFORM=win64
+cd C:\jenkins\workspace\wireshark_windows64
+nmake -f Makefile.nmake all
+nmake -f Makefile.nmake packaging
+exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
