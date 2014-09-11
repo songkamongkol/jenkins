@@ -30,11 +30,6 @@
           <description>major minor version TODO: get this from a file</description>
           <defaultValue>1.10.3</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>PACKAGE</name>
-          <description></description>
-          <defaultValue>NO</defaultValue>
-        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -75,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -100,16 +95,16 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>#import os
-#import subprocess
+      <command>import os
+import subprocess
 
-#changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-#print changelist
+changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+print changelist
 
-#proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
-#output = proc.stdout.read()
-#junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
-#print &quot;latest change is committed by &quot;, user</command>
+proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
+output = proc.stdout.read()
+junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
+print &quot;latest change is committed by &quot;, user</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
       <command># Get the user of last check in. If it is tableuser, then the change is for wireshark version. Do not make a new build in this case.
@@ -132,12 +127,11 @@
 
 
 #echo &quot;Last user is not tableuser. Continue.&quot;
-sudo chmod -R 777 .
-sudo ./autogen.sh
-#sudo ./configure --enable-setcap-install
-sudo ./configure 
-sudo make
-#sudo make debian-package
+#sudo chmod -R 777 .
+#sudo ./autogen.sh
+#sudo ./configure 
+#sudo make
+
 
 
 
@@ -145,12 +139,11 @@ sudo make
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>if [ &quot;$PACKAGE&quot; = &quot;YES&quot; ]; then
-    echo &quot;Packaging&quot;
-    p4 edit //Wireshark_Spirent/mainline/src/config.nmake
-    #p4 change -o | sed &apos;s/-spirent-3/-spirent-4/g&apos; config.nmake &gt; config.nmake
-    p4 submit -d &quot;$BUILD_NUMBER $P4_CHANGELIST&quot;
-fi
+      <command>#echo &quot;Packaging&quot;
+#p4 edit //Wireshark_Spirent/mainline/src/config.nmake
+#p4 change -o | sed &apos;s/-spirent-3/-spirent-4/g&apos; config.nmake &gt; config.nmake
+#p4 submit -d &quot;$BUILD_NUMBER $P4_CHANGELIST&quot;
+
 
  </command>
     </hudson.tasks.Shell>
