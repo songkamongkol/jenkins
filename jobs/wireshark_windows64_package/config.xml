@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -144,6 +144,50 @@ xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\wor
 ren c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10_x64.dll openflow.dll
 
 ECHO Make wireshark 64-bit package
+
+nmake -f Makefile.nmake packaging
+exit /B 0</command>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+
+print &quot;Set environment to 32-bit&quot;
+
+fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
+
+for line in fread:
+     if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
+          junk1, junk2 = line.split(&apos;=&apos;, 2)
+          junk2 = &apos;win32&apos;
+          newline = junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
+          fwrite.write(newline)
+     else:
+          fwrite.write(line)
+
+fread.close()
+fwrite.close()
+
+os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
+    </hudson.plugins.python.Python>
+    <hudson.tasks.BatchFile>
+      <command>ECHO Build wireshark 32-bit 
+
+call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x86
+set WIRESHARK_TARGET_PLATFORM=win32
+cd C:\jenkins\workspace\wireshark_windows64
+nmake -f Makefile.nmake verify_tools
+nmake -f Makefile.nmake setup
+nmake -f Makefile.nmake distclean
+nmake -f Makefile.nmake all
+
+ECHO Copy openflow.bll
+
+xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10.dll c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3
+ren c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10.dll openflow.dll
+
+ECHO Make wireshark 32-bit package
 
 nmake -f Makefile.nmake packaging
 exit /B 0</command>
