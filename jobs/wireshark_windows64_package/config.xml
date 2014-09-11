@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -120,6 +120,9 @@ for line in fread:
           junk1, junk2 = line.split(&apos;=&apos;, 2)
           junk2 = &apos;c:\\cygwin64\\bin&apos;
           newline =  junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
+          fwrite.write(newline)
+     elif &apos;MAKENSIS=&apos; in line:
+          newline = &apos;MAKENSIS=&quot;c:\\Program Files\\NSIS\\makensis.exe&quot; \n&apos;
           fwrite.write(newline)
      else:
           fwrite.write(line)
@@ -196,7 +199,7 @@ exit /B 0</command>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>false</failBuildOnError>
+      <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
