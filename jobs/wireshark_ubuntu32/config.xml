@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -103,9 +103,9 @@ print changelist
 
 proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
 output = proc.stdout.read()
-junk, junk, junk, junk, junk, user, junk = output.split(&quot; &quot;, 6)
-print user
-user1, junk = user.split(@, 2)
+junk, junk, junk, junk, junk, user, junk = output.split(&apos; &apos;, 6)
+print &quot;user string is: &quot;, user
+user1, junk = user.split(&apos;@&apos;, 2)
 print &quot;last change is submitted by &quot;, user1</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
