@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -106,39 +106,17 @@ output = proc.stdout.read()
 junk, junk, junk, junk, junk, user, junk = output.split(&apos; &apos;, 6)
 print &quot;user string is: &quot;, user
 user1, junk = user.split(&apos;@&apos;, 2)
-print &quot;last change is submitted by &quot;, user1</command>
+print &quot;last change is submitted by &quot;, user1
+
+if user1 == &apos;tableuser&apos;:
+    exit /B 0</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.Shell>
-      <command># Get the user of last check in. If it is tableuser, then the change is for wireshark version. Do not make a new build in this case.
-#descr=$(p4 changes -m 1 //Wireshark_Spirent/mainline/src/...)
-
-#str=$(echo $descr | tr &quot; &quot; &quot;\n&quot;)
-#user=&quot;&quot;
-#i=0
-#for substr in $str
-#do
-#  i=$((i+1))
-#  echo &quot;&gt; $i [$substr]&quot;
-#  if [ $i -eq &quot;6&quot;]; then
-#     if [[$substr == *tableuser* ]]; then
-#        echo &quot;exit&quot;
-#        exit
-#     fi
-#  fi
-#done  
-
-
-#echo &quot;Last user is not tableuser. Continue.&quot;
-#sudo chmod -R 777 .
-#sudo ./autogen.sh
-#sudo ./configure 
-#sudo make
-
-
-
-
-
-</command>
+      <command>echo &quot;Last user is not tableuser. Continue.&quot;
+sudo chmod -R 777 .
+sudo ./autogen.sh
+sudo ./configure 
+sudo make</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#echo &quot;Packaging&quot;
