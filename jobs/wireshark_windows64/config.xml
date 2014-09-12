@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -117,7 +117,7 @@ print &quot;++++++++++++++++++ Check if last user is tableuser. If yes then wire
 for filename in glob.glob(&quot;runbash.txt&quot;):
         os.remove(filename)
 
-if user1 != &apos;tableuser&apos;:
+if user1 == &apos;tableuser&apos;:
     fo = open(&quot;runbash.txt&quot;, &apos;w&apos;)
     fo.close()
     exit()
