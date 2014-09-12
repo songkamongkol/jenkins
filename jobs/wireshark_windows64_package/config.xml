@@ -198,8 +198,8 @@ exit /B 0</command>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
-      <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>true</failBuildOnError>
+      <unstableOnWarning>true</unstableOnWarning>
+      <failBuildOnError>false</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
