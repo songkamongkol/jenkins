@@ -98,7 +98,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -350,7 +350,9 @@ then
 
     VER_DATECODE=`cat Xilinx_Warpath_1x40G_AN/version_*.txt`
 
-    p4 submit -d &quot;Warpath 1x40G-AN I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
+    DESCRIPTION=`printf &quot;Warpath 1x40G-AN I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+    p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/legion/sandbox/bitstream/candidate/iob/warpath_40g_an.bit*
 
 fi</command>
         </hudson.tasks.Shell>
