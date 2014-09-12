@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -143,19 +143,19 @@ os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;,
 
 print &quot;++++++++++++++++++  Starting building windows 64-bit wireshark ++++++++++++++++++&quot;
 
-p = subprocess.Popen(&apos;c:/jenkins/workspace/buildwireshark_64.bat&apos;, shell=True)</command>
+#p = subprocess.Popen(&apos;c:/jenkins/workspace/buildwireshark_64.bat&apos;, shell=True)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>REM ECHO Starting building windows 64-bit wireshark
+      <command>ECHO Starting building windows 64-bit wireshark
 
-REM call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
-REM set WIRESHARK_TARGET_PLATFORM=win64
-REM cd C:\jenkins\workspace\wireshark_windows64
-REM nmake -f Makefile.nmake verify_tools
-REM nmake -f Makefile.nmake setup
-REM nmake -f Makefile.nmake distclean
-REM nmake -f Makefile.nmake all
-REM exit /B 0</command>
+call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
+set WIRESHARK_TARGET_PLATFORM=win64
+cd C:\jenkins\workspace\wireshark_windows64
+nmake -f Makefile.nmake verify_tools
+nmake -f Makefile.nmake setup
+nmake -f Makefile.nmake distclean
+nmake -f Makefile.nmake all
+exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
