@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -111,7 +111,7 @@ print &quot;user string is: &quot;, user
 user1, junk = user.split(&apos;@&apos;, 2)
 print &quot;last change is submitted by &quot;, user1
 
-print &quot;++++++++++++++++++ Check if last user is tableuser. If yes then bash command to build 32-bit wireshark won&apos;t be executed. +++++++++++++++++++++++&quot;
+print &quot;++++++++++++++++++ Check if last user is tableuser. If yes then wireshark 64-bit won&apos;t be build. +++++++++++++++++++++++&quot;
 
 if user1 == &apos;tableuser&apos;:
    exit()
@@ -154,16 +154,16 @@ subprocess.call(&apos;nmake -f Makefile.nmake all&apos;)
 exit(0)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>#ECHO Starting building windows 64-bit wireshark
+      <command>REM ECHO Starting building windows 64-bit wireshark
 
-#call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
-#set WIRESHARK_TARGET_PLATFORM=win64
-#cd C:\jenkins\workspace\wireshark_windows64
-#nmake -f Makefile.nmake verify_tools
-#nmake -f Makefile.nmake setup
-#nmake -f Makefile.nmake distclean
-#nmake -f Makefile.nmake all
-#exit /B 0</command>
+REM call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
+REM set WIRESHARK_TARGET_PLATFORM=win64
+REM cd C:\jenkins\workspace\wireshark_windows64
+REM nmake -f Makefile.nmake verify_tools
+REM nmake -f Makefile.nmake setup
+REM nmake -f Makefile.nmake distclean
+REM nmake -f Makefile.nmake all
+REM exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
