@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -96,6 +96,27 @@
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
+import subprocess
+import glob
+
+print &quot;++++++++++++++++++ Get last user +++++++++++++++++++&quot;
+
+changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+print changelist
+
+proc = subprocess.Popen([&quot;p4&quot;,  &quot;changes&quot;, &quot;-m 2&quot; , &quot;//Wireshark_Spirent/mainline/src&quot; +  &quot;/...&quot;], stdout=subprocess.PIPE)
+output = proc.stdout.read()
+junk, junk, junk, junk, junk, user, junk = output.split(&apos; &apos;, 6)
+print &quot;user string is: &quot;, user
+user1, junk = user.split(&apos;@&apos;, 2)
+print &quot;last change is submitted by &quot;, user1
+
+print &quot;++++++++++++++++++ Check if last user is tableuser. If yes then bash command to build 32-bit wireshark won&apos;t be executed. +++++++++++++++++++++++&quot;
+
+if user1 == &apos;tableuser&apos;:
+   exit()
+
+print &quot;++++++++++++++++++ Last user is not tableuser. Set up 64-bit wireshark enviornment +++++++++++++++++++++++&quot;
 
 fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
 fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
@@ -118,19 +139,31 @@ fread.close()
 fwrite.close()
 
 os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
-os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
+
+print &quot;++++++++++++++++++  Starting building windows 64-bit wireshark ++++++++++++++++++&quot;
+
+subprocess.call(&apos;call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64&apos;)
+subprocess.call(&apos;set WIRESHARK_TARGET_PLATFORM=win64&apos;)
+subprocess.call(&apos;cd C:\jenkins\workspace\wireshark_windows64&apos;)
+subprocess.call(&apos;nmake -f Makefile.nmake verify_tools&apos;)
+subprocess.call(&apos;nmake -f Makefile.nmake setup&apos;)
+subprocess.call(&apos;nmake -f Makefile.nmake distclean&apos;)
+subprocess.call(&apos;nmake -f Makefile.nmake all&apos;)
+
+exit(0)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>ECHO Starting building windows 64-bit wireshark
+      <command>#ECHO Starting building windows 64-bit wireshark
 
-call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
-set WIRESHARK_TARGET_PLATFORM=win64
-cd C:\jenkins\workspace\wireshark_windows64
-nmake -f Makefile.nmake verify_tools
-nmake -f Makefile.nmake setup
-nmake -f Makefile.nmake distclean
-nmake -f Makefile.nmake all
-exit /B 0</command>
+#call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
+#set WIRESHARK_TARGET_PLATFORM=win64
+#cd C:\jenkins\workspace\wireshark_windows64
+#nmake -f Makefile.nmake verify_tools
+#nmake -f Makefile.nmake setup
+#nmake -f Makefile.nmake distclean
+#nmake -f Makefile.nmake all
+#exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
