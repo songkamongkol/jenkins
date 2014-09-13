@@ -86,13 +86,9 @@
       <joinPublishers/>
       <evenIfDownstreamUnstable>false</evenIfDownstreamUnstable>
     </join.JoinTrigger>
-    <hudson.tasks.Fingerprinter>
-      <targets></targets>
-      <recordBuildArtifacts>false</recordBuildArtifacts>
-    </hudson.tasks.Fingerprinter>
     <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>scmteam@spirent.com</recipientList>
+      <recipientList>lili.huang@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
           <email>
@@ -161,7 +157,7 @@
               <properties></properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>wireshark_centos32, wireshark_centos64, wireshark_ubuntu32, wireshark_ubuntu64, </projects>
+          <projects>wireshark_centos32, wireshark_ubuntu32, wireshark_windows64</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>true</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
