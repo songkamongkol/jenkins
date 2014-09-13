@@ -25,6 +25,11 @@
           <description>major minor version TODO: get this from a file</description>
           <defaultValue>1.10.3</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
