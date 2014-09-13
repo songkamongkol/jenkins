@@ -114,7 +114,7 @@ p4 sumbit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quo
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>wireshark_centos32_package, wireshark_centos64_package, wireshark_ubuntu32_package, wireshark_ubuntu64_package</childProjects>
+      <childProjects>wireshark_centos32_package, wireshark_centos64_package, wireshark_ubuntu32_package, wireshark_ubuntu64_package, wireshark_windows64_package</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
