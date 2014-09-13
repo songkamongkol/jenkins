@@ -303,7 +303,9 @@ then
 
     VER_DATECODE=`cat Xilinx/version_*.txt`
 
-    p4 submit -d &quot;Frenzy 1G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/frenzy/sandbox/bitstream/candidate/frenzy.bit*
+    DESCRIPTION=`printf &quot;Description: Frenzy 1G NIC FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+    p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/frenzy/sandbox/bitstream/candidate/frenzy.bit*
 
 fi
 </command>
