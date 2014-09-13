@@ -311,7 +311,7 @@ then
 
     VER_DATECODE=`cat Xilinx_Legion_1x40G/version_*.txt`
 
-    DESCRIPTION=`printf &quot;Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+    DESCRIPTION=`printf &quot;Description: Legion 1x40G NIC FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
     p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/legion/sandbox/bitstream/candidate/nic/legion_40g.bit*
 
