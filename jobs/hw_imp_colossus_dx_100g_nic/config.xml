@@ -84,7 +84,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -324,7 +324,10 @@ then
 
     VER_DATECODE=`cat Vivado/version_*.txt`
 
-    p4 submit -d &quot;Colossus DX 100G NIC FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
+    DESCRIPTION=`printf &quot;Description: Colossus DX 100G NIC FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+
+    p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/nic/${BITSTREAM_NAME}*
 
 fi
 </command>
