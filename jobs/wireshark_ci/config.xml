@@ -20,11 +20,6 @@
           <description>branch name</description>
           <defaultValue>mainline</defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>STC_MAJ_MIN_VERSION</name>
-          <description>major minor version TODO: get this from a file</description>
-          <defaultValue>1.10.3</defaultValue>
-        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -84,32 +79,31 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>0 8 * * * </spec>
+      <spec>* * * * * </spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
+  <builders>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>print &quot;wireshark_ci&quot;</command>
+    </hudson.plugins.python.Python>
+  </builders>
   <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>wireshark_centos32, wireshark_ubuntu32, wireshark_windows64</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
-      <unstableOnWarning>true</unstableOnWarning>
+      <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties></properties>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
-          <projects>wireshark_centos32, wireshark_ubuntu32, wireshark_windows64</projects>
-          <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
     <join.JoinTrigger plugin="join@1.15">
       <joinProjects>wireshark_version</joinProjects>
       <joinPublishers/>
