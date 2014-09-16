@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -98,7 +98,7 @@ p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mai
 
 python UpdateVersion.py
 
-p4 sumbit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
+p4 submit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
