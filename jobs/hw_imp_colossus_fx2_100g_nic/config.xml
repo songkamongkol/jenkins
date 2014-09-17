@@ -88,7 +88,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -173,7 +173,9 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
-p4 submit -d &quot;Colossus FX2 100G NIC version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
+DESCRIPTION=`printf &quot;Description: Colossus FX2 100G NIC version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_ColossusFX2_1x100G.v
 
 echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoNIC
@@ -201,7 +203,6 @@ echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
 vivado -mode batch -source ./myImp.tcl
-
 </command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
