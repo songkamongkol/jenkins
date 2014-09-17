@@ -94,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -150,6 +150,8 @@ VER_DATECODE=${VER}${DATECODE}
 echo &quot;Update VERSION_Warpath_1x40G.v&quot;
 cd ${WORKSPACE}
 
+p4 revert SourceCode/include/VERSION_Warpath_1x40G.v
+p4 have SourceCode/include/VERSION_Warpath_1x40G.v
 p4 edit SourceCode/include/VERSION_Warpath_1x40G.v
 
 sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_Warpath_1x40G.v
