@@ -140,6 +140,7 @@ VER_DATECODE=${VER}${DATECODE}
 echo &quot;Update VERSION_Warpath_4x10G.v&quot;
 cd ${WORKSPACE}
 
+p4 have SourceCode/include/VERSION_Warpath_4x10G.v
 p4 edit SourceCode/include/VERSION_Warpath_4x10G.v
 
 sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_Warpath_4x10G.v
@@ -148,7 +149,9 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Warpath_4x10G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Warpath_4x10G.v
 
-p4 submit -d &quot;Warpath 4x10G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_4x10G.v
+DESCRIPTION=`printf &quot;Description: Warpath 4x10G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_Warpath_4x10G.v
 
 #start implementation
 echo &quot;Start implementation&quot;
