@@ -94,7 +94,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/Legion_1x40G.v
 //SPT_HW/legion/sandbox/legion_1x40g/fpga/SourceCode/include/VERSION_Legion_1x40G.v
@@ -158,7 +158,9 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_Warpath_1x40G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_Warpath_1x40G.v
 
-p4 submit -d &quot;Warpath 1x40G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}&quot; SourceCode/include/VERSION_Warpath_1x40G.v
+DESCRIPTION=`printf &quot;Description: Warpath 1x40G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${P4_CHANGELIST}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_Warpath_1x40G.v
 
 #start implementation
 echo &quot;Start implementation&quot;
