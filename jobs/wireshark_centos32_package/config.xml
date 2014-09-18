@@ -88,12 +88,18 @@
 
 # Make wireshark CentOS binary package
 echo &quot;++++++++++++++++++++++ Wireshark CentOS 32-bit Package +++++++++++++++++++++&quot;
-cd..
-cd wireshark_centos32
+sudo chmod -R 777 .
+sudo ./autogen.sh
+sudo ./configure
+sudo make
+
+# Remove previous rpm installers
+cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/
+rm -r -f wireshark-1.10.3-*.rpm
 
 sudo make rpm-package
 
-# new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos32/packaging/rpm/RPMS/i686/wireshark-1.10.3-spirent_3.i686.rpm
+# new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/wireshark-1.10.3-spirent_3.i686.rpm
 
 # copy Ubuntu32 installer to \\martin
 #cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
