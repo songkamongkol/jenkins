@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -87,12 +87,16 @@
       <command>#!/bin/bash
 
 # Make wireshark CentOS binary package
-echo &quot;Wireshark CentOS 32-bit Package&quot;
+echo &quot;+++++++++++++ Wireshark CentOS 64-bit Package ++++++++++++++++&quot;
 sudo chmod -R 777 .
 sudo ./autogen.sh
 sudo ./configure
 sudo make
-#sudo ./configure
+
+# Remove previous rpm installers
+cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos64_package/packaging/rpm/RPMS/x86_64/
+rm -r -f wireshark-1.10.3-spirent*.rpm
+
 sudo make rpm-package
 
 # new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos64_package/packaging/rpm/RPMS/x86_64/wireshark-1.10.3-spirent_3.x86_64.rpm
@@ -100,26 +104,6 @@ sudo make rpm-package
 # copy Ubuntu32 installer to \\martin
 #cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
     </hudson.tasks.Shell>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>#import os
-#import subprocess
-#import glob
-
-# to parent directory: /workspace/.
-#print os.path.abspath(os.curdir)
-#os.chdir(&quot;..&quot;)
-#print os.path.abspath(os.curdir)
-
-# delete previous files
-#for filename in glob.glob(&quot;wireshark_changelist_*&quot;):
-#       os.remove(filename)
-
-#changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-#print changelist
-
-#fo = open(&quot;wireshark_changelist_&quot;+changelist+&quot;.txt&quot;, &apos;w&apos;)
-#fo.close();</command>
-    </hudson.plugins.python.Python>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
