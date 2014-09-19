@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -92,11 +92,7 @@
     <hudson.tasks.Shell>
       <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
 
-cd ..
-
-p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
-
-sudo chmod -R 777 .</command>
+p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>#!/usr/bin/python
@@ -113,17 +109,17 @@ def UpdateVersion_info(filename, newver):
         fread = None
         fwrite = None
         if &quot;version_info.c&quot; in filename:
-                fread  = open(&apos;./wireshark_version/version_info.c&apos;, &apos;r&apos;)
-                fwrite = open(&apos;./wireshark_version/version_info_new.c&apos;, &apos;w&apos;)
+                fread  = open(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info.c&apos;, &apos;r&apos;)
+                fwrite = open(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info_new.c&apos;, &apos;w&apos;)
         elif &quot;config.nmake&quot; in filename:
-                fread  = open (&apos;./wireshark_version/config.nmake&apos;, &apos;r&apos;)
-                fwrite = open (&apos;./wireshark_version/config_new.nmake&apos;, &apos;w&apos;)
+                fread  = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config.nmake&apos;, &apos;r&apos;)
+                fwrite = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config_new.nmake&apos;, &apos;w&apos;)
         elif &quot;changelog&quot; in filename:
-                fread  = open (&apos;./wireshark_version/debian/changelog&apos;, &apos;r&apos;)
-                fwrite = open (&apos;./wireshark_version/debian/changelog_new&apos;, &apos;w&apos;)
+                fread  = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog&apos;, &apos;r&apos;)
+                fwrite = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog_new&apos;, &apos;w&apos;)
         elif &quot;wireshark.spec.in&quot; in filename:
-                fread  = open (&apos;./wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;, &apos;r&apos;)
-                fwrite = open (&apos;./wireshark_version/packaging/rpm/SPECS/wireshark_new.spec.in&apos;, &apos;w&apos;)
+                fread  = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;, &apos;r&apos;)
+                fwrite = open (&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark_new.spec.in&apos;, &apos;w&apos;)
 
         for line in fread:
                 # version_info.c: full string is &quot;Spirent Wireshark 1.10.3 v3.\n&quot;
@@ -168,17 +164,17 @@ def UpdateVersion_info(filename, newver):
         fwrite.close()
 
         if &quot;version_info.c&quot; in filename:
-                os.remove(&apos;./wireshark_version/version_info.c&apos;)
-                os.rename(&apos;./wireshark_version/version_info_new.c&apos;, &apos;./wireshark_version/version_info.c&apos;)
+                os.remove(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info.c&apos;)
+                os.rename(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info_new.c&apos;, &apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info.c&apos;)
         elif &quot;config.nmake&quot; in filename:
-                os.remove(&apos;./wireshark_version/config.nmake&apos;)
-                os.rename(&apos;./wireshark_version/config_new.nmake&apos;, &apos;./wireshark_version/config.nmake&apos;)
+                os.remove(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config.nmake&apos;)
+                os.rename(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config_new.nmake&apos;, &apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config.nmake&apos;)
         elif &quot;changelog&quot; in filename:
-                os.remove(&apos;./wireshark_version/debian/changelog&apos;)
-                os.rename(&apos;./wireshark_version/debian/changelog_new&apos;, &apos;./wireshark_version/debian/changelog&apos;)
+                os.remove(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog&apos;)
+                os.rename(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog_new&apos;, &apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog&apos;)
         elif &quot;wireshark.spec.in&quot; in filename:
-                os.remove(&apos;./wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;)
-                os.rename(&apos;./wireshark_version/packaging/rpm/SPECS/wireshark_new.spec.in&apos;, &apos;./wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;)
+                os.remove(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;)
+                os.rename(&apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark_new.spec.in&apos;, &apos;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&apos;)
 
 
         return newver
@@ -187,16 +183,16 @@ def UpdateVersion_info(filename, newver):
 def main():
         newver = 0
 
-        filename = &quot;./wireshark_version/version_info.c&quot;
+        filename = &quot;/home/spirent/jenkins-tomcat/workspace/wireshark_version/version_info.c&quot;
         newver = UpdateVersion_info(filename, newver)
 
-        filename = &quot;./wireshark_version/config.nmake&quot;
+        filename = &quot;/home/spirent/jenkins-tomcat/workspace/wireshark_version/config.nmake&quot;
         UpdateVersion_info(filename, newver)
 
-        filename = &quot;./wireshark_version/debian/changelog&quot;
+        filename = &quot;/home/spirent/jenkins-tomcat/workspace/wireshark_version/debian/changelog&quot;
         UpdateVersion_info(filename, newver)
 
-        filename = &quot;./wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&quot;
+        filename = &quot;/home/spirent/jenkins-tomcat/workspace/wireshark_version/packaging/rpm/SPECS/wireshark.spec.in&quot;
         UpdateVersion_info(filename, newver)
 
 # call main()
