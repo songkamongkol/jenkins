@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -98,6 +98,8 @@ rm -r -f $foldername
 echo &quot;++++++++++++++++++++ Make wireshark Ubuntu32 Package +++++++++++++++++++&quot;
 cd wireshark_ubuntu32_package
 sudo chmod -R 777 .
+sudo ./autogen.sh
+sudo ./configure
 sudo make
 
 sudo make debian-package
