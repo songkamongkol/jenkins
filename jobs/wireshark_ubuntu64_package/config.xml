@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -87,6 +87,7 @@
       <command>#!/bin/bash
 
 echo &quot;++++++++++++++++++ Clear files from last package +++++++++++++++++++&quot;
+cd ..
 rm -r -f *.deb
 rm -r -f *.tar.gz
 rm -r -f *.dsc
