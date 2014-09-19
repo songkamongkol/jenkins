@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -96,6 +96,8 @@ sudo make
 # Remove previous rpm installers
 cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/
 rm -r -f wireshark-1.10.3-*.rpm
+
+cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package
 
 sudo ./configure
 sudo make rpm-package
