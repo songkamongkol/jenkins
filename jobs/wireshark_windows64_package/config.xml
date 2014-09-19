@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -154,6 +154,7 @@ exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
+from glob import glob
 
 print &quot;++++++++++++++ Delete current installers ++++++++++++++&quot;
 for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe&apos;):
