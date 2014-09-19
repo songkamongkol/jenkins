@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -90,19 +90,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os, stat
+      <command>import os
 from glob import glob
 
-print &quot;++++++++++++++++++ Remove read only property of config.nmake +++++++++++++++++++++++&quot;
-
-myFile = &apos;c:\jenkins\workspace\wireshark_windows64_package\config.nmake&apos;
-fileAtt = os.stat(myFile)[0]
-if (not fileAtt &amp; stat.S_IWRITE):
-   # File is read-only, so make it writeable
-   os.chmod(myFile, stat.S_IWRITE)
-
 print &quot;++++++++++++++ Delete current installers ++++++++++++++&quot;
-
 for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe&apos;):
    os.unlink (f)
 for f in glob (&apos;c:/jenkins/workspace/wireshark_installer/Wireshark-win*.exe&apos;):
