@@ -64,7 +64,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -115,9 +115,9 @@ fnpre=${fn:2:len-6}
 echo $fnpre
 
 mkdir $fnpre
-cp wireshark_1.10.3-spirent-*_i386.deb $fnpre
-cp wireshark-common_1.10.3-spirent-*_i386.deb $fnpre
-cp tshark_1.10.3-spirent-*_i386.deb $fnpre
+cp wireshark_1.10.3-spirent-*_amd64.deb $fnpre
+cp wireshark-common_1.10.3-spirent-*_amd64.deb $fnpre
+cp tshark_1.10.3-spirent-*_amd64.deb $fnpre
 
 fnend=&quot;.tar.gz&quot;
 tar -zcvf $fnpre$fnend $fnpre
