@@ -84,7 +84,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>!/bin/bash
+      <command>#!/bin/bash
 
 # Make wireshark CentOS binary package
 echo &quot;++++++++++++++++++++++ Wireshark CentOS 32-bit Package +++++++++++++++++++++&quot;
