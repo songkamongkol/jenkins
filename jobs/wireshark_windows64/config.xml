@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,7 +95,7 @@
 import os, stat
 
 print &quot;++++++++++++++++++ Remove read only property of config.nmake +++++++++++++++++++++++&quot;
-myfile = &apos;c:\jenkins\workspace\wireshark_windows64\config.nmake&apos;
+myFile = &apos;c:\jenkins\workspace\wireshark_windows64\config.nmake&apos;
 fileAtt = os.stat(myFile)[0]
 if (not fileAtt &amp; stat.S_IWRITE):
    # File is read-only, so make it writeable
