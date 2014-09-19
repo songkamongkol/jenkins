@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -94,7 +94,9 @@
 
 cd ..
 
-p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in</command>
+p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+
+sudo chmod -R 777 .</command>
     </hudson.tasks.Shell>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>#!/usr/bin/python
