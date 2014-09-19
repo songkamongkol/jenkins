@@ -207,7 +207,7 @@ echo ++++++++++++++ Make wireshark 32-bit package ++++++++++++++
 nmake -f Makefile.nmake packaging
 
 echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
-xcopy /s c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe c:\jenkins\workspace\wireshark_install\
+xcopy /s c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe c:\jenkins\workspace\wireshark_installer\
 
 exit /B 0</command>
     </hudson.tasks.BatchFile>
