@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -86,29 +86,23 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>0 8 * * * </spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 from glob import glob
 
-print &quot;Delete current installers&quot;
-for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64/packaging/nsis/Wireshark-win*.exe&apos;):
-   os.unlink (f)</command>
-    </hudson.plugins.python.Python>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
+print &quot;++++++++++++++ Delete current installers ++++++++++++++&quot;
+for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe&apos;):
+   os.unlink (f)
+for f in glob (&apos;c:/jenkins/workspace/wireshark_installer/Wireshark-win*.exe&apos;):
+   os.unlink (f)
 
-print &quot;Set environment to 64-bit&quot;
+print &quot;++++++++++++++ Set environment to 64-bit ++++++++++++++&quot;
 
-fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
+fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;w&apos;)
 
 for line in fread:
      if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
@@ -130,34 +124,45 @@ for line in fread:
 fread.close()
 fwrite.close()
 
-os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
-os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
+os.remove(&apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>ECHO Build wireshark 64-bit 
+      <command>echo +++++++++++++++ Build wireshark 64-bit installer +++++++++++++++++++++
 
 call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
 set WIRESHARK_TARGET_PLATFORM=win64
-cd C:\jenkins\workspace\wireshark_windows64
+cd C:\jenkins\workspace\wireshark_windows64_package
+nmake -f Makefile.nmake verify_tools
+nmake -f Makefile.nmake setup
+nmake -f Makefile.nmake distclean
 nmake -f Makefile.nmake all
 
-ECHO Copy openflow.bll
+echo +++++++++++++++ Copy openflow.bll +++++++++++++++++
 
-xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3
-ren c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10_x64.dll openflow.dll
+xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3
+ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10_x64.dll openflow.dll
 
-ECHO Make wireshark 64-bit package
+echo +++++++++++++++ Make wireshark 64-bit package +++++++++++++++
 
 nmake -f Makefile.nmake packaging
+
+echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
+xcopy /s c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe c:\jenkins\workspace\wireshark_install\
+
 exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 
-print &quot;Set environment to 32-bit&quot;
+print &quot;++++++++++++++ Delete current installers ++++++++++++++&quot;
+for f in glob (&apos;c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe&apos;):
+   os.unlink (f)
 
-fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
+print &quot;++++++++++++++ Set environment to 32-bit ++++++++++++++&quot;
+
+fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;, &apos;r&apos;)
+fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;w&apos;)
 
 for line in fread:
      if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
@@ -171,28 +176,31 @@ for line in fread:
 fread.close()
 fwrite.close()
 
-os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
-os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
+os.remove(&apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)
+os.rename(&apos;C:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>ECHO Build wireshark 32-bit 
+      <command>echo ++++++++++++++ Build wireshark 32-bit ++++++++++++++
 
 call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x86
 set WIRESHARK_TARGET_PLATFORM=win32
-cd C:\jenkins\workspace\wireshark_windows64
+cd C:\jenkins\workspace\wireshark_windows64_package
 nmake -f Makefile.nmake verify_tools
 nmake -f Makefile.nmake setup
 nmake -f Makefile.nmake distclean
 nmake -f Makefile.nmake all
 
-ECHO Copy openflow.bll
+echo ++++++++++++++ Copy openflow.bll ++++++++++++++
 
-xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10.dll c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3
-ren c:\jenkins\workspace\wireshark_windows64\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10.dll openflow.dll
+xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3
+ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10.dll openflow.dll
 
-ECHO Make wireshark 32-bit package
-
+echo ++++++++++++++ Make wireshark 32-bit package ++++++++++++++
 nmake -f Makefile.nmake packaging
+
+echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
+xcopy /s c:/jenkins/workspace/wireshark_windows64_package/packaging/nsis/Wireshark-win*.exe c:\jenkins\workspace\wireshark_install\
+
 exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
