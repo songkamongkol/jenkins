@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -90,7 +90,11 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.python.Python plugin="python@1.2">
-      <command>print &quot;++++++++++++++++++ Set up 64-bit wireshark enviornment +++++++++++++++++++++++&quot;
+      <command>#!/usr/bin/python
+
+import os
+
+print &quot;++++++++++++++++++ Set up 64-bit wireshark enviornment +++++++++++++++++++++++&quot;
 
 fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
 fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
