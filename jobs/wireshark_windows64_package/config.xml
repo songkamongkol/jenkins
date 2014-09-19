@@ -147,8 +147,8 @@ nmake -f Makefile.nmake all
 
 echo +++++++++++++++ Copy openflow.bll +++++++++++++++++
 
-xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3
-ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-3\openflow13_1_10_x64.dll openflow.dll
+xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5
+ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5\openflow13_1_10_x64.dll openflow.dll
 
 echo +++++++++++++++ Make wireshark 64-bit package +++++++++++++++
 
@@ -215,7 +215,7 @@ exit /B 0</command>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>false</failBuildOnError>
+      <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
