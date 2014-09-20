@@ -70,7 +70,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -106,6 +106,7 @@ import glob
 
 print &quot; ++++++++++++++++++ Get last changelist numer ++++++++++++++++++ &quot;
 
+os.chdir(&quot;..&quot;)
 changelist = os.environ[&apos;P4_CHANGELIST&apos;]
 
 for filename in glob.glob(&quot;wireshark_changelist_*.txt&quot;):
