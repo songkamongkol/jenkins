@@ -2508,12 +2508,15 @@
         <string>wireshark_centos64</string>
         <string>wireshark_centos64_package</string>
         <string>wireshark_ci</string>
+        <string>wireshark_copy_to_storage</string>
+        <string>wireshark_join</string>
         <string>wireshark_ubuntu32</string>
         <string>wireshark_ubuntu32_build</string>
         <string>wireshark_ubuntu32_package</string>
         <string>wireshark_ubuntu64</string>
         <string>wireshark_ubuntu64_package</string>
         <string>wireshark_version</string>
+        <string>wireshark_version2</string>
         <string>wireshark_windows64</string>
         <string>wireshark_windows64_package</string>
       </jobNames>
