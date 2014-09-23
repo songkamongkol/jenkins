@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -105,12 +105,32 @@ for filename in glob.glob(&quot;wireshark_changelist_*.txt&quot;):
     os.remove(filename)
 
 fo = open(&quot;wireshark_changelist_&quot;+str(changelist)+&apos;.txt&apos;, &apos;w&apos;)
-fo.close();</command>
+fo.close();
+
+print &quot; ++++++++++++++++++ Create a folder in \\storage\builds\wireshark ++++++++++++++++++ &quot;
+
+# Get current version number from config.nmake
+fread = open(&apos;c:\jenkins\workspace\wireshark_version2\config.nmake&apos;, &apos;r&apos;)
+
+for line in fread:
+     if &quot;VERSION_EXTRA=-Spirent-&quot; in line:
+         line2 = line.replace(&quot;\n&quot;, &quot;&quot;)
+         junk1, junk2, vstr = line2.split(&apos;-&apos;, 3)
+         foldername = &quot;wireshark-1.10.3-spirent-&quot; + vstr
+         fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot; + foldername
+         if not os.path.exists(fullpath):
+            print &quot;make dir&quot;
+            os.makedirs(fullpath)            
+         else
+            print &quot; +++++ The folder &quot;, fullpath, &quot; is already created. ++++++ &quot;
+         break
+
+fread.close()</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
       <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
 
-p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+#p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
 
 
 </command>
@@ -119,7 +139,7 @@ p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mai
       <command>print &quot;++++++++++++++ test +++++++++++++++++&quot;</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>p4 submit -d &quot;Update wireshark version number&quot;</command>
+      <command>#p4 submit -d &quot;Update wireshark version number&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
