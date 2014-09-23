@@ -32,6 +32,9 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -41,7 +44,6 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -71,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -90,54 +92,16 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>#!/usr/bin/python
-
-import os, stat
-
-print &quot;++++++++++++++++++ Remove read only property of config.nmake +++++++++++++++++++++++&quot;
-myFile = &apos;c:\jenkins\workspace\wireshark_windows64\config.nmake&apos;
-fileAtt = os.stat(myFile)[0]
-if (not fileAtt &amp; stat.S_IWRITE):
-   # File is read-only, so make it writeable
-   os.chmod(myFile, stat.S_IWRITE)
-
-print &quot;++++++++++++++++++ Set up 64-bit wireshark enviornment +++++++++++++++++++++++&quot;
-
-fread  = open (&apos;c:/jenkins/workspace/wireshark_windows64/config.nmake&apos;, &apos;r&apos;)
-fwrite = open (&apos;c:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;w&apos;)
-
-for line in fread:
-     if &quot;WIRESHARK_TARGET_PLATFORM=&quot; in line:
-          junk1, junk2 = line.split(&apos;=&apos;, 2)
-          junk2 = &apos;win64&apos;
-          newline = junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
-          fwrite.write(newline)
-     elif &apos;CYGWIN_PATH=&apos; in line:
-          junk1, junk2 = line.split(&apos;=&apos;, 2)
-          junk2 = &apos;c:\\cygwin64\\bin&apos;
-          newline =  junk1 + &apos;=&apos; + junk2 + &apos;\n&apos;
-          fwrite.write(newline)
-     else:
-          fwrite.write(line)
-
-fread.close()
-fwrite.close()
-
-os.remove(&apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)
-os.rename(&apos;C:/jenkins/workspace/wireshark_windows64/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64/config.nmake&apos;)</command>
-    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>ECHO ++++++++++++++++++  Starting building windows 64-bit wireshark ++++++++++++++++++
+      <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
 
-call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
-set WIRESHARK_TARGET_PLATFORM=win64
-cd C:\jenkins\workspace\wireshark_windows64
-nmake -f Makefile.nmake verify_tools
-nmake -f Makefile.nmake setup
-nmake -f Makefile.nmake distclean
-nmake -f Makefile.nmake all
-exit /B 0</command>
+p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+
+#cd ..
+
+#python UpdateVersion.py
+
+p4 submit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
