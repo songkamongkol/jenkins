@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -130,7 +130,7 @@ fread.close()</command>
     <hudson.tasks.BatchFile>
       <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
 
-#p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+REM p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
 
 
 </command>
@@ -139,7 +139,7 @@ fread.close()</command>
       <command>print &quot;++++++++++++++ test +++++++++++++++++&quot;</command>
     </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>#p4 submit -d &quot;Update wireshark version number&quot;</command>
+      <command>REM p4 submit -d &quot;Update wireshark version number&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
