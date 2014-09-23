@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -121,7 +121,7 @@ for line in fread:
          if not os.path.exists(fullpath):
             print &quot;make dir&quot;
             os.makedirs(fullpath)            
-         else
+         else:
             print &quot; +++++ The folder &quot;, fullpath, &quot; is already created. ++++++ &quot;
          break
 
