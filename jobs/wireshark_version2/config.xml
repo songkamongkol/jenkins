@@ -115,8 +115,11 @@ p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mai
 
 </command>
     </hudson.tasks.BatchFile>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>print &quot;++++++++++++++ test +++++++++++++++++&quot;</command>
+    </hudson.plugins.python.Python>
     <hudson.tasks.BatchFile>
-      <command>p4 submit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
+      <command>p4 submit -d &quot;Update wireshark version number&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
