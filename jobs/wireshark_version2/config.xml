@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -92,16 +92,31 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.BatchFile>
-      <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import glob
 
-p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+print &quot; ++++++++++++++++++ Get last changelist number ++++++++++++++++++ &quot;
+
+os.chdir(&quot;..&quot;)
+changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+
+for filename in glob.glob(&quot;wireshark_changelist_*.txt&quot;):
+    os.remove(filename)
+
+fo = open(&quot;wireshark_changelist_&quot;+str(changelist)+&apos;.txt&apos;, &apos;w&apos;)
+fo.close();</command>
+    </hudson.plugins.python.Python>
+    <hudson.tasks.BatchFile>
+      <command>#echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
+
+#p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
 
 #cd ..
 
 #python UpdateVersion.py
 
-p4 submit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
+#p4 submit -d &quot;Update wireshark version number for change $P4_CHANGELIST&quot;</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
