@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -92,6 +92,132 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.BatchFile>
+      <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
+
+REM p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
+
+
+</command>
+    </hudson.tasks.BatchFile>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>#!/usr/bin/python
+
+import os
+import sys
+
+# print os.path.dirname(os.path.abspath(__file__))
+
+def UpdateVersion_info(filename, newver):
+# read and write version_info.c
+# first find version number, then increase by one
+# then write and close file
+        fread = None
+        fwrite = None
+        if &quot;version_info.c&quot; in filename:
+                fread  = open(&apos;c:\jenkins\workspace\wireshark_version2\version_info.c&apos;, &apos;r&apos;)
+                fwrite = open(&apos;c:\jenkins\workspace\wireshark_version2\version_info_new.c&apos;, &apos;w&apos;)
+        elif &quot;config.nmake&quot; in filename:
+                fread  = open (&apos;c:\jenkins\workspace\wireshark_version2\config.nmake&apos;, &apos;r&apos;)
+                fwrite = open (&apos;c:\jenkins\workspace\wireshark_version2\config_new.nmake&apos;, &apos;w&apos;)
+        elif &quot;changelog&quot; in filename:
+                fread  = open (&apos;c:\jenkins\workspace\wireshark_version2\debian\changelog&apos;, &apos;r&apos;)
+                fwrite = open (&apos;c:\jenkins\workspace\wireshark_version2\debian\changelog_new&apos;, &apos;w&apos;)
+        elif &quot;wireshark.spec.in&quot; in filename:
+                fread  = open (&apos;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark.spec.in&apos;, &apos;r&apos;)
+                fwrite = open (&apos;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark_new.spec.in&apos;, &apos;w&apos;)
+
+        for line in fread:
+                # version_info.c: full string is &quot;Spirent Wireshark 1.10.3 v3.\n&quot;
+                if &quot;Spirent Wireshark 1.10.3 v&quot; in line:
+                        # Get current version
+                        junk1, junk2, junk3, vstr = line.split(&apos; &apos;, 4)
+                        vstr2, junk4 = vstr.split(&apos;.&apos;, 2)
+                        vstr3 = vstr2[1:]
+
+                        # Get new version and set up the new string
+                        newver = int(vstr3) + 1
+                        # print &quot;new version is &quot;, newver
+                        newline = junk1 + &apos; &apos; + junk2 + &apos; &apos; + junk3 + &apos; &apos; + &apos;v&apos; + str(newver) + &apos;.&apos; + junk4 + &apos;\n&apos;
+                        print &quot;newline &quot;, newline
+
+                        fwrite.write(newline)
+                        #fo.write(line.replace(vstr, &apos;v&apos;+str(newver)+&apos;.&apos;+junk4))
+                        # print &apos;each version string is: &apos;, vstr3
+                # config.nmake: VERSION_EXTRA=-Spirent-3
+                elif &quot;VERSION_EXTRA=-Spirent-&quot; in line:
+                        junk1, junk2, vstr = line.split(&apos;-&apos;, 3)
+                        vstr = str(newver)
+                        newline = junk1 + &apos;-&apos; + junk2 + &apos;-&apos; + vstr + &apos;\n&apos;
+                        print &quot;newline &quot;, newline
+
+                        fwrite.write(newline)
+                # debian/changelog: wireshark (1.10.3-spirent-3) unstable; urgency=low
+                elif &quot;urgency=low&quot; in line:
+                        junk1, junk2, vstr = line.split(&apos;-&apos;, 3)
+                        vstr2, junk3 = vstr.split(&apos;)&apos;, 2)
+                        #print junk1, &quot;\t&quot;, junk2, &quot;\t&quot;, vstr2, &quot;\t&quot;, junk3
+                        vstr2 = str(newver)
+                        #print vstr2
+                        newline = junk1 + &apos;-&apos; + junk2 + &apos;-&apos; + vstr2 + &apos;)&apos; + junk3 + &apos;\n&apos;
+                        print &quot;newline &quot;, newline
+
+                        fwrite.write(newline)
+                        #fwrite.write(line)
+                elif &quot;Release:  spirent_&quot; in line:
+                        junk1, vstr = line.split(&apos;_&apos;, 2)
+                                                                        
+                        vstr = str(newver)
+                        newline = junk1 + &apos;_&apos; + vstr + &apos;\n&apos;
+                        print &quot;newline &quot;, newline
+
+                        fwrite.write(newline)
+                else:
+                        fwrite.write(line)
+
+        fread.close()
+        fwrite.close()
+
+        if &quot;version_info.c&quot; in filename:
+                os.remove(&apos;c:\jenkins\workspace\wireshark_version2\version_info.c&apos;)
+                os.rename(&apos;c:\jenkins\workspace\wireshark_version2\version_info_new.c&apos;, &apos;c:\jenkins\workspace\wireshark_version2\version_info.c&apos;)
+        elif &quot;config.nmake&quot; in filename:
+                os.remove(&apos;c:\jenkins\workspace\wireshark_version2\config.nmake&apos;)
+                os.rename(&apos;c:\jenkins\workspace\wireshark_version2\config_new.nmake&apos;, &apos;c:\jenkins\workspace\wireshark_version2\config.nmake&apos;)
+        elif &quot;changelog&quot; in filename:
+                os.remove(&apos;c:\jenkins\workspace\wireshark_version2\debian\changelog&apos;)
+                os.rename(&apos;c:\jenkins\workspace\wireshark_version2\debian/changelog_new&apos;, &apos;c:\jenkins\workspace\wireshark_version2\debian\changelog&apos;)
+        elif &quot;wireshark.spec.in&quot; in filename:
+                os.remove(&apos;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark.spec.in&apos;)
+                os.rename(&apos;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark_new.spec.in&apos;, &apos;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark.spec.in&apos;)
+
+
+        return newver
+
+# mian()
+def main():
+        newver = 0
+
+        filename = &quot;c:\jenkins\workspace\wireshark_version2\version_info.c&quot;
+        newver = UpdateVersion_info(filename, newver)
+
+        filename = &quot;c:\jenkins\workspace\wireshark_version2\config.nmake&quot;
+        UpdateVersion_info(filename, newver)
+
+        filename = &quot;c:\jenkins\workspace\wireshark_version2\debian\changelog&quot;
+        UpdateVersion_info(filename, newver)
+
+        filename = &quot;c:\jenkins\workspace\wireshark_version2\packaging\rpm\SPECS\wireshark.spec.in&quot;
+        UpdateVersion_info(filename, newver)
+
+# call main()
+if __name__ == &apos;__main__&apos;:
+        main()
+                                                                                              </command>
+    </hudson.plugins.python.Python>
+    <hudson.tasks.BatchFile>
+      <command>REM p4 submit -d &quot;Update wireshark version number&quot;</command>
+    </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import glob
@@ -127,20 +253,6 @@ for line in fread:
 
 fread.close()</command>
     </hudson.plugins.python.Python>
-    <hudson.tasks.BatchFile>
-      <command>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++
-
-REM p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in
-
-
-</command>
-    </hudson.tasks.BatchFile>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>print &quot;++++++++++++++ test +++++++++++++++++&quot;</command>
-    </hudson.plugins.python.Python>
-    <hudson.tasks.BatchFile>
-      <command>REM p4 submit -d &quot;Update wireshark version number&quot;</command>
-    </hudson.tasks.BatchFile>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
