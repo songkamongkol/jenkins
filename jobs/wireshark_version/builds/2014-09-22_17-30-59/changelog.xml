@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<changelog>
+	<entry>
+		<changenumber>700124</changenumber>
+		<date>2014-09-19 12:27:06</date>
+		<description>Update wireshark version number for change 699927</description>
+		<user>tableuser</user>
+		<workspace>wireshark_version_mainline-1975880785</workspace>
+		<files>
+			<file>
+				<name>//Wireshark_Spirent/mainline/src/config.nmake</name>
+				<workspacePath>config.nmake</workspacePath>
+				<rev>11</rev>
+				<changenumber>700124</changenumber>
+				<action>EDIT</action>
+			</file>
+			<file>
+				<name>//Wireshark_Spirent/mainline/src/debian/changelog</name>
+				<workspacePath>debian/changelog</workspacePath>
+				<rev>9</rev>
+				<changenumber>700124</changenumber>
+				<action>EDIT</action>
+			</file>
+			<file>
+				<name>//Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in</name>
+				<workspacePath>packaging/rpm/SPECS/wireshark.spec.in</workspacePath>
+				<rev>9</rev>
+				<changenumber>700124</changenumber>
+				<action>EDIT</action>
+			</file>
+			<file>
+				<name>//Wireshark_Spirent/mainline/src/version_info.c</name>
+				<workspacePath>version_info.c</workspacePath>
+				<rev>8</rev>
+				<changenumber>700124</changenumber>
+				<action>EDIT</action>
+			</file>
+		</files>
+		<jobs>
+		</jobs>
+	</entry>
+</changelog>

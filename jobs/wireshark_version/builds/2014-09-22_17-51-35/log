@@ -1,0 +1,50 @@
+Started by user [8mha:AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyuEgZe/dLi1CL9nMyMUqAxAFywwU7CAAAA[0mLili Huang
+[EnvInject] - Loading node environment variables.
+Building remotely on [8mha:AAAApB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgYJ/eT83ILSktQi/fLijMSibN3wzDxzXTMTAEXuiOXNAAAA[0mwshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2
+Using remote perforce client: wireshark_version2_mainline-1698561233
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233
+Last build changeset: 700419
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700420,@700419
+Sync'ing workspace to changelist 700419.
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700419
+Sync complete, took 133 ms
+No emails were triggered.
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson3044933093562595606.py
+ ++++++++++++++++++ Get last changelist number ++++++++++++++++++ 
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson8147513616857188181.bat
+
+c:\jenkins\workspace\wireshark_version2>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++ 
+++++++++++++++ Update wireshark_version ++++++++++++++++++++++
+
+c:\jenkins\workspace\wireshark_version2>p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in 
+//Wireshark_Spirent/mainline/src/version_info.c#9 - opened for edit
+... //Wireshark_Spirent/mainline/src/version_info.c - also opened by pliu@pliu_151_repo
+//Wireshark_Spirent/mainline/src/config.nmake#12 - opened for edit
+... //Wireshark_Spirent/mainline/src/config.nmake - also opened by pliu@pliu_151_repo
+... //Wireshark_Spirent/mainline/src/config.nmake - also opened by pliu@pliu_dell_int
+... //Wireshark_Spirent/mainline/src/config.nmake - also opened by bchen@zzhong_win
+//Wireshark_Spirent/mainline/src/debian/changelog#10 - opened for edit
+... //Wireshark_Spirent/mainline/src/debian/changelog - also opened by pliu@pliu_151_repo
+//Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in#10 - opened for edit
+... //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in - also opened by pliu@pliu_151_repo
+
+c:\jenkins\workspace\wireshark_version2>exit 0 
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson8027202318901987213.py
+++++++++++++++ test +++++++++++++++++
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson8052881853334016484.bat
+
+c:\jenkins\workspace\wireshark_version2>p4 submit -d "Update wireshark version number" 
+Submitting change 700423.
+Locking 4 files ...
+edit //Wireshark_Spirent/mainline/src/config.nmake#13
+edit //Wireshark_Spirent/mainline/src/debian/changelog#11
+edit //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in#11
+edit //Wireshark_Spirent/mainline/src/version_info.c#10
+Change 700423 submitted.
+//Wireshark_Spirent/mainline/src/version_info.c#10 - refreshing
+
+c:\jenkins\workspace\wireshark_version2>exit 0 
+No emails were triggered.
+Notifying upstream projects of job completion
+Finished: SUCCESS

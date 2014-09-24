@@ -1,0 +1,34 @@
+Started by user [8mha:AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyuEgZe/dLi1CL9nMyMUqAxAFywwU7CAAAA[0mLili Huang
+[EnvInject] - Loading node environment variables.
+Building remotely on [8mha:AAAApB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgYJ/eT83ILSktQi/fLijMSibN3wzDxzXTMTAEXuiOXNAAAA[0mwshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2
+Using remote perforce client: wireshark_version2_mainline-1698561233
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233
+Last build changeset: 700423
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700424,@700423
+Sync'ing workspace to changelist 700423.
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700423
+Sync complete, took 155 ms
+No emails were triggered.
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson152074575310617774.py
+ ++++++++++++++++++ Get last changelist number ++++++++++++++++++ 
+ ++++++++++++++++++ Create a folder in \storageuilds\wireshark ++++++++++++++++++ 
+make dir
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson8411128807706664951.bat
+
+c:\jenkins\workspace\wireshark_version2>echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++ 
+++++++++++++++ Update wireshark_version ++++++++++++++++++++++
+
+c:\jenkins\workspace\wireshark_version2>REM p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in 
+
+c:\jenkins\workspace\wireshark_version2>exit 0 
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson5993242731154779901.py
+++++++++++++++ test +++++++++++++++++
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson6755584257668899847.bat
+
+c:\jenkins\workspace\wireshark_version2>REM p4 submit -d "Update wireshark version number" 
+
+c:\jenkins\workspace\wireshark_version2>exit 0 
+No emails were triggered.
+Notifying upstream projects of job completion
+Finished: SUCCESS

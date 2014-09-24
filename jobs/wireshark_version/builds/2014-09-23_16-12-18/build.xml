@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<build>
+  <actions>
+    <hudson.plugins.logparser.LogParserAction plugin="log-parser@1.0.8">
+      <build class="build" reference="../../.."/>
+      <result>
+        <totalErrors>0</totalErrors>
+        <totalWarnings>0</totalWarnings>
+        <totalInfos>0</totalInfos>
+        <htmlLogFile>/opt/jenkins/jenkins-root/jobs/wireshark_version2/builds/2014-09-23_16-12-18/log_content.html</htmlLogFile>
+        <errorLinksFile>/opt/jenkins/jenkins-root/jobs/wireshark_version2/builds/2014-09-23_16-12-18/logerrorLinks.html</errorLinksFile>
+        <warningLinksFile>/opt/jenkins/jenkins-root/jobs/wireshark_version2/builds/2014-09-23_16-12-18/logwarningLinks.html</warningLinksFile>
+        <infoLinksFile>/opt/jenkins/jenkins-root/jobs/wireshark_version2/builds/2014-09-23_16-12-18/loginfoLinks.html</infoLinksFile>
+        <parsedLogURL>job/wireshark_version2/9/parsed_console/log.html</parsedLogURL>
+        <htmlLogPath>/opt/jenkins/jenkins-root/jobs/wireshark_version2/builds/2014-09-23_16-12-18</htmlLogPath>
+      </result>
+    </hudson.plugins.logparser.LogParserAction>
+    <hudson.model.ParametersAction>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>BRANCH_NAME</name>
+          <description>branch name</description>
+          <value>mainline</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.BooleanParameterValue>
+          <name>P4CLEANWORKSPACE</name>
+          <description>clean build</description>
+          <value>false</value>
+        </hudson.model.BooleanParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>STC_MAJ_MIN_VERSION</name>
+          <description>major minor version TODO: get this from a file</description>
+          <value>1.10.3</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+    </hudson.model.ParametersAction>
+    <hudson.model.CauseAction>
+      <causes>
+        <hudson.model.Cause_-UserIdCause>
+          <userId>lihuang</userId>
+        </hudson.model.Cause_-UserIdCause>
+      </causes>
+    </hudson.model.CauseAction>
+    <hudson.plugins.jobConfigHistory.JobConfigBadgeAction plugin="jobConfigHistory@2.5">
+      <configDates>
+        <string>2014-09-23_16-12-13</string>
+        <string>2014-09-23_15-57-17</string>
+      </configDates>
+    </hudson.plugins.jobConfigHistory.JobConfigBadgeAction>
+    <org.jenkinsci.plugins.envinject.EnvInjectPluginAction plugin="envinject@1.89">
+      <build class="build" reference="../../.."/>
+    </org.jenkinsci.plugins.envinject.EnvInjectPluginAction>
+    <hudson.plugins.perforce.PerforceTagAction plugin="perforce@1.3.27">
+      <changeNumber>700423</changeNumber>
+      <depot>
+        <settings>
+          <entry>
+            <string>P4PORT</string>
+            <string>perforceproxy.cal.ci.spirentcom.com:1999</string>
+          </entry>
+          <entry>
+            <string>SystemRoot</string>
+            <string>C:\WINDOWS</string>
+          </entry>
+          <entry>
+            <string>P4CLIENT</string>
+            <string>wireshark_version2_mainline-1698561233</string>
+          </entry>
+          <entry>
+            <string>P4USER</string>
+            <string>tableuser</string>
+          </entry>
+          <entry>
+            <string>SystemDrive</string>
+            <string>C:</string>
+          </entry>
+        </settings>
+        <validEnvp>false</validEnvp>
+        <p4exe>p4</p4exe>
+        <threshold>10000</threshold>
+        <execFactory class="hudson.plugins.perforce.HudsonP4ExecutorFactory"/>
+        <changes>
+          <depot reference="../.."/>
+        </changes>
+        <workspaces>
+          <depot reference="../.."/>
+        </workspaces>
+      </depot>
+      <tags/>
+      <view>//Wireshark_Spirent/mainline/src/... //ws/...</view>
+      <owner>tableuser</owner>
+    </hudson.plugins.perforce.PerforceTagAction>
+    <hudson.plugins.perforce.PerforceSCMRevisionState plugin="perforce@1.3.27">
+      <revision>700423</revision>
+    </hudson.plugins.perforce.PerforceSCMRevisionState>
+    <hudson.tasks.MailMessageIdAction plugin="mailer@1.8">
+      <messageId>&lt;914786611.49.1411513942456.JavaMail.root@jenkins-tomcat&gt;</messageId>
+    </hudson.tasks.MailMessageIdAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.22"/>
+  </actions>
+  <number>9</number>
+  <startTime>1411513938949</startTime>
+  <result>FAILURE</result>
+  <duration>1477</duration>
+  <charset>windows-1252</charset>
+  <keepLog>false</keepLog>
+  <builtOn>wshark-Win7-64</builtOn>
+  <workspace>c:\jenkins\workspace\wireshark_version2</workspace>
+  <hudsonVersion>1.553</hudsonVersion>
+  <scm class="hudson.plugins.perforce.PerforceChangeLogParser" plugin="perforce@1.3.27"/>
+  <culprits class="com.google.common.collect.EmptyImmutableSortedSet"/>
+</build>

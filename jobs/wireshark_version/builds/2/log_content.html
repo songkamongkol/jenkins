@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/color.css"></link>
+	</head>
+	<body>
+Started by user Lili Huang<br/>
+
+[EnvInject] - Loading node environment variables.<br/>
+
+Building remotely on wshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2<br/>
+
+Using remote perforce client: wireshark_version2_mainline-1698561233<br/>
+
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233<br/>
+
+Last build changeset: 700124<br/>
+
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...<br/>
+
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700125,@700419<br/>
+
+[wireshark_version2] $ p4 describe -s 700419<br/>
+
+[wireshark_version2] $ p4 -G where //...<br/>
+
+[wireshark_version2] $ p4 -s users tableuser<br/>
+
+[wireshark_version2] $ p4 user -o tableuser<br/>
+
+Sync'ing workspace to changelist 700419.<br/>
+
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700419<br/>
+
+Sync complete, took 136 ms<br/>
+
+No emails were triggered.<br/>
+
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson8272398624035283212.py<br/>
+
+ ++++++++++++++++++ Get last changelist number ++++++++++++++++++ <br/>
+
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson6373084740210443813.bat<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;#echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++ <br/>
+
+'#echo' is not recognized as an internal or external command,<br/>
+
+operable program or batch file.<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;#p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in <br/>
+
+'#p4' is not recognized as an internal or external command,<br/>
+
+operable program or batch file.<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;#cd .. <br/>
+
+'#cd' is not recognized as an internal or external command,<br/>
+
+operable program or batch file.<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;#python UpdateVersion.py <br/>
+
+'#python' is not recognized as an internal or external command,<br/>
+
+operable program or batch file.<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;#p4 submit -d "Update wireshark version number for change $P4_CHANGELIST" <br/>
+
+'#p4' is not recognized as an internal or external command,<br/>
+
+operable program or batch file.<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;exit 9009 <br/>
+
+Build step 'Execute Windows batch command' marked build as failure<br/>
+
+	</body>
+</html>

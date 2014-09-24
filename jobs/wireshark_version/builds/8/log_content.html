@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/color.css"></link>
+	</head>
+	<body>
+Started by user Lili Huang<br/>
+
+[EnvInject] - Loading node environment variables.<br/>
+
+Building remotely on wshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2<br/>
+
+Using remote perforce client: wireshark_version2_mainline-1698561233<br/>
+
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233<br/>
+
+Last build changeset: 700423<br/>
+
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...<br/>
+
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700424,@700423<br/>
+
+Sync'ing workspace to changelist 700423.<br/>
+
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700423<br/>
+
+Sync complete, took 155 ms<br/>
+
+No emails were triggered.<br/>
+
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson152074575310617774.py<br/>
+
+ ++++++++++++++++++ Get last changelist number ++++++++++++++++++ <br/>
+
+ ++++++++++++++++++ Create a folder in \storageuilds\wireshark ++++++++++++++++++ <br/>
+
+make dir<br/>
+
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson8411128807706664951.bat<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;echo ++++++++++++++ Update wireshark_version ++++++++++++++++++++++ <br/>
+
+++++++++++++++ Update wireshark_version ++++++++++++++++++++++<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;REM p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in <br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;exit 0 <br/>
+
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson5993242731154779901.py<br/>
+
+++++++++++++++ test +++++++++++++++++<br/>
+
+[wireshark_version2] $ cmd /c call C:\Users\spirent\AppData\Local\Temp\hudson6755584257668899847.bat<br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;REM p4 submit -d "Update wireshark version number" <br/>
+
+<br/>
+
+c:\jenkins\workspace\wireshark_version2&gt;exit 0 <br/>
+
+	</body>
+</html>

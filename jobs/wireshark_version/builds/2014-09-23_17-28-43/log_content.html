@@ -1,0 +1,148 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/color.css"></link>
+	</head>
+	<body>
+Started by user Lili Huang<br/>
+
+[EnvInject] - Loading node environment variables.<br/>
+
+Building remotely on wshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2<br/>
+
+Using remote perforce client: wireshark_version2_mainline-1698561233<br/>
+
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233<br/>
+
+Changing P4 Client Root to: c:\jenkins\workspace\wireshark_version2<br/>
+
+Changing P4 Client View from:<br/>
+
+<br/>
+
+<br/>
+
+Changing P4 Client View to: <br/>
+
+  //Wireshark_Spirent/mainline/src/... //wireshark_version2_mainline-1698561233/...<br/>
+
+Saving new client wireshark_version2_mainline-1698561233<br/>
+
+[wireshark_version2] $ p4 -s client -i<br/>
+
+Caught exception communicating with perforce.  Server down for maintenance. Back soon<br/>
+
+For Command: p4 -s client -i <br/>
+
+With Data:<br/>
+
+===================<br/>
+
+Client: wireshark_version2_mainline-1698561233<br/>
+
+Description: <br/>
+
+Root: c:\jenkins\workspace\wireshark_version2<br/>
+
+Options: noallwrite clobber nocompress unlocked nomodtime rmdir<br/>
+
+LineEnd: local<br/>
+
+View:<br/>
+
+  //Wireshark_Spirent/mainline/src/... //wireshark_version2_mainline-1698561233/...<br/>
+
+<br/>
+
+<br/>
+
+===================<br/>
+
+com.tek42.perforce.PerforceException:  Server down for maintenance. Back soon<br/>
+
+For Command: p4 -s client -i <br/>
+
+With Data:<br/>
+
+===================<br/>
+
+Client: wireshark_version2_mainline-1698561233<br/>
+
+Description: <br/>
+
+Root: c:\jenkins\workspace\wireshark_version2<br/>
+
+Options: noallwrite clobber nocompress unlocked nomodtime rmdir<br/>
+
+LineEnd: local<br/>
+
+View:<br/>
+
+  //Wireshark_Spirent/mainline/src/... //wireshark_version2_mainline-1698561233/...<br/>
+
+<br/>
+
+<br/>
+
+===================<br/>
+
+<br/>
+
+	at com.tek42.perforce.parse.AbstractPerforceTemplate.saveToPerforce(AbstractPerforceTemplate.java:270)<br/>
+
+	at com.tek42.perforce.parse.Workspaces.saveWorkspace(Workspaces.java:77)<br/>
+
+	at hudson.plugins.perforce.PerforceSCM.saveWorkspaceIfDirty(PerforceSCM.java:1787)<br/>
+
+	at hudson.plugins.perforce.PerforceSCM.checkout(PerforceSCM.java:895)<br/>
+
+	at hudson.model.AbstractProject.checkout(AbstractProject.java:1414)<br/>
+
+	at hudson.model.AbstractBuild$AbstractBuildExecution.defaultCheckout(AbstractBuild.java:671)<br/>
+
+	at jenkins.scm.SCMCheckoutStrategy.checkout(SCMCheckoutStrategy.java:88)<br/>
+
+	at hudson.model.AbstractBuild$AbstractBuildExecution.run(AbstractBuild.java:580)<br/>
+
+	at hudson.model.Run.execute(Run.java:1676)<br/>
+
+	at hudson.model.FreeStyleBuild.run(FreeStyleBuild.java:43)<br/>
+
+	at hudson.model.ResourceController.execute(ResourceController.java:88)<br/>
+
+	at hudson.model.Executor.run(Executor.java:231)<br/>
+
+ERROR: Unable to communicate with perforce.  Server down for maintenance. Back soon<br/>
+
+For Command: p4 -s client -i <br/>
+
+With Data:<br/>
+
+===================<br/>
+
+Client: wireshark_version2_mainline-1698561233<br/>
+
+Description: <br/>
+
+Root: c:\jenkins\workspace\wireshark_version2<br/>
+
+Options: noallwrite clobber nocompress unlocked nomodtime rmdir<br/>
+
+LineEnd: local<br/>
+
+View:<br/>
+
+  //Wireshark_Spirent/mainline/src/... //wireshark_version2_mainline-1698561233/...<br/>
+
+<br/>
+
+<br/>
+
+===================<br/>
+
+<br/>
+
+<br/>
+
+	</body>
+</html>

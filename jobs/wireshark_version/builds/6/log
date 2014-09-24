@@ -1,0 +1,27 @@
+Started by user [8mha:AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyuEgZe/dLi1CL9nMyMUqAxAFywwU7CAAAA[0mLili Huang
+[EnvInject] - Loading node environment variables.
+Building remotely on [8mha:AAAApB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgYJ/eT83ILSktQi/fLijMSibN3wzDxzXTMTAEXuiOXNAAAA[0mwshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2
+Using remote perforce client: wireshark_version2_mainline-1698561233
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233
+Last build changeset: 700419
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700420,@700423
+[wireshark_version2] $ p4 describe -s 700423
+[wireshark_version2] $ p4 -G where //...
+[wireshark_version2] $ p4 -s users tableuser
+[wireshark_version2] $ p4 user -o tableuser
+Sync'ing workspace to changelist 700423.
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700423
+Sync complete, took 283 ms
+No emails were triggered.
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson8928861625915701557.py
+  File "C:\Users\spirent\AppData\Local\Temp\hudson8928861625915701557.py", line 29
+    else
+       ^
+SyntaxError: invalid syntax
+Build step 'Execute Python script' marked build as failure
+Email was triggered for: Failure
+Sending email for trigger: Failure
+Sending email to: lili.huang@spirent.com somboon.ongkamongkol@spirent.com perforce@spirentcom.com
+Notifying upstream projects of job completion
+Finished: FAILURE

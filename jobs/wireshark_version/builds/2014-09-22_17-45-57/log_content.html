@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/style.css"></link>
+		<link type="text/css" rel="stylesheet" href="http://jenkins-tomcat.cal.ci.spirentcom.com/css/color.css"></link>
+	</head>
+	<body>
+Started by user Lili Huang<br/>
+
+[EnvInject] - Loading node environment variables.<br/>
+
+Building remotely on wshark-Win7-64 (windows_x64) in workspace c:\jenkins\workspace\wireshark_version2<br/>
+
+Using remote perforce client: wireshark_version2_mainline-1698561233<br/>
+
+[wireshark_version2] $ p4 workspace -o wireshark_version2_mainline-1698561233<br/>
+
+Last build changeset: 700419<br/>
+
+[wireshark_version2] $ p4 changes -s submitted -m 1 //wireshark_version2_mainline-1698561233/...<br/>
+
+[wireshark_version2] $ p4 -s changes -s submitted //wireshark_version2_mainline-1698561233/...@700420,@700419<br/>
+
+Sync'ing workspace to changelist 700419.<br/>
+
+[wireshark_version2] $ p4 -s sync //wireshark_version2_mainline-1698561233/...@700419<br/>
+
+Sync complete, took 138 ms<br/>
+
+No emails were triggered.<br/>
+
+[wireshark_version2] $ python C:\Users\spirent\AppData\Local\Temp\hudson5055696488650276334.py<br/>
+
+  File "C:\Users\spirent\AppData\Local\Temp\hudson5055696488650276334.py", line 15<br/>
+
+    p4 edit //Wireshark_Spirent/mainline/src/version_info.c  //Wireshark_Spirent/mainline/src/config.nmake //Wireshark_Spirent/mainline/src/debian/changelog //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in<br/>
+
+          ^<br/>
+
+SyntaxError: invalid syntax<br/>
+
+Build step 'Execute Python script' marked build as failure<br/>
+
+	</body>
+</html>
