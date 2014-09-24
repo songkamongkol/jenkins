@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
+  <description></description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -72,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -124,7 +125,7 @@ fo.close();
 print &quot; ++++++++++++++++++ Create a folder in \\storage\builds\wireshark ++++++++++++++++++ &quot;
 
 # Get current version number from config.nmake
-fread = open(&apos;c:\jenkins\workspace\wireshark_version2\config.nmake&apos;, &apos;r&apos;)
+fread = open(&apos;c:\jenkins\workspace\wireshark_version\config.nmake&apos;, &apos;r&apos;)
 
 for line in fread:
      if &quot;VERSION_EXTRA=-Spirent-&quot; in line:
