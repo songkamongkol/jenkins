@@ -64,6 +64,9 @@
         <string>Release Build Passed on all OS</string>
       </activeProcessNames>
     </hudson.plugins.promoted__builds.JobPropertyImpl>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -126,7 +129,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -232,7 +235,8 @@ cd bin\Release
 rmdir /q /s pdb
 mkdir pdb
 copy *.pdb pdb
-del /q pdb\test*.pdb 
+del /q pdb\test*.pdb
+copy TestCenter*.pdb pdb
 
 set P4PORT=perforce.spirentcom.com:1666
 set P4USER=tableuser
