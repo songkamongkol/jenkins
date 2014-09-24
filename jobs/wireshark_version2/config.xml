@@ -108,6 +108,7 @@ REM p4 submit -d &quot;Update wireshark version number&quot;
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import glob
+import shutil
 
 print &quot; ++++++++++++++++++ Get last changelist number ++++++++++++++++++ &quot;
 
@@ -118,6 +119,7 @@ for filename in glob.glob(&quot;wireshark_changelist_*.txt&quot;):
     os.remove(filename)
 
 fo = open(&quot;wireshark_changelist_&quot;+str(changelist)+&apos;.txt&apos;, &apos;w&apos;)
+srcfile = &apos;c:\jenkins\workspace\wireshark_changelist_&apos;+str(changelist)+&apos;.txt&apos;     
 fo.close();
 
 print &quot; ++++++++++++++++++ Create a folder in \\storage\builds\wireshark ++++++++++++++++++ &quot;
@@ -133,7 +135,9 @@ for line in fread:
          fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot; + foldername
          if not os.path.exists(fullpath):
             print &quot;make dir&quot;
-            os.makedirs(fullpath)            
+            os.makedirs(fullpath)    
+            shutil.copy(srcfile, fullpath)
+  
          else:
             print &quot; +++++ The folder &quot;, fullpath, &quot; is already created. ++++++ &quot;
          break
