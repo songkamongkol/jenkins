@@ -45,6 +45,7 @@
 -//Wireshark_Spirent/mainline/src/config.nmake
 -//Wireshark_Spirent/mainline/src/debian/changelog</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -100,7 +101,7 @@
   <builders/>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>wireshark_centos32, wireshark_ubuntu32, wireshark_windows64</childProjects>
+      <childProjects>wireshark_centos32,wireshark_ubuntu32,wireshark_windows64</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
