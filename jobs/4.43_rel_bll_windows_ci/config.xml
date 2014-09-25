@@ -60,7 +60,8 @@
     </hudson.model.ParametersDefinitionProperty>
     <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.17">
       <activeProcessNames>
-        <string>test</string>
+        <string>Release Build Passed Regression</string>
+        <string>Release Build Passed on all OS</string>
       </activeProcessNames>
     </hudson.plugins.promoted__builds.JobPropertyImpl>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
