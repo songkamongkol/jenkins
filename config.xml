@@ -2575,6 +2575,14 @@
       <topPortlets/>
       <bottomPortlets/>
     </hudson.plugins.view.dashboard.Dashboard>
+    <hudson.plugins.nested__view.NestedView plugin="nested-view@1.14">
+      <owner class="hudson" reference="../../.."/>
+      <name>4.43_rel</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <views/>
+    </hudson.plugins.nested__view.NestedView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>49152</slaveAgentPort>
