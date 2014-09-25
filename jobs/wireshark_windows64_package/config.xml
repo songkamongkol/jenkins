@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -145,11 +145,11 @@ import subprocess
 
 print &quot;+++++++++++++++ Build wireshark 64-bit installer +++++++++++++++++++++&quot;
 
-p=subprocess.Popen(&quot;c:/jenkins/workspace/BuildScripts/BuildWireshark_64bit.bat&quot;, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+p=subprocess.Popen(&quot;c:\jenkins\workspace\BuildScripts\BuildWireshark_64bit.bat&quot;, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 print &quot;+++++++++++++++ Copy openflow.bll +++++++++++++++++++++&quot;
 
-os.chdir(&quot;c:/jenkins/workspace&quot;)
+os.chdir(&quot;c:\jenkins\workspace&quot;)
 for file in glob.glob(&quot;version_*.txt&quot;):
     line = file
     junk1, junk2 = line.split(&apos;.&apos;, 2)
