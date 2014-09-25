@@ -2641,60 +2641,6 @@
           <topPortlets/>
           <bottomPortlets/>
         </hudson.plugins.view.dashboard.Dashboard>
-        <hudson.plugins.view.dashboard.Dashboard plugin="dashboard-view@2.9.2">
-          <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
-          <name>4.43_rel_summary_packaging</name>
-          <filterExecutors>false</filterExecutors>
-          <filterQueue>false</filterQueue>
-          <properties class="hudson.model.View$PropertyList"/>
-          <jobNames>
-            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.view.dashboard.Dashboard/jobNames/comparator"/>
-            <string>4.43_rel_bll_freebsd63_packaging</string>
-            <string>4.43_rel_bll_freebsd71_packaging</string>
-            <string>4.43_rel_bll_linux_packaging</string>
-            <string>4.43_rel_bll_linux_rpm_packaging</string>
-            <string>4.43_rel_bll_linux_x64_packaging</string>
-            <string>4.43_rel_bll_solaris_packaging</string>
-            <string>4.43_rel_bll_win_pkg_webhelp</string>
-            <string>4.43_rel_bll_windows_packaging_new</string>
-            <string>4.43_rel_ccp_packaging-new</string>
-            <string>4.43_rel_copy_to_spccalfs03_packaging</string>
-            <string>4.43_rel_cts_linux_packaging</string>
-            <string>4.43_rel_cts_solaris_packaging</string>
-            <string>4.43_rel_cts_windows_packaging</string>
-            <string>4.43_rel_ftp_tarball_packaging</string>
-            <string>4.43_rel_il_centralboot_packaging</string>
-            <string>4.43_rel_il_ftp_centralboot_packaging</string>
-            <string>4.43_rel_l4l7_windows_packaging</string>
-            <string>4.43_rel_launch_nightly_packaging</string>
-            <string>4.43_rel_launch_smarttest</string>
-            <string>4.43_rel_launch_smarttest_remote</string>
-            <string>4.43_rel_reset_tag_file</string>
-            <string>4.43_rel_set_status</string>
-            <string>4.43_rel_win_bll_copy_to_filer</string>
-          </jobNames>
-          <jobFilters/>
-          <columns>
-            <hudson.views.StatusColumn/>
-            <hudson.views.WeatherColumn/>
-            <hudson.views.JobColumn/>
-            <hudson.views.LastSuccessColumn/>
-            <hudson.views.LastFailureColumn/>
-            <hudson.views.LastDurationColumn/>
-            <hudson.views.BuildButtonColumn/>
-            <hudson.plugins.nodenamecolumn.NodeNameColumn plugin="nodenamecolumn@1.1"/>
-            <hudson.plugins.projectstats.column.NumBuildsColumn plugin="project-stats-plugin@0.4"/>
-          </columns>
-          <recurse>false</recurse>
-          <useCssStyle>true</useCssStyle>
-          <includeStdJobList>true</includeStdJobList>
-          <leftPortletWidth>50%</leftPortletWidth>
-          <rightPortletWidth>50%</rightPortletWidth>
-          <leftPortlets/>
-          <rightPortlets/>
-          <topPortlets/>
-          <bottomPortlets/>
-        </hudson.plugins.view.dashboard.Dashboard>
       </views>
       <columns>
         <columns/>
