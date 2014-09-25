@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -166,7 +166,7 @@ print &quot;+++++++++++++++ Make wireshark 64-bit package +++++++++++++++++++++&
 subprocess.call([&quot;nmake&quot;, &quot;-f&quot;, &quot;Makefile.nmake&quot;, &quot;packaging&quot;])
 
 print &quot;+++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++&quot;
-shutil.copy(&quot;c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe&quot;, &quot;c:\jenkins\workspace\wireshark_installer\&quot;)</command>
+shutil.copy(&quot;c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe&quot;, &quot;c:\jenkins\workspace\wireshark_installer&quot;)</command>
     </hudson.plugins.python.Python>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
