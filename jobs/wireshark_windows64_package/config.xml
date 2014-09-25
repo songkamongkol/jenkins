@@ -32,6 +32,9 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -70,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -134,31 +137,37 @@ fwrite.close()
 os.remove(&apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)
 os.rename(&apos;C:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
-    <hudson.tasks.BatchFile>
-      <command>echo +++++++++++++++ Build wireshark 64-bit installer +++++++++++++++++++++
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import glob
+import shutil
+import subprocess
 
-call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
-set WIRESHARK_TARGET_PLATFORM=win64
-cd C:\jenkins\workspace\wireshark_windows64_package
-nmake -f Makefile.nmake verify_tools
-nmake -f Makefile.nmake setup
-nmake -f Makefile.nmake distclean
-nmake -f Makefile.nmake all
+print &quot;+++++++++++++++ Build wireshark 64-bit installer +++++++++++++++++++++&quot;
 
-echo +++++++++++++++ Copy openflow.bll +++++++++++++++++
+p=subprocess.Popen(&quot;c:/jenkins/workspace/BuildScripts/BuildWireshark_64bit.bat&quot;, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5
-ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5\openflow13_1_10_x64.dll openflow.dll
+print &quot;+++++++++++++++ Copy openflow.bll +++++++++++++++++++++&quot;
 
-echo +++++++++++++++ Make wireshark 64-bit package +++++++++++++++
+os.chdir(&quot;c:/jenkins/workspace&quot;)
+for file in glob.glob(&quot;version_*.txt&quot;):
+    line = file
+    junk1, junk2 = line.split(&apos;.&apos;, 2)
+    junk3, ver = junk1.split(&apos;_&apos;, 2)
+    break
 
-nmake -f Makefile.nmake packaging
+dst = &apos;c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\\1.10.3-Spirent-&apos; + ver
+srcfile = &apos;c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll&apos;     
+shutil.copy(srcfile, dst)
+os.rename( dst+&apos;\openflow13_1_10_x64.dll&apos;, dst+&apos;\openflow.dll&apos;  )
 
-echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
-xcopy /s c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe c:\jenkins\workspace\wireshark_installer\
+print &quot;+++++++++++++++ Make wireshark 64-bit package +++++++++++++++++++++&quot;
 
-exit /B 0</command>
-    </hudson.tasks.BatchFile>
+subprocess.call([&quot;nmake&quot;, &quot;-f&quot;, &quot;Makefile.nmake&quot;, &quot;packaging&quot;])
+
+print &quot;+++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++&quot;
+shutil.copy(c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe, c:\jenkins\workspace\wireshark_installer\)</command>
+    </hudson.plugins.python.Python>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 from glob import glob
