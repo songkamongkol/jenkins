@@ -56,6 +56,9 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -85,7 +88,6 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
 +//TestCenter/${BRANCH_NAME}/build/il/configs/scripts/... //ws/build/il/configs/scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <p4Label>${BUILD_LABEL}</p4Label>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -115,7 +117,7 @@ Install the latest vcredist from http://www.microsoft.com/download/en/details.as
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -141,7 +143,7 @@ del /Q TestCenterDebug.Windows.bll.tar.gz
 exit /B 0</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_bll_windows_debug_ci</project>
+      <project>4.43_rel_bll_windows_debug_ci</project>
       <filter>TestCenterDebug.Windows.bll.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
@@ -149,7 +151,7 @@ exit /B 0</command>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_bll_windows_debug_ci</project>
+      <project>4.43_rel_bll_windows_debug_ci</project>
       <filter>STAKCommands.beta.Windows.tar.gz</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
@@ -274,7 +276,7 @@ python ..\..\framework\tools\testRunner\testRunner.py --runInParallel=2 --ui --a
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
     <EnvInjectBuildWrapper plugin="envinject@1.89">
       <info>
-        <propertiesContent>STC_BUILD_ROOT=c:\jenkins-tc\workspace\release_ui_debug_ci</propertiesContent>
+        <propertiesContent>STC_BUILD_ROOT=c:\jenkins-tc\workspace\4.43_rel_ui_debug_ci</propertiesContent>
         <loadFilesFromMaster>false</loadFilesFromMaster>
       </info>
     </EnvInjectBuildWrapper>
