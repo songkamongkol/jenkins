@@ -73,7 +73,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -137,7 +137,7 @@ fwrite.close()
 os.remove(&apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)
 os.rename(&apos;C:/jenkins/workspace/wireshark_windows64_package/config_new.nmake&apos;, &apos;C:/jenkins/workspace/wireshark_windows64_package/config.nmake&apos;)</command>
     </hudson.plugins.python.Python>
-    <hudson.tasks.Shell>
+    <hudson.tasks.BatchFile>
       <command>echo +++++++++++++++ Build wireshark 64-bit installer +++++++++++++++++++++
 
 call &quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.Cmd&quot; /Release /x64
@@ -147,7 +147,7 @@ nmake -f Makefile.nmake verify_tools
 nmake -f Makefile.nmake setup
 nmake -f Makefile.nmake distclean
 nmake -f Makefile.nmake all</command>
-    </hudson.tasks.Shell>
+    </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import glob
