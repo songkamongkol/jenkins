@@ -132,7 +132,7 @@ cd /export/crosstools
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <join.JoinTrigger plugin="join@1.15">
-      <joinProjects>release_il_ci_join</joinProjects>
+      <joinProjects>4.43_rel_il_ci_join</joinProjects>
       <joinPublishers/>
       <evenIfDownstreamUnstable>false</evenIfDownstreamUnstable>
     </join.JoinTrigger>
