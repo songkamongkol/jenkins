@@ -39,11 +39,9 @@ release_ccp&lt;br&gt;&#xd;
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.promoted__builds.JobPropertyImpl plugin="promoted-builds@2.17">
-      <activeProcessNames>
-        <string>release Ready for SmartTest</string>
-      </activeProcessNames>
-    </hudson.plugins.promoted__builds.JobPropertyImpl>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -67,7 +65,6 @@ release_ccp&lt;br&gt;&#xd;
 -//TestCenter/*/framework/il/freebsd/sys/dev/digi/...
 -//TestCenter/*/framework/il/platform/scripts/chassis/i686/filesys/etc/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <p4Tool>p4</p4Tool>
@@ -91,7 +88,7 @@ release_ccp&lt;br&gt;&#xd;
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -125,7 +122,7 @@ del Build_*.txt
 rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchangereport=yes</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_ui_ci</project>
+      <project>4.43_rel_ui_ci</project>
       <filter>BLL_changelist_*.txt, UI_changelist_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -135,7 +132,7 @@ rem c:\python27\python %WORKSPACE%\Scripts\ci_run_jenkins_steps.py --createchang
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>release_il_testmodule_contents_ci</project>
+      <project>4.43_rel_il_testmodule_contents_ci</project>
       <filter>*il_testmodule_contents*changelist_*.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -195,7 +192,7 @@ exit /B 0</command>
               <properties>BLL_BUILD_NUMBER=${BUILD_NUMBER}</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>release_bll_windows_packaging_new,release_bll_freebsd71_packaging,release_bll_freebsd63_packaging,release_il_centralboot_packaging,release_ccp_packaging-new,release_cts_windows_packaging,release_bll_linux_x64_packaging,release_cts_linux_packaging,release_bll_solaris_packaging,release_cts_solaris_packaging</projects>
+          <projects>4.43_rel_bll_windows_packaging_new,4.43_rel_bll_freebsd71_packaging,4.43_rel_bll_freebsd63_packaging,4.43_rel_il_centralboot_packaging,4.43_rel_ccp_packaging-new,4.43_rel_cts_windows_packaging,4.43_rel_bll_linux_x64_packaging,4.43_rel_cts_linux_packaging,4.43_rel_bll_solaris_packaging,4.43_rel_cts_solaris_packaging</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
