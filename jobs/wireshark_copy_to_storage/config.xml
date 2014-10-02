@@ -31,8 +31,49 @@
       <autoRebuild>false</autoRebuild>
     </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
-  <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>wshark-u1204-32</assignedNode>
+  <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
+    <configVersion>1</configVersion>
+    <p4User>tableuser</p4User>
+    <p4Passwd></p4Passwd>
+    <p4Port>perforceproxy.cal.ci.spirentcom.com:1999</p4Port>
+    <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
+    <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
+    <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <p4SysDrive></p4SysDrive>
+    <p4SysRoot></p4SysRoot>
+    <p4Tool>p4</p4Tool>
+    <useClientSpec>false</useClientSpec>
+    <useStreamDepot>false</useStreamDepot>
+    <forceSync>false</forceSync>
+    <alwaysForceSync>false</alwaysForceSync>
+    <dontUpdateServer>false</dontUpdateServer>
+    <disableAutoSync>false</disableAutoSync>
+    <disableChangeLogOnly>false</disableChangeLogOnly>
+    <disableSyncOnly>false</disableSyncOnly>
+    <showIntegChanges>false</showIntegChanges>
+    <useOldClientName>false</useOldClientName>
+    <createWorkspace>true</createWorkspace>
+    <updateView>true</updateView>
+    <dontRenameClient>false</dontRenameClient>
+    <updateCounterValue>false</updateCounterValue>
+    <dontUpdateClient>false</dontUpdateClient>
+    <exposeP4Passwd>false</exposeP4Passwd>
+    <wipeBeforeBuild>false</wipeBeforeBuild>
+    <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
+    <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
+    <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
+    <firstChange>0</firstChange>
+    <fileLimit>0</fileLimit>
+    <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
+    <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
+    <lineEndValue>local</lineEndValue>
+    <useViewMask>true</useViewMask>
+    <useViewMaskForPolling>true</useViewMaskForPolling>
+    <useViewMaskForSyncing>false</useViewMaskForSyncing>
+    <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
+  </scm>
+  <assignedNode>wshark-Win7-64</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -40,11 +81,71 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>echo &quot; clear all installer in \\storage\builds\wireshark\temp &quot;
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import glob
 
-</command>
-    </hudson.tasks.Shell>
+print &quot;++++++++++++++ Check if installers from all VMs (Windows/CentOS/Ubuntu 32-bit and 64-bit) are uploaded to \\storage\builds\wireshark ++++++++++++++&quot;
+
+ver = &apos;0&apos;
+
+fread = open(&apos;\\\\storage\\builds\\wireshark\\latestbuild.txt&apos;,&apos;r&apos;)
+for line in fread:
+    if &apos;wireshark-1.10.3-spirent-&apos; in line:
+        junk1, junk2, junk3, ver = line.split(&apos;-&apos;, 4)
+fread.close()
+
+path = &quot;\\\\storage\\builds\\wireshark\\wireshark-1.10.3-spirent-&quot; + ver
+
+win32 = False
+win64 = False
+centos32 = False
+centos64 = False
+ubuntu32 = False
+ubuntu64 = False
+
+print &quot;++++++++++++++ List all files under \\storage\builds\wireshark ++++++++++++++&quot;
+#for (dirpath, dirnames, filenames) in os.walk(path):
+#     print filenames
+
+filenames = [f for f in os.listdir(filepath) if os.path.isfile(os.path.join(filepath,f))]
+for name in filenames:
+     if name == &quot;wireshark-1.10.3-spirent_&quot;+ver+&quot;.i686.rpm.tar.gz&quot;:
+           centos32 = True
+     elif name == &quot;wireshark-1.10.3-spirent_&quot;+ver+&quot;.x86_64.rpm.tar.gz&quot;:
+           centos64 = True
+     elif name == &quot;wireshark_1.10.3-spirent-&quot;+ver+&quot;_i386.deb.tar.gz&quot;:
+           ubuntu32 = True 
+     elif name == &quot;wireshark_1.10.3-spirent-&quot;+ver+&quot;_amd64.deb.tar.gz&quot;:
+           ubuntu64 = True 
+     elif  name == &quot;Wireshark-win32-1.10.3-Spirent-&quot;+ver+&quot;.exe&quot;:
+           win32 = True
+     elif  name == &quot;Wireshark-win64-1.10.3-Spirent-&quot;+ver+&quot;.exe&quot;:
+           win64 = True
+
+filestring = path + &quot;\\&quot;
+
+if win32 == True and win64 == True and centos32 == True and centos64 == True and ubuntu32 == True and ubuntu64 == True:
+	fo = open(filestring+&apos;All installers uploaded successfully.txt&apos;, &apos;w+&apos;)
+	fo.close();
+else:
+	if win32 == False:
+		filestring = filestring +&apos;windows 32, &apos;
+	if win64 == False:
+		filestring = filestring +&apos;windows 64, &apos;
+	if centos32 == False:
+		filestring = filestring +&apos;centos 32, &apos;	
+ 	if centos64 == False:
+		filestring = filestring +&apos;centos 64, &apos;
+	if ubuntu32 == False:
+		filestring = filestring +&apos;ubuntu 32, &apos;	
+ 	if ubuntu64 == False:
+		filestring = filestring +&apos;ubuntu 64&apos;
+	fo = open(filestring+&apos; installers are not uploaded. This build failed.txt&apos;, &apos;w&apos;)
+	fo.close()
+	
+	exit(1)	</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
