@@ -46,7 +46,6 @@ Create wireshark-1.10.3-spirent-# folder at \\storage\builds\wireshark. Upload l
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -76,7 +75,7 @@ Create wireshark-1.10.3-spirent-# folder at \\storage\builds\wireshark. Upload l
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -132,8 +131,13 @@ for line in fread:
             for allfiles in os.listdir(fullpath):
                 file_path = os.path.join(fullpath, allfiles)                
                 os.remove(file_path)
-         break
 
+         changelist = os.environ[&apos;P4_CHANGELIST&apos;]
+         fo = open(fullpath+&apos;\\lastest_checkin_&apos;+changelist+&apos;.txt&apos;, &apos;w+&apos;)
+         fo.close()
+
+         break
+ 
 fread.close()
 
 print &quot; ++++++++++++++++++ Update latest version and check in info ++++++++++++++++++ &quot;
