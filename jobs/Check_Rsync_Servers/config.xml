@@ -43,7 +43,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -67,11 +67,11 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>net use \\martin.spirentcom.com\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
-net use \\mcelroy.spirentcom.com\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
-net use \\anahola.spirentcom.com\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
-net use \\maingard.spirentcom.com\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
-net use \\klien.spirentcom.com\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
+      <command>net use \\martin\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
+net use \\mcelroy\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
+net use \\anahola\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
+net use \\maingard\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
+net use \\klien\archive\pv Spirent8 /USER:SPIRENTCOM\qabuild
 perl check_rsync_servers.pl</command>
     </hudson.tasks.BatchFile>
   </builders>
