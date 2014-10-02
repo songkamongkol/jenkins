@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Check current wireshark version on this VM by command &apos;wireshark -v&apos;.&lt;br&gt;&#xd;
+Get latest wireshark version from \\storage\builds\wireshark\wireshark-1.10.3-spirent-#\wireshark-1.10.3-spirent_#.i686.rpm.tar.gz.&lt;br&gt;&#xd;
+If current version and latest version is the same, exit this task. &lt;br&gt;&#xd;
+If wireshark is not installed on this VM, install the latest one.&lt;br&gt;&#xd;
+Otherwise unintall current one and install the latest one.&lt;br&gt;</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -35,10 +39,77 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>echo &quot;++++++++++++++++++ Smart Test ++++++++++++++++++&quot;
-</command>
-    </hudson.tasks.Shell>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+import subprocess
+import glob
+import stat
+
+print &quot;++++++++++++++++++ Detect version output file  ++++++++++++++++++&quot;
+currpath = os.getcwd()
+if os.path.isfile(currpath+&quot;currVersion.txt&quot;):
+      os.remove(currpath+&quot;/currVersion.txt&quot;)
+
+print &quot;++++++++++++++++++ Detect if wireshark is installed on current VM ++++++++++++++++++&quot;
+
+command = &apos;tshark -v&apos;
+myoutfile = open (&apos;currVersion.txt&apos;, &apos;w&apos;)
+subprocess.call(command, stdout=myoutfile, shell=True)
+
+ver = 0
+
+if os.stat(&quot;currVersion.txt&quot;)[6]==0:
+    print &quot;Wireshark is not installed&quot;
+else:
+     fread = open(currpath+&apos;/currVersion.txt&apos;, &apos;r&apos;)
+     for line in fread:
+         if &quot;Spirent Wireshark 1.10.3 v&quot; in line:
+             # Get current version
+	     junk1, junk2, junk3, vstr = line.split(&apos; &apos;, 4)
+             vstr2, junk4 = vstr.split(&apos;.&apos;, 2)
+	     ver = vstr2[1:]
+             print &quot;Wireshark is installed. Current version is wireshark-1.10.3-spirent-&quot;, ver
+             break
+
+print &quot;++++++++++++++++++ Detect latest wireshark installer ++++++++++++++++++&quot;
+
+newver = 0
+
+fread = open(&apos;/mnt/builds/wireshark/latestbuild.txt&apos;,&apos;r&apos;)
+for line in fread:
+    if &apos;wireshark-1.10.3-spirent-&apos; in line:
+        junk1, junk2, junk3, newver = line.split(&apos;-&apos;, 4)
+fread.close()
+
+if newver == 0: 
+   print &quot;Error! Latest version does not exist!&quot;
+   exit(1)
+else:
+    print &quot;Latest version is wireshark-1.10.3-spirent-&quot;, newver
+
+print &quot;++++++++++++++++++ Update to latest version if necessary ++++++++++++++++++&quot;
+
+if int(ver) == int(newver):
+    print &quot;Latest wireshark has been installed on this VM. No update required.&quot;  
+    exit(0)
+
+# untar installer file
+os.chdir(&quot;/mnt/builds/wireshark/wireshark-1.10.3-spirent-&quot;+newver)
+
+subprocess.call(&apos;tar -zxvf wireshark-1.10.3-spirent_&apos;+newver+&apos;.i686.rpm.tar.gz&apos;, shell=True)
+
+currpath = os.getcwd() + &apos;/wireshark-1.10.3-spirent_&apos;+newver
+
+if ver == 0:
+    subprocess.call(&apos;yum -y install &apos;+currpath +&apos;/wireshark-1.10.3-spirent_*.i686.rpm&apos;, shell=True)
+    subprocess.call(&apos;yum -y install &apos;+currpath +&apos;/wireshark-gnome-1.10.3-spirent_*.i686.rpm&apos;, shell=True)
+else:
+    print &quot;Wireshark will be updated to wireshark-1.10.3-spirent-&quot;, newver
+    subprocess.call(&apos;yum -y remove wireshark-gnome&apos;, shell=True)
+    subprocess.call(&apos;yum -y remove wireshark&apos;, shell=True)
+    subprocess.call(&apos;yum -y install &apos; + currpath + &apos;/wireshark-1.10.3-spirent_*.i686.rpm&apos;, shell=True)
+    subprocess.call(&apos;yum -y install &apos; + currpath + &apos;/wireshark-gnome-1.10.3-spirent_*.i686.rpm&apos;, shell=True)</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
