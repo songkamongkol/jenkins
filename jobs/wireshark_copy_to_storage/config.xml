@@ -62,7 +62,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -123,7 +123,7 @@ for name in filenames:
      elif  name == &quot;Wireshark-win64-1.10.3-Spirent-&quot;+ver+&quot;.exe&quot;:
            win64 = True
 
-filestring = path + &quot;\\&quot;
+filestring = filepath + &quot;\\&quot;
 
 if win32 == True and win64 == True and centos32 == True and centos64 == True and ubuntu32 == True and ubuntu64 == True:
 	fo = open(filestring+&apos;All installers uploaded successfully.txt&apos;, &apos;w+&apos;)
