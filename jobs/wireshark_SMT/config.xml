@@ -77,8 +77,8 @@ newver = 0
 
 fread = open(&apos;/mnt/builds/wireshark/latestbuild.txt&apos;,&apos;r&apos;)
 for line in fread:
-    if &apos;wireshark-1.10.3-spirent-&apos; in line:
-        junk1, junk2, junk3, newver = line.split(&apos;-&apos;, 4)
+    if &apos;wireshark-1.10.3-spirent_&apos; in line:
+        junk1, newver = line.split(&apos;_&apos;, 2)
 fread.close()
 
 if newver == 0: 
