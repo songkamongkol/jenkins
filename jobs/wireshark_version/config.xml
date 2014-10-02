@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Update wireshark version files once wireshark build in CentOS, Ubuntu and Windows are successful.&lt;br&gt;&#xd;
+Each version file is updated by new version # = old version # + 1.&lt;br&gt;&#xd;
+Create wireshark-1.10.3-spirent-# folder at \\storage\builds\wireshark. Upload latest_build_#.txt and version_#.txt under this directory.&lt;br&gt;</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -44,6 +46,7 @@
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//Wireshark_Spirent/${BRANCH_NAME}/src/... //ws/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -101,31 +104,18 @@ cd c:\jenkins\workspace\BuildScripts
 
 python UpdateVersion.py
 
-p4 submit -d &quot;Update wireshark version number&quot;
-
-</command>
+p4 submit -d &quot;Update wireshark version number&quot;</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 import glob
 import shutil
 
-print &quot; ++++++++++++++++++ Get last changelist number ++++++++++++++++++ &quot;
-
-os.chdir(&quot;c:\jenkins\workspace&quot;)
-changelist = os.environ[&apos;P4_CHANGELIST&apos;]
-
-for filename in glob.glob(&quot;wireshark_changelist_*.txt&quot;):
-    os.remove(filename)
-
-fo = open(&quot;wireshark_changelist_&quot;+str(changelist)+&apos;.txt&apos;, &apos;w&apos;)
-srcfile = &apos;c:\jenkins\workspace\wireshark_changelist_&apos;+str(changelist)+&apos;.txt&apos;     
-fo.close();
-
 print &quot; ++++++++++++++++++ Create a folder in \\storage\builds\wireshark ++++++++++++++++++ &quot;
 
 # Get current version number from config.nmake
 fread = open(&apos;c:\jenkins\workspace\wireshark_version\config.nmake&apos;, &apos;r&apos;)
+vstr = &apos;0&apos;
 
 for line in fread:
      if &quot;VERSION_EXTRA=-Spirent-&quot; in line:
@@ -133,19 +123,44 @@ for line in fread:
          junk1, junk2, vstr = line2.split(&apos;-&apos;, 3)
          foldername = &quot;wireshark-1.10.3-spirent-&quot; + vstr
          fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot; + foldername
+         # If the folder does not exist, create a new one. Otherwise clear the files
          if not os.path.exists(fullpath):
-            print &quot;make dir&quot;
+            print &quot;+++++++++++++++ make a directory of &quot;, fullpath, &quot; +++++++++++&quot;
             os.makedirs(fullpath)    
-            shutil.copy(srcfile, fullpath)
-  
          else:
-            print &quot; +++++ The folder &quot;, fullpath, &quot; is already created. ++++++ &quot;
+            print &quot; +++++ The folder &quot;, fullpath, &quot; is already created. Current files in this folder will be cleared. ++++++ &quot;
+            for allfiles in os.listdir(fullpath):
+                file_path = os.path.join(fullpath, allfiles)                
+                os.remove(file_path)
          break
 
-fread.close()</command>
+fread.close()
+
+print &quot; ++++++++++++++++++ Update latest version and check in info ++++++++++++++++++ &quot;
+
+fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot;
+os.chdir(fullpath)
+
+fo = open(fullpath+&apos;latestbuild.txt&apos;, &apos;w+&apos;)
+fo.write(&apos;wireshark-1.10.3-spirent-&apos; + vstr)
+fo.close()</command>
     </hudson.plugins.python.Python>
   </builders>
   <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>wireshark_centos32_package, wireshark_centos64_package, wireshark_ubuntu32_package, wireshark_ubuntu64_package, wireshark_windows64_package</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <join.JoinTrigger plugin="join@1.15">
+      <joinProjects>wireshark_copy_to_storage</joinProjects>
+      <joinPublishers/>
+      <evenIfDownstreamUnstable>false</evenIfDownstreamUnstable>
+    </join.JoinTrigger>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
