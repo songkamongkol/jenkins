@@ -146,7 +146,7 @@ fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot;
 os.chdir(fullpath)
 
 fo = open(fullpath+&apos;latestbuild.txt&apos;, &apos;w+&apos;)
-fo.write(&apos;wireshark-1.10.3-spirent-&apos; + vstr)
+fo.write(&apos;wireshark-1.10.3-spirent_&apos; + vstr)
 fo.close()</command>
     </hudson.plugins.python.Python>
   </builders>
