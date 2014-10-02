@@ -62,7 +62,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -91,8 +91,8 @@ ver = &apos;0&apos;
 
 fread = open(&apos;\\\\storage\\builds\\wireshark\\latestbuild.txt&apos;,&apos;r&apos;)
 for line in fread:
-    if &apos;wireshark-1.10.3-spirent-&apos; in line:
-        junk1, junk2, junk3, ver = line.split(&apos;-&apos;, 4)
+    if &apos;wireshark-1.10.3-spirent_&apos; in line:
+        junk1, ver = line.split(&apos;_&apos;, 4)
 fread.close()
 
 filepath = &quot;\\\\storage\\builds\\wireshark\\wireshark-1.10.3-spirent_&quot; + ver
