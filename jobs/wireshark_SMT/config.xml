@@ -94,7 +94,7 @@ if int(ver) == int(newver):
     exit(0)
 
 # untar installer file
-os.chdir(&quot;/mnt/builds/wireshark/wireshark-1.10.3-spirent-&quot;+newver)
+os.chdir(&quot;/mnt/builds/wireshark/wireshark-1.10.3-spirent_&quot;+newver)
 
 subprocess.call(&apos;tar -zxvf wireshark-1.10.3-spirent_&apos;+newver+&apos;.i686.rpm.tar.gz&apos;, shell=True)
 
