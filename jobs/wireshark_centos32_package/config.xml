@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Make wireshark CentOS 32-bit package (wireshark-1.10.3-spirent_#.i686.rpm.tar.gz), which contains wireshark.rpm amd wireshark-gnome.rpm.&lt;br&gt;&#xd;
+Upload the package to \\storage\builds\wireshark\wireshark-1.10.3-spirent-# folder.&lt;br&gt;&#xd;
+</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -32,6 +34,9 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -64,7 +69,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -86,26 +91,44 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
+# Delete existing installer files
+rm -r -f /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/*
+
 # Make wireshark CentOS binary package
 echo &quot;++++++++++++++++++++++ Wireshark CentOS 32-bit Package +++++++++++++++++++++&quot;
 sudo chmod -R 777 .
 sudo ./autogen.sh
 sudo ./configure
-sudo make
+#sudo make
 
-# Remove previous rpm installers
-cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/
-rm -r -f wireshark-1.10.3-*.rpm
+#cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package
 
-cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package
-
-sudo ./configure
+#sudo ./configure
 sudo make rpm-package
 
 # new rpm file is located at /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/wireshark-1.10.3-spirent_3.i686.rpm
 
-# copy Ubuntu32 installer to \\martin
-#cp $fnpre$fnend &quot;\\martin\archive\pv\wireshark</command>
+echo &quot;+++++++++++++++++++++ Get Version Number +++++++++++++++++++++++&quot;
+
+cd /home/spirent/jenkins-tomcat/workspace/wireshark_centos32_package/packaging/rpm/RPMS/i686/
+# fn = wireshark_1.10.3-spirent-5_i386.deb
+fn=$(find -name &apos;wireshark-1.10.3-spirent_*.i686.rpm&apos;)
+len=${#fn}
+ver=${fn:27:len-36}
+fnpre=${fn:2:len-11}
+
+echo &quot;+++++++++++++++++++++ Tar wireshark.rpm, wireshark-gnome.rpm in one file +++++++++++++++++++++++&quot;
+
+mkdir $fnpre
+cp wireshark-1.10.3-spirent_*.i686.rpm $fnpre
+cp wireshark-gnome-1.10.3-spirent_*.i686.rpm $fnpre
+
+fnend=&quot;.i686.rpm.tar.gz&quot;
+tar -zcvf $fnpre$fnend $fnpre
+
+echo &quot;+++++++++++++++++++++ Copy installer to \\storage\builds\wireshark\ +++++++++++++++++++++++&quot;
+path=&quot;/mnt/builds/wireshark/wireshark-1.10.3-spirent_&quot;
+cp $fnpre$fnend $path$ver</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
