@@ -62,7 +62,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -95,7 +95,7 @@ for line in fread:
         junk1, junk2, junk3, ver = line.split(&apos;-&apos;, 4)
 fread.close()
 
-filepath = &quot;\\\\storage\\builds\\wireshark\\wireshark-1.10.3-spirent-&quot; + ver
+filepath = &quot;\\\\storage\\builds\\wireshark\\wireshark-1.10.3-spirent_&quot; + ver
 
 win32 = False
 win64 = False
