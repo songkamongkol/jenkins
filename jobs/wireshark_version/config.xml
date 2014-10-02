@@ -75,7 +75,7 @@ Create wireshark-1.10.3-spirent-# folder at \\storage\builds\wireshark. Upload l
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -120,7 +120,7 @@ for line in fread:
      if &quot;VERSION_EXTRA=-Spirent-&quot; in line:
          line2 = line.replace(&quot;\n&quot;, &quot;&quot;)
          junk1, junk2, vstr = line2.split(&apos;-&apos;, 3)
-         foldername = &quot;wireshark-1.10.3-spirent-&quot; + vstr
+         foldername = &quot;wireshark-1.10.3-spirent_&quot; + vstr
          fullpath = &quot;\\\\storage\\builds\\wireshark\\&quot; + foldername
          # If the folder does not exist, create a new one. Otherwise clear the files
          if not os.path.exists(fullpath):
