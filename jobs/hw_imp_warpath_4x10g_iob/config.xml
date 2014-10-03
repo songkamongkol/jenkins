@@ -232,7 +232,7 @@ echo &quot;-g Encrypt:No&quot; &gt;&gt; WarpathTop_4x10G.ut
 
 #launch smartxplorer
 echo &quot;Start smartxplorer process&quot;
-smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo WarpathTop_4x10G.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;${TRCE_OPT}&quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
+smartxplorer -p xc7k410t-ffg676-2 -l hosts.txt -b -bo WarpathTop_4x10G.ut -m 12 -max_time &quot;04:00:00&quot; -to &quot;${TRCE_OPT} &quot; -rcmd ssh -uc ./ucf/Warpath_4x10G_PCIe2x4.ucf -sd &quot;../SourceCode/CoreGen;../SourceCode/PCIe/CoreGen;../SourceCode/GenAnaFramerTop/Analyzer/coregen;../SourceCode/GenAnaFramerTop/Framer/TxPhy/CoreGen;../SourceCode/CoreGen/chipscope;../SourceCode/CoreGen/ClockModule&quot; WarpathTop_4x10G.ngd
 
 </command>
     </hudson.tasks.Shell>
