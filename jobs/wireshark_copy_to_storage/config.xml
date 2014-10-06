@@ -178,7 +178,7 @@ import urllib2
 job = &apos;Remote_Trigger_Wireshark&apos;
 url = &quot;http://jenkins-smt.cal.ci.spirentcom.com:8080/job/&quot; + job +&quot;/build&quot;
 print url
-data=&quot;token=mosheallowedtodothis&quot;
+data=&quot;token=meenuallowedtodothis&quot;
 #creating HTTP Req
 req = urllib2.Request(url,data)
 f = urllib2.urlopen(req)</command>
