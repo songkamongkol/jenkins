@@ -62,7 +62,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -162,6 +162,31 @@ else:
       <failBuildOnError>true</failBuildOnError>
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
+      <buildSteps>
+        <hudson.plugins.python.Python plugin="python@1.2">
+          <command>import os
+import sys
+import subprocess
+import optparse
+import re
+import string
+import urllib2
+
+
+ 
+job = &apos;Remote_Trigger_Wireshark&apos;
+url = &quot;http://jenkins-smt.cal.ci.spirentcom.com:8080/job/&quot; + job +&quot;/build&quot;
+print url
+data=&quot;token=mosheallowedtodothis&quot;
+#creating HTTP Req
+req = urllib2.Request(url,data)
+f = urllib2.urlopen(req)</command>
+        </hudson.plugins.python.Python>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>lili.huang@spirent.com,somboon.ongkamongkol@spirent.com</recipientList>
       <configuredTriggers>
