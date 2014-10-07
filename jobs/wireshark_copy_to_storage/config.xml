@@ -148,15 +148,6 @@ else:
     </hudson.plugins.python.Python>
   </builders>
   <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>wireshark_SMT</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
       <unstableOnWarning>false</unstableOnWarning>
       <failBuildOnError>true</failBuildOnError>
