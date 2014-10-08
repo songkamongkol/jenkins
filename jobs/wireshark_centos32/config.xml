@@ -116,8 +116,8 @@ sudo make</command>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>false</sendToRequester>
-            <includeCulprits>false</includeCulprits>
+            <sendToRequester>true</sendToRequester>
+            <includeCulprits>true</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
