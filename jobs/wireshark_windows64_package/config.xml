@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Make wireshark 32-bit and 64-bit packages. Both installers are .exe files.&lt;br&gt;&#xd;
+Set envionment to 64-bit and make 64-bit package.&lt;br&gt;&#xd;
+Then change environment to 32-bit and make 32-bit package.&lt;br&gt;&#xd;
+Upload the package to \\storage\builds\wireshark\wireshark-1.10.3-spirent-# folder.</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -73,7 +76,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>false</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -146,35 +149,21 @@ cd C:\jenkins\workspace\wireshark_windows64_package
 nmake -f Makefile.nmake verify_tools
 nmake -f Makefile.nmake setup
 nmake -f Makefile.nmake distclean
-nmake -f Makefile.nmake all</command>
+nmake -f Makefile.nmake all
+
+echo +++++++++++++++ Copy openflow.bll +++++++++++++++++
+
+c:\Python27\python.exe C:\jenkins\workspace\BuildScripts\CopyOpenflow_64.py
+
+echo +++++++++++++++ Make wireshark 64-bit package +++++++++++++++
+
+nmake -f Makefile.nmake packaging
+
+echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
+xcopy /s c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe c:\jenkins\workspace\wireshark_installer\
+
+exit /B 0</command>
     </hudson.tasks.BatchFile>
-    <hudson.plugins.python.Python plugin="python@1.2">
-      <command>import os
-import glob
-import shutil
-import subprocess
-
-print &quot;+++++++++++++++ Copy openflow.bll +++++++++++++++++++++&quot;
-
-os.chdir(&quot;c:\jenkins\workspace&quot;)
-for file in glob.glob(&quot;version_*.txt&quot;):
-    line = file
-    junk1, junk2 = line.split(&apos;.&apos;, 2)
-    junk3, ver = junk1.split(&apos;_&apos;, 2)
-    break
-
-dst = &apos;c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\\1.10.3-Spirent-&apos; + ver
-srcfile = &apos;c:\jenkins\workspace\openflowdll\openflow13_1_10_x64.dll&apos;     
-shutil.copy(srcfile, dst)
-os.rename( dst+&apos;\openflow13_1_10_x64.dll&apos;, dst+&apos;\openflow.dll&apos;  )
-
-print &quot;+++++++++++++++ Make wireshark 64-bit package +++++++++++++++++++++&quot;
-
-subprocess.call([&quot;nmake&quot;, &quot;-f&quot;, &quot;Makefile.nmake&quot;, &quot;packaging&quot;])
-
-print &quot;+++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++&quot;
-shutil.copy(&quot;c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe&quot;, &quot;c:\jenkins\workspace\wireshark_installer&quot;)</command>
-    </hudson.plugins.python.Python>
     <hudson.plugins.python.Python plugin="python@1.2">
       <command>import os
 from glob import glob
@@ -216,8 +205,7 @@ nmake -f Makefile.nmake all
 
 echo ++++++++++++++ Copy openflow.bll ++++++++++++++
 
-xcopy /s c:\jenkins\workspace\openflowdll\openflow13_1_10.dll c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5
-ren c:\jenkins\workspace\wireshark_windows64_package\wireshark-gtk2\plugins\1.10.3-Spirent-5\openflow13_1_10.dll openflow.dll
+c:\Python27\python.exe C:\jenkins\workspace\BuildScripts\CopyOpenflow_32.py
 
 echo ++++++++++++++ Make wireshark 32-bit package ++++++++++++++
 nmake -f Makefile.nmake packaging
@@ -225,13 +213,11 @@ nmake -f Makefile.nmake packaging
 echo +++++++++++++++ Copy installer to wireshark_installer folder +++++++++++++++
 xcopy /s c:\jenkins\workspace\wireshark_windows64_package\packaging\nsis\Wireshark-win*.exe c:\jenkins\workspace\wireshark_installer\
 
-exit /B 0</command>
-    </hudson.tasks.BatchFile>
-    <hudson.tasks.BatchFile>
-      <command>echo ++++++++++++++ Copy installer files to \\storage\builds\wireshark\temp ++++++++++++++++++++
+echo ++++++++++++++ Copy installer files to \\storage\builds\wireshark\temp ++++++++++++++++++++
 
-cd C:\jenkins\workspace\wireshark_installer
-xcopy /s Wireshark-win*-1.10.3-spirent-*.exe \\storage\builds\wireshark\temp</command>
+c:\Python27\python.exe C:\jenkins\workspace\BuildScripts\UploadInstaller.py
+
+exit /B 0</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
@@ -241,7 +227,7 @@ xcopy /s Wireshark-win*-1.10.3-spirent-*.exe \\storage\builds\wireshark\temp</co
       <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>lili.huang@spirent.com,somboon.ongkamongkol@spirent.com</recipientList>
+      <recipientList>lili.huang@spirent.com, meenu.pandey@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -249,8 +235,8 @@ xcopy /s Wireshark-win*-1.10.3-spirent-*.exe \\storage\builds\wireshark\temp</co
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>false</sendToRequester>
-            <includeCulprits>false</includeCulprits>
+            <sendToRequester>true</sendToRequester>
+            <includeCulprits>true</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
