@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Sync to //Wireshark_Spirent/mainline/src/.&lt;br&gt;&#xd;
+If the check in is //Wireshark_Spirent/mainline/src/packaging/rpm/SPECS/wireshark.spec.in, //Wireshark_Spirent/mainline/src/version_info.c, //Wireshark_Spirent/mainline/src/config.nmake, or &#xd;
+//Wireshark_Spirent/mainline/src/debian/changelog, following build won&apos;t be called.&lt;br&gt;&#xd;
+Otherwise call wireshark build in CentOS 32-bit, Ubuntu 32-bit, and windows 64-bit.&lt;br&gt;&#xd;
+</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -122,7 +126,7 @@
       <evenIfDownstreamUnstable>false</evenIfDownstreamUnstable>
     </join.JoinTrigger>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>lili.huang@spirent.com</recipientList>
+      <recipientList>lili.huang@spirent.com, meenu.pandey@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -130,8 +134,8 @@
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>false</sendToRequester>
-            <includeCulprits>false</includeCulprits>
+            <sendToRequester>true</sendToRequester>
+            <includeCulprits>true</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
