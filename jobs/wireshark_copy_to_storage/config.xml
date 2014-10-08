@@ -179,7 +179,7 @@ f = urllib2.urlopen(req)</command>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
-      <recipientList>lili.huang@spirent.com,somboon.ongkamongkol@spirent.com</recipientList>
+      <recipientList>lili.huang@spirent.com, meenu.pandey@spirent.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
           <email>
@@ -187,8 +187,8 @@ f = urllib2.urlopen(req)</command>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
             <body>$PROJECT_DEFAULT_CONTENT</body>
             <sendToDevelopers>true</sendToDevelopers>
-            <sendToRequester>false</sendToRequester>
-            <includeCulprits>false</includeCulprits>
+            <sendToRequester>true</sendToRequester>
+            <includeCulprits>true</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
             <attachmentsPattern></attachmentsPattern>
             <attachBuildLog>false</attachBuildLog>
