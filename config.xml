@@ -2282,7 +2282,7 @@
         <hudson.plugins.nested__view.NestedView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Proteus</name>
-          <description>Proteus FPGA builds</description>
+          <description>Proteus builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
