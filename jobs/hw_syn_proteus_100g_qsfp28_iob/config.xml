@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus DX 1x100G I/O Board FPGA Synthesis</description>
+  <description>Proteus 1x100G QSFP28 I/O Board FPGA Synthesis</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -44,9 +44,8 @@
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/... //ws/SourceCode/...
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v  //ws/SourceCode/include/VERSION_ColossusDX_1x100G.v
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SynplifyBlade/... //ws/SynplifyBlade/...</projectPath>
+-//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*.v  //ws/SourceCode/include/VERSION_*.v
++//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SynplifyProteus/... //ws/SynplifyProteus/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -79,8 +78,7 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_1x100G.v
-//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v</excludedFiles>
+    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
     <lineEndValue>local</lineEndValue>
@@ -112,8 +110,8 @@ export LM_LICENSE_FILE=${LM_LICENSE_FILE}
 echo ${P4_CHANGELIST} &gt; changelist.txt
 
 echo &quot;Synthesizing&quot;
-${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./SynplifyBlade/ColossusDX_BLADE100G.prj&quot; || cat ./SynplifyBlade/rev_1/*.srr
-cat ./SynplifyBlade/rev_1/*.srr
+${SYNOPSYS_PATH}/synplify_pro -batch -license_release &quot;./SynplifyProteus/Proteus_1x100G.prj&quot; || cat ./SynplifyProteus/rev_1/*.srr
+cat ./SynplifyProteus/rev_1/*.srr
 
 </command>
     </hudson.tasks.Shell>
@@ -137,9 +135,9 @@ cat ./SynplifyBlade/rev_1/*.srr
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.edf, *.srr</includes>
-            <basedir>SynplifyBlade/rev_1</basedir>
+            <basedir>SynplifyProteus/rev_1</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -152,7 +150,7 @@ cat ./SynplifyBlade/rev_1/*.srr
             <includes>changelist.txt</includes>
             <basedir></basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -165,7 +163,7 @@ cat ./SynplifyBlade/rev_1/*.srr
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>SynplifyBlade/rev_1/*.edf, changelist.txt</artifacts>
+      <artifacts>SynplifyProteus/rev_1/*.edf, changelist.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -252,15 +250,6 @@ rm -rf ${WORKSPACE}/*</command>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>hw_imp_colossus_dx_100g_iob</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.8"/>
