@@ -2282,11 +2282,13 @@
         <listView>
           <owner class="hudson.plugins.nested_view.NestedView" reference="../../.."/>
           <name>Proteus</name>
+          <description>Proteus builds</description>
           <filterExecutors>false</filterExecutors>
           <filterQueue>false</filterQueue>
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>hw_syn_proteus_100g_qsfp28_iob</string>
           </jobNames>
           <jobFilters/>
           <columns>
