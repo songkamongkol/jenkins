@@ -2288,6 +2288,7 @@
           <properties class="hudson.model.View$PropertyList"/>
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
+            <string>hw_imp_proteus_dx_100g_qsfp28_iob</string>
             <string>hw_syn_proteus_100g_qsfp28_iob</string>
           </jobNames>
           <jobFilters/>
