@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>FTP central boot image file from 10.2.19.55 machine to martin&lt;br&gt;
 Requires I: drive to be mapped to \\martin\archive\pv&lt;br&gt;
@@ -20,8 +19,8 @@ Triggers integration_set_status job to create entry in build database&lt;br&gt;<
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description></description>
-          <defaultValue>4.45_rel</defaultValue>
+          <description/>
+          <defaultValue>4.46_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
