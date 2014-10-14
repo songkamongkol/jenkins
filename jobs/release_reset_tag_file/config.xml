@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>Rename pw_packages_to_test.new in \\martin\archive\pv\TestCenter\4.20\Engineering_Builds to &lt;br&gt;
 pw_packages_to_test and clean out the same file in \\spccalfs04\SCM\SCMSmartTest\4.20 &lt;br&gt;
@@ -19,22 +18,22 @@ pw_packages_to_test and clean out the same file in \\spccalfs04\SCM\SCMSmartTest
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description></description>
-          <defaultValue>4.45_rel</defaultValue>
+          <description/>
+          <defaultValue>4.46_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
-          <description></description>
-          <defaultValue>4.45</defaultValue>
+          <description/>
+          <defaultValue>4.46</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BLL_BUILD_NUMBER</name>
-          <description></description>
+          <description/>
           <defaultValue>BAD_BUILD_NUMBER</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SOURCE_OS</name>
-          <description></description>
+          <description/>
           <defaultValue>IL</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
