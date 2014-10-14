@@ -85,7 +85,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -180,7 +180,7 @@ echo &quot;Start implementation&quot;
 cd ${WORKSPACE}/VivadoProteus
 
 chmod u+w ./*.xpr
-chmod u+w ./VivadoProteus.data/runs/*
+#chmod u+w ./VivadoProteus.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
