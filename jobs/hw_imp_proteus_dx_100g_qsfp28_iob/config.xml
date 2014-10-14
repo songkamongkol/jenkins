@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Colossus DX 1x100G I/O Board FPGA Implementation</description>
+  <description>Proteus DX 1x100G-QSFP28 I/O Board FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -191,10 +191,10 @@ echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;wait_on_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;open_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
-#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
-echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
-echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force proteus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
+#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file proteus_iob_imp.sdf proteus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force proteus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf -force proteus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;write_bitstream ./VivadoProteus.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
@@ -233,7 +233,7 @@ fi</command>
           <includes>version_*.txt</includes>
           <basedir>VivadoProteus</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -260,7 +260,7 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
             <includes>*.bit*</includes>
             <basedir>VivadoProteus/VivadoProteus.runs/impl_1</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -292,14 +292,14 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
-        <includes>VivadoProteus/colossus_iob_imp*.v</includes>
+        <includes>VivadoProteus/proteus_iob_imp*.v</includes>
         <excludes></excludes>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
           <command>cd VivadoProteus
-tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
+tar zcvf proteus_iob_imp_sim.tar.gz ./proteus_iob_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
@@ -375,7 +375,7 @@ fi
           <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
           <basedir>${WORKSPACE}/VivadoProteus</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -383,10 +383,10 @@ fi
           <failNoFilesDeploy>false</failNoFilesDeploy>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-          <includes>colossus_iob_imp_sim.tar.gz</includes>
+          <includes>proteus_iob_imp_sim.tar.gz</includes>
           <basedir>${WORKSPACE}/VivadoProteus</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>/net/storage_cal_ci/builds/dev/fpga/proteus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
