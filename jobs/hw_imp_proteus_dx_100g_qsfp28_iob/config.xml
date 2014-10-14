@@ -54,7 +54,7 @@
     <p4Client>${JOB_NAME}</p4Client>
     <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_PROTEUS_1x100G.v  //ws/SourceCode/include/VERSION_PROTEUS_1x100G.v
 +//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoProteus/... //ws/VivadoProteus/...
-+//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/proteus_100g_qsfp28.bit*  //ws/bitstream/candidate/iob/proteus_100g_qsfp28.bit*</projectPath>
++//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*  //ws/bitstream/candidate/iob/${BITSTREAM_NAME}*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
