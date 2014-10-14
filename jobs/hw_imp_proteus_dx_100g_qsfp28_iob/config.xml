@@ -125,7 +125,7 @@
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
       <project>hw_syn_proteus_100g_qsfp28_iob</project>
       <filter>SynplifyProteus/rev_1/Proteus_1x100G.edf</filter>
-      <target>VivadoBlade</target>
+      <target>VivadoProteus</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
       </selector>
@@ -177,14 +177,14 @@ p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_PROTEUS_1x100
 
 
 echo &quot;Start implementation&quot;
-cd ${WORKSPACE}/VivadoBlade
+cd ${WORKSPACE}/VivadoProteus
 
 chmod u+w ./*.xpr
-chmod u+w ./VivadoBlade.data/runs/*
+chmod u+w ./VivadoProteus.data/runs/*
 
 echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
 
-echo &quot;open_project VivadoBlade.xpr&quot; &gt;&gt; myImp.tcl
+echo &quot;open_project VivadoProteus.xpr&quot; &gt;&gt; myImp.tcl
 echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
 echo &quot;reset_run impl_1&quot; &gt;&gt; myImp.tcl
 echo &quot;launch_runs impl_1&quot; &gt;&gt; myImp.tcl
@@ -197,7 +197,7 @@ echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_an
 echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
 #echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
 echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
-echo &quot;write_bitstream ./VivadoBlade.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoProteus.runs/impl_1/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
 echo &quot;close_project&quot; &gt;&gt; myImp.tcl
 echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
@@ -210,29 +210,28 @@ vivado -mode batch -source ./myImp.tcl</command>
 #grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
 
 #parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log ];
+if [ -f ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log ];
 then
     #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
 
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
 
     if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
     then
         echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
         exit 1
     fi
-fi
-</command>
+fi</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/version_*.txt</file>
+        <file>VivadoProteus/version_*.txt</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </condition>
       <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
         <entry>
           <includes>version_*.txt</includes>
-          <basedir>VivadoBlade</basedir>
+          <basedir>VivadoProteus</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
@@ -247,19 +246,19 @@ fi
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}</file>
+        <file>VivadoProteus/VivadoProteus.runs/impl_1/${BITSTREAM_NAME}</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoBlade/VivadoBlade.runs/impl_1/
+          <command>cd VivadoProteus/VivadoProteus.runs/impl_1/
 md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 </command>
         </hudson.tasks.Shell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>VivadoBlade/VivadoBlade.runs/impl_1</basedir>
+            <basedir>VivadoProteus/VivadoProteus.runs/impl_1</basedir>
             <excludes></excludes>
             <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -275,7 +274,7 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
 #echo &quot;Checking Post Routing Timing Summary...&quot;
 #echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
 
-#eval $(cat $WORKSPACE/VivadoBlade/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
+#eval $(cat $WORKSPACE/VivadoProteus/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
 
 #debug prints
 #echo $WNS
@@ -293,13 +292,13 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
-        <includes>VivadoBlade/colossus_iob_imp*.v</includes>
+        <includes>VivadoProteus/colossus_iob_imp*.v</includes>
         <excludes></excludes>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>cd VivadoBlade
+          <command>cd VivadoProteus
 tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
@@ -322,7 +321,7 @@ tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
       </runCondition>
       <conditionalbuilders>
         <hudson.tasks.Shell>
-          <command>if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME} ];
+          <command>if [ -f ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/${BITSTREAM_NAME} ];
 then
 
     #submit FPGA image to Perforce
@@ -334,9 +333,9 @@ then
 
     p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
-    cp ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
+    cp ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/${BITSTREAM_NAME}* bitstream/candidate/iob/
 
-    VER_DATECODE=`cat VivadoBlade/version_*.txt`
+    VER_DATECODE=`cat VivadoProteus/version_*.txt`
 
     DESCRIPTION=`printf &quot;Description: Proteus DX 100G-QSFP28 I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
@@ -356,7 +355,7 @@ fi
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade.runs/impl_1/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
+      <artifacts>VivadoProteus/VivadoProteus.runs/impl_1/${BITSTREAM_NAME}*, VivadoProteus/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -374,7 +373,7 @@ fi
       <entries>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
           <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <basedir>${WORKSPACE}/VivadoProteus</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
@@ -385,7 +384,7 @@ fi
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
           <includes>colossus_iob_imp_sim.tar.gz</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <basedir>${WORKSPACE}/VivadoProteus</basedir>
           <excludes></excludes>
           <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
           <flatten>true</flatten>
