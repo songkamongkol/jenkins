@@ -99,7 +99,7 @@
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
   <quietPeriod>1800</quietPeriod>
-  <assignedNode>fpga-imp-02 || fpga-imp-03</assignedNode>
+  <assignedNode>fpga-imp-02 || fpga-imp-03 || fpga-imp-01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
