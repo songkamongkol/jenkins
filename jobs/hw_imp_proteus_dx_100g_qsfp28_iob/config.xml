@@ -38,7 +38,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BITSTREAM_NAME</name>
           <description>File name for the generated bitstream</description>
-          <defaultValue>colossus_100g.bit</defaultValue>
+          <defaultValue>proteus_100g_qsfp28.bit</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -52,11 +52,9 @@
     <p4Passwd></p4Passwd>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}</p4Client>
-    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v  //ws/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/... //ws/VivadoBlade/...
--//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoBlade/ColossusDX_BLADE100G.edf //ws/VivadoBlade/ColossusDX_BLADE100G.edf
-
-+//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/colossus_100g.bit*  //ws/bitstream/candidate/iob/colossus_100g.bit*</projectPath>
+    <projectPath>+//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_PROTEUS_1x100G.v  //ws/SourceCode/include/VERSION_PROTEUS_1x100G.v
++//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/VivadoProteus/... //ws/VivadoProteus/...
++//SPT_HW/Colossus/sandbox/bitstream/candidate/iob/proteus_100g_qsfp28.bit*  //ws/bitstream/candidate/iob/proteus_100g_qsfp28.bit*</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
@@ -89,7 +87,7 @@
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
     <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
-    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+    <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
@@ -101,7 +99,7 @@
     <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
   <quietPeriod>1800</quietPeriod>
-  <assignedNode>fpga-imp-01</assignedNode>
+  <assignedNode>fpga-imp-02 || fpga-imp-03</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -115,7 +113,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_dx_100g_iob</project>
+      <project>hw_syn_proteus_100g_qsfp28_iob</project>
       <filter>changelist.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -125,8 +123,8 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_colossus_dx_100g_iob</project>
-      <filter>SynplifyBlade/rev_1/ColossusDX_BLADE100G.edf</filter>
+      <project>hw_syn_proteus_100g_qsfp28_iob</project>
+      <filter>SynplifyProteus/rev_1/Proteus_1x100G.edf</filter>
       <target>VivadoBlade</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
         <id>lastSuccessfulBuild</id>
@@ -161,21 +159,21 @@ if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
     LAST_CHANGE=${P4_CHANGELIST}
 fi
 
-echo &quot;Update VERSION_ColossusDX_BLADE100G.v&quot;
+echo &quot;Update VERSION_PROTEUS_1x100G.v&quot;
 cd ${WORKSPACE}
 
-p4 edit SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+p4 edit SourceCode/include/VERSION_PROTEUS_1x100G.v
 
-sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_PROTEUS_1x100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
 
-DESCRIPTION=`printf &quot;Description: Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
+DESCRIPTION=`printf &quot;Description: Proteus DX 100G-QSFP28 I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
-p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
-#p4 submit -d &quot;Description: Colossus DX 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_ColossusDX_BLADE100G.v
+p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
+#p4 submit -d &quot;Description: Proteus DX 100G-QSFP28 I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
 
 
 echo &quot;Start implementation&quot;
@@ -340,10 +338,10 @@ then
 
     VER_DATECODE=`cat VivadoBlade/version_*.txt`
 
-    DESCRIPTION=`printf &quot;Description: Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+    DESCRIPTION=`printf &quot;Description: Proteus DX 100G-QSFP28 I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
     p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-    #p4 submit -d &quot;Description: Colossus DX 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    #p4 submit -d &quot;Description: Proteus DX 100G-QSFP28 I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
@@ -405,15 +403,6 @@ fi
       <rawLabelDesc>${BUILD_TAG}-${BUILD_NUMBER}</rawLabelDesc>
       <onlyOnSuccess>true</onlyOnSuccess>
     </hudson.plugins.perforce.PerforceTagNotifier>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>hw_patch_fpga_colossus_dx_100g_iob</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.37.2">
       <recipientList>$DEFAULT_RECIPIENTS, alex.su@spirent.com, James.Bauder@spirent.com</recipientList>
       <configuredTriggers>
