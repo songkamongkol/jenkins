@@ -18,10 +18,13 @@
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
           <description></description>
-          <defaultValue>4.44_rel</defaultValue>
+          <defaultValue>4.46_rel</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>spccalengec06</assignedNode>
