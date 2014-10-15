@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Copy the tar.gz file created on FreeBSD or other os to windows system&lt;br&gt;&#xd;
-Extract the tarball&lt;br&gt;&#xd;
-Copy the tar.gz file to martin server&lt;br&gt;&#xd;
-Copy the extracted contents of the tarball to martin server&lt;br&gt;&#xd;
-Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
+  <description>FTP central boot image file from 10.2.19.55 machine to martin&lt;br&gt;&#xd;
+Requires I: drive to be mapped to \\martin\archive\pv&lt;br&gt;&#xd;
+Update latestbuild.txt file in \\martin\archive\pv\TestCenter\&lt;version&gt;\Engineering_Builds to include the latest build number (for SmartTest)&#xd;
+Triggers integration_set_status job to create entry in build database&lt;br&gt;</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>20</numToKeep>
@@ -21,32 +20,12 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>BRANCH_NAME</name>
-          <description>branch name</description>
+          <description></description>
           <defaultValue>mainline</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>P4CLEANWORKSPACE</name>
-          <description>clean build</description>
-          <defaultValue>false</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>BUILD_RUN_UNITTEST</name>
-          <description>run unittest</description>
-          <defaultValue>true</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>BUILD_PACKAGE_BUILD</name>
-          <description>package build</description>
-          <defaultValue>true</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>BUILD_OUTPUT_DIR</name>
-          <description>build output dir</description>
-          <defaultValue>bin/Release</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_MAJ_MIN_VERSION</name>
-          <description>major minor version</description>
+          <description></description>
           <defaultValue>4.50</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -57,16 +36,7 @@ Jenkins Node(s): spccalengec01, spccalpvxpvm-01, spccalengec02</description>
         <hudson.model.StringParameterDefinition>
           <name>SOURCE_OS</name>
           <description></description>
-          <defaultValue>BAD_SOURCE_OS</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>DEPENDENT_JOB_NAME</name>
-          <description>MUST be set to job name of job which creates this package:
-examples:
-integration_bll_freebsd63_packaging
-integration_bll_freebsd71_packaging
-integration_bll_freebsd_packaging</description>
-          <defaultValue>integration_bll_freebsd71_packaging</defaultValue>
+          <defaultValue>IL</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -78,21 +48,11 @@ integration_bll_freebsd_packaging</description>
     <p4Port>perforce.spirentcom.com:1666</p4Port>
     <p4Client>${JOB_NAME}_${BRANCH_NAME}</p4Client>
     <projectPath>//SCM/Build_Scripts/STC_Build_Scripts/... //ws/Build_Scripts/STC_Build_Scripts/...
-//SCM/Scripts/... //ws/Build_Scripts/Scripts/...
-//TestCenter/${BRANCH_NAME}/framework/tools/buildUtil/... //ws/framework/tools/buildUtil/...
-//TestCenter/${BRANCH_NAME}/framework/automation/scripting/stc/SampleScripts/... //ws/SampleScripts/...
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/templates/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/...
-//TestCenter/${BRANCH_NAME}/content/traffic/l4l7/tools/DpgUpdate/... //ws/Spirent_TestCenter_Application_Linux_Server/Dpg/DpgUpdate/...</projectPath>
+//SCM/Scripts/... //ws/Build_Scripts/Scripts/...</projectPath>
     <projectOptions>noallwrite clobber nocompress unlocked nomodtime rmdir</projectOptions>
     <clientOwner></clientOwner>
     <p4SysDrive>C:</p4SysDrive>
     <p4SysRoot>C:\WINDOWS</p4SysRoot>
-    <browser class="hudson.plugins.perforce.browsers.P4Web">
-      <url>http://jenkins.ad.spirentcom.com:5104/</url>
-      <p4WebEndShite>?ac=22</p4WebEndShite>
-      <p4DifEndShite>?ac=19</p4DifEndShite>
-      <p4ClEndShite>?ac=10</p4ClEndShite>
-    </browser>
     <p4Tool>p4</p4Tool>
     <useClientSpec>false</useClientSpec>
     <useStreamDepot>false</useStreamDepot>
@@ -123,9 +83,8 @@ integration_bll_freebsd_packaging</description>
     <useViewMaskForPolling>true</useViewMaskForPolling>
     <useViewMaskForSyncing>false</useViewMaskForSyncing>
     <useViewMaskForChangeLog>false</useViewMaskForChangeLog>
-    <pollOnlyOnMaster>true</pollOnlyOnMaster>
+    <pollOnlyOnMaster>false</pollOnlyOnMaster>
   </scm>
-  <quietPeriod>5</quietPeriod>
   <assignedNode>spccalengec06</assignedNode>
   <canRoam>false</canRoam>
   <disabled>true</disabled>
@@ -133,23 +92,57 @@ integration_bll_freebsd_packaging</description>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
-  <customWorkspace>${JOB_NAME}</customWorkspace>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>echo &quot;Running ci_cleanup_by_date.pl.&quot;
-perl %WORKSPACE%\Build_Scripts\Scripts\ci_cleanup_by_date.pl</command>
+      <command>del /f /q IL_*.txt
+del /f /q BUILD_*.txt</command>
     </hudson.tasks.BatchFile>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>mainline_launch_nightly_builds</project>
+      <filter>IL_*.txt,BUILD_*.txt</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <flatten>true</flatten>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.BatchFile>
-      <command>c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=yes</command>
+      <command>net use /Delete I:
+net use I: \\martin\archive\pv
+net use
+
+rem SET ILHOST=10.2.19.208
+SET ILHOST=ilpkg-01.cal.ci.spirentcom.com
+rem SET ILWORKSPACE=/home/spirent/jenkins-tc/workspace/mainline_il_centralboot_packaging
+SET ILWORKSPACE=/home/spirent/jenkins-tc/workspace/mainline_il_centralboot_packaging
+SET DEPENDENT_JOB_NAME=mainline_il_ftp_centralboot
+c:\python27\python %WORKSPACE%\Build_Scripts\Scripts\ci_run_jenkins_steps.py --createpropfile=yes --runcimaketarballs=no --runsetver=no --runciftpcentralboot=yes --updatelatestbuildtext=no</command>
     </hudson.tasks.BatchFile>
+    <hudson.plugins.python.Python plugin="python@1.2">
+      <command>import os
+
+bll_build_number = os.environ[&apos;BLL_BUILD_NUMBER&apos;]
+branch_id = &quot;4&quot;
+buildver = bll_build_number+branch_id
+stc_maj_min_ver=os.environ[&apos;STC_MAJ_MIN_VERSION&apos;]
+martindir=&quot;\\\\martin\\archive\\pv\\TestCenter\\&quot; + stc_maj_min_ver + &quot;\\Engineering_Builds&quot;
+# read the previous changelist from the changelist file and then update it
+out_file = martindir + &quot;\\latestbuild-yocto.txt&quot;
+print out_file
+
+# update the changelist file with the changelist from this build
+outfile = open(out_file , &quot;w&quot;)
+outfile.write(&quot;BLL=&quot;+stc_maj_min_ver + &quot;.&quot; + buildver +&quot;\nIL=&quot; + stc_maj_min_ver + &quot;.&quot; + buildver+&quot;\nL4L7=&quot;) 
+outfile.close()
+
+# now copy the file to the dashboard server
+print &quot;Finished with update latestbuild-yocto.txt&quot;</command>
+    </hudson.plugins.python.Python>
   </builders>
   <publishers>
-    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
-      <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>true</failBuildOnError>
-      <parsingRulesPath>/opt/jenkins/jenkins-root/log_parse_rule</parsingRulesPath>
-    </hudson.plugins.logparser.LogParserPublisher>
-    <hudson.plugins.claim.ClaimPublisher plugin="claim@2.3"/>
+    <hudson.tasks.Fingerprinter>
+      <targets>IL_*.txt, BUILD_*.txt</targets>
+      <recordBuildArtifacts>false</recordBuildArtifacts>
+    </hudson.tasks.Fingerprinter>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.22">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -159,8 +152,8 @@ perl %WORKSPACE%\Build_Scripts\Scripts\ci_cleanup_by_date.pl</command>
               <failTriggerOnMissing>false</failTriggerOnMissing>
             </hudson.plugins.parameterizedtrigger.FileBuildParameters>
           </configs>
-          <projects>mainline_set_status</projects>
-          <condition>ALWAYS</condition>
+          <projects>mainline_set_status,mainline_copy_to_spccalfs03,mainline_reset_tag_file</projects>
+          <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
       </configs>
