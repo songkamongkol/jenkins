@@ -13,7 +13,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
-          <defaultValue>10.100.21.96</defaultValue>
+          <defaultValue>hw-cal-n11u-01.calenglab.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
@@ -42,6 +42,9 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <quietPeriod>120</quietPeriod>
