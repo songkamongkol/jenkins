@@ -17,7 +17,7 @@
         <hudson.model.StringParameterDefinition>
           <name>STC_CHASSIS_IP</name>
           <description>IP address of Spirent TestCenter chassis</description>
-          <defaultValue>10.100.21.96</defaultValue>
+          <defaultValue>hw-cal-n11u-01.calenglab.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>STC_SLOT_ID</name>
@@ -46,6 +46,9 @@
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
   </properties>
   <scm class="hudson.plugins.perforce.PerforceSCM" plugin="perforce@1.3.27">
     <configVersion>1</configVersion>
@@ -84,7 +87,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
     <slaveClientNameFormat>${basename}-${hash}</slaveClientNameFormat>
