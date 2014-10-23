@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<changelog>
+	<entry>
+		<changenumber>702752</changenumber>
+		<date>2014-10-10 14:19:46</date>
+		<description>Description: Colossus FX2 100G I/O Board version 12101014.  Includes up to Changelist 702719.
+	Change Type: Proto
+	Change #: none</description>
+		<user>tableuser</user>
+		<workspace>hw_imp_colossus_fx2_100g_iob-1022639723</workspace>
+		<files>
+			<file>
+				<name>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v</name>
+				<workspacePath>SourceCode/include/VERSION_ColossusFX2_BLADE100G.v</workspacePath>
+				<rev>101</rev>
+				<changenumber>702752</changenumber>
+				<action>EDIT</action>
+			</file>
+		</files>
+		<jobs>
+		</jobs>
+	</entry>
+	<entry>
+		<changenumber>702553</changenumber>
+		<date>2014-10-09 12:57:01</date>
+		<description>Description: Colossus FX2 100G I/O Board version 11100914.  Includes up to Changelist 702536.
+	Change Type: Proto
+	Change #: none</description>
+		<user>tableuser</user>
+		<workspace>hw_imp_colossus_fx2_100g_iob-1022639723</workspace>
+		<files>
+			<file>
+				<name>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION_ColossusFX2_BLADE100G.v</name>
+				<workspacePath>SourceCode/include/VERSION_ColossusFX2_BLADE100G.v</workspacePath>
+				<rev>100</rev>
+				<changenumber>702553</changenumber>
+				<action>EDIT</action>
+			</file>
+		</files>
+		<jobs>
+		</jobs>
+	</entry>
+</changelog>
