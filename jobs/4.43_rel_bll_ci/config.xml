@@ -115,7 +115,7 @@
   <builders/>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>4.43_rel_bll_windows_ci, 4.43_rel_bll_linux_ci</childProjects>
+      <childProjects>4.43_rel_bll_windows_ci,4.43_rel_bll_linux_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

@@ -119,7 +119,7 @@ cd /export/crosstools
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>4.43_rel_il_changeling_ci, 4.43_rel_il_chos2_ci, 4.43_rel_il_testmodule_contents_ci, 4.43_rel_il_changeling_all_ci, 4.43_rel_il_virtual_ci, 4.43_rel_il_vtc_ci, 4.43_rel_il_qemu_ci,4.43_rel_il_chassisvm_ci</childProjects>
+      <childProjects>4.43_rel_il_changeling_ci,4.43_rel_il_chos2_ci,4.43_rel_il_testmodule_contents_ci,4.43_rel_il_changeling_all_ci,4.43_rel_il_virtual_ci,4.43_rel_il_vtc_ci,4.43_rel_il_qemu_ci,4.43_rel_il_chassisvm_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

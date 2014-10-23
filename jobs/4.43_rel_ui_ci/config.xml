@@ -220,7 +220,7 @@ mv *_CoverageReport unit_test_report
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
-      <childProjects>4.43_rel_regression_ci, 4.43_rel_regression_changeling_ci, 4.43_rel_bll_windows_debug_ci</childProjects>
+      <childProjects>4.43_rel_regression_ci,4.43_rel_regression_changeling_ci,4.43_rel_bll_windows_debug_ci</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
