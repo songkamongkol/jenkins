@@ -2259,7 +2259,7 @@
           <jobNames>
             <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../slaves/slave[62]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
             <string>hw_imp_colossus_fx2_100g_iob</string>
-            <string>hw_imp_colossus_fx2_100g_iob_vivado_2014_3_EA</string>
+            <string>hw_imp_colossus_fx2_100g_iob_vivado_2014_3</string>
             <string>hw_imp_colossus_fx2_100g_nic</string>
             <string>hw_sim_colossus_fx2_100g_nic</string>
             <string>hw_syn_colossus_fx2_100g_iob</string>
