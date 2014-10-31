@@ -16,10 +16,20 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
+          <name>REMOTE_TOOL_ROOT</name>
+          <description></description>
+          <defaultValue>\\storage.cal.ci.spirentcom.com\general\Development\Hardware\FPGA\Tools\Windows</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>MAPPED_TOOL_DRIVE_LETTER</name>
+          <description></description>
+          <defaultValue>T</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
           <name>XILINX_PATH</name>
           <description>path to the intended version of Xilinx, example:&lt;br/&gt;
 T:\win64\Xilinx\Vivado\2014.3</description>
-          <defaultValue>T:\win64\Xilinx\Vivado\2014.3</defaultValue>
+          <defaultValue>%MAPPED_TOOL_DRIVE_LETTER%:\win64\Xilinx\Vivado\2014.3</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
