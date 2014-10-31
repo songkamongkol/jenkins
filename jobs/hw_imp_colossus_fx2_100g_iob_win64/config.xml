@@ -23,13 +23,13 @@ T:\win64\Xilinx\Vivado\2014.3</description>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>LM_LICENSE_FILE</name>
-          <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com;1900@hnlcsv.ad.spirentcom.com</description>
-          <defaultValue>2100@spcsjcapp01.ad.spirentcom.com;1900@hnlcsv.ad.spirentcom.com</defaultValue>
+          <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</description>
+          <defaultValue>2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>XILINXD_LICENSE_FILE</name>
-          <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com;1900@hnlcsv.ad.spirentcom.com</description>
-          <defaultValue>2100@spcsjcapp01.ad.spirentcom.com;1900@hnlcsv.ad.spirentcom.com</defaultValue>
+          <description>FlexLM license server ports, example:  2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</description>
+          <defaultValue>2100@spcsjcapp01.ad.spirentcom.com:1900@hnlcsv.ad.spirentcom.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>MAX_CPU_USAGE</name>
