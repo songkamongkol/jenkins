@@ -139,6 +139,68 @@ T:\win64\Xilinx\Vivado\2014.3</description>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.BatchFile>
+      <command>#sanity check, make sure no files are checked out from Perforce at the beginning
+p4 revert //...
+
+#set up environment
+export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+
+source ${XILINX_PATH}/settings64.sh
+
+echo &quot;Derive FPGA image version/datecode&quot;
+VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
+DATECODE=`date &quot;+%m%d%y&quot;`
+VER_DATECODE=${VER}${DATECODE}
+LAST_CHANGE=`cat ${WORKSPACE}/changelist.txt`
+
+if [ ${P4_CHANGELIST} -gt ${LAST_CHANGE} ] ; then
+    LAST_CHANGE=${P4_CHANGELIST}
+fi
+
+echo &quot;Update VERSION_ColossusFX2_BLADE100G.v&quot;
+cd ${WORKSPACE}
+
+#p4 revert SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+#p4 edit SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+
+sed -i &apos;s/^parameter /\/\/parameter /g&apos; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;1i //Includes up to Changelist ${LAST_CHANGE}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+sed -i &quot;4i \ &quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+
+DESCRIPTION=`printf &quot;Description: Colossus FX2 100G I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
+
+#p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_ColossusFX2_BLADE100G.v
+
+echo &quot;Start implementation&quot;
+cd ${WORKSPACE}/VivadoBlade
+
+chmod u+w ./*.xpr
+#chmod u+w ./VivadoBlade_14_3.data/runs/*
+
+echo &quot;${VER_DATECODE}&quot; &gt; ./version_${VER_DATECODE}.txt
+
+echo &quot;open_project VivadoBlade_14_3.xpr&quot; &gt;&gt; myImp.tcl
+echo &quot;set_param general.maxThreads ${MAX_CPU_USAGE}&quot; &gt;&gt; myImp.tcl
+echo &quot;reset_run impl_2&quot; &gt;&gt; myImp.tcl
+echo &quot;launch_runs impl_2&quot; &gt;&gt; myImp.tcl
+echo &quot;wait_on_run impl_2&quot; &gt;&gt; myImp.tcl
+echo &quot;open_run impl_2&quot; &gt;&gt; myImp.tcl
+echo &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; myImp.tcl
+#echo &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; myImp.tcl
+echo &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; myImp.tcl
+echo &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; myImp.tcl
+#echo &quot;archive_project ${WORKSPACE}/${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
+echo &quot;archive_project ${JOB_NAME}-${BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; myImp.tcl
+echo &quot;write_bitstream ./VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME}&quot; &gt;&gt; myImp.tcl
+echo &quot;close_project&quot; &gt;&gt; myImp.tcl
+echo &quot;exit&quot; &gt;&gt; myImp.tcl
+
+vivado -mode batch -source ./myImp.tcl</command>
+    </hudson.tasks.BatchFile>
     <hudson.tasks.Shell>
       <command>#sanity check, make sure no files are checked out from Perforce at the beginning
 p4 revert //...
