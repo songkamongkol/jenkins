@@ -183,7 +183,7 @@ REM PUSHD %WORKSPACE%\VivadoBlade_14_3
 
 ATTRIB -R .\*.xpr
 
-echo &quot;%VER_DATECODE%&quot; &gt; .\version_%VER_DATECODE%.txt
+echo %VER_DATECODE% &gt; .\version_%VER_DATECODE%.txt
 
 IF exist myImp.tcl (
     del myImp.tcl
@@ -195,7 +195,8 @@ ECHO reset_run impl_2 &gt;&gt; myImp.tcl
 ECHO launch_runs impl_2 &gt;&gt; myImp.tcl
 ECHO wait_on_run impl_2 &gt;&gt; myImp.tcl
 ECHO open_run impl_2 &gt;&gt; myImp.tcl
-ECHO set_property BITSTREAM.CONFIG.USR_ACCESS %VER_DATECODE% [current_design] &gt;&gt; myImp.tcl
+ECHO set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design] &gt;&gt; myImp.tcl
+REM ECHO set_property BITSTREAM.CONFIG.USR_ACCESS %VER_DATECODE% [current_design] &gt;&gt; myImp.tcl
 ECHO write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim &gt;&gt; myImp.tcl
 REM ECHO write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v &gt;&gt; myImp.tcl
 ECHO write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true &gt;&gt; myImp.tcl
