@@ -183,7 +183,7 @@ REM PUSHD %WORKSPACE%\VivadoBlade_14_3
 
 ATTRIB -R .\*.xpr
 
-echo %VER_DATECODE% &gt; .\version_%VER_DATECODE%.txt
+echo &quot;%VER_DATECODE%&quot; &gt; .\version_%VER_DATECODE%.txt
 
 IF exist myImp.tcl (
     del myImp.tcl
