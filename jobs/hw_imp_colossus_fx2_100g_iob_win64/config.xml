@@ -151,7 +151,7 @@ p4 revert //...
 ECHO Set up environment
 NET USE T: %REMOTE_TOOL_ROOT% /PERSISTENT:NO
 SET LM_LICENSE_FILE=%LM_LICENSE_FILE%
-SET XILINXD_LICENSE_FILE=%XILINXD_LICENSE_FILE=%
+SET XILINXD_LICENSE_FILE=%XILINXD_LICENSE_FILE%
 
 CALL %XILINX_PATH%\settings64.bat
 REM CALL \\storage.cal.ci.spirentcom.com\general\Development\Hardware\FPGA\Tools\Windows\win64\Xilinx\Vivado\2014.3\settings64.bat
