@@ -144,11 +144,11 @@ T:\win64\Xilinx\Vivado\2014.3</description>
 p4 revert //...
 
 #set up environment
-export LM_LICENSE_FILE=${LM_LICENSE_FILE}
+SET LM_LICENSE_FILE=%LM_LICENSE_FILE%
 
-source ${XILINX_PATH}/settings64.sh
+CALL %XILINX_PATH%/settings64.bat
 
-echo &quot;Derive FPGA image version/datecode&quot;
+ECHO &quot;Derive FPGA image version/datecode&quot;
 VER=`printf &quot;%02d&quot; \`expr ${BUILD_NUMBER} % 100\``
 DATECODE=`date &quot;+%m%d%y&quot;`
 VER_DATECODE=${VER}${DATECODE}
