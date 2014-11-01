@@ -56,6 +56,11 @@ T:\win64\Xilinx\Vivado\2014.3</description>
           <description>File name to use for the generated bitstream</description>
           <defaultValue>colossus_fx2_100g.bit</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ARCHIVE_REPOSITORY</name>
+          <description></description>
+          <defaultValue>\\storage.cal.ci.spirentcom.com\builds\dev\fpga\colossus</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
@@ -221,7 +226,7 @@ POPD</command>
           <includes>version_*.txt</includes>
           <basedir>VivadoBlade</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>%ARCHIVE_REPOSITORY%\%JOB_NAME%-%BUILD_NUMBER%</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
