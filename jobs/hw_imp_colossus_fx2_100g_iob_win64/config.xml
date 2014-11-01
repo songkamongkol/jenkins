@@ -218,7 +218,7 @@ POPD</command>
     </hudson.tasks.BatchFile>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/version_*.txt</file>
+        <file>VivadoBlade\version_*.txt</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </condition>
       <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
@@ -239,7 +239,7 @@ POPD</command>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME}</file>
+        <file>VivadoBlade\VivadoBlade.runs\impl_2\%BITSTREAM_NAME%</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
@@ -251,9 +251,9 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>VivadoBlade/VivadoBlade_14_3.runs/impl_2</basedir>
+            <basedir>VivadoBlade\VivadoBlade.runs\impl_2</basedir>
             <excludes></excludes>
-            <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+            <remote>%ARCHIVE_REPOSITORY%\%JOB_NAME%-%BUILD_NUMBER%</remote>
             <flatten>true</flatten>
             <deleteRemote>false</deleteRemote>
             <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -261,31 +261,12 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
             <failNoFilesDeploy>false</failNoFilesDeploy>
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
-        <hudson.tasks.Shell>
-          <command>#MAX_TIMING_DELTA=0.000
-
-#echo &quot;Checking Post Routing Timing Summary...&quot;
-#echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
-
-#eval $(cat $WORKSPACE/VivadoBlade/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
-
-#debug prints
-#echo $WNS
-#echo $TNS
-#echo $WHS
-#echo $THS
-
-#echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &lt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &lt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &lt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &lt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
-
-#echo &quot;Done checking Post Routing Timing Summary.&quot;
-</command>
-        </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
-        <includes>VivadoBlade/colossus_iob_imp*.v</includes>
+        <includes>VivadoBlade\colossus_iob_imp*.v</includes>
         <excludes></excludes>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
@@ -355,49 +336,6 @@ fi
 #fi
 </command>
     </hudson.tasks.Shell>
-    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
-      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
-      <runCondition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
-        <worstResult>
-          <name>SUCCESS</name>
-          <ordinal>0</ordinal>
-          <color>BLUE</color>
-          <completeBuild>true</completeBuild>
-        </worstResult>
-        <bestResult>
-          <name>SUCCESS</name>
-          <ordinal>0</ordinal>
-          <color>BLUE</color>
-          <completeBuild>true</completeBuild>
-        </bestResult>
-      </runCondition>
-      <conditionalbuilders>
-        <hudson.tasks.Shell>
-          <command>#if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME} ];
-#then
-#
-#    #submit FPGA image to Perforce
-#    echo &quot;Submitting FPGA image to Perforce&quot;
-#
-#    cd ${WORKSPACE}
-#
-#    p4 revert //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#    p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#    p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#    cp ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME}* bitstream/candidate/iob/
-#
-#    VER_DATECODE=`cat VivadoBlade/version_*.txt`
-#
-#    p4 submit -d &quot;Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#fi
-</command>
-        </hudson.tasks.Shell>
-      </conditionalbuilders>
-    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
@@ -406,7 +344,7 @@ fi
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_relaxed_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
+      <artifacts>VivadoBlade\VivadoBlade.runs\impl_2\%BITSTREAM_NAME%*, VivadoBlade\version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
@@ -423,10 +361,10 @@ fi
     <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher plugin="artifactdeployer@0.28">
       <entries>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
-          <includes>${JOB_NAME}-${BUILD_NUMBER}.zip</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <includes>%JOB_NAME%-%BUILD_NUMBER%.zip</includes>
+          <basedir>%WORKSPACE%\VivadoBlade</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>%ARCHIVE_REPOSITORY%\%JOB_NAME%-%BUILD_NUMBER%</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -435,9 +373,9 @@ fi
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerEntry>
           <includes>colossus_iob_imp_sim.tar.gz</includes>
-          <basedir>${WORKSPACE}/VivadoBlade</basedir>
+          <basedir>%WORKSPACE%\VivadoBlade</basedir>
           <excludes></excludes>
-          <remote>/net/storage_cal_ci/builds/dev/fpga/colossus/${JOB_NAME}-${BUILD_NUMBER}</remote>
+          <remote>%ARCHIVE_REPOSITORY%\%JOB_NAME%-%BUILD_NUMBER%</remote>
           <flatten>true</flatten>
           <deleteRemote>false</deleteRemote>
           <deleteRemoteArtifacts>true</deleteRemoteArtifacts>
@@ -448,7 +386,7 @@ fi
       <deployEvenBuildFail>true</deployEvenBuildFail>
     </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerPublisher>
     <hudson.plugins.perforce.PerforceTagNotifier plugin="perforce@1.3.27">
-      <rawLabelName>${JOB_NAME}-${BUILD_NUMBER}</rawLabelName>
+      <rawLabelName>%JOB_NAME%-%BUILD_NUMBER%</rawLabelName>
       <rawLabelOwner></rawLabelOwner>
       <rawLabelDesc>${BUILD_TAG}-${BUILD_NUMBER}</rawLabelDesc>
       <onlyOnSuccess>true</onlyOnSuccess>
