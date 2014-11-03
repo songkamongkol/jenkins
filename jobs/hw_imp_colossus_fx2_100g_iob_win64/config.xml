@@ -225,9 +225,6 @@ POPD</command>
       <command>#Import PowerShell Community Extensions
 Import-Module $env:PSCX_PATH
 
-# Sanity check, make sure no files are checked out from Perforce at the beginning
-p4 revert //...
-
 #Derive Version/Date information
 $DateCode = Get-Date -Format MMddyy
 $FpgaVer = $env:BUILD_NUMBER % 100
