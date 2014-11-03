@@ -207,13 +207,13 @@ ECHO wait_on_run impl_2 &gt;&gt; myImp.tcl
 ECHO open_run impl_2 &gt;&gt; myImp.tcl
 ECHO set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design] &gt;&gt; myImp.tcl
 REM ECHO set_property BITSTREAM.CONFIG.USR_ACCESS %VER_DATECODE% [current_design] &gt;&gt; myImp.tcl
+ECHO write_bitstream ./VivadoBlade_14_3.runs/impl_2/%BITSTREAM_NAME% &gt;&gt; myImp.tcl
 ECHO write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim &gt;&gt; myImp.tcl
 REM ECHO write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v &gt;&gt; myImp.tcl
 ECHO write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true &gt;&gt; myImp.tcl
 ECHO write_sdf -force colossus_iob_imp_timesim.sdf &gt;&gt; myImp.tcl
 REM ECHO archive_project %WORKSPACE%/%JOB_NAME%-%BUILD_NUMBER%.zip -force -include_config_settings &gt;&gt; myImp.tcl
-ECHO archive_project %JOB_NAME%-%BUILD_NUMBER%.zip -force -include_config_settings &gt;&gt; myImp.tcl
-ECHO write_bitstream ./VivadoBlade_14_3.runs/impl_2/%BITSTREAM_NAME% &gt;&gt; myImp.tcl
+REM ECHO archive_project %JOB_NAME%-%BUILD_NUMBER%.zip -force -include_config_settings &gt;&gt; myImp.tcl
 ECHO close_project &gt;&gt; myImp.tcl
 ECHO exit &gt;&gt; myImp.tcl
 
