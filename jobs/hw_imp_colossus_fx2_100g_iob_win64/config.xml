@@ -222,20 +222,62 @@ vivado -mode batch -source ./myImp.tcl
 POPD</command>
     </hudson.tasks.BatchFile>
     <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
-      <command>#Import PowerShell Community Extensions
+      <command>#Map remote tool drive
+ECHO &quot;Mounting remote tool drive&quot;
+NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: $env:REMOTE_TOOL_ROOT /PERSISTENT:NO
+
+#Import PowerShell Community Extensions
 Import-Module $env:PSCX_PATH
 
-# Sanity check, make sure no files are checked out from Perforce at the beginning
-p4 revert //...
+ECHO &quot;Importing Xilinx environment settings&quot;
+ECHO &quot;XILINX_PATH = ${env:XILINX_PATH}&quot;
+$xilinxSettings = &quot;${env:XILINX_PATH}\settings64.bat&quot;
+
+Invoke-BatchFile &quot;${xilinxSettings}&quot;
+
+$env:PATH
+
+#Sanity check, make sure no files are checked out from Perforce at the beginning
+#p4 revert //...
 
 #Derive Version/Date information
+ECHO &quot;Deriving Version/Date information&quot;
+$env:BUILD_Number = 123
 $DateCode = Get-Date -Format MMddyy
 $FpgaVer = $env:BUILD_NUMBER % 100
-$VerDateCode = &quot;FpgaVer&quot; + $DateCode
+#$VerDateCode = &quot;${FpgaVer}&quot; + $DateCode
+$VER_DATECODE = &quot;${FpgaVer}&quot; + $DateCode
+ECHO &quot;VerDateCode = ${VER_DATECODE}&quot;
+
+#Run implementation
+IF (Test-Path &quot;dummyImp.tcl&quot;) {
+    del &quot;dummyImp.tcl&quot;
+}
+
+ECHO &quot;open_project VivadoBlade.xpr&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;set_param general.maxThreads ${env:MAX_CPU_USAGE}&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;reset_run impl_2&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;launch_runs impl_2&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;wait_on_run impl_2&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;open_run impl_2&quot; &gt;&gt; dummyImp.tcl
+#ECHO &quot;set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design]&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;write_bitstream ./VivadoBlade.runs/impl_2/${env:BITSTREAM_NAME}&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; dummyImp.tcl
+#ECHO &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;archive_project ${env:WORKSPACE}/${env:JOB_NAME}-${env:BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;close_project&quot; &gt;&gt; dummyImp.tcl
+ECHO &quot;exit&quot; &gt;&gt; dummyImp.tcl
 
 #Generate MD5 checksum for bitstream
 
-#Archive implemented project</command>
+#Archive implemented project
+
+#Check for errors
+
+NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: /DELETE</command>
     </hudson.plugins.powershell.PowerShell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
