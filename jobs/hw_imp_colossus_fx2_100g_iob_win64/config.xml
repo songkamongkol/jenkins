@@ -61,6 +61,11 @@ T:\win64\Xilinx\Vivado\2014.3</description>
           <description></description>
           <defaultValue>\\storage.cal.ci.spirentcom.com\builds\dev\fpga\colossus</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>PSCX_PATH</name>
+          <description>Directory location to where PowerShell Community Extensions is installed</description>
+          <defaultValue>C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
     <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.22">
