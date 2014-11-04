@@ -122,7 +122,7 @@ T:\win64\Xilinx\Vivado\2014.3</description>
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...
@@ -170,7 +170,16 @@ T:\win64\Xilinx\Vivado\2014.3</description>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
-      <command>#Map remote tool drive
+      <command>Write-Output &quot;DEBUG &gt;&gt;&gt;&quot;
+$myUserName = [Environment]::UserName
+$myUserDomainName = [Environment]::UserDomainName
+$myMachineName = [Environment]::MachineName
+Write-Output &quot;myUserName = $myUserName&quot;
+Write-Output &quot;myUserDomainName = $myUserDomainName&quot;
+Write-Output &quot;myMachineName = $myMachineName&quot;
+Write-Output &quot;&lt;&lt;&lt; DEBUG&quot;
+
+#Map remote tool drive
 Write-Output &quot;Mounting remote tool drive&quot;
 #NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: $env:REMOTE_TOOL_ROOT /PERSISTENT:NO
 New-PSDrive -Name &quot;${env:MAPPED_TOOL_DRIVE_LETTER}&quot; -PSProvider FileSystem -Root &quot;$env:REMOTE_TOOL_ROOT&quot; -Persist
