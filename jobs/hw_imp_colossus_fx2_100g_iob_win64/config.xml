@@ -405,7 +405,7 @@ If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BIT
       <buildSteps>
         <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
           <command>Write-Output &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
-Remove-Item &quot;$env:WORKSPACE\*&quot;</command>
+#Remove-Item &quot;$env:WORKSPACE\*&quot;</command>
         </hudson.plugins.powershell.PowerShell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
