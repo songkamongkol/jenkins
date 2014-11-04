@@ -138,7 +138,7 @@ T:\win64\Xilinx\Vivado\2014.3</description>
   </scm>
   <assignedNode>fpga-imp-win-01</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
   <triggers>
