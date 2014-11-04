@@ -233,7 +233,7 @@ Pop-Location
     </hudson.plugins.powershell.PowerShell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade\version_*.txt</file>
+        <file>VivadoBlade/version_*.txt</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </condition>
       <buildStep class="org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder" plugin="artifactdeployer@0.28">
@@ -254,7 +254,7 @@ Pop-Location
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
-        <file>VivadoBlade\VivadoBlade.runs\impl_2\%BITSTREAM_NAME%</file>
+        <file>VivadoBlade/VivadoBlade.runs/impl_2/${BITSTREAM_NAME}</file>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
@@ -272,7 +272,7 @@ If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BIT
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
-            <basedir>VivadoBlade\VivadoBlade.runs\impl_2</basedir>
+            <basedir>VivadoBlade/VivadoBlade.runs/impl_2</basedir>
             <excludes></excludes>
             <remote>${ARCHIVE_REPOSITORY}/${JOB_NAME}-${BUILD_NUMBER}</remote>
             <flatten>true</flatten>
@@ -292,7 +292,7 @@ If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BIT
       <parsingRulesPath>/opt/jenkins/jenkins-root/xilinx_vivado_relaxed_rule</parsingRulesPath>
     </hudson.plugins.logparser.LogParserPublisher>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>VivadoBlade\VivadoBlade.runs\impl_2\%BITSTREAM_NAME%*, VivadoBlade\version_*.txt</artifacts>
+      <artifacts>VivadoBlade/VivadoBlade.runs/impl_2/${BITSTREAM_NAME}*, VivadoBlade/version_*.txt</artifacts>
       <latestOnly>true</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
