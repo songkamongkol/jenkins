@@ -220,7 +220,8 @@ Add-Content ${env:IMP_TCL} &quot;close_project&quot;
 Add-Content ${env:IMP_TCL} &quot;exit&quot;
 
 #DEBUG: vivado -help
-vivado -mode batch -source ${env:IMP_TCL}
+vivado -help
+#vivado -mode batch -source ${env:IMP_TCL}
 
 Pop-Location
 </command>
@@ -278,79 +279,6 @@ If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BIT
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
-    <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
-      <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
-      <runCondition class="org.jenkins_ci.plugins.run_condition.core.FilesMatchCondition" plugin="run-condition@1.0">
-        <includes>VivadoBlade\colossus_iob_imp*.v</includes>
-        <excludes></excludes>
-        <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
-      </runCondition>
-      <conditionalbuilders>
-        <hudson.tasks.Shell>
-          <command>cd VivadoBlade
-tar zcvf colossus_iob_imp_sim.tar.gz ./colossus_iob_imp*.v ./*.sdf</command>
-        </hudson.tasks.Shell>
-      </conditionalbuilders>
-    </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
-    <hudson.tasks.Shell>
-      <command>#!/bin/sh
-
-#Jenkins by default runs shell executions with &quot;-xe&quot; option, which will exit immediately when a command returns non-zero value
-#grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
-
-
-echo &quot;Parsing timing reports for errors...&quot;
-TIMING_NOT_MET=&quot;&quot;
-ls ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/
-if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_postroute_physopted.rpt ];
-then
-    echo &quot;Checking ColossusFX2_BLADE100G_timing_summary_postroute_physopted.rpt&quot;
-    TIMING_NOT_MET=`grep Timing\ constraints\ are\ not\ met ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_postroute_physopted.rpt`
-
-    if [ &quot;${TIMING_NOT_MET}&quot; != &quot;&quot; ];
-    then
-        echo &quot;ERROR: ${TIMING_NOT_MET} Mark build as failure&quot;
-        #exit 1
-    fi
-elif [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt ];
-then
-    echo &quot;Checking ColossusFX2_BLADE100G_timing_summary_routed.rpt&quot;
-    TIMING_NOT_MET=`grep Timing\ constraints\ are\ not\ met ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt`
-
-    if [ &quot;${TIMING_NOT_MET}&quot; != &quot;&quot; ];
-    then
-        echo &quot;ERROR: ${TIMING_NOT_MET} Mark build as failure&quot;
-        #exit 1
-    fi
-fi
-
-#if [ &quot;${TIMING_NOT_MET}&quot; == &quot;&quot; ];
-#then
-#    if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME} ];
-#    then
-#
-#        #submit FPGA image to Perforce
-#        echo &quot;Submitting FPGA image to Perforce&quot;
-#
-#        cd ${WORKSPACE}
-#
-#        p4 revert //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#        p4 have //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#        p4 edit //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#
-#        cp ${WORKSPACE}/VivadoBlade/VivadoBlade_14_3.runs/impl_2/${BITSTREAM_NAME}* bitstream/candidate/iob/
-#
-#        VER_DATECODE=`cat VivadoBlade/version_*.txt`
-#
-#        DESCRIPTION=`printf &quot;Description: Colossus FX2 100G I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
-#
-#        p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-#    fi
-#fi
-</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@1.0.8">
