@@ -1715,7 +1715,6 @@
       <userId>lihuang</userId>
     </slave>
     <slave>
-      <temporaryOfflineCause class="hudson.slaves.OfflineCause$LaunchFailed"/>
       <name>fpga-imp-win-01</name>
       <description>FPGA implementation job builder (Windows 7 Pro 64-bit)</description>
       <remoteFS>C:\Temp</remoteFS>
