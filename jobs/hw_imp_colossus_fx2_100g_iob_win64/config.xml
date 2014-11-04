@@ -164,120 +164,66 @@ T:\win64\Xilinx\Vivado\2014.3</description>
       <flatten>true</flatten>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
-    <hudson.tasks.BatchFile>
-      <command>REM sanity check, make sure no files are checked out from Perforce at the beginning
-p4 revert //...
-
-REM set up environment
-NET USE %MAPPED_TOOL_DRIVE_LETTER%: %REMOTE_TOOL_ROOT% /PERSISTENT:NO
-SET LM_LICENSE_FILE=%LM_LICENSE_FILE%
-SET XILINXD_LICENSE_FILE=%XILINXD_LICENSE_FILE%
-
-CALL %XILINX_PATH%\settings64.bat
-REM CALL %MAPPED_DRIVE_LETTER%:\win64\Xilinx\Vivado\2014.3\settings64.bat
-REM CALL \\storage.cal.ci.spirentcom.com\general\Development\Hardware\FPGA\Tools\Windows\win64\Xilinx\Vivado\2014.3\settings64.bat
-
-@ECHO ON
-
-SET /P LAST_CHANGE= &lt; %WORKSPACE%\changelist.txt
-
-
-if %P4_CHANGELIST% gtr %LAST_CHANGE% (
-    SET LAST_CHANGE=%P4_CHANGELIST%
-)
-
-
-ECHO Start implementation
-PUSHD %WORKSPACE%\VivadoBlade
-REM PUSHD %WORKSPACE%\VivadoBlade_14_3
-
-ATTRIB -R .\*.xpr
-
-echo %VER_DATECODE% &gt; .\version_%VER_DATECODE%.txt
-
-IF exist myImp.tcl (
-    del myImp.tcl
-)
-
-ECHO open_project VivadoBlade_14_3.xpr &gt;&gt; myImp.tcl
-ECHO set_param general.maxThreads %MAX_CPU_USAGE% &gt;&gt; myImp.tcl
-ECHO reset_run impl_2 &gt;&gt; myImp.tcl
-ECHO launch_runs impl_2 &gt;&gt; myImp.tcl
-ECHO wait_on_run impl_2 &gt;&gt; myImp.tcl
-ECHO open_run impl_2 &gt;&gt; myImp.tcl
-ECHO set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design] &gt;&gt; myImp.tcl
-REM ECHO set_property BITSTREAM.CONFIG.USR_ACCESS %VER_DATECODE% [current_design] &gt;&gt; myImp.tcl
-ECHO write_bitstream ./VivadoBlade_14_3.runs/impl_2/%BITSTREAM_NAME% &gt;&gt; myImp.tcl
-ECHO write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim &gt;&gt; myImp.tcl
-REM ECHO write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v &gt;&gt; myImp.tcl
-ECHO write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true &gt;&gt; myImp.tcl
-ECHO write_sdf -force colossus_iob_imp_timesim.sdf &gt;&gt; myImp.tcl
-REM ECHO archive_project %WORKSPACE%/%JOB_NAME%-%BUILD_NUMBER%.zip -force -include_config_settings &gt;&gt; myImp.tcl
-REM ECHO archive_project %JOB_NAME%-%BUILD_NUMBER%.zip -force -include_config_settings &gt;&gt; myImp.tcl
-ECHO close_project &gt;&gt; myImp.tcl
-ECHO exit &gt;&gt; myImp.tcl
-
-vivado -mode batch -source ./myImp.tcl
-
-POPD</command>
-    </hudson.tasks.BatchFile>
     <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
       <command>#Map remote tool drive
-ECHO &quot;Mounting remote tool drive&quot;
-NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: $env:REMOTE_TOOL_ROOT /PERSISTENT:NO
+Write-Output &quot;Mounting remote tool drive&quot;
+#NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: $env:REMOTE_TOOL_ROOT /PERSISTENT:NO
+New-PSDrive -Name &quot;${env:MAPPED_TOOL_DRIVE_LETTER}&quot; -PSProvider FileSystem -Root &quot;$env:REMOTE_TOOL_ROOT&quot; -Persist
 
 #Import PowerShell Community Extensions
 Import-Module $env:PSCX_PATH
 
-ECHO &quot;Importing Xilinx environment settings&quot;
-ECHO &quot;XILINX_PATH = ${env:XILINX_PATH}&quot;
+Write-Output &quot;Importing Xilinx environment settings&quot;
+Write-Debug &quot;XILINX_PATH = ${env:XILINX_PATH}&quot;
 $xilinxSettings = &quot;${env:XILINX_PATH}\settings64.bat&quot;
 
 Invoke-BatchFile &quot;${xilinxSettings}&quot;
 
-$env:PATH
-
-#Sanity check, make sure no files are checked out from Perforce at the beginning
-#p4 revert //...
+Write-Debug $env:PATH
 
 #Derive Version/Date information
-ECHO &quot;Deriving Version/Date information&quot;
-$env:BUILD_Number = 123
+Write-Output &quot;Deriving Version/Date information&quot;
 $DateCode = Get-Date -Format MMddyy
 $FpgaVer = $env:BUILD_NUMBER % 100
-#$VerDateCode = &quot;${FpgaVer}&quot; + $DateCode
 $VER_DATECODE = &quot;${FpgaVer}&quot; + $DateCode
-ECHO &quot;VerDateCode = ${VER_DATECODE}&quot;
+Write-Output &quot;VER_DATECODE=${VER_DATECODE}&quot;
+
+
+#Sanity check, make sure no files are checked out from Perforce at the beginning
+p4 revert //...
+
 
 #Run implementation
-IF (Test-Path &quot;dummyImp.tcl&quot;) {
-    del &quot;dummyImp.tcl&quot;
+Push-Location &quot;$env:WORKSPACE\VivadoBlade&quot;
+
+Write-Output &quot;${VER_DATECODE}&quot; | Out-File &quot;version_${VER_DATECODE}.txt&quot; -Encoding ascii
+
+IF (Test-Path &quot;${env:IMP_TCL}&quot;) {
+    Remove-Item &quot;${env:IMP_TCL}&quot;
 }
 
-ECHO &quot;open_project VivadoBlade.xpr&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;set_param general.maxThreads ${env:MAX_CPU_USAGE}&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;reset_run impl_2&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;launch_runs impl_2&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;wait_on_run impl_2&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;open_run impl_2&quot; &gt;&gt; dummyImp.tcl
-#ECHO &quot;set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design]&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;write_bitstream ./VivadoBlade.runs/impl_2/${env:BITSTREAM_NAME}&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot; &gt;&gt; dummyImp.tcl
-#ECHO &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;archive_project ${env:WORKSPACE}/${env:JOB_NAME}-${env:BUILD_NUMBER}.zip -force -include_config_settings&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;close_project&quot; &gt;&gt; dummyImp.tcl
-ECHO &quot;exit&quot; &gt;&gt; dummyImp.tcl
+Add-Content ${env:IMP_TCL} &quot;open_project VivadoBlade.xpr&quot;
+Add-Content ${env:IMP_TCL} &quot;set_param general.maxThreads ${env:MAX_CPU_USAGE}&quot;
+Add-Content ${env:IMP_TCL} &quot;reset_run impl_2&quot;
+Add-Content ${env:IMP_TCL} &quot;launch_runs impl_2&quot;
+Add-Content ${env:IMP_TCL} &quot;wait_on_run impl_2&quot;
+Add-Content ${env:IMP_TCL} &quot;open_run impl_2&quot;
+#Add-Content ${env:IMP_TCL} &quot;set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design]&quot;
+Add-Content ${env:IMP_TCL} &quot;set_property BITSTREAM.CONFIG.USR_ACCESS ${VER_DATECODE} [current_design]&quot;
+Add-Content ${env:IMP_TCL} &quot;write_bitstream ./VivadoBlade.runs/impl_2/${env:BITSTREAM_NAME}&quot;
+Add-Content ${env:IMP_TCL} &quot;write_verilog -force colossus_iob_imp_funcsim.v -mode funcsim&quot;
+#Add-Content ${env:IMP_TCL} &quot;write_verilog -force -mode timesim –sdf_anno true -sdf_file colossus_iob_imp.sdf colossus_iob_imp_timesim.v&quot;
+Add-Content ${env:IMP_TCL} &quot;write_verilog -force colossus_iob_imp_timesim.v -mode timesim -sdf_anno true&quot;
+Add-Content ${env:IMP_TCL} &quot;write_sdf -force colossus_iob_imp_timesim.sdf&quot;
+#Add-Content ${env:IMP_TCL} &quot;archive_project ${env:JOB_NAME}-${env:BUILD_NUMBER}.zip -force -include_config_settings&quot;
+Add-Content ${env:IMP_TCL} &quot;close_project&quot;
+Add-Content ${env:IMP_TCL} &quot;exit&quot;
 
-#Generate MD5 checksum for bitstream
+#DEBUG: vivado -help
+vivado -mode batch -source ${env:IMP_TCL}
 
-#Archive implemented project
-
-#Check for errors
-
-NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: /DELETE</command>
+Pop-Location
+</command>
     </hudson.plugins.powershell.PowerShell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
@@ -306,11 +252,17 @@ NET USE ${env:MAPPED_TOOL_DRIVE_LETTER}: /DELETE</command>
         <baseDir class="org.jenkins_ci.plugins.run_condition.common.BaseDirectory$Workspace"/>
       </runCondition>
       <conditionalbuilders>
-        <hudson.tasks.Shell>
-          <command>cd VivadoBlade/VivadoBlade_14_3.runs/impl_2/
-md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
+        <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
+          <command>#Generate MD5 checksum for bitstream
+If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BITSTREAM_NAME}&quot;) {
+    $md5 = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider
+    $hash = [System.BitConverter]::ToString($md5.ComputeHash([System.IO.File]::ReadAllBytes(&quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BITSTREAM_NAME}&quot;)))
+    $hash = $hash.Replace(&quot;-&quot;, &quot;&quot;)
+    Write-Debug &quot;hash = $hash&quot;
+    Write-Output &quot;$hash *${env:BITSTREAM_NAME}&quot; | Out-File &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BITSTREAM_NAME}.md5&quot; -Encoding ascii
+}
 </command>
-        </hudson.tasks.Shell>
+        </hudson.plugins.powershell.PowerShell>
         <org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder plugin="artifactdeployer@0.28">
           <entry>
             <includes>*.bit*</includes>
