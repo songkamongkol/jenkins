@@ -403,10 +403,6 @@ If (Test-Path &quot;$env:WORKSPACE\VivadoBlade\VivadoBlade.runs\impl_2\${env:BIT
     </hudson.plugins.emailext.ExtendedEmailPublisher>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.16">
       <buildSteps>
-        <hudson.tasks.Shell>
-          <command>echo &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
-rm -rf ${WORKSPACE}/*</command>
-        </hudson.tasks.Shell>
         <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
           <command>Write-Output &quot;!!! CLEANING OUT WORKSPACE !!!&quot;
 Remove-Item &quot;$env:WORKSPACE\*&quot;</command>
