@@ -78,7 +78,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v</excludedFiles>
     <excludedFilesCaseSensitivity>true</excludedFilesCaseSensitivity>
@@ -264,7 +264,7 @@ rm -rf ${WORKSPACE}/*</command>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_imp_colossus_fx2_100g_iob_vivado_2014_3,hw_imp_colossus_fx2_100g_iob,hw_syn_colossus_fx2_100g_nic</childProjects>
+      <childProjects>hw_imp_colossus_fx2_100g_iob,hw_imp_colossus_fx2_100g_iob_win64,hw_syn_colossus_fx2_100g_nic</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
