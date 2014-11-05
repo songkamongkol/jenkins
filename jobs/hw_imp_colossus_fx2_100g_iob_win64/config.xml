@@ -170,14 +170,14 @@ T:\win64\Xilinx\Vivado\2014.3</description>
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.powershell.PowerShell plugin="powershell@1.2">
-      <command>Write-Output &quot;DEBUG &gt;&gt;&gt;&quot;
+      <command>Write-Debug &quot;DEBUG &gt;&gt;&gt;&quot;
 $myUserName = [Environment]::UserName
 $myUserDomainName = [Environment]::UserDomainName
 $myMachineName = [Environment]::MachineName
-Write-Output &quot;myUserName = $myUserName&quot;
-Write-Output &quot;myUserDomainName = $myUserDomainName&quot;
-Write-Output &quot;myMachineName = $myMachineName&quot;
-Write-Output &quot;&lt;&lt;&lt; DEBUG&quot;
+Write-Debug &quot;myUserName = $myUserName&quot;
+Write-Debug &quot;myUserDomainName = $myUserDomainName&quot;
+Write-Debug &quot;myMachineName = $myMachineName&quot;
+Write-Debug &quot;&lt;&lt;&lt; DEBUG&quot;
 
 #Map remote tool drive
 #Write-Output &quot;Mounting remote tool drive&quot;
@@ -234,8 +234,8 @@ Add-Content ${env:IMP_TCL} &quot;close_project&quot;
 Add-Content ${env:IMP_TCL} &quot;exit&quot;
 
 #DEBUG: vivado -help
-vivado -help
-#vivado -mode batch -source ${env:IMP_TCL}
+#vivado -help
+vivado -mode batch -source ${env:IMP_TCL}
 
 Pop-Location
 </command>
