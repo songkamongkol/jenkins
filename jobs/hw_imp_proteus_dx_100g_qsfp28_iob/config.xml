@@ -203,26 +203,6 @@ echo &quot;exit&quot; &gt;&gt; myImp.tcl
 
 vivado -mode batch -source ./myImp.tcl</command>
     </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#!/bin/sh
-
-#Jenkins by default runs shell executions with &quot;-xe&quot; option, which will exit immediately when a command returns non-zero value
-#grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
-
-#parse log to check for errors
-if [ -f ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log ];
-then
-    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
-
-    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
-
-    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
-    then
-        echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
-        exit 1
-    fi
-fi</command>
-    </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <condition class="org.jenkins_ci.plugins.run_condition.core.FileExistsCondition" plugin="run-condition@1.0">
         <file>VivadoProteus/version_*.txt</file>
@@ -268,25 +248,6 @@ md5sum -b ${BITSTREAM_NAME} &gt; ${BITSTREAM_NAME}.md5
             <failNoFilesDeploy>false</failNoFilesDeploy>
           </entry>
         </org.jenkinsci.plugins.artifactdeployer.ArtifactDeployerBuilder>
-        <hudson.tasks.Shell>
-          <command>#MAX_TIMING_DELTA=0.000
-
-#echo &quot;Checking Post Routing Timing Summary...&quot;
-#echo &quot;MAX_TIMING_DELTA=${MAX_TIMING_DELTA}&quot;
-
-#eval $(cat $WORKSPACE/VivadoProteus/vivado.log | grep &quot;Post Routing Timing Summary&quot; | awk &apos;BEGIN {FS = &quot;|&quot;;} {print $2; print $3; print $4; print $5}&apos;)
-
-#debug prints
-#echo $WNS
-#echo $TNS
-#echo $WHS
-#echo $THS
-
-#echo | awk -v MAX=&quot;$MAX_ABS_TIMING_DELTA&quot; -v WNS=&quot;$WNS&quot; -v TNS=&quot;$TNS&quot; -v WHS=&quot;$WHS&quot; -v THS=&quot;$THS&quot; &apos;{if (WNS &lt; MAX) printf (&quot;ERROR: WNS out of acceptable range\n&quot;); if (TNS &lt; MAX) printf (&quot;ERROR: TNS out of acceptable range\n&quot;); if (WHS &lt; MAX) printf (&quot;ERROR: WHS out of acceptable range\n&quot;); if (THS &lt; MAX) printf (&quot;ERROR: THS out of acceptable range\n&quot;);}&apos;
-
-#echo &quot;Done checking Post Routing Timing Summary.&quot;
-</command>
-        </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
@@ -303,6 +264,26 @@ tar zcvf proteus_iob_imp_sim.tar.gz ./proteus_iob_imp*.v ./*.sdf</command>
         </hudson.tasks.Shell>
       </conditionalbuilders>
     </org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder>
+    <hudson.tasks.Shell>
+      <command>#!/bin/sh
+
+#Jenkins by default runs shell executions with &quot;-xe&quot; option, which will exit immediately when a command returns non-zero value
+#grep will return non-zero value if no matches are found, however, in this case it is not considered an error and should not fail the build, thus we specify &quot;#!/bin/sh&quot; to prevent Jenkins from marking the build as a failure
+
+#parse log to check for errors
+if [ -f ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log ];
+then
+    #first grep filters out critical warnings from timing estimates, second grep gets rest of critical warnings
+
+    CRITICAL_WARNINGS=`grep -v ^CRITICAL\ WARNING:\ \\\[Route\ 35\\-39\\\] ${WORKSPACE}/VivadoProteus/VivadoProteus.runs/impl_1/runme.log | grep ^CRITICAL\ WARNING:`
+
+    if [ &quot;${CRITICAL_WARNINGS}&quot; != &quot;&quot; ];
+    then
+        echo &quot;ERROR: CRITICAL WARNING detected, mark build as failure&quot;
+        exit 1
+    fi
+fi</command>
+    </hudson.tasks.Shell>
     <org.jenkinsci.plugins.conditionalbuildstep.ConditionalBuilder plugin="conditional-buildstep@1.3.3">
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$DontRun" plugin="run-condition@1.0"/>
       <runCondition class="org.jenkins_ci.plugins.run_condition.core.StatusCondition" plugin="run-condition@1.0">
