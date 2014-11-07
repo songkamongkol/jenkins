@@ -91,7 +91,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>0</firstChange>
+    <firstChange>-1</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusFX2_1x100G/SourceCode/include/VERSION*.v
 //SPT_HW/Colossus/sandbox/bitstream/...
@@ -325,9 +325,10 @@ then
         echo &quot;ERROR: ${TIMING_NOT_MET} Mark build as failure&quot;
         #exit 1
     fi
-elif [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt ];
+fi
+TIMING_NOT_MET=&quot;&quot;
+if [ -f ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt ];
 then
-    #check timing summary report only if postroute physopt was not executed (no postroute report available)
     echo &quot;Checking ColossusFX2_BLADE100G_timing_summary_routed.rpt&quot;
     TIMING_NOT_MET=`grep Timing\ constraints\ are\ not\ met ${WORKSPACE}/VivadoBlade/VivadoBlade.runs/impl_2/ColossusFX2_BLADE100G_timing_summary_routed.rpt`
 
