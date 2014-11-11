@@ -47,6 +47,7 @@
 -//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*.v  //ws/SourceCode/include/VERSION_*.v
 +//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SynplifyBlade/... //ws/SynplifyBlade/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
+    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -249,9 +250,10 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.BuildTrigger>
-      <childProjects>hw_imp_colossus_dx_100g_iob, hw_syn_colossus_dx_100g_nic</childProjects>
+      <childProjects>hw_imp_colossus_dx_100g_iob,hw_syn_colossus_dx_100g_nic</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
