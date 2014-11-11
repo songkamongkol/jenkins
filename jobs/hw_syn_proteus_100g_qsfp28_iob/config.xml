@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Proteus 1x100G QSFP28 I/O Board FPGA Synthesis</description>
+  <description>Proteus 1x100G (QSFP28/CFP4) I/O Board FPGA Synthesis</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -49,7 +49,6 @@
 +//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SynplifyBlade/CoreGen/...  //ws/SynplifyProteus/CoreGen/...
 +//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SynplifyBlade/IP_edif/...  //ws/SynplifyProteus/IP_edif/...</projectPath>
     <projectOptions>noallwrite clobber compress unlocked nomodtime rmdir</projectOptions>
-    <clientOwner></clientOwner>
     <p4SysDrive></p4SysDrive>
     <p4SysRoot></p4SysRoot>
     <browser class="hudson.plugins.perforce.browsers.P4Web">
@@ -252,7 +251,6 @@ rm -rf ${WORKSPACE}/*</command>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
-      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
