@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Proteus DX 1x100G-QSFP28 I/O Board FPGA Implementation</description>
+  <description>Proteus DX 1x100G (QSFP28/CFP4) I/O Board FPGA Implementation</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>50</numToKeep>
@@ -38,7 +38,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BITSTREAM_NAME</name>
           <description>File name for the generated bitstream</description>
-          <defaultValue>proteus_100g_qsfp28.bit</defaultValue>
+          <defaultValue>proteus_100g.bit</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -85,7 +85,7 @@
     <quickCleanBeforeBuild>false</quickCleanBeforeBuild>
     <restoreChangedDeletedFiles>false</restoreChangedDeletedFiles>
     <wipeRepoBeforeBuild>true</wipeRepoBeforeBuild>
-    <firstChange>-1</firstChange>
+    <firstChange>0</firstChange>
     <fileLimit>0</fileLimit>
     <excludedFiles>//SPT_HW/Colossus/sandbox/ColossusDX_1x100G_Build/SourceCode/include/VERSION_*v
 //SPT_HW/Colossus/sandbox/bitstream/...</excludedFiles>
@@ -113,7 +113,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_proteus_100g_qsfp28_iob</project>
+      <project></project>
       <filter>changelist.txt</filter>
       <target></target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -123,7 +123,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
-      <project>hw_syn_proteus_100g_qsfp28_iob</project>
+      <project></project>
       <filter>SynplifyProteus/rev_1/Proteus_1x100G.edf</filter>
       <target>VivadoProteus</target>
       <selector class="hudson.plugins.copyartifact.PermalinkBuildSelector">
@@ -170,10 +170,10 @@ sed -i &quot;2i parameter FPGA_VERSION =  8&apos;h${VER};&quot; SourceCode/inclu
 sed -i &quot;3i parameter DATE_CODE    =  24&apos;h${DATECODE};&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
 sed -i &quot;4i \ &quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
 
-DESCRIPTION=`printf &quot;Description: Proteus DX 100G-QSFP28 I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
+DESCRIPTION=`printf &quot;Description: Proteus DX 100G (QSFP28/CFP4) I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
 p4 submit -d &quot;${DESCRIPTION}&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
-#p4 submit -d &quot;Description: Proteus DX 100G-QSFP28 I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
+#p4 submit -d &quot;Description: Proteus DX 100G (QSFP28/CFP4) I/O Board version ${VER_DATECODE}.  Includes up to Changelist ${LAST_CHANGE}.  Change Type: Proto  Change #: none&quot; SourceCode/include/VERSION_PROTEUS_1x100G.v
 
 
 echo &quot;Start implementation&quot;
@@ -318,10 +318,10 @@ then
 
     VER_DATECODE=`cat VivadoProteus/version_*.txt`
 
-    DESCRIPTION=`printf &quot;Description: Proteus DX 100G-QSFP28 I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
+    DESCRIPTION=`printf &quot;Description: Proteus DX 100G (QSFP28/CFP4) I/O Board FPGA candidate image, version ${VER_DATECODE}.\nChange Type: Proto\nChange #: none\n&quot;`
 
     p4 submit -d &quot;${DESCRIPTION}&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
-    #p4 submit -d &quot;Description: Proteus DX 100G-QSFP28 I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
+    #p4 submit -d &quot;Description: Proteus DX 100G (QSFP28/CFP4) I/O Board FPGA candidate image, version ${VER_DATECODE}.  Change Type: Proto  Change #: none&quot; //SPT_HW/Colossus/sandbox/bitstream/candidate/iob/${BITSTREAM_NAME}*
 
 fi
 </command>
